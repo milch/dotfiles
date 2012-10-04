@@ -1,0 +1,109 @@
+" Incompatible to vi
+set nocompatible
+
+" Required for Pathogen
+call pathogen#infect()
+
+" How many lines of history VIM remembers
+set history=1000
+
+" Enables syntax highlighting
+syntax on
+
+" Enable plugins based on filetype
+filetype plugin indent on
+
+colorscheme jellybeans+
+
+let mapleader = ","
+
+" Tab doesn't expand, Tab-Size is 4 spaces
+set softtabstop=4
+set shiftwidth=4
+
+" Smart indentation of lines
+set smartindent
+
+" Enables Statusbar
+set laststatus=2
+
+" Highlight searches
+set hlsearch
+" No idea, 'makes search act like modern browsers'
+set incsearch
+
+" For regular expressions
+set magic
+
+" Show matching brackets
+set showmatch
+
+" No error sounds
+set noerrorbells
+set novisualbell
+set t_vb=
+set tm=500
+
+" Ignore case when searching, but not if keywords are capitalized
+set ignorecase smartcase
+
+" Turn off backups
+set nobackup
+set nowb
+set noswapfile
+
+" Allows Backspace to loop over everything
+set backspace=indent,eol,start
+
+" No Arrow keys
+map <Left> <Nop>
+map <Right> <Nop>
+map <Up> <Nop>
+map <Down> <Nop>
+
+" Viewport will move if Cursor is 10 lines away from the edge
+set so=10
+
+" Show current position
+set ruler
+
+set showcmd
+
+" Height of the command bar
+set cmdheight=1
+
+" Automatically reload file when it is changed from the outside
+set autoread
+
+" Set default encoding to utf-8
+set encoding=utf8
+
+" Change split with Ctrl+Direction
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+
+set number
+set rnu "relative line numbers
+
+set guioptions-=T "No top toolbar
+set guioptions-=r "no right scrollbar
+set guioptions-=L "no left scrollbar
+
+
+let g:clang_auto_select=1
+let g:clang_library_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib'
+let g:clang_use_library=1
+let g:clang_complete_copen=1
+"let g:clang_periodic_quickfix=1
+let g:clang_close_preview=1
+
+let g:loaded_golden_ratio = 1 "disable golden ratio
+
+let g:SuperTabDefaultCompletionType="context"
+
+nmap <leader>l :TagbarToggle<CR>
+
+set guifont=Menlo\ for\ Powerline "use patched font for Powerline
+let g:Powerline_symbols='fancy' "use fancy symbols like arrows 
