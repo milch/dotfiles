@@ -1,0 +1,60 @@
+[submodule "vim/bundle/Command-T"]
+	path = vim/bundle/Command-T
+	url = https://github.com/wincent/Command-T.git
+[submodule "vim/bundle/snipmate"]
+	path = vim/bundle/snipmate
+	url = https://github.com/msanders/snipmate.vim.git
+[submodule "vim/bundle/irblack"]
+	path = vim/bundle/irblack
+	url = https://github.com/wgibbs/vim-irblack.git
+[submodule "vim/bundle/color-github"]
+	path = vim/bundle/color-github
+	url = https://github.com/telamon/vim-color-github.git
+[submodule "vim/bundle/vividchalk"]
+	path = vim/bundle/vividchalk
+	url = https://github.com/tpope/vim-vividchalk.git
+[submodule "vim/bundle/pyte"]
+	path = vim/bundle/pyte
+	url = https://github.com/vim-scripts/pyte.git
+[submodule "vim/bundle/molokai"]
+	path = vim/bundle/molokai
+	url = https://github.com/vim-scripts/molokai.git
+[submodule "vim/bundle/janus-colors"]
+	path = vim/bundle/janus-colors
+	url = https://github.com/TechnoGate/janus-colors.git
+[submodule "vim/bundle/Color-Sampler-Pack"]
+	path = vim/bundle/Color-Sampler-Pack
+	url = https://github.com/vim-scripts/Color-Sampler-Pack.git
+[submodule "vim/bundle/pasta"]
+	path = vim/bundle/pasta
+	url = https://github.com/sickill/vim-pasta.git
+[submodule "vim/bundle/autoclose"]
+	path = vim/bundle/autoclose
+	url = https://github.com/Townk/vim-autoclose.git
+[submodule "vim/bundle/clang_complete"]
+	path = vim/bundle/clang_complete
+	url = https://github.com/Rip-Rip/clang_complete.git
+[submodule "vim/bundle/endwise"]
+	path = vim/bundle/endwise
+	url = https://github.com/tpope/vim-endwise.git
+[submodule "vim/bundle/cocoa"]
+	path = vim/bundle/cocoa
+	url = https://github.com/markschabacker/cocoa.vim.git
+[submodule "vim/bundle/supertab"]
+	path = vim/bundle/supertab
+	url = https://github.com/ervandew/supertab.git
+[submodule "vim/bundle/tagbar"]
+	path = vim/bundle/tagbar
+	url = https://github.com/majutsushi/tagbar
+[submodule "vim/bundle/powerline"]
+	path = vim/bundle/powerline
+	url = https://github.com/Lokaltog/vim-powerline.git
+[submodule "vim/bundle/fugitive"]
+	path = vim/bundle/fugitive
+	url = https://github.com/tpope/vim-fugitive.git
+[submodule "vim/bundle/golden-ratio"]
+	path = vim/bundle/golden-ratio
+	url = https://github.com/roman/golden-ratio.git
+[submodule "vim/bundle/html5"]
+	path = vim/bundle/html5
+	url = https://github.com/othree/html5.vim.git
