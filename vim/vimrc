@@ -1,6 +1,9 @@
 " Incompatible to vi
 set nocompatible
 
+"Make sure we load pathogen before everything else
+runtime bundle/pathogen/autoload/pathogen.vim
+
 " Required for Pathogen
 call pathogen#infect()
 
@@ -13,7 +16,8 @@ syntax on
 " Enable plugins based on filetype
 filetype plugin indent on
 
-colorscheme jellybeans+
+set background=dark
+colorscheme solarized
 
 let mapleader = ","
 
@@ -107,3 +111,33 @@ nmap <leader>l :TagbarToggle<CR>
 
 set guifont=Menlo\ for\ Powerline "use patched font for Powerline
 let g:Powerline_symbols='fancy' "use fancy symbols like arrows 
+"let g:Powerline_theme='skwp'
+"let g:Powerline_colorscheme="skwp"
+
+let g:ctrlp_map='<leader>p'
+let g:ctlp_cmd='CtrlP'
+
+let g:neocomplcache_enable_at_startup=1
+let g:neocomplcache_enable_smart_case=1
+let g:neocomplcache_enable_camel_case_completion=1
+let g:neocomplcache_enable_camel_case_completion=1
+let g:neocomplcache_min_syntax_length=3
+let g:neocomplcache_lock_buffer_name_pattern='\*ku\*'
+
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+
+" Enable heavy omni completion.
+ if !exists('g:neocomplcache_omni_patterns')
+   let g:neocomplcache_omni_patterns = {}
+endif
+let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
+let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+let g:neocomplcache_omni_patterns.c = '\%(\.\|->\)\h\w*'
+let g:neocomplcache_omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'
+
+nnoremap <silent> <leader>y :YRShow<CR>
