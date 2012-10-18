@@ -82,3 +82,9 @@
 [submodule "vim/bundle/yankring"]
 	path = vim/bundle/yankring
 	url = https://github.com/vim-scripts/YankRing.vim
+[submodule "tmux/powerline"]
+	path = tmux/powerline
+	url = https://github.com/erikw/tmux-powerline.git
+[submodule "tmux/solarized"]
+	path = tmux/solarized
+	url = https://github.com/seebi/tmux-colors-solarized.git
