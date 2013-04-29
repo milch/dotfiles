@@ -22,6 +22,30 @@ I only have very simple customizations for tmux. Instead of Ctrl+B as a prefix k
 vim
 ---
 
+Most important customizations:
+
+- generally customized for development (what else?)
+- the leader key is set to ","
+- Solarized colorscheme all the way
+- relative line numbers (great for moving around with [jk])
+- tabs, no spaces
+- no backups of files, that's what git and dropbox are for
+- no arrow keys
+
+I have too many vim plugins to count (I should probably uninstall some), but here are the most important:
+
+- tagbar: leader + t - Shows symbols in a seperate split
+- fugitive: git wrapper for vim
+- ctrlp: leader + p - fuzzy filename search
+- ack.vim: Use :Ack {query} to search for something inside of all the files in cwd
+- powerline: awesome vim (it now has support for tmux - among others - as well) statusbar
+- YouCompleteMe: semantic auto completion for C-based languages
+- dispatch: Runs terminal/compiler-commands inside of a tmux split
+- signature: m + , - place marks and visually display them
+
+[[vim.png]]
+*Plugins you can see here are: ack.vim, powerline, youcompleteme*
+
 bash
 ---
 

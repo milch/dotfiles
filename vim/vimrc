@@ -12,14 +12,11 @@ Bundle 'Townk/vim-autoclose.git'
 Bundle 'markschabacker/cocoa.vim.git'
 Bundle 'majutsushi/tagbar'
 Bundle 'tpope/vim-fugitive.git'
-Bundle 'roman/golden-ratio.git'
 Bundle 'othree/html5.vim.git'
 Bundle 'mattn/zencoding-vim.git'
 Bundle 'tsaleh/vim-matchit.git'
-Bundle 'nathanaelkane/vim-indent-guides.git'
 Bundle 'kien/ctrlp.vim.git'
 Bundle 'altercation/vim-colors-solarized.git'
-Bundle 'tpope/vim-pathogen'
 Bundle 'Soares/write.vim.git'
 Bundle 'vim-scripts/YankRing.vim'
 Bundle 'mileszs/ack.vim'
@@ -120,17 +117,7 @@ set guioptions-=T "No top toolbar
 set guioptions-=r "no right scrollbar
 set guioptions-=L "no left scrollbar
 
-
-let g:clang_auto_select=1
-let g:clang_library_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib'
-let g:clang_use_library=1
-let g:clang_complete_copen=1
 set completeopt=menu,menuone,longest
-
-
-let g:loaded_golden_ratio = 1 "disable golden ratio
-
-let g:SuperTabDefaultCompletionType="context"
 
 nmap <leader>l :TagbarToggle<CR>
 
