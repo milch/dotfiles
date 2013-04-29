@@ -43,7 +43,7 @@ I have too many vim plugins to count (I should probably uninstall some), but her
 - dispatch: Runs terminal/compiler-commands inside of a tmux split
 - signature: m + , - place marks and visually display them
 
-[[images/vim.png]]
+![vim-screenshot](images/vim.png)
 *Plugins you can see here are: ack.vim, powerline, youcompleteme*
 
 bash
