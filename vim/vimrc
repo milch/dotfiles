@@ -1,11 +1,35 @@
 " Incompatible to vi
 set nocompatible
+filetype off
 
-"Make sure we load pathogen before everything else
-runtime bundle/pathogen/autoload/pathogen.vim
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
 
-" Required for Pathogen
-call pathogen#infect()
+Bundle 'gmarik/vundle'
+
+Bundle 'sickill/vim-pasta.git'
+Bundle 'Townk/vim-autoclose.git'
+Bundle 'markschabacker/cocoa.vim.git'
+Bundle 'majutsushi/tagbar'
+Bundle 'tpope/vim-fugitive.git'
+Bundle 'roman/golden-ratio.git'
+Bundle 'othree/html5.vim.git'
+Bundle 'mattn/zencoding-vim.git'
+Bundle 'tsaleh/vim-matchit.git'
+Bundle 'nathanaelkane/vim-indent-guides.git'
+Bundle 'kien/ctrlp.vim.git'
+Bundle 'altercation/vim-colors-solarized.git'
+Bundle 'tpope/vim-pathogen'
+Bundle 'Soares/write.vim.git'
+Bundle 'vim-scripts/YankRing.vim'
+Bundle 'mileszs/ack.vim'
+Bundle 'kshenoy/vim-signature'
+Bundle 'Lokaltog/powerline'
+Bundle 'Valloric/YouCompleteMe'
+Bundle 'xolox/vim-session'
+Bundle 'tpope/vim-dispatch'
+
+set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim/
 
 " How many lines of history VIM remembers
 set history=1000
@@ -16,6 +40,7 @@ syntax on
 " Enable plugins based on filetype
 filetype plugin indent on
 
+" Solarized all the way
 set background=dark
 colorscheme solarized
 

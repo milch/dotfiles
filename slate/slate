@@ -6,7 +6,7 @@ config windowHintsIgnoreHiddenWindows false
 config windowHintsSpread true 
 
 #config gridBackgroundColor 71.2;71.2;71.2;0.8 <-- doesn't work
-confgi gridCellBackgroundColor 0.0;0.0;255.0;1.0
+config gridCellBackgroundColor 0.0;0.0;255.0;1.0
 config gridCellSelectedColor 175.95;198.9;229.5;1.0
 config gridCellRoundedCornerSize 0
 
@@ -52,10 +52,10 @@ bind pad9 ${topright}
 bind g:${hyper} grid padding:2 1440x900:6,4 1920x1200:8,5
 
 #move using hyper+vim movements
-bind h:${hyper} focus left
-bind j:${hyper} focus down
-bind k:${hyper} focus up
-bind l:${hyper} focus right
+bind h:${hyper} push left
+bind j:${hyper} push down
+bind k:${hyper} push up
+bind l:${hyper} push right
 bind up:${hyper} ${full}
 bind down:${hyper} push bottom bar-resize:screenSizeY/2
 bind left:${hyper} ${lefthalf}
@@ -106,8 +106,8 @@ layout 2monitors 'Nachrichten':REPEAT move screenOriginX+440;screenOriginY 620;s
 
 default 2monitors count:2 
 
-bind 1:${hyper} layout 1monitor
-bind 2:${hyper} layout 2monitors
+bind 1:${hyper} throw 0
+bind 2:${hyper} throw 1
 
 bind v:${hyper} focus 'MacVim'
 bind t:${hyper} focus 'iTerm'
