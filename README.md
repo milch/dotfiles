@@ -1,6 +1,25 @@
 My dotfiles
 ===
 
+Installation
+---
+
+1. Clone the repository:
+    git clone https://github.com/milch/dotfiles.git ~/dotfiles
+
+2. Link inputrc:
+    ln -s ~/dotfiles/inputrc ~/.inputrc
+Link slate config: 
+    ln -s ~/dotfiles/slate/slate ~/.slate
+Link tmux config:
+    ln -s ~/dotfiles/tmux ~/.tmux
+    ln -s ~/dotfiles/tmux/tmux.conf ~/.tmux.conf
+Link vim config:
+    ln -s ~/dotfiles/vim/ ~/.vim/
+    ln -s ~/dotfiles/vim/vimrc ~/.vimrc
+Install all vim bundles:
+    vim +BundleInstall +qall
+
 Slate
 ---
 
