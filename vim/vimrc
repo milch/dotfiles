@@ -8,7 +8,7 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 Bundle 'sickill/vim-pasta.git'
-Bundle 'Townk/vim-autoclose.git'
+Bundle 'Raimondi/delimitMate'
 Bundle 'markschabacker/cocoa.vim.git'
 Bundle 'majutsushi/tagbar'
 Bundle 'tpope/vim-fugitive.git'
@@ -17,13 +17,11 @@ Bundle 'mattn/zencoding-vim.git'
 Bundle 'tsaleh/vim-matchit.git'
 Bundle 'kien/ctrlp.vim.git'
 Bundle 'altercation/vim-colors-solarized.git'
-Bundle 'Soares/write.vim.git'
 Bundle 'vim-scripts/YankRing.vim'
 Bundle 'mileszs/ack.vim'
 Bundle 'kshenoy/vim-signature'
 Bundle 'Lokaltog/powerline'
 Bundle 'Valloric/YouCompleteMe'
-Bundle 'xolox/vim-session'
 Bundle 'tpope/vim-dispatch'
 
 set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim/
