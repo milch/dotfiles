@@ -16,13 +16,17 @@ Bundle 'othree/html5.vim.git'
 Bundle 'mattn/zencoding-vim.git'
 Bundle 'tsaleh/vim-matchit.git'
 Bundle 'kien/ctrlp.vim.git'
-Bundle 'altercation/vim-colors-solarized.git'
+Bundle 'skwp/vim-colors-solarized.git'
 Bundle 'vim-scripts/YankRing.vim'
 Bundle 'mileszs/ack.vim'
 Bundle 'kshenoy/vim-signature'
 Bundle 'Lokaltog/powerline'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'tpope/vim-dispatch'
+Bundle 'SirVer/ultisnips'
+Bundle 'wikitopian/hardmode'
+Bundle 'nono/vim-handlebars'
+Bundle 'airblade/vim-gitgutter'
 
 set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim/
 
@@ -118,6 +122,7 @@ set guioptions-=L "no left scrollbar
 set completeopt=menu,menuone,longest
 
 nmap <leader>l :TagbarToggle<CR>
+nnoremap <leader>h <Esc>:call ToggleHardMode()<CR>
 
 set guifont=Menlo\ for\ Powerline "use patched font for Powerline
 let g:Powerline_symbols='fancy' "use fancy symbols like arrows 
@@ -126,3 +131,22 @@ let g:Powerline_colorscheme="skwp"
 
 let g:ctrlp_map='<leader>p'
 let g:ctlp_cmd='CtrlP'
+
+function! g:UltiSnips_Complete()
+    call UltiSnips_ExpandSnippet()
+    if g:ulti_expand_res == 0
+	if pumvisible()
+	    return "\<C-n>"
+	else
+	    call UltiSnips_JumpForwards()
+	    if g:ulti_jump_forwards_res == 0
+		return "\<TAB>"
+	    endif
+	endif
+    endif
+    return ""
+endfunction
+
+au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
+
+let g:UltiSnipsJumpForwardTrigger="<tab>"
