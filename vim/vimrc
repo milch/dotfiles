@@ -7,26 +7,36 @@ call vundle#rc()
 
 Bundle 'gmarik/vundle'
 
-Bundle 'sickill/vim-pasta.git'
-Bundle 'Raimondi/delimitMate'
+"Language support
 Bundle 'markschabacker/cocoa.vim.git'
-Bundle 'majutsushi/tagbar'
-Bundle 'tpope/vim-fugitive.git'
 Bundle 'othree/html5.vim.git'
-Bundle 'mattn/zencoding-vim.git'
-Bundle 'tsaleh/vim-matchit.git'
-Bundle 'kien/ctrlp.vim.git'
-Bundle 'skwp/vim-colors-solarized.git'
-Bundle 'vim-scripts/YankRing.vim'
-Bundle 'mileszs/ack.vim'
-Bundle 'kshenoy/vim-signature'
-Bundle 'Lokaltog/powerline'
-Bundle 'Valloric/YouCompleteMe'
-Bundle 'tpope/vim-dispatch'
-Bundle 'SirVer/ultisnips'
-Bundle 'wikitopian/hardmode'
 Bundle 'nono/vim-handlebars'
+
+"Search, Navigation, etc.
+Bundle 'majutsushi/tagbar'
+Bundle 'kien/ctrlp.vim.git'
+Bundle 'mileszs/ack.vim'
+Bundle "rking/ag.vim"
+
+"Aesthetics
+Bundle 'skwp/vim-colors-solarized.git'
+Bundle 'Lokaltog/powerline'
+
+"SCM
 Bundle 'airblade/vim-gitgutter'
+Bundle 'tpope/vim-fugitive.git'
+
+"Autocomplete, Snippets
+Bundle 'Valloric/YouCompleteMe'
+Bundle 'Raimondi/delimitMate'
+Bundle 'SirVer/ultisnips'
+
+"Misc
+Bundle 'sickill/vim-pasta.git'
+Bundle 'tsaleh/vim-matchit.git'
+Bundle 'kshenoy/vim-signature'
+Bundle 'tpope/vim-dispatch'
+Bundle 'wikitopian/hardmode'
 
 set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim/
 
