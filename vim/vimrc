@@ -23,20 +23,21 @@ Bundle 'skwp/vim-colors-solarized.git'
 Bundle 'Lokaltog/powerline'
 
 "SCM
-Bundle 'airblade/vim-gitgutter'
+Bundle 'mhinz/vim-signify'
 Bundle 'tpope/vim-fugitive.git'
 
-"Autocomplete, Snippets
+"Autocomplete, Snippets, Syntax
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'Raimondi/delimitMate'
 Bundle 'SirVer/ultisnips'
+Bundle "scrooloose/syntastic"
 
 "Misc
 Bundle 'sickill/vim-pasta.git'
 Bundle 'tsaleh/vim-matchit.git'
 Bundle 'kshenoy/vim-signature'
 Bundle 'tpope/vim-dispatch'
-Bundle 'wikitopian/hardmode'
+Bundle 'kbarrette/mediummode'
 
 set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim/
 
@@ -160,3 +161,8 @@ endfunction
 au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
 
 let g:UltiSnipsJumpForwardTrigger="<tab>"
+
+let g:signify_sign_weight = "NONE"
+let g:signify_sign_color_inherit_from_linenr = 1
+let g:signify_sign_change = "~"
+let g:signify_sign_change_delete = "~_"
