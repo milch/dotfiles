@@ -37,7 +37,6 @@ Bundle 'sickill/vim-pasta.git'
 Bundle 'tsaleh/vim-matchit.git'
 Bundle 'kshenoy/vim-signature'
 Bundle 'tpope/vim-dispatch'
-Bundle 'kbarrette/mediummode'
 
 set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim/
 
@@ -123,7 +122,6 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
-set number
 set rnu "relative line numbers
 
 set guioptions-=T "No top toolbar
