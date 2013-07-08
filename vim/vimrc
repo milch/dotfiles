@@ -11,6 +11,7 @@ Bundle 'gmarik/vundle'
 Bundle 'markschabacker/cocoa.vim.git'
 Bundle 'othree/html5.vim.git'
 Bundle 'nono/vim-handlebars'
+Bundle 'jimenezrick/vimerl'
 
 "Search, Navigation, etc.
 Bundle 'majutsushi/tagbar'
@@ -20,7 +21,7 @@ Bundle "rking/ag.vim"
 
 "Aesthetics
 Bundle 'skwp/vim-colors-solarized.git'
-Bundle 'Lokaltog/powerline'
+Bundle 'bling/vim-airline'
 
 "SCM
 Bundle 'mhinz/vim-signify'
@@ -38,7 +39,6 @@ Bundle 'tsaleh/vim-matchit.git'
 Bundle 'kshenoy/vim-signature'
 Bundle 'tpope/vim-dispatch'
 
-set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim/
 
 " How many lines of history VIM remembers
 set history=1000
@@ -133,10 +133,7 @@ set completeopt=menu,menuone,longest
 nmap <leader>l :TagbarToggle<CR>
 nnoremap <leader>h <Esc>:call ToggleHardMode()<CR>
 
-set guifont=Menlo\ for\ Powerline "use patched font for Powerline
-let g:Powerline_symbols='fancy' "use fancy symbols like arrows 
-"let g:Powerline_theme='skwp'
-let g:Powerline_colorscheme="skwp"
+let g:airline_powerline_fonts=0
 
 let g:ctrlp_map='<leader>p'
 let g:ctlp_cmd='CtrlP'
@@ -164,3 +161,5 @@ let g:signify_sign_weight = "NONE"
 let g:signify_sign_color_inherit_from_linenr = 1
 let g:signify_sign_change = "~"
 let g:signify_sign_change_delete = "~_"
+
+let g:ycm_confirm_extra_conf = 0
