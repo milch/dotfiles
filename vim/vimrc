@@ -133,7 +133,8 @@ set completeopt=menu,menuone,longest
 nmap <leader>l :TagbarToggle<CR>
 nnoremap <leader>h <Esc>:call ToggleHardMode()<CR>
 
-let g:airline_powerline_fonts=0
+let g:airline_powerline_fonts=1
+let g:airline_theme='powerlineish'
 
 let g:ctrlp_map='<leader>p'
 let g:ctlp_cmd='CtrlP'
