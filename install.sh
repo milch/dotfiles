@@ -10,3 +10,5 @@ ln -s ~/dotfiles/tmux ~/.tmux
 ln -s ~/dotfiles/tmux/tmux.conf ~/.tmux.conf
 ln -s ~/dotfiles/vim ~/.vim/
 ln -s ~/dotfiles/vim/vimrc ~/.vimrc
+
+git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
