@@ -16,6 +16,7 @@ Bundle 'jimenezrick/vimerl'
 "Search, Navigation, etc.
 Bundle "Shougo/unite.vim"
 Bundle "Shougo/unite-outline"
+Bundle "ujihisa/unite-colorscheme"
 Bundle "ervandew/supertab"
 
 "Aesthetics
