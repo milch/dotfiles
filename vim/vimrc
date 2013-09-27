@@ -9,9 +9,7 @@ Bundle 'gmarik/vundle'
 
 "Language support
 Bundle 'markschabacker/cocoa.vim.git'
-Bundle 'othree/html5.vim.git'
-Bundle 'nono/vim-handlebars'
-Bundle 'jimenezrick/vimerl'
+Bundle "sheerun/vim-polyglot"
 
 "Search, Navigation, etc.
 Bundle 'majutsushi/tagbar'
