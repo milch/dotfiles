@@ -6,25 +6,12 @@ Installation
 
 1. Clone the repository: `git clone https://github.com/milch/dotfiles.git ~/dotfiles` 
 
-2. Link inputrc:
+2. Execute install.sh
     ```
-    ln -s ~/dotfiles/inputrc ~/.inputrc
+    cd ~/dotfiles && ./install.sh
     ```
-3. Link slate config: 
-    ```
-    ln -s ~/dotfiles/slate/slate ~/.slate
-    ```
-4. Link tmux config:
-    ```
-    ln -s ~/dotfiles/tmux ~/.tmux
-    ln -s ~/dotfiles/tmux/tmux.conf ~/.tmux.conf
-    ```
-5. Link vim config:
-    ```
-    ln -s ~/dotfiles/vim/ ~/.vim/
-    ln -s ~/dotfiles/vim/vimrc ~/.vimrc
-    ```
-6. Install all vim bundles:
+
+3. Install all vim bundles:
     ```
     vim +BundleInstall +qall
     ```
@@ -62,17 +49,12 @@ Most important customizations:
 
 I have too many vim plugins to count (I should probably uninstall some), but here are the most important:
 
-- tagbar: leader + t - Shows symbols in a seperate split
 - fugitive: git wrapper for vim
-- ctrlp: leader + p - fuzzy filename search
-- ack.vim: Use :Ack {query} to search for something inside of all the files in cwd
-- powerline: awesome vim (it now has support for tmux - among others - as well) statusbar
+- unite: <leader>p to search files, <leader>pr to search recent files, <leader>t to search tags and <leader>f to grep in current dir
+- airline: lightweight status bar
 - YouCompleteMe: semantic auto completion for C-based languages
 - dispatch: Runs terminal/compiler-commands inside of a tmux split
 - signature: m + , - place marks and visually display them
-
-![vim-screenshot](images/vim.png)
-*Plugins you can see here are: ack.vim, powerline, youcompleteme*
 
 bash
 ---

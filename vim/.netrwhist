@@ -1,8 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =6
-let g:netrw_dirhist_1='/Volumes/Data/Users/Manu/Dropbox/Workspace/Projekte/Anvil/Anvil/C++/Components'
-let g:netrw_dirhist_2='ftp://web9@web9.server09.ultraserver.org/'
-let g:netrw_dirhist_3='ftp://web9@web9.server09.ultraserver.org/files/'
-let g:netrw_dirhist_4='ftp://web9@web9.server09.ultraserver.org/'
-let g:netrw_dirhist_5='ftp://web9@web9.server09.ultraserver.org/html/'
-let g:netrw_dirhist_6='ftp://web9@web9.server09.ultraserver.org/html/ba/'

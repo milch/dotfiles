@@ -12,10 +12,10 @@ Bundle 'markschabacker/cocoa.vim.git'
 Bundle "sheerun/vim-polyglot"
 
 "Search, Navigation, etc.
-Bundle 'majutsushi/tagbar'
-Bundle 'kien/ctrlp.vim.git'
-Bundle 'mileszs/ack.vim'
-Bundle "rking/ag.vim"
+Bundle "Shougo/unite.vim"
+Bundle "Shougo/unite-outline"
+Bundle "ujihisa/unite-colorscheme"
+Bundle "ervandew/supertab"
 
 "Aesthetics
 Bundle 'skwp/vim-colors-solarized.git'
@@ -32,6 +32,7 @@ Bundle 'SirVer/ultisnips'
 Bundle "scrooloose/syntastic"
 
 "Misc
+Bundle "Shougo/vimproc"
 Bundle 'sickill/vim-pasta.git'
 Bundle 'tsaleh/vim-matchit.git'
 Bundle 'kshenoy/vim-signature'
@@ -51,9 +52,10 @@ filetype plugin indent on
 set background=dark
 colorscheme solarized
 
+" Leader -> to prefix your own keybindings
 let mapleader = ","
 
-" Tab doesn't expand, Tab-Size is 4 spaces
+" Tab doesn't expand, Tab-Size is 4 spaces (all Hail the Tab-God)
 set softtabstop=4
 set shiftwidth=4
 
@@ -63,15 +65,14 @@ set smartindent
 " Enables Statusbar
 set laststatus=2
 
-" Highlight searches
+" Highlight searches & searches while typing
 set hlsearch
-" No idea, 'makes search act like modern browsers'
 set incsearch
 
 " For regular expressions
 set magic
 
-" Show matching brackets
+" Highlight matching brackets
 set showmatch
 
 " No error sounds
@@ -103,8 +104,6 @@ set so=10
 " Show current position
 set ruler
 
-set showcmd
-
 " Height of the command bar
 set cmdheight=1
 
@@ -128,33 +127,8 @@ set guioptions-=L "no left scrollbar
 
 set completeopt=menu,menuone,longest
 
-nmap <leader>l :TagbarToggle<CR>
-nnoremap <leader>h <Esc>:call ToggleHardMode()<CR>
-
 let g:airline_powerline_fonts=1
 let g:airline_theme='powerlineish'
-
-let g:ctrlp_map='<leader>p'
-let g:ctlp_cmd='CtrlP'
-
-function! g:UltiSnips_Complete()
-    call UltiSnips_ExpandSnippet()
-    if g:ulti_expand_res == 0
-	if pumvisible()
-	    return "\<C-n>"
-	else
-	    call UltiSnips_JumpForwards()
-	    if g:ulti_jump_forwards_res == 0
-		return "\<TAB>"
-	    endif
-	endif
-    endif
-    return ""
-endfunction
-
-au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
-
-let g:UltiSnipsJumpForwardTrigger="<tab>"
 
 let g:signify_sign_weight = "NONE"
 let g:signify_sign_color_inherit_from_linenr = 1
@@ -162,3 +136,45 @@ let g:signify_sign_change = "~"
 let g:signify_sign_change_delete = "~_"
 
 let g:ycm_confirm_extra_conf = 0
+
+" Make UltiSnips compatible with YCM
+let g:ycm_key_list_select_completion=["<C-Tab>", "<Down>"]
+let g:ycm_key_list_previous_completion=["<C-S-Tab>", "<Up>"]
+let g:SuperTabDefaultCompletionType="<C-Tab>"
+
+" Enable Omnicomplete
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+"Syntastic
+let g:syntastic_error_symbol="✗"
+let g:syntastic_warning_symbol="!"
+let g:syntastic_style_warning_symbol='⚡'
+let g:syntastic_style_error_symbol='⚡'
+
+call unite#filters#matcher_default#use(["matcher_fuzzy"])
+let g:unite_winheight = 10
+let g:unite_split_rule='botright'
+let g:unite_source_history_yank_enable=1
+
+if executable('ag')
+    let g:unite_source_grep_command='ag'
+    let g:unite_source_grep_default_opts='--nocolor --nogroup -a -S'
+    let g:unite_source_grep_recursive_opt=''
+    let g:unite_source_grep_search_word_highlight = 1
+elseif executable('ack')
+    let g:unite_source_grep_command='ack'
+    let g:unite_source_grep_default_opts='--no-group --no-color'
+    let g:unite_source_grep_recursive_opt=''
+    let g:unite_source_grep_search_word_highlight = 1
+endif
+
+nnoremap <leader>p :<C-u>Unite -start-insert file_rec<CR>
+nnoremap <leader>pr :<C-u>Unite -start-insert file_mru<CR>
+nnoremap <leader>y :<C-u>Unite -start-insert history/yank<CR>
+nnoremap <leader>f :<C-u>Unite -no-quit grep<CR>
+nnoremap <leader>t :<C-u>Unite -vertical -winwidth=40 -direction=topleft -toggle outline<CR>
