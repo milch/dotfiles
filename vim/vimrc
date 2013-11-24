@@ -16,6 +16,7 @@ Bundle "Shougo/unite.vim"
 Bundle "Shougo/unite-outline"
 Bundle "ujihisa/unite-colorscheme"
 Bundle "ervandew/supertab"
+Bundle "xolox/vim-easytags"
 
 "Aesthetics
 Bundle 'skwp/vim-colors-solarized.git'
@@ -37,6 +38,7 @@ Bundle 'sickill/vim-pasta.git'
 Bundle 'tsaleh/vim-matchit.git'
 Bundle 'kshenoy/vim-signature'
 Bundle 'tpope/vim-dispatch'
+Bundle "xolox/vim-misc"
 
 
 " How many lines of history VIM remembers
@@ -132,12 +134,15 @@ set completeopt=menu,menuone,longest
 let g:airline_powerline_fonts=1
 let g:airline_theme='powerlineish'
 
+let g:easytags_updatetime_warn=0
+
 let g:signify_sign_weight = "NONE"
 let g:signify_sign_color_inherit_from_linenr = 1
 let g:signify_sign_change = "~"
 let g:signify_sign_change_delete = "~_"
 
 let g:ycm_confirm_extra_conf = 0
+let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py"
 
 " Make UltiSnips compatible with YCM
 let g:ycm_key_list_select_completion=["<C-Tab>", "<Down>"]
@@ -152,13 +157,15 @@ autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
-"Syntastic
+" Syntastic
 let g:syntastic_error_symbol="✗"
 let g:syntastic_warning_symbol="!"
 let g:syntastic_style_warning_symbol='⚡'
 let g:syntastic_style_error_symbol='⚡'
 
+" Unite
 call unite#filters#matcher_default#use(["matcher_fuzzy"])
+call unite#custom#source("file_rec", "ignore_pattern", "CMake.*")
 let g:unite_winheight = 10
 let g:unite_split_rule='botright'
 let g:unite_source_history_yank_enable=1
