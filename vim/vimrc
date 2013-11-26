@@ -121,11 +121,13 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
-set rnu "relative line numbers
+set relativenumber "relative line numbers
+set number "But on the current line, show the absolute line number
 
 set guioptions-=T "No top toolbar
 set guioptions-=r "no right scrollbar
 set guioptions-=L "no left scrollbar
+set guifont=Droid\ Sans\ Mono\ for\ Powerline:h12
 
 set completeopt=menu,menuone,longest
 
