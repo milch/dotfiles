@@ -8,6 +8,7 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 "Language support
+Bundle "Blackrush/vim-gocode"
 Bundle 'markschabacker/cocoa.vim.git'
 Bundle "sheerun/vim-polyglot"
 
@@ -133,6 +134,7 @@ set completeopt=menu,menuone,longest
 
 let g:airline_powerline_fonts=1
 let g:airline_theme='powerlineish'
+let g:airline#extensions#whitespace#checks = []
 
 let g:easytags_updatetime_warn=0
 
