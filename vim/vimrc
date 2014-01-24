@@ -134,6 +134,7 @@ set completeopt=menu,menuone,longest
 
 let g:airline_powerline_fonts=1
 let g:airline_theme='powerlineish'
+let g:airline#extensions#whitespace#checks = []
 
 let g:easytags_updatetime_warn=0
 
@@ -188,3 +189,5 @@ nnoremap <leader>pr :<C-u>Unite -start-insert file_mru<CR>
 nnoremap <leader>y :<C-u>Unite -start-insert history/yank<CR>
 nnoremap <leader>f :<C-u>Unite -no-quit grep<CR>
 nnoremap <leader>t :<C-u>Unite -vertical -winwidth=40 -direction=topleft -toggle outline<CR>
+
+let g:gofmt_command="gofmt -tabs=false -tabwidth=4"

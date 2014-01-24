@@ -6,9 +6,9 @@ config windowHintsIgnoreHiddenWindows false
 config windowHintsSpread true 
 
 #config gridBackgroundColor 71.2;71.2;71.2;0.8 <-- doesn't work
-config gridCellBackgroundColor 0.0;0.0;255.0;1.0
-config gridCellSelectedColor 175.95;198.9;229.5;1.0
-config gridCellRoundedCornerSize 0
+#config gridCellBackgroundColor 0.0;0.0;255.0;1.0
+#config gridCellSelectedColor 175.95;198.9;229.5;1.0
+#config gridCellRoundedCornerSize 0
 
 
 # HYPER-key
@@ -49,7 +49,7 @@ bind pad7 ${topleft}
 bind pad8 push top bar-resize:screenSizeY/2
 bind pad9 ${topright}
 
-bind g:${hyper} grid padding:2 1440x900:6,4 1920x1200:8,5
+bind g:${hyper} grid padding:2 1440x900:6,4 1920x1200:8,5 1680x1050:8,5
 
 #move using hyper+vim movements
 bind h:${hyper} push left
