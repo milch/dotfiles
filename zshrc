@@ -6,7 +6,8 @@ export EDITOR=vim
 alias vim="mvim -v"
 
 # use utf8
-export LC_ALL=UTF8
+export LC_ALL=de_AT.UTF-8
+export LANG=de_AT.UTF-8
 
 plugins=(brew autojump rbenv battery git tmux)
 
