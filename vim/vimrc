@@ -9,6 +9,7 @@ Bundle 'gmarik/vundle'
 
 "Language support
 Bundle 'markschabacker/cocoa.vim.git'
+Bundle "Blackrush/vim-gocode"
 Bundle "sheerun/vim-polyglot"
 
 "Search, Navigation, etc.
