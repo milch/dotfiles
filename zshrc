@@ -15,5 +15,7 @@ export RPROMPT='%F{blue}$(current_branch) %F{3}[%*]%f'
 # vim-keybindings
 bindkey -v
 
-export PATH=$PATH:~/.rbenv/shims:/usr/local/share/npm/bin:/opt/iOSOpenDev/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/texbin
+export GOPATH=$HOME/go
+
+export PATH=$PATH:~/.rbenv/shims:/usr/local/share/npm/bin:/opt/iOSOpenDev/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/texbin:$GOPATH/bin
 
