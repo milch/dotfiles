@@ -23,6 +23,11 @@ def files_to_install
   glob.reject { |file| ignore.any? { |i| file.match?(/^#{i}$/) || file.match?(/^#{i}\//) } || file.end_with?('/.') }
 end
 
+def gitignore_global
+  puts "Configuring global gitignore"
+  `git config --global core.excludesfile ~/.gitignore_global`
+end
+
 def install
   to_install = files_to_install
 
@@ -42,6 +47,7 @@ def install
 
   install_vim_plug
   install_terminfo
+  gitignore_global
 end
 
 install
