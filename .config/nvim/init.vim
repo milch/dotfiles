@@ -28,28 +28,16 @@ Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
 Plug 'mhinz/vim-signify'
 
 "Autocomplete, Snippets, Syntax
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'Shougo/neoinclude.vim'
+Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install() }}
 Plug 'Rip-Rip/clang_complete', { 'for': ['cpp', 'c', 'objc'] }
 Plug 'wellle/tmux-complete.vim'
-Plug 'landaire/deoplete-swift', { 'for': ['swift'] }
-Plug 'osyo-manga/vim-monster', { 'for': ['ruby', 'eruby'] }
-Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'Raimondi/delimitMate'
 Plug 'tpope/vim-endwise', {'for': ['lua', 'elixir', 'ruby', 'crystal', 'sh', 'zsh', 'vim', 'c', 'cpp', 'objc', 'snippets']}
 Plug 'w0rp/ale'
-Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'shime/vim-livedown'
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
 
 "Misc
+Plug 'Shougo/denite.nvim', {'do':':UpdateRemotePlugins'}
 Plug 'Yggdroot/indentLine'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug '907th/vim-auto-save'
@@ -170,18 +158,6 @@ let g:signify_sign_color_inherit_from_linenr = 1
 let g:signify_sign_change = "~"
 let g:signify_sign_change_delete = "~_"
 
-let g:monster#completion#solargraph#backend = "async_solargraph_suggest"
-
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#omni#functions = {}
-let g:deoplete#omni#functions.javascript = [
-  \ 'tern#Complete',
-  \ 'jspc#omni'
-\]
-let g:deoplete#sources#omni#input_patterns = {
-\   "ruby" : '[^. *\t]\.\w*\|\h\w*::',
-\}
-
 let g:clang_auto_user_options = 'compile_commands.json, .clang_complete, path'
 let g:clang_library_path = "/Library/Developer/CommandLineTools/usr/lib/libclang.dylib"
 let g:clang_use_library = 1
@@ -190,22 +166,12 @@ let g:clang_auto_select = 0
 let g:clang_omnicppcomplete_compliance = 0
 let g:clang_make_default_keymappings = 0
 let g:clang_snippets = 1
-let g:clang_snippets_engine = 'ultisnips'
-
-" better key bindings for UltiSnipsExpandTrigger
-let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsJumpForwardTrigger = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 nnoremap Y y$
 
 nnoremap <leader>t :TagbarToggle<CR>
 
 let g:gofmt_command="gofmt -tabs=false -tabwidth=4"
-
-autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
-autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
-autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 
 nnoremap <leader>r :Make<CR>
 
@@ -351,25 +317,54 @@ let g:ale_linters = {
 
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines'],
-\   'javascript': ['eslint', 'prettier'],
+\   'javascript': ['prettier'],
+\   'typescript': ['tslint', 'prettier'],
+\   'ruby': ['rubocop']
 \}
 let g:ale_fix_on_save = 1
-
-let g:LanguageClient_serverCommands = {
-    \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
-    \ 'javascript': ['javascript-typescript-stdio'],
-    \ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
-    \ 'python': ['pyls'],
-    \ 'ruby': ['solargraph', 'stdio']
-    \ }
-
 
 set mouse=a
 
 set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<
 set list
 
-nnoremap <F5> :call LanguageClient_contextMenu()<CR>
-nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
+
+" Use K for show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if &filetype == 'vim' || &filetype == 'help'
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Remap for format selected region
+vmap gf <Plug>(coc-format-selected)
+nmap gf <Plug>(coc-format-selected)
+
+" Show extension list
+nnoremap <silent> <space>e  :<C-u>Denite coc-extension<cr>
+" Show symbols of current buffer
+nnoremap <silent> <space>o  :<C-u>Denite coc-symbols<cr>
+" Search symbols of current workspace
+nnoremap <silent> <space>t  :<C-u>Denite coc-workspace<cr>
+" Show diagnostics of current workspace
+nnoremap <silent> <space>a  :<C-u>Denite coc-diagnostic<cr>
+" Show available commands
+nnoremap <silent> <space>c  :<C-u>Denite coc-command<cr>
+" Show available services
+nnoremap <silent> <space>s  :<C-u>Denite coc-service<cr>
+" Show links of current buffer
+nnoremap <silent> <space>l  :<C-u>Denite coc-link<cr>
+
+" Use <c-k> to trigger kompletion
+inoremap <silent><expr> <c-k> coc#refresh()
