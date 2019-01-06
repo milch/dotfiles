@@ -37,6 +37,7 @@ Plug 'w0rp/ale'
 Plug 'shime/vim-livedown'
 
 "Misc
+Plug 'tmux-plugins/vim-tmux-focus-events' " Enable FocusLost/FocusGained w/ tmux
 Plug 'Shougo/denite.nvim', {'do':':UpdateRemotePlugins'}
 Plug 'Yggdroot/indentLine'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
@@ -153,9 +154,6 @@ let g:bufferline_echo = 0
 let g:bufferline_active_highlight = 'Comment'
 let g:airline#extensions#bufferline#overwrite_variables = 1
 
-let g:auto_save = 1
-let g:auto_save_events = ["InsertLeave", "TextChanged", "BufLeave"]
-
 let g:NERDTreeIndicatorMapCustom = {
     \ "Modified"  : "~",
     \ "Staged"    : "+",
@@ -193,6 +191,15 @@ nmap <silent> <leader>pp :Files <CR>
 nmap <silent> <leader>pc :Commits <CR>
 
 nmap / /\v
+
+augroup shareData
+  autocmd!
+  autocmd FocusGained * rshada
+  autocmd TextYankPost * wshada
+augroup END
+
+let g:auto_save = 1
+let g:auto_save_events = ["FocusLost", "BufLeave"]
 
 let g:fzf_history_dir = '~/.config/fzf/history'
 
