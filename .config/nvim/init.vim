@@ -6,7 +6,6 @@ Plug 'tpope/vim-rails', { 'for': ['ruby', 'eruby'] }
 Plug 'sheerun/vim-polyglot'
 Plug 'slashmili/alchemist.vim', { 'for': ['elixir'] }
 Plug 'milch/vim-fastlane'
-Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
 
 "Search, Navigation, etc.
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
