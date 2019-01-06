@@ -192,6 +192,8 @@ nmap <leader>f :Rg
 nmap <silent> <leader>pp :Files <CR>
 nmap <silent> <leader>pc :Commits <CR>
 
+nmap / /\v
+
 let g:fzf_history_dir = '~/.config/fzf/history'
 
 " Tag definitions
