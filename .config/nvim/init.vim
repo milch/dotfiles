@@ -49,23 +49,9 @@ Plug 'rhysd/vim-clang-format', { 'for': ['c', 'cpp', 'objc'] }
 
 call plug#end()
 
-" Enable plugins based on filetype
-filetype plugin indent on
-
-" Enables syntax highlighting
-syntax on
-
-" How many lines of history VIM remembers
-set history=1000
-
-" Solarized all the way
-" if $ITERM_PROFILE =~ 'Light$'
-"     set background=light
-" else
-"     set background=dark
-" endif
-
+" Enable 24-bit color 
 set termguicolors
+
 let g:dracula_italic=1
 colorscheme Dracula
 
@@ -75,40 +61,20 @@ let mapleader = ","
 " Tab doesn't expand, Tab-Size is 4 spaces (all Hail the Tab-God)
 set tabstop=4
 set shiftwidth=4
-set noexpandtab
 
 " Smart indentation of lines
 set smartindent
 
-" Enables Statusbar
-set laststatus=2
-
-" Highlight searches & searches while typing
-set hlsearch
-set incsearch
-
-" For regular expressions
-set magic
-
 " Highlight matching brackets
 set showmatch
-
-" No error sounds
-set noerrorbells
-set novisualbell
-set t_vb=
-set tm=500
 
 " Ignore case when searching, but not if keywords are capitalized
 set ignorecase smartcase
 
 " Turn off backups
 set nobackup
-set nowb
+set nowritebackup
 set noswapfile
-
-" Allows Backspace to loop over everything
-set backspace=indent,eol,start
 
 " No Arrow keys
 map <Left> <Nop>
@@ -117,28 +83,10 @@ map <Up> <Nop>
 map <Down> <Nop>
 
 " Viewport will move if Cursor is 10 lines away from the edge
-set so=10
+set scrolloff=10
 
-" Show current position
-set ruler
-
-" Height of the command bar
-set cmdheight=1
-
-" Automatically reload file when it is changed from the outside
-set autoread
-
-" Set default encoding to utf-8
-set encoding=utf8
-
-" Change split with Ctrl+Direction
-" map <C-j> <C-W>j
-" map <C-k> <C-W>k
-" map <C-h> <C-W>h
-" map <C-l> <C-W>l
-
-set relativenumber "relative line numbers
-set number "But on the current line, show the absolute line number
+set relativenumber " relative line numbers
+set number " But on the current line, show the absolute line number
 
 set hidden " Allow hidden buffers
 
@@ -167,6 +115,7 @@ let g:clang_omnicppcomplete_compliance = 0
 let g:clang_make_default_keymappings = 0
 let g:clang_snippets = 1
 
+" Make Y behave like D
 nnoremap Y y$
 
 nnoremap <leader>t :TagbarToggle<CR>
@@ -178,10 +127,6 @@ nnoremap <leader>r :Make<CR>
 autocmd FileType markdown,mkd set spell spelllang=de,en
 autocmd FileType text set spell spelllang=de,en
 autocmd FileType plaintex,tex set spell spelllang=de,en
-
-if $SHELL =~ 'bin/fish'
-    set shell=/bin/bash
-endif
 
 let g:clang_format#detect_style_file = 1
 let g:clang_format#auto_format = 0
@@ -198,7 +143,6 @@ let test#strategy="dispatch"
 
 let g:dispatch_compilers = {
       \ 'bundle exec': ''}
-
 
 set keywordprg=:Nman
 
@@ -223,14 +167,8 @@ let g:NERDTreeIndicatorMapCustom = {
     \ }
 
 if !has('gui_vimr')
-  " Open NERDTree automatically if no files were specified
-  autocmd StdinReadPre * let s:std_in=1
-  autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-
   " Close vim if NERDTree is the only window left
   autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-else
-
 endif
 
 map <leader>o :NERDTreeToggle <CR>
@@ -238,16 +176,6 @@ map <leader>o :NERDTreeToggle <CR>
 " Working with buffers
 nmap <silent> <Tab> :bn<CR>
 nmap <silent> <S-Tab> :bp<CR>
-
-nmap <silent> <leader>1 :b 1<CR>
-nmap <silent> <leader>2 :b 2<CR>
-nmap <silent> <leader>3 :b 3<CR>
-nmap <silent> <leader>4 :b 4<CR>
-nmap <silent> <leader>5 :b 5<CR>
-nmap <silent> <leader>6 :b 6<CR>
-nmap <silent> <leader>7 :b 7<CR>
-nmap <silent> <leader>8 :b 8<CR>
-nmap <silent> <leader>9 :b 9<CR>
 
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
@@ -285,31 +213,6 @@ let g:gutentags_cache_dir = '~/.cache/gutentags/'
 
 nmap <silent> <leader>q :bd<CR>
 
-" Workaround for files not auto-reloading https://github.com/neovim/neovim/issues/2127
-augroup AutoSwap
-  autocmd!
-  autocmd SwapExists *  call AS_HandleSwapfile(expand('<afile>:p'), v:swapname)
-augroup END
-
-function! AS_HandleSwapfile (filename, swapname)
-  " if swapfile is older than file itself, just get rid of it
-  if getftime(v:swapname) < getftime(a:filename)
-    call delete(v:swapname)
-    let v:swapchoice = 'e'
-  endif
-endfunction
-autocmd CursorHold,BufWritePost,BufReadPost,BufLeave *
-      \ if isdirectory(expand("<amatch>:h")) | let &swapfile = &modified | endif
-
-augroup checktime
-  au!
-  if !has("gui_running")
-    "silent! necessary otherwise throws errors when using command
-    "line window.
-    autocmd BufEnter,CursorHold,CursorHoldI,CursorMoved,CursorMovedI,FocusGained,BufEnter,FocusLost,WinLeave * checktime
-  endif
-augroup END
-
 let g:ale_linters = {
 \   'c': ['clang_check', 'cppcheck'],
 \   'cpp': ['clang_check', 'cppcheck', 'clangtidy'],
@@ -325,7 +228,7 @@ let g:ale_fix_on_save = 1
 
 set mouse=a
 
-set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<
+set listchars=tab:>·,trail:~,extends:>,precedes:<
 set list
 
 nmap <silent> gd <Plug>(coc-definition)
