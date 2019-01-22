@@ -171,7 +171,8 @@ if !has('gui_vimr')
   autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 endif
 
-map <leader>o :NERDTreeToggle <CR>
+let loaded_netrwPlugin = 1
+map <leader>o :NERDTreeToggle<CR>
 
 " Working with buffers
 nmap <silent> <Tab> :bn<CR>
