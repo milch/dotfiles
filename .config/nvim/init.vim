@@ -40,7 +40,7 @@ Plug 'tmux-plugins/vim-tmux-focus-events' " Enable FocusLost/FocusGained w/ tmux
 Plug 'Shougo/denite.nvim', {'do':':UpdateRemotePlugins'}
 Plug 'Yggdroot/indentLine'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
-Plug '907th/vim-auto-save'
+Plug '907th/vim-auto-save', {'on': [] } " Defer loading
 Plug 'critiqjo/lldb.nvim', { 'for': ['c', 'cpp', 'objc'] }
 Plug 'janko-m/vim-test'
 Plug 'kshenoy/vim-signature'
@@ -52,7 +52,7 @@ call plug#end()
 " Enable 24-bit color 
 set termguicolors
 
-let g:dracula_italic=1
+" let g:dracula_italic=1
 colorscheme Dracula
 
 " Leader -> to prefix your own keybindings
@@ -99,6 +99,8 @@ set completeopt=menu,menuone,longest
 " always show signcolumns
 set signcolumn=yes
 
+let g:indentLine_fileTypeExclude = ['json', 'markdown']
+
 let g:airline_powerline_fonts=1
 let g:airline_theme='dracula'
 let g:airline#extensions#whitespace#checks = []
@@ -127,9 +129,9 @@ let g:gofmt_command="gofmt -tabs=false -tabwidth=4"
 
 nnoremap <leader>r :Make<CR>
 
-autocmd FileType markdown,mkd set spell spelllang=de,en
-autocmd FileType text set spell spelllang=de,en
-autocmd FileType plaintex,tex set spell spelllang=de,en
+autocmd FileType markdown,mkd set spell spelllang=en
+autocmd FileType text set spell spelllang=en
+autocmd FileType plaintex,tex set spell spelllang=en
 
 let g:clang_format#detect_style_file = 1
 let g:clang_format#auto_format = 0
@@ -200,6 +202,14 @@ augroup END
 
 let g:auto_save = 1
 let g:auto_save_events = ["FocusLost", "BufLeave"]
+
+function! s:AdjustAutoSaveForMarkdown()
+  set updatetime=200
+  let g:auto_save_events += ["TextChanged", "CursorHold", "CursorHoldI"]
+endfunction
+
+autocmd FileType markdown,mkd call <SID>AdjustAutoSaveForMarkdown()
+autocmd FileType * call plug#load('vim-auto-save')
 
 let g:fzf_history_dir = '~/.config/fzf/history'
 
