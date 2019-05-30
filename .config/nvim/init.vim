@@ -1,7 +1,6 @@
 call plug#begin('~/.config/nvim/bundle')
 
 "Language support
-Plug 'AlexKornitzer/cocoa.vim', { 'for': ['objc', 'swift'] }
 Plug 'tpope/vim-rails', { 'for': ['ruby', 'eruby'] }
 Plug 'sheerun/vim-polyglot'
 Plug 'slashmili/alchemist.vim', { 'for': ['elixir'] }
@@ -9,7 +8,6 @@ Plug 'milch/vim-fastlane'
 
 "Search, Navigation, etc.
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
-Plug 'ervandew/supertab'
 Plug 'ludovicchabant/vim-gutentags' | Plug 'majutsushi/tagbar'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-surround'
@@ -94,10 +92,12 @@ set guioptions-=T "No top toolbar
 set guioptions-=r "no right scrollbar
 set guioptions-=L "no left scrollbar
 
-set completeopt=menu,menuone,longest
+set completeopt=menu,menuone,noinsert,noselect
 
 " always show signcolumns
 set signcolumn=yes
+
+" let g:endwise_no_mappings=1
 
 let g:indentLine_fileTypeExclude = ['json', 'markdown']
 
@@ -105,6 +105,15 @@ let g:airline_powerline_fonts=1
 let g:airline_theme='dracula'
 let g:airline#extensions#whitespace#checks = []
 let g:airline#extensions#bufferline#enabled = 1
+let g:airline_section_b=''
+let g:airline_skip_empty_sections=1
+let g:airline#extensions#gutentags#enabled = 0
+
+" Only show line and column number in the bottom right
+call airline#parts#define_raw('linenr', '%l')
+call airline#parts#define_accent('linenr', 'bold')
+let g:airline_section_z = airline#section#create([g:airline_symbols.linenr .' ', 'linenr', ':%c '])
+let g:airline_section_x = airline#section#create_right(['tagbar', 'filetype', '%f'])
 
 let g:signify_sign_weight = "NONE"
 let g:signify_sign_color_inherit_from_linenr = 1
@@ -124,8 +133,6 @@ let g:clang_snippets = 1
 nnoremap Y y$
 
 nnoremap <leader>t :TagbarToggle<CR>
-
-let g:gofmt_command="gofmt -tabs=false -tabwidth=4"
 
 nnoremap <leader>r :Make<CR>
 
@@ -180,16 +187,13 @@ map <leader>o :NERDTreeToggle<CR>
 nmap <silent> <Tab> :bn<CR>
 nmap <silent> <S-Tab> :bp<CR>
 
-command! -bang -nargs=* Rg
-  \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
-  \   <bang>0 ? fzf#vim#with_preview('up:60%')
-  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-  \   <bang>0)
+call denite#custom#alias('source', 'file/rec/git', 'file/rec')
+call denite#custom#var('file/rec/git', 'command',
+      \ ['git', 'ls-files', '-co', '--exclude-standard'])
 
-nmap <silent> <leader>p :GFiles <CR>
-nmap <leader>f :Rg 
-nmap <silent> <leader>pp :Files <CR>
+nmap <leader>f :Denite -split=floating grep<CR>
+nmap <leader>p :<C-u>Denite -split=floating file/rec/git<CR>
+nmap <leader>pp :<C-u>Denite -split=floating file/rec<CR>
 nmap <silent> <leader>pc :Commits <CR>
 
 nmap / /\v
@@ -250,6 +254,8 @@ let g:ale_fix_on_save = 1
 
 set mouse=a
 
+set shortmess+=c
+
 set listchars=tab:>·,trail:~,extends:>,precedes:<
 set list
 
@@ -291,5 +297,19 @@ nnoremap <silent> <space>s  :<C-u>Denite coc-service<cr>
 " Show links of current buffer
 nnoremap <silent> <space>l  :<C-u>Denite coc-link<cr>
 
-" Use <c-k> to trigger kompletion
-inoremap <silent><expr> <c-k> coc#refresh()
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <cr> for confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <C-R>=...<CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
