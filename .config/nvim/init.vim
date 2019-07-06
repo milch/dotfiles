@@ -26,10 +26,9 @@ Plug 'mhinz/vim-signify'
 
 "Autocomplete, Snippets, Syntax
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install() }}
-Plug 'Rip-Rip/clang_complete', { 'for': ['cpp', 'c', 'objc'] }
 Plug 'wellle/tmux-complete.vim'
 Plug 'Raimondi/delimitMate'
-Plug 'tpope/vim-endwise', {'for': ['lua', 'elixir', 'ruby', 'crystal', 'sh', 'zsh', 'vim', 'c', 'cpp', 'objc', 'snippets']}
+Plug 'tpope/vim-endwise', {'for': ['lua', 'elixir', 'ruby', 'crystal', 'sh', 'zsh', 'vim']}
 Plug 'w0rp/ale'
 Plug 'shime/vim-livedown'
 
@@ -43,7 +42,6 @@ Plug 'critiqjo/lldb.nvim', { 'for': ['c', 'cpp', 'objc'] }
 Plug 'janko-m/vim-test'
 Plug 'kshenoy/vim-signature'
 Plug 'tpope/vim-sleuth' "Auto detect tab/space settings
-Plug 'rhysd/vim-clang-format', { 'for': ['c', 'cpp', 'objc'] }
 
 call plug#end()
 
@@ -120,15 +118,6 @@ let g:signify_sign_color_inherit_from_linenr = 1
 let g:signify_sign_change = "~"
 let g:signify_sign_change_delete = "~_"
 
-let g:clang_auto_user_options = 'compile_commands.json, .clang_complete, path'
-let g:clang_library_path = "/Library/Developer/CommandLineTools/usr/lib/libclang.dylib"
-let g:clang_use_library = 1
-let g:clang_complete_auto = 0
-let g:clang_auto_select = 0
-let g:clang_omnicppcomplete_compliance = 0
-let g:clang_make_default_keymappings = 0
-let g:clang_snippets = 1
-
 " Make Y behave like D
 nnoremap Y y$
 
@@ -139,10 +128,6 @@ nnoremap <leader>r :Make<CR>
 autocmd FileType markdown,mkd set spell spelllang=en
 autocmd FileType text set spell spelllang=en
 autocmd FileType plaintex,tex set spell spelllang=en
-
-let g:clang_format#detect_style_file = 1
-let g:clang_format#auto_format = 0
-let g:clang_format#auto_formatexpr = 0
 
 " vim-test config - run Tests in local file
 nmap <silent> <leader>u :TestNearest<CR>
@@ -248,7 +233,8 @@ let g:ale_fixers = {
 \   '*': ['remove_trailing_lines'],
 \   'javascript': ['prettier'],
 \   'typescript': ['tslint', 'prettier'],
-\   'ruby': ['rubocop']
+\   'ruby': ['rubocop'],
+\   'c': ['clang-format'],
 \}
 let g:ale_fix_on_save = 1
 
@@ -258,6 +244,27 @@ set shortmess+=c
 
 set listchars=tab:>·,trail:~,extends:>,precedes:<
 set list
+
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+let g:coc_snippet_next = '<Tab>'
+let g:coc_snippet_prev = '<S-Tab>'
+
+" Coc only does snippet and additional edit on confirm.
+" use <tab> for trigger completion and navigate to next complete item
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+inoremap <expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
+
+set shortmess+=c
 
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
