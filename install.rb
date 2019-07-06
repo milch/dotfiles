@@ -2,6 +2,12 @@
 
 require 'fileutils'
 
+def install_fisherman
+  puts "Installing fisherman..."
+  `curl https://git.io/fisher --create-dirs -sLo ~/.config/fish/functions/fisher.fish`
+  `fish -c fisher`
+end
+
 def install_terminfo
   Dir.chdir(File.expand_path('~')) do
     puts "Installing terminfo files..."
@@ -15,6 +21,10 @@ def install_vim_plug
   puts "Installing Vim Plug..."
   `curl -fsLo ~/.config/nvim/autoload/plug.vim --create-dirs \
   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim`
+end
+
+def install_tmux_plugin_manager
+  `git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm`
 end
 
 def files_to_install
@@ -45,6 +55,8 @@ def install
     FileUtils.ln_s(in_this_dir, in_home_dir, force: true)
   end
 
+  install_fisherman
+  install_tmux_plugin_manager
   install_vim_plug
   install_terminfo
   gitignore_global
