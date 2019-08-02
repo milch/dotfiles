@@ -86,8 +86,6 @@ def install
 
   install_runtimes
 
-  install_fisherman
-  install_tmux_plugin_manager
   install_vim_plug
   install_terminfo
   install_tmux_plugin_manager
