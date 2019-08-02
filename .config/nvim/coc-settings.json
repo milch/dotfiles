@@ -9,7 +9,7 @@
        }
     }
   },
-  "coc.preferences.triggerAfterInsertEnter": true,
-  "coc.preferences.minTriggerInputLength": 0,
-  "coc.preferences.maxCompleteItemCount": 10
+  "suggest.triggerAfterInsertEnter": true,
+  "suggest.minTriggerInputLength": 0,
+  "suggest.maxCompleteItemCount": 10
 }
