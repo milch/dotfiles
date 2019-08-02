@@ -9,7 +9,6 @@ Plug 'milch/vim-fastlane'
 "Search, Navigation, etc.
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
 Plug 'ludovicchabant/vim-gutentags' | Plug 'majutsushi/tagbar'
-Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'bling/vim-bufferline'
@@ -26,14 +25,12 @@ Plug 'mhinz/vim-signify'
 
 "Autocomplete, Snippets, Syntax
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install() }}
-Plug 'wellle/tmux-complete.vim'
 Plug 'Raimondi/delimitMate'
 Plug 'tpope/vim-endwise', {'for': ['lua', 'elixir', 'ruby', 'crystal', 'sh', 'zsh', 'vim']}
 Plug 'w0rp/ale'
 Plug 'shime/vim-livedown'
 
 "Misc
-Plug 'tmux-plugins/vim-tmux-focus-events' " Enable FocusLost/FocusGained w/ tmux
 Plug 'Shougo/denite.nvim', {'do':':UpdateRemotePlugins'}
 Plug 'Yggdroot/indentLine'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
@@ -172,16 +169,60 @@ map <leader>o :NERDTreeToggle<CR>
 nmap <silent> <Tab> :bn<CR>
 nmap <silent> <S-Tab> :bp<CR>
 
+autocmd FileType denite call s:denite_my_settings()
+function! s:denite_my_settings() abort
+  nnoremap <silent><buffer><expr> <CR>    denite#do_map('do_action')
+  nnoremap <silent><buffer><expr> q       denite#do_map('quit')
+  nnoremap <silent><buffer><expr> i       denite#do_map('open_filter_buffer')
+endfunction
+
+autocmd FileType denite-filter call s:denite_filter_settings()
+function! s:denite_filter_settings() abort
+  inoremap <silent><buffer><expr> <C-c>   denite#do_map('quit')
+  inoremap <silent><buffer><expr> <CR>    denite#do_map('do_action')
+  nnoremap <silent><buffer><expr> <C-c>   denite#do_map('quit')
+  nnoremap <silent><buffer><expr> q       denite#do_map('quit')
+endfunction
+
 call denite#custom#alias('source', 'file/rec/git', 'file/rec')
 call denite#custom#var('file/rec/git', 'command',
       \ ['git', 'ls-files', '-co', '--exclude-standard'])
 
-nmap <leader>f :Denite -split=floating grep<CR>
-nmap <leader>p :<C-u>Denite -split=floating file/rec/git<CR>
-nmap <leader>pp :<C-u>Denite -split=floating file/rec<CR>
-nmap <silent> <leader>pc :Commits <CR>
+call denite#custom#var('grep', 'command', ['rg'])
+call denite#custom#var('grep', 'default_opts',
+      \ ['-i', '--vimgrep', '--no-heading'])
+call denite#custom#var('grep', 'recursive_opts', [])
+call denite#custom#var('grep', 'pattern_opt', ['--regexp'])
+call denite#custom#var('grep', 'separator', ['--'])
+call denite#custom#var('grep', 'final_opts', [])
 
-nmap / /\v
+let g:float_width = &columns/4*3
+call denite#custom#option('_', {
+      \ 'winwidth': &columns/4 * 3,
+      \ 'wincol': (&columns - &columns/4 * 3) / 2,
+      \ 'split': 'floating',
+      \ 'start_filter': 'true'
+      \ })
+
+" Sets recursive search to git search if in a git project, regular recursive
+" search otherwise
+function! s:SetDeniteRecursiveSearchMapping()
+  if finddir('.git', ';') != ''
+    nmap <silent> <leader>p :<C-u>Denite file/rec/git<CR>
+  else
+    nmap <silent> <leader>p :<C-u>Denite file/rec<CR>
+  endif
+endfunction
+
+call <SID>SetDeniteRecursiveSearchMapping()
+
+autocmd FileType markdown,mkd call <SID>AdjustAutoSaveForMarkdown()
+augroup DeniteRecursiveMapping
+  autocmd!
+  autocmd DirChanged * call <SID>SetDeniteRecursiveSearchMapping()
+augroup END
+nmap <silent> <leader>f :Denite grep<CR>
+nmap <silent> <leader>c :Commits <CR>
 
 augroup shareData
   autocmd!
@@ -227,6 +268,7 @@ nmap <silent> <leader>q :bd<CR>
 let g:ale_linters = {
 \   'c': ['clang_check', 'cppcheck'],
 \   'cpp': ['clang_check', 'cppcheck', 'clangtidy'],
+\   'java': []
 \}
 
 let g:ale_fixers = {

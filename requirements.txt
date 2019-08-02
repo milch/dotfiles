@@ -1,0 +1,4 @@
+greenlet
+msgpack
+pynvim
+powerline-status
