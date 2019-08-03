@@ -92,8 +92,6 @@ set completeopt=menu,menuone,noinsert,noselect
 " always show signcolumns
 set signcolumn=yes
 
-" let g:endwise_no_mappings=1
-
 let g:indentLine_fileTypeExclude = ['json', 'markdown']
 
 let g:airline_powerline_fonts=1
@@ -137,8 +135,6 @@ let test#strategy="dispatch"
 
 let g:dispatch_compilers = {
       \ 'bundle exec': ''}
-
-set keywordprg=:Nman
 
 let g:bufferline_echo = 0
 let g:bufferline_active_highlight = 'Comment'
@@ -215,12 +211,11 @@ function! s:SetDeniteRecursiveSearchMapping()
 endfunction
 
 call <SID>SetDeniteRecursiveSearchMapping()
-
-autocmd FileType markdown,mkd call <SID>AdjustAutoSaveForMarkdown()
 augroup DeniteRecursiveMapping
   autocmd!
   autocmd DirChanged * call <SID>SetDeniteRecursiveSearchMapping()
 augroup END
+
 nmap <silent> <leader>f :Denite grep<CR>
 nmap <silent> <leader>c :Commits <CR>
 
@@ -304,9 +299,9 @@ inoremap <silent><expr> <TAB>
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
 
-inoremap <expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
-
-set shortmess+=c
+" Use <cr> for confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <C-R>=...<CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
@@ -330,35 +325,3 @@ endfunction
 " Remap for format selected region
 vmap gf <Plug>(coc-format-selected)
 nmap gf <Plug>(coc-format-selected)
-
-" Show extension list
-nnoremap <silent> <space>e  :<C-u>Denite coc-extension<cr>
-" Show symbols of current buffer
-nnoremap <silent> <space>o  :<C-u>Denite coc-symbols<cr>
-" Search symbols of current workspace
-nnoremap <silent> <space>t  :<C-u>Denite coc-workspace<cr>
-" Show diagnostics of current workspace
-nnoremap <silent> <space>a  :<C-u>Denite coc-diagnostic<cr>
-" Show available commands
-nnoremap <silent> <space>c  :<C-u>Denite coc-command<cr>
-" Show available services
-nnoremap <silent> <space>s  :<C-u>Denite coc-service<cr>
-" Show links of current buffer
-nnoremap <silent> <space>l  :<C-u>Denite coc-link<cr>
-
-" Use tab for trigger completion with characters ahead and navigate.
-" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" Use <cr> for confirm completion, `<C-g>u` means break undo chain at current position.
-" Coc only does snippet and additional edit on confirm.
-inoremap <C-R>=...<CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
