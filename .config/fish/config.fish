@@ -25,7 +25,7 @@ set -g fish_user_paths "/usr/local/opt/llvm/bin" $fish_user_paths
 set -g theme_color_scheme 'dracula'
 set -g theme_date_format "+%H:%M:%S"
 
-status --is-interactive; and source (pyenv init -|psub)
+status --is-interactive; and source (pyenv init -|psub); and source (rbenv init -|psub)
 
 test -e ~/.config/fish/local.fish; and source ~/.config/fish/local.fish
 
