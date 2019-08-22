@@ -9,7 +9,6 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 
 "Search, Navigation, etc.
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
-Plug 'ludovicchabant/vim-gutentags' | Plug 'majutsushi/tagbar'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'bling/vim-bufferline'
@@ -101,7 +100,6 @@ let g:airline#extensions#whitespace#checks = []
 let g:airline#extensions#bufferline#enabled = 1
 let g:airline_section_b=''
 let g:airline_skip_empty_sections=1
-let g:airline#extensions#gutentags#enabled = 0
 
 " Only show line and column number in the bottom right
 call airline#parts#define_raw('linenr', '%l')
@@ -238,26 +236,6 @@ autocmd FileType markdown,mkd call <SID>AdjustAutoSaveForMarkdown()
 autocmd FileType * call plug#load('vim-auto-save')
 
 let g:fzf_history_dir = '~/.config/fzf/history'
-
-" Tag definitions
-let g:tagbar_type_elixir = {
-    \ 'ctagstype' : 'elixir',
-    \ 'kinds' : [
-        \ 'f:functions',
-        \ 'functions:functions',
-        \ 'c:callbacks',
-        \ 'd:delegates',
-        \ 'e:exceptions',
-        \ 'i:implementations',
-        \ 'a:macros',
-        \ 'o:operators',
-        \ 'm:modules',
-        \ 'p:protocols',
-        \ 'r:records'
-    \ ]
-\ }
-
-let g:gutentags_cache_dir = '~/.cache/gutentags/'
 
 nmap <silent> <leader>q :bd<CR>
 
