@@ -9,6 +9,7 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 
 "Search, Navigation, etc.
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
+Plug 'liuchengxu/vista.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'bling/vim-bufferline'
@@ -115,7 +116,9 @@ let g:signify_sign_change_delete = "~_"
 " Make Y behave like D
 nnoremap Y y$
 
-nnoremap <leader>t :TagbarToggle<CR>
+let g:vista_default_executive = 'coc'
+let g:vista#renderer#enable_icon = 0
+nnoremap <silent> <leader>t :Vista!!<CR>
 
 nnoremap <leader>r :Make<CR>
 
