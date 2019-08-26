@@ -249,7 +249,7 @@ let g:ale_linters = {
 \}
 
 let g:ale_fixers = {
-\   '*': ['remove_trailing_lines'],
+\   '*': [],
 \   'javascript': ['prettier'],
 \   'typescript': ['tslint', 'prettier'],
 \   'ruby': ['rubocop'],
