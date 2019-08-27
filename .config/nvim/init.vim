@@ -28,7 +28,6 @@ Plug 'mhinz/vim-signify'
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install() }}
 Plug 'Raimondi/delimitMate'
 Plug 'tpope/vim-endwise', {'for': ['lua', 'elixir', 'ruby', 'crystal', 'sh', 'zsh', 'vim']}
-Plug 'shime/vim-livedown'
 
 "Misc
 Plug 'Shougo/denite.nvim', {'do':':UpdateRemotePlugins'}
