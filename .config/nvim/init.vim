@@ -28,7 +28,6 @@ Plug 'mhinz/vim-signify'
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install() }}
 Plug 'Raimondi/delimitMate'
 Plug 'tpope/vim-endwise', {'for': ['lua', 'elixir', 'ruby', 'crystal', 'sh', 'zsh', 'vim']}
-Plug 'w0rp/ale'
 Plug 'shime/vim-livedown'
 
 "Misc
@@ -241,21 +240,6 @@ autocmd FileType * call plug#load('vim-auto-save')
 let g:fzf_history_dir = '~/.config/fzf/history'
 
 nmap <silent> <leader>q :bd<CR>
-
-let g:ale_linters = {
-\   'c': ['clang_check', 'cppcheck'],
-\   'cpp': ['clang_check', 'cppcheck', 'clangtidy'],
-\   'java': []
-\}
-
-let g:ale_fixers = {
-\   '*': [],
-\   'javascript': ['prettier'],
-\   'typescript': ['tslint', 'prettier'],
-\   'ruby': ['rubocop'],
-\   'c': ['clang-format'],
-\}
-let g:ale_fix_on_save = 1
 
 set mouse=a
 
