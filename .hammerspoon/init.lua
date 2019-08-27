@@ -12,7 +12,7 @@ function compareFrame(lhs, rhs)
   local deltaW = lhs.w - rhs.w
 
   local rms = (deltaX^2 + deltaY^2 + deltaH^2 + deltaW^2)^0.5
-  return rms <= 5.0
+  return rms <= 10.0
 end
 
 function map(func, array)
@@ -43,7 +43,7 @@ function reloadConfig(files)
         hs.reload()
     end
 end
-myWatcher = hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", reloadConfig):start()
+myWatcher = hs.pathwatcher.new(os.getenv("HOME") .. "/dotfiles/.hammerspoon/", reloadConfig):start()
 hs.alert.show("Config loaded")
 
 function frames()
@@ -56,22 +56,34 @@ function frames()
 
   local frames = {
     ["Right"] = map(
-        function(f)
-          frame = hs.screen.mainScreen():frame()
-          frame.x = round(screenFrame.x + (screenFrame.w / f * (f - 1)))
-          frame.w = round(screenFrame.w / f)
-          return frame
-        end,
-      range(supportedFractionCount, 2)),
+      function(f)
+        frame = hs.screen.mainScreen():frame()
+        frame.x = round(screenFrame.x + (screenFrame.w / f * (f - 1)))
+        frame.w = round(screenFrame.w / f)
+        return frame
+      end,
+      range(supportedFractionCount, 2)
+    ),
     ["Left"] = map(
-        function(f)
-          frame = hs.screen.mainScreen():frame()
-          frame.w = round(screenFrame.w / f)
-          return frame
-        end,
-      range(supportedFractionCount, 2)),
+      function(f)
+        frame = hs.screen.mainScreen():frame()
+        frame.w = round(screenFrame.w / f)
+        return frame
+      end,
+      range(supportedFractionCount, 2)
+    ),
     ["Up"] = { screenFrame },
-    ["Down"] = { middleThird }
+    ["Down"] = map(
+      function(f)
+        frame = hs.screen.mainScreen():frame()
+        frame.x = screenFrame.x + round(screenFrame.w / 3)
+        frame.y = screenFrame.y + round(screenFrame.h / f * (f - 1))
+        frame.w = round(screenFrame.w / 3)
+        frame.h = round(screenFrame.h / f)
+        return frame
+      end,
+      range(3, 1)
+    )
   }
 
   return frames
