@@ -33,7 +33,7 @@ Plug 'tpope/vim-endwise', {'for': ['lua', 'elixir', 'ruby', 'crystal', 'sh', 'zs
 Plug 'Shougo/denite.nvim', {'do':':UpdateRemotePlugins'}
 Plug 'Yggdroot/indentLine'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
-Plug '907th/vim-auto-save', {'on': [] } " Defer loading
+Plug '907th/vim-auto-save'
 Plug 'critiqjo/lldb.nvim', { 'for': ['c', 'cpp', 'objc'] }
 Plug 'janko-m/vim-test'
 Plug 'kshenoy/vim-signature'
@@ -227,14 +227,6 @@ augroup END
 
 let g:auto_save = 1
 let g:auto_save_events = ["FocusLost", "BufLeave"]
-
-function! s:AdjustAutoSaveForMarkdown()
-  set updatetime=200
-  let g:auto_save_events += ["TextChanged", "CursorHold", "CursorHoldI"]
-endfunction
-
-autocmd FileType markdown,mkd call <SID>AdjustAutoSaveForMarkdown()
-autocmd FileType * call plug#load('vim-auto-save')
 
 let g:fzf_history_dir = '~/.config/fzf/history'
 
