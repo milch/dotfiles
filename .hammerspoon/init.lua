@@ -46,18 +46,18 @@ end
 myWatcher = hs.pathwatcher.new(os.getenv("HOME") .. "/dotfiles/.hammerspoon/", reloadConfig):start()
 hs.alert.show("Config loaded")
 
-function frames()
-  local screenFrame = hs.screen.mainScreen():frame()
+function frames(screen)
+  local screenFrame = screen:frame()
   local supportedFractionCount = 8
 
-  local middleThird = hs.screen.mainScreen():frame()
+  local middleThird = screen:frame()
   middleThird.x = screenFrame.x + (screenFrame.w / 3)
   middleThird.w = screenFrame.w / 3
 
   local frames = {
     ["Right"] = map(
       function(f)
-        frame = hs.screen.mainScreen():frame()
+        frame = screen:frame()
         frame.x = round(screenFrame.x + (screenFrame.w / f * (f - 1)))
         frame.w = round(screenFrame.w / f)
         return frame
@@ -66,7 +66,7 @@ function frames()
     ),
     ["Left"] = map(
       function(f)
-        frame = hs.screen.mainScreen():frame()
+        frame = screen:frame()
         frame.w = round(screenFrame.w / f)
         return frame
       end,
@@ -75,7 +75,7 @@ function frames()
     ["Up"] = { screenFrame },
     ["Down"] = map(
       function(f)
-        frame = hs.screen.mainScreen():frame()
+        frame = screen:frame()
         frame.x = screenFrame.x + round(screenFrame.w / 3)
         frame.y = screenFrame.y + round(screenFrame.h / f * (f - 1))
         frame.w = round(screenFrame.w / 3)
@@ -89,8 +89,8 @@ function frames()
   return frames
 end
 
-function findNextFrame(currentFrame, type)
-  local framesOfType = frames()[type]
+function findNextFrame(screen, currentFrame, type)
+  local framesOfType = frames(screen)[type]
   for idx, frame in pairs(framesOfType) do
     if compareFrame(frame, currentFrame) then
       return framesOfType[idx + 1]
@@ -105,7 +105,7 @@ function windowMovement(keys, direction)
   hs.hotkey.bind(keys, direction, function()
     local win = hs.window.focusedWindow()
 
-    local foundFrame = findNextFrame(win:frame(), direction)
+    local foundFrame = findNextFrame(win:screen(), win:frame(), direction)
 
     win:setFrame(foundFrame)
   end)
@@ -122,5 +122,5 @@ hs.hotkey.bind(hyper, "Tab", function()
   local f = win:frame()
   local screen = win:screen()
 
-  win:centerOnScreen(screen:next())
+  win:centerOnScreen(screen:next(), true)
 end)
