@@ -11,5 +11,13 @@
   },
   "suggest.triggerAfterInsertEnter": true,
   "suggest.minTriggerInputLength": 0,
-  "suggest.maxCompleteItemCount": 10
+  "suggest.maxCompleteItemCount": 10,
+  "solargraph.diagnostics": true,
+  "solargraph.hover": true,
+  "solargraph.formatting": true,
+  "coc.preferences.formatOnSaveFiletypes": [
+    "ruby"
+  ],
+  "solargraph.completion": true,
+  "diagnostic.virtualText": true
 }
