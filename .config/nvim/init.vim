@@ -239,11 +239,14 @@ function! s:denite_filter_settings() abort
   inoremap <silent><buffer><expr> <CR>    denite#do_map('do_action')
   nnoremap <silent><buffer><expr> <C-c>   denite#do_map('quit')
   nnoremap <silent><buffer><expr> q       denite#do_map('quit')
+  nnoremap <silent><buffer>       <ESC>   :q<CR>
 endfunction
 
 call denite#custom#alias('source', 'file/rec/git', 'file/rec')
 call denite#custom#var('file/rec/git', 'command',
       \ ['git', 'ls-files', '-co', '--exclude-standard'])
+call denite#custom#var('file/rec', 'command',
+      \ ['fd', '--hidden', '--exclude', '.git', '--follow', '--color', 'never', '--full-path', '--type', 'file'])
 
 call denite#custom#var('grep', 'command', ['rg'])
 call denite#custom#var('grep', 'default_opts',
@@ -258,7 +261,8 @@ call denite#custom#option('_', {
       \ 'winwidth': &columns/4 * 3,
       \ 'wincol': (&columns - &columns/4 * 3) / 2,
       \ 'split': 'floating',
-      \ 'start_filter': 'true'
+      \ 'start_filter': 'true',
+      \ 'match-highlight': 'true'
       \ })
 
 " Sets recursive search to git search if in a git project, regular recursive
@@ -317,8 +321,14 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
+" Perform code action
+nmap <leader>a <Plug>(coc-codeaction)
+
 " Remap for rename current word
 nmap <leader>rn <Plug>(coc-rename)
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
 
 " Use K for show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -334,6 +344,9 @@ endfunction
 " Remap for format selected region
 vmap gf <Plug>(coc-format-selected)
 nmap gf <Plug>(coc-format-selected)
+
+" Disable autoformat for temporary files
+autocmd BufRead,VimEnter * if expand('%') =~ "/private/var/folders" | call coc#config('coc.preferences.formatOnSaveFiletypes', []) | endif
 
 let g:projectionist_heuristics = {
 \ "rails-root/Rakefile": {
