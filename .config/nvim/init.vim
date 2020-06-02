@@ -16,6 +16,7 @@ Plug 'bling/vim-bufferline'
 Plug 'romainl/vim-cool'
 Plug 'scrooloose/nerdtree' | Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-projectionist'
 
 "Aesthetics
 Plug 'dracula/vim', { 'as': 'dracula' }
@@ -318,3 +319,20 @@ endfunction
 " Remap for format selected region
 vmap gf <Plug>(coc-format-selected)
 nmap gf <Plug>(coc-format-selected)
+
+let g:projectionist_heuristics = {
+\ "rails-root/Rakefile": {
+\   "rails-root/spec/*_spec.rb": { "alternate": "rails-root/{}.rb" },
+\   "rails-root/*.rb": { "alternate": "rails-root/spec/{}_spec.rb" }
+\ },
+\ "Rakefile": {
+\   "spec/*_spec.rb": { "alternate": "lib/{}.rb" },
+\   "lib/*.rb": { "alternate": "spec/{}_spec.rb" }
+\ },
+\ "package.json": {
+\   "lib/*.ts": { "alternate": "test/{}.test.ts" },
+\   "test/*.test.ts": { "alternate": "lib/{}.ts" }
+\ },
+\}
+
+nmap <silent> <leader><leader> :A<CR>
