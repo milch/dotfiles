@@ -27,10 +27,6 @@ def install_vim_plug
   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim`
 end
 
-def install_tmux_plugin_manager
-  `git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm`
-end
-
 def files_to_install
   ignore = %w[. .. .git .gitignore install.rb]
   glob = Dir.glob(File.join(__dir__, '**', '*'), File::FNM_DOTMATCH).map { |f| f.sub(%r{^#{__dir__}/}, '') }
