@@ -2,12 +2,14 @@
 
 source 'https://rubygems.org'
 
-gem 'aws-sdk-dynamodb'
-gem 'aws-sdk-sqs'
+gem 'aws-sdk', '~> 3'
+gem 'cocoapods'
 gem 'fastlane'
+gem 'logging'
 gem 'neovim'
 gem 'pry'
 gem 'pry-coolline'
+gem 'rouge'
 gem 'rubocop'
 gem 'solargraph'
-gem 'xcode-install', git: 'https://github.com/xcpretty/xcode-install.git'
+gem 'xcode-install'
