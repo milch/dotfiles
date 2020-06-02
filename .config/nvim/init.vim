@@ -7,13 +7,12 @@ call plug#begin('~/.config/nvim/bundle')
  Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 
 "Search, Navigation, etc.
+Plug 'lambdalisue/fern.vim' " Much faster than netrw
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
-Plug 'liuchengxu/vista.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'bling/vim-bufferline'
 Plug 'romainl/vim-cool'
-Plug 'scrooloose/nerdtree' | Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-projectionist'
 
@@ -152,6 +151,46 @@ set shortmess+=c
 set listchars=tab:>·,trail:~,extends:>,precedes:<
 set list
 
+" Replace netrw with the (much faster) fern.vim
+let g:loaded_netrw             = 1
+let g:loaded_netrwPlugin       = 1
+let g:loaded_netrwSettings     = 1
+let g:loaded_netrwFileHandlers = 1
+
+augroup my-fern-hijack
+  autocmd!
+  autocmd BufEnter * ++nested call s:hijack_directory()
+augroup END
+
+function! s:hijack_directory() abort
+  let l:target = expand('%')
+  if !isdirectory(l:target)
+    return
+  endif
+  bwipeout %
+  execute "Fern " . l:target
+endfunction
+
+function! s:init_fern() abort
+    nmap <buffer><expr>
+      \ <Plug>(fern-my-expand-or-collapse)
+      \ fern#smart#leaf(
+      \   "\<Plug>(fern-action-collapse)",
+      \   "\<Plug>(fern-action-expand)",
+      \   "\<Plug>(fern-action-collapse)",
+      \ )
+
+  " Open node with 'o'
+  nmap <buffer><nowait> o <Plug>(fern-my-expand-or-collapse)
+endfunction
+
+augroup fern-custom
+  autocmd! *
+  autocmd FileType fern call s:init_fern()
+augroup END
+
+nmap <silent> - :Fern .<CR>
+
 let g:indentLine_fileTypeExclude = ['json', 'markdown']
 
 let g:airline_powerline_fonts=1
@@ -171,9 +210,6 @@ let g:signify_sign_color_inherit_from_linenr = 1
 let g:signify_sign_change = "~"
 let g:signify_sign_change_delete = "~_"
 
-let g:vista_default_executive = 'coc'
-let g:vista#renderer#enable_icon = 0
-nnoremap <silent> <leader>t :Vista!!<CR>
 " vim-test config - run Tests in local file
 nmap <silent> <leader>u :TestNearest<CR>
 nmap <silent> <leader>U :TestFile<CR>
@@ -190,26 +226,6 @@ let g:bufferline_echo = 0
 let g:bufferline_active_highlight = 'Comment'
 let g:airline#extensions#bufferline#overwrite_variables = 1
 
-let g:NERDTreeIndicatorMapCustom = {
-    \ "Modified"  : "~",
-    \ "Staged"    : "+",
-    \ "Untracked" : "✭",
-    \ "Renamed"   : "➜",
-    \ "Unmerged"  : "═",
-    \ "Deleted"   : "✖",
-    \ "Dirty"     : "✗",
-    \ "Clean"     : "✔︎",
-    \ 'Ignored'   : '☒',
-    \ "Unknown"   : "?"
-    \ }
-
-if !has('gui_vimr')
-  " Close vim if NERDTree is the only window left
-  autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-endif
-
-let loaded_netrwPlugin = 1
-map <leader>o :NERDTreeToggle<CR>
 autocmd FileType denite call s:denite_my_settings()
 function! s:denite_my_settings() abort
   nnoremap <silent><buffer><expr> <CR>    denite#do_map('do_action')
