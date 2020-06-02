@@ -22,13 +22,29 @@ set -x MANPAGER "nvim -c 'set ft=man' -"
 set -x GPG_TTY (tty)
 set -g fish_user_paths "/usr/local/opt/llvm/bin" $fish_user_paths
 
-set -g theme_color_scheme 'dracula'
+function set_color_scheme
+    if test (defaults read -g AppleInterfaceStyle 2>/dev/null || echo '0') = 'dark'
+        set_dracula_colorscheme
+        set -g theme_color_scheme 'dracula'
+        set -gx APPLE_INTERFACE_STYLE 'dark'
+    else
+        base16-papercolor-light
+        set -g theme_color_scheme 'nord'
+        set -gx APPLE_INTERFACE_STYLE 'light'
+    end
+end
+
+set_color_scheme
 set -g theme_date_format "+%H:%M:%S"
 
 status --is-interactive; and source (pyenv init -|psub); and source (rbenv init -|psub)
 
 test -e ~/.config/fish/local.fish; and source ~/.config/fish/local.fish
 
-source ~/.config/fish/functions/dracula.fish
 
 alias cp='rsync --info=progress2'
+
+
+function update_color_scheme -d 'Set color scheme after every call' --on-event fish_postexec
+    set_color_scheme
+end

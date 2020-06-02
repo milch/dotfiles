@@ -19,6 +19,7 @@ Plug 'tpope/vim-dispatch'
 
 "Aesthetics
 Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'NLKNguyen/papercolor-theme'
 Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
 
 "SCM
@@ -44,8 +45,43 @@ call plug#end()
 " Enable 24-bit color 
 set termguicolors
 
-" let g:dracula_italic=1
-colorscheme Dracula
+func ChangeToSystemColor(timer)
+  let darkModeEnabled = ''
+  if $ITERM_PROFILE == 'Dark'
+    echo "Using Dark profile from iTerm"
+    let darkModeEnabled = 'dark'
+  elseif $ITERM_PROFILE == 'Light'
+    echo "Using Light profile from iTerm"
+    let darkModeEnabled = 'light'
+  elseif a:timer == 'startup'
+    " This is the first call, and calling `system` would slow down loading the
+    " init.vim file. In fish I export an env var which is reasonably
+    " up-to-date as a workaround
+    let darkModeEnabled = $APPLE_INTERFACE_STYLE
+  else
+    let darkModeEnabled = systemlist("defaults read -g AppleInterfaceStyle")[0]
+  endif
+
+  if darkModeEnabled =~ 'dark'
+    let g:airline_theme='dracula'
+    let g:dracula_italic=1
+    colorscheme Dracula
+  else
+    set background=light
+    let g:airline_theme='papercolor'
+    let g:PaperColor_Theme_Options = {
+          \ 'theme': {
+          \   'default.light': {
+          \     'allow_bold': 1,
+          \     'allow_italic': 1
+          \   }
+          \  }
+          \ }
+    colorscheme PaperColor
+  endif
+endfunc
+exec ChangeToSystemColor('startup')
+call timer_start(3000, 'ChangeToSystemColor', {'repeat': -1})
 
 " Leader -> to prefix your own keybindings
 let mapleader = ","
