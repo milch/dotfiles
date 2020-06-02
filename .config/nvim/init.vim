@@ -1,11 +1,10 @@
 call plug#begin('~/.config/nvim/bundle')
 
 "Language support
-Plug 'tpope/vim-rails', { 'for': ['ruby', 'eruby'] }
-Plug 'sheerun/vim-polyglot'
-Plug 'slashmili/alchemist.vim', { 'for': ['elixir'] }
-Plug 'milch/vim-fastlane'
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
+ Plug 'sheerun/vim-polyglot'
+ Plug 'slashmili/alchemist.vim', { 'for': ['elixir'] }
+ Plug 'milch/vim-fastlane'
+ Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 
 "Search, Navigation, etc.
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
@@ -128,10 +127,34 @@ set completeopt=menu,menuone,noinsert,noselect
 " always show signcolumns
 set signcolumn=yes
 
+" Make Y behave like D
+nnoremap Y y$
+
+autocmd FileType markdown,mkd set spell spelllang=en
+autocmd FileType text set spell spelllang=en
+autocmd FileType plaintex,tex set spell spelllang=en
+
+" Working with buffers
+nmap <silent> <Tab> :bn<CR>
+nmap <silent> <S-Tab> :bp<CR>
+
+augroup fixAutoread
+  autocmd!
+  autocmd FocusGained * silent! checktime
+augroup END
+
+nmap <silent> <leader>q :bd<CR>
+
+set mouse=a
+
+set shortmess+=c
+
+set listchars=tab:>·,trail:~,extends:>,precedes:<
+set list
+
 let g:indentLine_fileTypeExclude = ['json', 'markdown']
 
 let g:airline_powerline_fonts=1
-let g:airline_theme='dracula'
 let g:airline#extensions#whitespace#checks = []
 let g:airline#extensions#bufferline#enabled = 1
 let g:airline_section_b=''
@@ -148,19 +171,9 @@ let g:signify_sign_color_inherit_from_linenr = 1
 let g:signify_sign_change = "~"
 let g:signify_sign_change_delete = "~_"
 
-" Make Y behave like D
-nnoremap Y y$
-
 let g:vista_default_executive = 'coc'
 let g:vista#renderer#enable_icon = 0
 nnoremap <silent> <leader>t :Vista!!<CR>
-
-nnoremap <leader>r :Make<CR>
-
-autocmd FileType markdown,mkd set spell spelllang=en
-autocmd FileType text set spell spelllang=en
-autocmd FileType plaintex,tex set spell spelllang=en
-
 " vim-test config - run Tests in local file
 nmap <silent> <leader>u :TestNearest<CR>
 nmap <silent> <leader>U :TestFile<CR>
@@ -197,11 +210,6 @@ endif
 
 let loaded_netrwPlugin = 1
 map <leader>o :NERDTreeToggle<CR>
-
-" Working with buffers
-nmap <silent> <Tab> :bn<CR>
-nmap <silent> <S-Tab> :bp<CR>
-
 autocmd FileType denite call s:denite_my_settings()
 function! s:denite_my_settings() abort
   nnoremap <silent><buffer><expr> <CR>    denite#do_map('do_action')
@@ -266,15 +274,6 @@ let g:auto_save = 1
 let g:auto_save_events = ["FocusLost", "BufLeave"]
 
 let g:fzf_history_dir = '~/.config/fzf/history'
-
-nmap <silent> <leader>q :bd<CR>
-
-set mouse=a
-
-set shortmess+=c
-
-set listchars=tab:>·,trail:~,extends:>,precedes:<
-set list
 
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
