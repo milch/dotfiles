@@ -9,15 +9,19 @@
        }
     }
   },
-  "suggest.triggerAfterInsertEnter": true,
   "suggest.minTriggerInputLength": 0,
-  "suggest.maxCompleteItemCount": 10,
+  "suggest.enablePreview": true,
+  "suggest.triggerAfterInsertEnter": true,
+  "suggest.autoTrigger": "always",
   "solargraph.diagnostics": true,
   "solargraph.hover": true,
   "solargraph.formatting": true,
-  "coc.preferences.formatOnSaveFiletypes": [
-    "ruby"
-  ],
   "solargraph.completion": true,
-  "diagnostic.virtualText": true
+  "prettier.eslintIntegration": false,
+  "codeLens.enable": true,
+  "diagnostic.virtualText": true,
+  "coc.preferences.formatOnSaveFiletypes": [
+    "ruby",
+    "typescript"
+  ]
 }
