@@ -44,6 +44,7 @@ call plug#end()
 " Enable 24-bit color 
 set termguicolors
 
+let g:_init_previous_bg = 'undefined'
 func ChangeToSystemColor(timer)
   let darkModeEnabled = ''
   if $ITERM_PROFILE == 'Dark'
@@ -61,23 +62,33 @@ func ChangeToSystemColor(timer)
     let darkModeEnabled = systemlist("defaults read -g AppleInterfaceStyle")[0]
   endif
 
-  if darkModeEnabled =~ 'dark'
+  if darkModeEnabled =~ 'dark' && g:_init_previous_bg != 'dark'
+    let g:_init_previous_bg = 'dark'
     let g:airline_theme='dracula'
     let g:dracula_italic=1
     colorscheme Dracula
   else
-    set background=light
-    let g:airline_theme='papercolor'
-    let g:PaperColor_Theme_Options = {
-          \ 'theme': {
-          \   'default.light': {
-          \     'allow_bold': 1,
-          \     'allow_italic': 1
-          \   }
-          \  }
-          \ }
-    colorscheme PaperColor
+    if g:_init_previous_bg != 'light'
+      let g:_init_previous_bg='light'
+      set background=light
+      let g:airline_theme='papercolor'
+      let g:PaperColor_Theme_Options = {
+            \ 'theme': {
+            \   'default.light': {
+            \     'allow_bold': 1,
+            \     'allow_italic': 1
+            \   }
+            \  }
+            \ }
+      colorscheme PaperColor
+
+    endif
   endif
+  hi CocUnderline gui=undercurl term=undercurl
+  hi CocErrorHighlight   guisp=Red cterm=undercurl gui=undercurl
+  hi CocWarningHighlight guisp=Yellow cterm=undercurl gui=undercurl
+  hi CocInfoHighlight    guisp=Blue cterm=undercurl gui=undercurl
+  hi CocHintHighlight    guisp=Blue cterm=undercurl gui=undercurl
 endfunc
 exec ChangeToSystemColor('startup')
 call timer_start(3000, 'ChangeToSystemColor', {'repeat': -1})
