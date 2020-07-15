@@ -15,16 +15,14 @@ set -gx LANG "en_US.UTF-8"
 set -gx LC_COLLATE "en_US.UTF-8"
 set -gx LC_ALL "en_US.UTF-8"
 
-set -gx TERM "xterm-256color"
-
 set -x MANPAGER "nvim -c 'set ft=man' -"
 
 set -x GPG_TTY (tty)
 set -g fish_user_paths "/usr/local/opt/llvm/bin" $fish_user_paths
 
 function set_color_scheme
-    if test (defaults read -g AppleInterfaceStyle 2>/dev/null || echo '0') = 'dark'
-        set_dracula_colorscheme
+    if test (defaults read -g AppleInterfaceStyle 2>/dev/null || echo '0') = 'Dark'
+        source $HOME/.config/fish/functions/dracula.fish
         set -g theme_color_scheme 'dracula'
         set -gx APPLE_INTERFACE_STYLE 'dark'
     else
