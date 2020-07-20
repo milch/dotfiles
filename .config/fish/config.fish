@@ -46,3 +46,5 @@ alias cp='rsync --info=progress2'
 function update_color_scheme -d 'Set color scheme after every call' --on-event fish_postexec
     set_color_scheme
 end
+
+fish_vi_key_bindings
