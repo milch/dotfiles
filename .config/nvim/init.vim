@@ -18,7 +18,7 @@ Plug 'tpope/vim-projectionist'
 
 "Aesthetics
 Plug 'dracula/vim', { 'as': 'dracula' }
-Plug 'NLKNguyen/papercolor-theme'
+Plug 'milch/papercolor-theme'
 Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
 
 "SCM
