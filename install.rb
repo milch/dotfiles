@@ -35,7 +35,7 @@ end
 
 def install_brew
   puts 'Installing homebrew if it is missing...'
-  `which brew || /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
+  `which brew || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"`
 end
 
 def brew_bundle
