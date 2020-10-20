@@ -15,6 +15,8 @@ def install_terminfo
 end
 
 def install_tmux_plugin_manager
+  return if Dir.exist?(File.expand_path('~/.tmux/plugins/tpm'))
+
   puts 'Installing tpm...'
 
   `git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm`
