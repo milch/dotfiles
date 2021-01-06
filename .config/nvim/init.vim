@@ -62,13 +62,17 @@ func ChangeToSystemColor(timer)
     let darkModeEnabled = systemlist("defaults read -g AppleInterfaceStyle")[0]
   endif
 
-  if darkModeEnabled =~ 'dark' && g:_init_previous_bg != 'dark'
-    let g:_init_previous_bg = 'dark'
-    let g:airline_theme='dracula'
-    let g:dracula_italic=1
-    colorscheme Dracula
+  if darkModeEnabled =~ 'dark'
+      if g:_init_previous_bg != 'dark'
+          echo "Changing to dark mode"
+          let g:_init_previous_bg = 'dark'
+          let g:airline_theme='dracula'
+          let g:dracula_italic=1
+          colorscheme Dracula
+      endif
   else
     if g:_init_previous_bg != 'light'
+      echo "Changing to light mode"
       let g:_init_previous_bg='light'
       set background=light
       let g:airline_theme='papercolor'
@@ -84,11 +88,6 @@ func ChangeToSystemColor(timer)
 
     endif
   endif
-  hi CocUnderline gui=undercurl term=undercurl
-  hi CocErrorHighlight   guisp=Red cterm=undercurl gui=undercurl
-  hi CocWarningHighlight guisp=Yellow cterm=undercurl gui=undercurl
-  hi CocInfoHighlight    guisp=Blue cterm=undercurl gui=undercurl
-  hi CocHintHighlight    guisp=Blue cterm=undercurl gui=undercurl
 endfunc
 exec ChangeToSystemColor('startup')
 call timer_start(3000, 'ChangeToSystemColor', {'repeat': -1})

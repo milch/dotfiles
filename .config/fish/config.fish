@@ -1,4 +1,4 @@
-if not functions -q fisher
+if status --is-interactive; and not functions -q fisher
     set -q XDG_CONFIG_HOME; or set XDG_CONFIG_HOME ~/.config
     curl https://git.io/fisher --create-dirs -sLo $XDG_CONFIG_HOME/fish/functions/fisher.fish
     fish -c fisher
@@ -22,7 +22,7 @@ set -g fish_user_paths "/usr/local/opt/llvm/bin" $fish_user_paths
 
 function set_color_scheme
     if test (defaults read -g AppleInterfaceStyle 2>/dev/null || echo '0') = 'Dark'
-        source $HOME/.config/fish/functions/dracula.fish
+        source $HOME/.config/fish/conf.d/dracula.fish
         set -g theme_color_scheme 'dracula'
         set -gx APPLE_INTERFACE_STYLE 'dark'
     else
@@ -32,19 +32,21 @@ function set_color_scheme
     end
 end
 
-set_color_scheme
+status --is-interactive; and set_color_scheme
 set -g theme_date_format "+%H:%M:%S"
 
 status --is-interactive; and source (pyenv init -|psub); and source (rbenv init -|psub)
 
-test -e ~/.config/fish/local.fish; and source ~/.config/fish/local.fish
+status --is-interactive; and test -e ~/.config/fish/local.fish; and source ~/.config/fish/local.fish
 
 
 alias cp='rsync --info=progress2'
 
 
-function update_color_scheme -d 'Set color scheme after every call' --on-event fish_postexec
-    set_color_scheme
-end
+if status --is-interactive
+    function update_color_scheme -d 'Set color scheme after every call' --on-event fish_postexec
+        set_color_scheme
+    end
 
-fish_vi_key_bindings
+    fish_vi_key_bindings
+end
