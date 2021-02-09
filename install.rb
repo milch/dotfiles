@@ -3,8 +3,8 @@
 
 require 'fileutils'
 
-RB_VERSION = '2.6.3'
-PYTHON_VERSION = '3.7.3'
+RB_VERSION = '2.7.2'
+PYTHON_VERSION = '3.9.1'
 
 def install_terminfo
   Dir.chdir(File.expand_path('~')) do
