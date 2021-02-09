@@ -1,3 +1,5 @@
+set -gx PATH /opt/homebrew/bin /usr/local/bin $PATH
+
 if status --is-interactive; and not functions -q fisher
     set -q XDG_CONFIG_HOME; or set XDG_CONFIG_HOME ~/.config
     curl https://git.io/fisher --create-dirs -sLo $XDG_CONFIG_HOME/fish/functions/fisher.fish
@@ -18,7 +20,6 @@ set -gx LC_ALL "en_US.UTF-8"
 set -x MANPAGER "nvim -c 'set ft=man' -"
 
 set -x GPG_TTY (tty)
-set -g fish_user_paths "/usr/local/opt/llvm/bin" $fish_user_paths
 
 function set_color_scheme
     if test (defaults read -g AppleInterfaceStyle 2>/dev/null || echo '0') = 'Dark'
