@@ -1,4 +1,5 @@
-# Defined in - @ line 1
+# Defined in /var/folders/hl/swx6fly14j50lcyd5_rq2mlh0000gn/T//fish.ilbfch/gpm.fish @ line 2
 function gpm --description 'alias gpm=git pull --rebase origin mainline --autostash'
-	git pull --rebase origin mainline --autostash $argv;
+	set main_branch (git branch --color=never --list "main" "mainline" "master" | sed 's/\* //')
+	git pull --rebase origin $main_branch --autostash $argv;
 end
