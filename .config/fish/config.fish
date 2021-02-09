@@ -25,6 +25,9 @@ function set_color_scheme
         source $HOME/.config/fish/conf.d/dracula.fish
         set -g theme_color_scheme 'dracula'
         set -gx APPLE_INTERFACE_STYLE 'dark'
+
+        # Without this the base16 themes always override any other theme that's there
+        set -e base16_theme
     else
         base16-papercolor-light
         set -g theme_color_scheme 'nord'
@@ -35,7 +38,7 @@ end
 status --is-interactive; and set_color_scheme
 set -g theme_date_format "+%H:%M:%S"
 
-status --is-interactive; and source (pyenv init -|psub); and source (rbenv init -|psub)
+status --is-interactive; and source (pyenv init -|psub); and source (rbenv init -|psub); and source (nodenv init -|psub)
 
 status --is-interactive; and test -e ~/.config/fish/local.fish; and source ~/.config/fish/local.fish
 
