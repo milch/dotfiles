@@ -23,5 +23,18 @@
   "coc.preferences.formatOnSaveFiletypes": [
     "ruby",
     "typescript"
-  ]
+  ],
+  "java.configuration.runtimes":[
+    {
+      "name":"JavaSE-11",
+      "path":"/Library/Java/JavaVirtualMachines/amazon-corretto-11.jdk/Contents/Home/",
+      "default":true
+    },
+    {
+      "name":"JavaSE-1.6",
+      "path":"/Library/Java/JavaVirtualMachines/amazon-corretto-16.jdk/Contents/Home"
+    }
+  ],
+  "java.import.gradle.wrapper.enabled": true,
+  "java.import.gradle.java.home": "/Library/Java/JavaVirtualMachines/amazon-corretto-11.jdk/Contents/Home/"
 }

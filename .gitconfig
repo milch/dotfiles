@@ -33,3 +33,5 @@
 [diff "plist"]
 	textconv = /usr/libexec/PlistBuddy -c "Print"
 	binary = true
+[pull]
+	rebase = true

@@ -1,10 +1,10 @@
 call plug#begin('~/.config/nvim/bundle')
 
 "Language support
- Plug 'sheerun/vim-polyglot'
- Plug 'slashmili/alchemist.vim', { 'for': ['elixir'] }
- Plug 'milch/vim-fastlane'
- Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
+Plug 'sheerun/vim-polyglot'
+Plug 'slashmili/alchemist.vim', { 'for': ['elixir'] }
+Plug 'milch/vim-fastlane'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 
 "Search, Navigation, etc.
 Plug 'lambdalisue/fern.vim' " Much faster than netrw
@@ -27,7 +27,7 @@ Plug 'mhinz/vim-signify'
 "Autocomplete, Snippets, Syntax
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'Raimondi/delimitMate'
-Plug 'tpope/vim-endwise', {'for': ['lua', 'elixir', 'ruby', 'crystal', 'sh', 'zsh', 'vim']}
+Plug 'tpope/vim-endwise'
 
 "Misc
 Plug 'Shougo/denite.nvim', {'do':':UpdateRemotePlugins'}
@@ -95,9 +95,9 @@ call timer_start(3000, 'ChangeToSystemColor', {'repeat': -1})
 " Leader -> to prefix your own keybindings
 let mapleader = ","
 
-" Tab doesn't expand, Tab-Size is 4 spaces (all Hail the Tab-God)
-set tabstop=4
-set shiftwidth=4
+set tabstop=2
+set shiftwidth=2
+set expandtab
 
 " Smart indentation of lines
 set smartindent
@@ -324,7 +324,10 @@ inoremap <silent><expr> <TAB>
 
 " Use <cr> for confirm completion, `<C-g>u` means break undo chain at current position.
 " Coc only does snippet and additional edit on confirm.
-inoremap <C-R>=...<CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" See https://github.com/tpope/vim-endwise/issues/22
+let g:endwise_no_mappings = v:true
+inoremap <expr> <Plug>CustomCocCR pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+imap <CR> <Plug>CustomCocCR<Plug>DiscretionaryEnd
 
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
@@ -338,7 +341,11 @@ nmap <leader>a <Plug>(coc-codeaction)
 nmap <leader>rn <Plug>(coc-rename)
 
 " Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
+if has('nvim')
+  inoremap <silent><expr> <c-a> coc#refresh()
+else
+  inoremap <silent><expr> <c-a> coc#refresh()
+endif
 
 " Use K for show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -371,6 +378,18 @@ let g:projectionist_heuristics = {
 \   "lib/*.ts": { "alternate": "test/{}.test.ts" },
 \   "test/*.test.ts": { "alternate": "lib/{}.ts" }
 \ },
+\ "src/*/main.go": {
+\   "*.go": { "alternate": "{}_test.go" },
+\   "*_test.go": { "alternate": "{}.go" }
+\ },
+\ "go.mod": {
+\   "*.go": { "alternate": "{}_test.go" },
+\   "*_test.go": { "alternate": "{}.go" }
+\ }
 \}
 
 nmap <silent> <leader><leader> :A<CR>
+
+if filereadable($HOME . "/init_local.vim")
+  source $HOME/init_local.vim
+end
