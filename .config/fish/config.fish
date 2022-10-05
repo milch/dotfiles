@@ -17,7 +17,8 @@ set -gx LANG "en_US.UTF-8"
 set -gx LC_COLLATE "en_US.UTF-8"
 set -gx LC_ALL "en_US.UTF-8"
 
-set -x MANPAGER "nvim -c 'set ft=man' -"
+set -x MANPAGER 'nvim +Man!'
+
 
 set -x GPG_TTY (tty)
 

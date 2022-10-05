@@ -7,10 +7,14 @@
       "initializationOptions": {
          "cacheDirectory": "/tmp/ccls"
        }
+    },
+    "brazil-config": {
+      "command": "barium",
+      "filetypes": ["brazil-config"]
     }
   },
   "suggest.minTriggerInputLength": 0,
-  "suggest.enablePreview": true,
+  "suggest.noselect": true,
   "suggest.triggerAfterInsertEnter": true,
   "suggest.autoTrigger": "always",
   "solargraph.diagnostics": true,
@@ -19,6 +23,7 @@
   "solargraph.completion": true,
   "prettier.eslintIntegration": false,
   "codeLens.enable": true,
+  "codeLens.position": "eol",
   "diagnostic.virtualText": true,
   "coc.preferences.formatOnSaveFiletypes": [
     "ruby",
@@ -36,5 +41,6 @@
     }
   ],
   "java.import.gradle.wrapper.enabled": true,
-  "java.import.gradle.java.home": "/Library/Java/JavaVirtualMachines/amazon-corretto-11.jdk/Contents/Home/"
+  "java.import.gradle.java.home": "/Library/Java/JavaVirtualMachines/amazon-corretto-11.jdk/Contents/Home/",
+  "semanticTokens.enable": true
 }

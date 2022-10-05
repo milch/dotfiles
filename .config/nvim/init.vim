@@ -5,9 +5,11 @@ Plug 'sheerun/vim-polyglot'
 Plug 'slashmili/alchemist.vim', { 'for': ['elixir'] }
 Plug 'milch/vim-fastlane'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'romgrk/nvim-treesitter-context'
 
 "Search, Navigation, etc.
-Plug 'lambdalisue/fern.vim' " Much faster than netrw
+Plug 'lambdalisue/fern.vim', { 'branch': 'main' } " Much faster than netrw
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
@@ -318,15 +320,16 @@ function! s:check_back_space() abort
 endfunction
 
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
       \ coc#refresh()
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
 " Use <cr> for confirm completion, `<C-g>u` means break undo chain at current position.
 " Coc only does snippet and additional edit on confirm.
 " See https://github.com/tpope/vim-endwise/issues/22
 let g:endwise_no_mappings = v:true
-inoremap <expr> <Plug>CustomCocCR pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+inoremap <expr> <Plug>CustomCocCR coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 imap <CR> <Plug>CustomCocCR<Plug>DiscretionaryEnd
 
 nmap <silent> gd <Plug>(coc-definition)
@@ -340,23 +343,22 @@ nmap <leader>a <Plug>(coc-codeaction)
 " Remap for rename current word
 nmap <leader>rn <Plug>(coc-rename)
 
-" Use <c-space> to trigger completion.
-if has('nvim')
-  inoremap <silent><expr> <c-a> coc#refresh()
-else
-  inoremap <silent><expr> <c-a> coc#refresh()
-endif
+" Use <c-a> to trigger completion.
+inoremap <silent><expr> <c-a> coc#refresh()
 
 " Use K for show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
-  if &filetype == 'vim' || &filetype == 'help'
-    execute 'h '.expand('<cword>')
+  if CocAction('hasProvider', 'hover')
+    call CocActionAsync('doHover')
   else
-    call CocAction('doHover')
+    call feedkeys('K', 'in')
   endif
 endfunction
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Remap for format selected region
 vmap gf <Plug>(coc-format-selected)
@@ -376,7 +378,9 @@ let g:projectionist_heuristics = {
 \ },
 \ "package.json": {
 \   "lib/*.ts": { "alternate": "test/{}.test.ts" },
-\   "test/*.test.ts": { "alternate": "lib/{}.ts" }
+\   "test/*.test.ts": { "alternate": "lib/{}.ts" },
+\   "src/*.ts": { "alternate": "tests/{}.test.ts" },
+\   "tests/*.test.ts": { "alternate": "src/{}.ts" }
 \ },
 \ "src/*/main.go": {
 \   "*.go": { "alternate": "{}_test.go" },
@@ -390,6 +394,109 @@ let g:projectionist_heuristics = {
 
 nmap <silent> <leader><leader> :A<CR>
 
-if filereadable($HOME . "/init_local.vim")
-  source $HOME/init_local.vim
-end
+ if filereadable($HOME . "/init_local.vim")
+   source $HOME/init_local.vim
+ end
+
+lua << EOF
+require'nvim-treesitter.configs'.setup {
+  -- One of "all", "maintained" (parsers with maintainers), or a list of languages
+  ensure_installed = {
+    "bash",
+    "c",
+    "cmake",
+    "cpp",
+    "css",
+    "dart",
+    "dockerfile",
+    "dot",
+    "elixir",
+    "fish",
+    "go",
+    "gomod",
+    "gowork",
+    "graphql",
+    "help",
+    "html",
+    "http",
+    "java",
+    "javascript",
+    "jsdoc",
+    "json",
+    "kotlin",
+    "latex",
+    "llvm",
+    "make",
+    "markdown",
+    "markdown_inline",
+    "ninja",
+    "nix",
+    "perl",
+    "php",
+    "python",
+    "regex",
+    "ruby",
+    "rust",
+    "swift",
+    "typescript",
+    "vim",
+    "yaml"
+  },
+
+  -- Install languages synchronously (only applied to `ensure_installed`)
+  sync_install = true,
+
+  -- List of parsers to ignore installing
+  ignore_install = { },
+
+  highlight = {
+    -- `false` will disable the whole extension
+    enable = true,
+
+    -- list of language that will be disabled
+    disable = {},
+
+    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+    -- Using this option may slow down your editor, and you may see some duplicate highlights.
+    -- Instead of true it can also be a list of languages
+    additional_vim_regex_highlighting = false,
+  },
+}
+require'treesitter-context'.setup{
+    enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
+    throttle = true, -- Throttles plugin updates (may improve performance)
+    max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
+    patterns = { -- Match patterns for TS nodes. These get wrapped to match at word boundaries.
+        -- For all filetypes
+        -- Note that setting an entry here replaces all other patterns for this entry.
+        -- By setting the 'default' entry below, you can control which nodes you want to
+        -- appear in the context window.
+        default = {
+            'class',
+            'function',
+            'method',
+            -- 'for', -- These won't appear in the context
+            -- 'while',
+            -- 'if',
+            -- 'switch',
+            -- 'case',
+        },
+        -- Example for a specific filetype.
+        -- If a pattern is missing, *open a PR* so everyone can benefit.
+        --   rust = {
+        --       'impl_item',
+        --   },
+        ruby = {
+            'module',
+            'def'
+             },
+    },
+    exact_patterns = {
+        -- Example for a specific filetype with Lua patterns
+        -- Treat patterns.rust as a Lua pattern (i.e "^impl_item$" will
+        -- exactly match "impl_item" only)
+        -- rust = true, 
+    }
+}
+EOF
