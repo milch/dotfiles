@@ -30,7 +30,7 @@ def install_vim_plug
 end
 
 def files_to_install
-  ignore = %w[. .. .git .gitignore install.rb]
+  ignore = %w[. .. .git .gitignore install.rb iTerm]
   glob = Dir.glob(File.join(__dir__, '**', '*'), File::FNM_DOTMATCH).map { |f| f.sub(%r{^#{__dir__}/}, '') }
   glob.reject { |file| ignore.any? { |i| file.match?(/^#{i}$/) || file.match?(%r{^#{i}/}) } || file.end_with?('/.') }
 end
