@@ -7,7 +7,7 @@ async def changeTheme(connection,parts):
     theme_dark = "Dracula"
     theme_light = "papercolor-light"
     print(parts)
-    
+
     if "dark" in parts:
         preset = await iterm2.ColorPreset.async_get(connection, theme_dark)
     else:
@@ -33,8 +33,8 @@ async def main(connection):
             theme = await mon.async_get()
             # Themes have space-delimited attributes, one of which will be light or dark.
             parts = theme.split(" ")
-    
+
             await changeTheme(connection,parts)
-            
+
 
 iterm2.run_forever(main)

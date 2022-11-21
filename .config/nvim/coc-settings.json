@@ -42,5 +42,7 @@
   ],
   "java.import.gradle.wrapper.enabled": true,
   "java.import.gradle.java.home": "/Library/Java/JavaVirtualMachines/amazon-corretto-11.jdk/Contents/Home/",
-  "semanticTokens.enable": true
+  "semanticTokens.enable": true,
+  "sumneko-lua.enableNvimLuaDev": true,
+  "Lua.telemetry.enable": false
 }

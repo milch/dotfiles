@@ -22,11 +22,10 @@ def install_tmux_plugin_manager
   `git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm`
 end
 
-def install_vim_plug
-  # From https://github.com/junegunn/vim-plug
-  puts 'Installing Vim Plug...'
-  `curl -fsLo ~/.config/nvim/autoload/plug.vim --create-dirs \
-  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim`
+def install_packer_nvim
+  puts 'Installing packer.nvim...'
+  `git clone --depth 1 https://github.com/wbthomason/packer.nvim\
+    ~/.local/share/nvim/site/pack/packer/start/packer.nvim`
 end
 
 def files_to_install
@@ -74,12 +73,12 @@ def install
     FileUtils.ln_s(in_this_dir, in_home_dir, force: true)
   end
 
-  install_brew
-  brew_bundle
+  # install_brew
+  # brew_bundle
 
   install_runtimes
 
-  install_vim_plug
+  install_packer_nvim
   install_terminfo
   install_tmux_plugin_manager
 end

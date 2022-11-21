@@ -1,0 +1,74 @@
+format = """
+$character\
+[](bg:#434c5d fg:#434c5d)\
+$directory\
+[](fg:#434c5d bg:#a3be8c)\
+$git_branch\
+$git_status\
+[](fg:#a3be8c bg:#06969A)\
+$aws\
+[ ](fg:#06969A)\
+"""
+
+right_format = """
+[](fg:#06969A bg:#33658A)\
+$cmd_duration \
+$time\
+"""
+
+# Warp converts this to a space, so disable it
+add_newline = false
+
+# Disable the blank line at the start of the prompt
+# add_newline = false
+
+# You can also replace your username with a neat symbol like  to save some space
+[username]
+show_always = false
+
+[directory]
+style = "bold fg:#edeff5 bg:#434c5d"
+format = "[$path ]($style)"
+truncation_length = 3
+truncation_symbol = "…/"
+
+# Here is how you can shorten some long paths by text replacement
+# similar to mapped_locations in Oh My Posh:
+[directory.substitutions]
+"Documents" = " "
+"Downloads" = " "
+"Music" = " "
+"Pictures" = " "
+"Developer" = ""
+
+[git_branch]
+symbol = ""
+style = "bg:#a3be8c"
+format = '[ $symbol $branch ]($style)'
+
+[git_status]
+style = "bg:#a3be8c"
+format = '[$all_status$ahead_behind ]($style)'
+
+[time]
+disabled = false
+time_format = "%R" # Hour:Minute Format
+style = "fg:#ffffff bg:#33658A"
+format = '[  $time ]($style)'
+
+[cmd_duration]
+min_time = 500
+format = "[$duration]($style)"
+
+[package]
+# TODO
+format = "$symbol$version"
+
+[character]
+vimcmd_symbol="[ N ](bold bg:#88c0d0)[](fg:#88c0d0 bg:#434c5d)"
+vimcmd_visual_symbol="[ V ](bold bg:#8fbcbb)[](fg:#8fbcbb bg:#434c5d)"
+vimcmd_replace_symbol="[ R ](bold bg:#bc8f90)[](fg:#bc8f90 bg:#434c5d)"
+vimcmd_replace_one_symbol="[ R ](bold bg:#bc8f90)[](fg:#bc8f90 bg:#434c5d)"
+success_symbol="[ I ](bold bg:#e5e9f0)[](fg:#e5e9f0 bg:#434c5d)"
+error_symbol="[ I ](bold bg:#e5e9f0)[](fg:#e5e9f0 bg:#434c5d)"
+format="$symbol"

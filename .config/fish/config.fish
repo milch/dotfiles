@@ -38,15 +38,13 @@ function set_color_scheme
 end
 
 status --is-interactive; and set_color_scheme
-set -g theme_date_format "+%H:%M:%S"
+# set -g theme_date_format "+%H:%M:%S"
 
 status --is-interactive; and source (pyenv init -|psub); and source (rbenv init -|psub); and source (nodenv init -|psub)
 
 status --is-interactive; and test -e ~/.config/fish/local.fish; and source ~/.config/fish/local.fish
 
-
 alias cp='rsync --info=progress2'
-
 
 if status --is-interactive
     function update_color_scheme -d 'Set color scheme after every call' --on-event fish_postexec
@@ -54,4 +52,5 @@ if status --is-interactive
     end
 
     fish_vi_key_bindings
+    starship init fish | source
 end
