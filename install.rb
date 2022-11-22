@@ -2,6 +2,7 @@
 # frozen_string_literal: true
 
 require 'fileutils'
+require 'pathname'
 
 RB_VERSION = '2.7.2'
 PYTHON_VERSION = '3.9.1'
