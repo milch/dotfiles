@@ -2,15 +2,13 @@
   "languageserver": {
     "ccls": {
       "command": "ccls",
-      "filetypes": ["c", "cpp", "cuda", "objc", "objcpp"],
-      "rootPatterns": [".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/"],
-      "initializationOptions": {
-         "cacheDirectory": "/tmp/ccls"
-       }
+      "filetypes": [ "c", "cpp", "cuda", "objc", "objcpp" ],
+      "rootPatterns": [ ".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/" ],
+      "initializationOptions": { "cacheDirectory": "/tmp/ccls" }
     },
     "brazil-config": {
       "command": "barium",
-      "filetypes": ["brazil-config"]
+      "filetypes": [ "brazil-config" ]
     }
   },
   "suggest.minTriggerInputLength": 0,
@@ -63,13 +61,13 @@
   "suggest.removeDuplicateItems": true,
   "java.configuration.runtimes":[
     {
-      "name":"JavaSE-11",
-      "path":"/Library/Java/JavaVirtualMachines/amazon-corretto-11.jdk/Contents/Home/",
-      "default":true
+      "name": "JavaSE-11",
+      "path": "/Library/Java/JavaVirtualMachines/amazon-corretto-11.jdk/Contents/Home/",
+      "default": true
     },
     {
-      "name":"JavaSE-1.6",
-      "path":"/Library/Java/JavaVirtualMachines/amazon-corretto-16.jdk/Contents/Home"
+      "name": "JavaSE-1.6",
+      "path": "/Library/Java/JavaVirtualMachines/amazon-corretto-16.jdk/Contents/Home"
     }
   ],
   "java.import.gradle.wrapper.enabled": true,
