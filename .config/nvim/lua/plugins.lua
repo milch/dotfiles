@@ -2,12 +2,6 @@ require('packer').startup(function(use)
     -- Packer can manage itself
   use 'wbthomason/packer.nvim'
 
-  -- Speeds up loading of lua dependencies
-  use {
-    'lewis6991/impatient.nvim',
-    config = function() require('impatient') end
-  }
-
   -- Language support
   use 'sheerun/vim-polyglot'
   use {'slashmili/alchemist.vim', ft = { 'elixir' } }

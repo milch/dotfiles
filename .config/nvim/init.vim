@@ -25,8 +25,6 @@ let mapleader = ","
 lua <<EOF
 require('plugins')
 require('use_system_theme')
-
-require('plugins/lualine')
 EOF
 
 set tabstop=2
