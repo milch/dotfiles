@@ -19,7 +19,6 @@ set -gx LC_ALL "en_US.UTF-8"
 
 set -x MANPAGER 'nvim +Man!'
 
-
 set -x GPG_TTY (tty)
 
 function set_color_scheme
@@ -38,7 +37,6 @@ function set_color_scheme
 end
 
 status --is-interactive; and set_color_scheme
-# set -g theme_date_format "+%H:%M:%S"
 
 status --is-interactive; and source (pyenv init -|psub); and source (rbenv init -|psub); and source (nodenv init -|psub)
 

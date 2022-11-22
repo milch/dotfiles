@@ -2,7 +2,7 @@
 # frozen_string_literal: true
 
 require 'fileutils'
-require 'pathname'
+require 'tmpdir'
 
 RB_VERSION = '2.7.2'
 PYTHON_VERSION = '3.9.1'
@@ -74,14 +74,15 @@ def install
     FileUtils.ln_s(in_this_dir, in_home_dir, force: true)
   end
 
-  # install_brew
-  # brew_bundle
+  install_brew
+  brew_bundle
 
   install_runtimes
 
   install_packer_nvim
   install_terminfo
   install_tmux_plugin_manager
+  install_patched_sf_mono
 end
 
 install
