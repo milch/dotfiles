@@ -25,6 +25,8 @@ vim.g.coc_global_extensions = {
   -- Misc
   'coc-lightbulb',
   'coc-marketplace',
+  'coc-snippets',
+  'https://github.com/rafamadriz/friendly-snippets@main'
 }
 
 -- Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
