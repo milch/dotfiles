@@ -10,6 +10,7 @@ require('plugins/nvim-treesitter')
 require('plugins/coc-nvim')
 require('plugins/telescope')
 require('plugins/indent-blankline')
+require('plugins/nvim-autopairs')
 EOF
 
 set tabstop=2

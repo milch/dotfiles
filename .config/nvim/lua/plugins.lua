@@ -41,8 +41,7 @@ require('packer').startup(function(use)
 
   -- Autocomplete, Snippets, Syntax
   use { 'neoclide/coc.nvim', branch = 'release' }
-  use 'Raimondi/delimitMate'
-  use 'tpope/vim-endwise'
+  use { "windwp/nvim-autopairs" }
 
   -- Misc
   use {

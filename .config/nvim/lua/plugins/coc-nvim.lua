@@ -52,14 +52,6 @@ local opts = { silent = true, noremap = true, expr = true, replace_keycodes = fa
 keyset("i", "<TAB>", 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()', opts)
 keyset("i", "<S-TAB>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], opts)
 
--- See https://github.com/tpope/vim-endwise/issues/22
-vim.g.endwise_no_mappings = true
-
--- Make <CR> to accept selected completion item or notify coc.nvim to format
--- <C-g>u breaks current undo, please make your own choice.
-keyset("i", "<cr>", [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]], opts)
-keyset("i", "<cr>", "<cr><Plug>DiscretionaryEnd", {})
-
 keyset('n', 'gd', '<Plug>(coc-definition)', { silent = true })
 keyset('n', 'gy', '<Plug>(coc-type-definition)', { silent = true })
 keyset('n', 'gi', '<Plug>(coc-implementation)', { silent = true })
