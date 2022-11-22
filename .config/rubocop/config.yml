@@ -1,0 +1,12 @@
+# I don't care about line-length, we're not in the 80's anymore
+Layout/LineLength:
+  Enabled: false
+
+
+# Default length is too low, and causes functions to be broken up unnnecessarily
+Metrics/MethodLength:
+  Max: 50
+
+# Longer methods frequently run into this even if they are simple
+Metrics/AbcSize:
+  Enabled: false

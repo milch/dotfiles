@@ -24,6 +24,8 @@ def install_tmux_plugin_manager
 end
 
 def install_packer_nvim
+  return unless File.exist?('~/.local/share/nvim/site/pack/packer/start/packer.nvim')
+
   puts 'Installing packer.nvim...'
   `git clone --depth 1 https://github.com/wbthomason/packer.nvim\
     ~/.local/share/nvim/site/pack/packer/start/packer.nvim`
@@ -55,6 +57,42 @@ def install_runtimes
 
   `rbenv exec gem install bundle && cd ~ && rbenv exec bundle install`
   `cd ~ && pyenv exec pip install -r requirements.txt`
+end
+
+def get_sf_mono # rubocop:disable Naming/AccessorMethodName
+  # Get the font
+  `curl https://devimages-cdn.apple.com/design/resources/download/SF-Mono.dmg --output SF-Mono.dmg`
+  `hdiutil attach SF-Mono.dmg`
+  FileUtils.cp('/Volumes/SFMonoFonts/SF Mono Fonts.pkg', '.')
+  `xar -xf 'SF Mono Fonts.pkg'`
+  `tar -xzf SFMonoFonts.pkg/Payload`
+end
+
+def patch_sf_mono
+  `wget https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FontPatcher.zip`
+  `unzip FontPatcher.zip`
+
+  Dir['Library/Fonts/*.otf'].each do |font|
+    `fontforge -script font-patcher --complete #{font}`
+  end
+end
+
+def install_patched_fonts
+  Dir['*Complete.otf'].each do |font|
+    FileUtils.mv(font, File.expand_path('~/Library/Fonts/'))
+  end
+end
+
+def install_patched_sf_mono
+  return if File.exist?(File.expand_path('~/Library/Fonts/SFMono Regular Nerd Font Complete.otf'))
+
+  Dir.mktmpdir do |tmp|
+    Dir.chdir(tmp) do
+      get_sf_mono
+      patch_sf_mono
+      install_patched_fonts
+    end
+  end
 end
 
 def install
