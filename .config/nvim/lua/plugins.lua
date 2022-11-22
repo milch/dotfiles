@@ -42,8 +42,9 @@ require('packer').startup(function(use)
   use { 'dracula/vim', as = 'dracula' }
   use 'milch/papercolor-theme'
   use {
-    'vim-airline/vim-airline',
-    requires = { 'vim-airline/vim-airline-themes' }
+    'nvim-lualine/lualine.nvim',
+    requires = { 'nvim-tree/nvim-web-devicons', opt = true },
+    config = function() require('plugins/lualine') end
   }
 
   -- SCM

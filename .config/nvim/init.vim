@@ -25,6 +25,8 @@ let mapleader = ","
 lua <<EOF
 require('plugins')
 require('use_system_theme')
+
+require('plugins/lualine')
 EOF
 
 set tabstop=2
@@ -95,18 +97,6 @@ set list
 
 let g:indentLine_fileTypeExclude = ['json', 'markdown']
 
-let g:airline_powerline_fonts=1
-let g:airline#extensions#whitespace#checks = []
-let g:airline#extensions#bufferline#enabled = 1
-let g:airline_section_b=''
-let g:airline_skip_empty_sections=1
-
-" Only show line and column number in the bottom right
-call airline#parts#define_raw('linenr', '%l')
-call airline#parts#define_accent('linenr', 'bold')
-let g:airline_section_z = airline#section#create([g:airline_symbols.linenr .' ', 'linenr', ':%c '])
-let g:airline_section_x = airline#section#create_right(['tagbar', 'filetype', '%f'])
-
 let g:signify_sign_weight = "NONE"
 let g:signify_sign_color_inherit_from_linenr = 1
 let g:signify_sign_change = "~"
@@ -123,10 +113,6 @@ let test#strategy="dispatch"
 
 let g:dispatch_compilers = {
       \ 'bundle exec': ''}
-
-let g:bufferline_echo = 0
-let g:bufferline_active_highlight = 'Comment'
-let g:airline#extensions#bufferline#overwrite_variables = 1
 
 augroup shareData
   autocmd!
