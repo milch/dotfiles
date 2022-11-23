@@ -48,7 +48,6 @@
     "menu"  // No clue
   ],
   "suggest.detailField": "abbr",
-  "suggest.virtualText": true,
   "suggest.labelMaxLength": 50,
   "suggest.maxCompleteItemCount": 15,
   "suggest.removeDuplicateItems": true,
