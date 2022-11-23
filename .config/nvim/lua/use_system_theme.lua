@@ -12,7 +12,6 @@ function UpdateColorScheme(colorScheme)
   if colorScheme == 'dark' then
     if LastColorScheme ~= 'dark' then
       print('Changing to dark mode')
-      vim.g.airline_theme='dracula'
       vim.g.dracula_italic=1
       vim.api.nvim_command("colorscheme Dracula")
       LastColorScheme = 'dark'
@@ -21,7 +20,6 @@ function UpdateColorScheme(colorScheme)
     if LastColorScheme ~= 'light' then
       print('Changing to light mode')
       vim.opt.background = 'light'
-      vim.g.airline_theme = 'papercolor'
       vim.g.PaperColor_Theme_Options = {
         theme = {
           ['default.light'] = {

@@ -1,6 +1,6 @@
 require('packer').startup(function(use)
     -- Packer can manage itself
-  use 'wbthomason/packer.nvim'
+  use { 'wbthomason/packer.nvim' }
 
   -- Language support
   use 'sheerun/vim-polyglot'
@@ -11,13 +11,14 @@ require('packer').startup(function(use)
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
     config = function() require('plugins/nvim-treesitter') end,
-    event = 'BufReadPost'
+    event = "BufEnter"
   }
+
   use {
     'romgrk/nvim-treesitter-context',
     event = "WinScrolled",
     config = function() require('plugins/nvim-treesitter-context') end,
-    requires = 'nvim-treesitter/nvim-treesitter'
+    requires = 'nvim-treesitter/nvim-treesitter',
   }
   -- Search, Navigation, etc.
   use {
@@ -42,14 +43,16 @@ require('packer').startup(function(use)
   }
 
   -- SCM
-  use { 'mhinz/vim-signify', event = 'BufReadPost' }
+  use {
+    'mhinz/vim-signify',
+    event = 'BufReadPost'
+  }
 
   -- Autocomplete, Snippets, Syntax
   use {
     'neoclide/coc.nvim',
     branch = 'release',
     config = function() require('plugins/coc-nvim') end,
-    event = 'BufReadPost'
   }
   use {
     "windwp/nvim-autopairs",
@@ -83,14 +86,36 @@ require('packer').startup(function(use)
     config = function() require('plugins/indent-blankline') end,
     event = 'BufReadPost'
   }
-  use { '907th/vim-auto-save', event = 'InsertEnter' }
+  use {
+    '907th/vim-auto-save',
+    event = 'TextChanged'
+  }
   use { 'critiqjo/lldb.nvim', ft = {'c', 'cpp', 'objc'} }
   use { 'janko-m/vim-test', ft = {'swift', 'go', 'javascript', 'typescript', 'ruby'} }
-  use { 'kshenoy/vim-signature', event = 'BufReadPost' }
-  use { 'tpope/vim-sleuth', event = 'BufReadPost' } -- Auto detect tab/space settings
+  use {
+    'kshenoy/vim-signature',
+    event = 'BufReadPost'
+  }
+  -- Auto detect tab/space settings
+  use {
+    'tpope/vim-sleuth',
+    event = 'BufReadPost'
+  }
 
 
   use { 'dstein64/vim-startuptime', cmd = "StartupTime" }
+
+  use { 'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async', config = function()
+      vim.o.foldcolumn = '0'
+      vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+      vim.o.foldlevel = 99
+      vim.o.foldlevelstart = 99
+      vim.o.foldenable = true
+      vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
+      vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
+      require('ufo').setup()
+    end
+  }
 end)
 
 -- Run PackerCompile whenever this file is changed
