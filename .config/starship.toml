@@ -37,11 +37,11 @@ truncation_symbol = "…/"
 
 [git_branch]
 symbol = ""
-style = "bg:#a3be8c"
+style = "bg:#a3be8c fg:black"
 format = '[ $symbol $branch ]($style)'
 
 [git_status]
-style = "bg:#a3be8c"
+style = "bg:#a3be8c fg:black"
 format = '[$all_status$ahead_behind ]($style)'
 
 [time]
@@ -59,10 +59,10 @@ format = "[$duration]($style)"
 format = "$symbol$version"
 
 [character]
-vimcmd_symbol="[ N ](bold bg:#88c0d0)[](fg:#88c0d0 bg:#434c5d)"
-vimcmd_visual_symbol="[ V ](bold bg:#8fbcbb)[](fg:#8fbcbb bg:#434c5d)"
-vimcmd_replace_symbol="[ R ](bold bg:#bc8f90)[](fg:#bc8f90 bg:#434c5d)"
-vimcmd_replace_one_symbol="[ R ](bold bg:#bc8f90)[](fg:#bc8f90 bg:#434c5d)"
-success_symbol="[ I ](bold bg:#e5e9f0)[](fg:#e5e9f0 bg:#434c5d)"
-error_symbol="[ I ](bold bg:#e5e9f0)[](fg:#e5e9f0 bg:#434c5d)"
+vimcmd_symbol="[ N ](bold bg:#88c0d0 fg:#434c5d)[](fg:#88c0d0 bg:#434c5d)"
+vimcmd_visual_symbol="[ V ](bold bg:#8fbcbb fg:#434c5d)[](fg:#8fbcbb bg:#434c5d)"
+vimcmd_replace_symbol="[ R ](bold bg:#bc8f90 fg:#434c5d)[](fg:#bc8f90 bg:#434c5d)"
+vimcmd_replace_one_symbol="[ R ](bold bg:#bc8f90 fg:#434c5d)[](fg:#bc8f90 bg:#434c5d)"
+success_symbol="[ I ](bold bg:#e5e9f0 fg:#434c5d)[](fg:#e5e9f0 bg:#434c5d)"
+error_symbol="[ I ](bold bg:#e5e9f0 fg:#434c5d)[](fg:#e5e9f0 bg:#434c5d)"
 format="$symbol"

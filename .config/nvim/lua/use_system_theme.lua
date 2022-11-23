@@ -15,6 +15,16 @@ function UpdateColorScheme(colorScheme)
       vim.g.dracula_italic=1
       vim.api.nvim_command("colorscheme Dracula")
       LastColorScheme = 'dark'
+
+      vim.cmd([[
+        hi! LualineErrorHighlight guifg=NONE ctermfg=NONE guibg=#ff5555 ctermbg=237 gui=NONE cterm=NONE guisp=NONE
+        hi! LualineWarnHighlight guifg=NONE ctermfg=NONE guibg=#ffb86c ctermbg=237 gui=NONE cterm=NONE guisp=NONE
+        hi! LualineInfoHighlight guifg=NONE ctermfg=NONE guibg=#424450 ctermbg=237 gui=NONE cterm=NONE guisp=NONE
+        hi! LualineHintHighlight guifg=NONE ctermfg=NONE guibg=#282A36 ctermbg=237 gui=NONE cterm=NONE guisp=NONE
+
+        hi! link LualineBufferActive lualine_b_inactive
+        hi! link LualineBufferInactive lualine_c_normal
+      ]])
     end
   else
     if LastColorScheme ~= 'light' then
@@ -29,6 +39,15 @@ function UpdateColorScheme(colorScheme)
         }
       }
       vim.api.nvim_command("colorscheme PaperColor")
+      vim.cmd([[
+        hi! link LualineErrorHighlight CocErrorHighlight
+        hi! link LualineWarnHighlight CocInfoHighlight
+        hi! link LualineInfoHighlight CocWarnHighlight
+        hi! link LualineHintHighlight CocHintHighlight
+
+        hi! link LualineBufferActive lualine_b_inactive
+        hi! link LualineBufferInactive lualine_b_normal
+      ]])
       LastColorScheme = 'light'
     end
   end

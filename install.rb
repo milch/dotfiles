@@ -73,7 +73,7 @@ def patch_sf_mono
   `unzip FontPatcher.zip`
 
   Dir['Library/Fonts/*.otf'].each do |font|
-    `fontforge -script font-patcher --complete #{font}`
+    `fontforge -script font-patcher --use-single-width-glyphs --complete --adjust-line-height --careful #{font}`
   end
 end
 
