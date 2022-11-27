@@ -26,7 +26,7 @@ require('packer').startup(function(use)
     requires = {
       'nvim-tree/nvim-web-devicons',
     },
-    config = function() require('plugins/nvim-tree') end
+    config = function() require('plugins/nvim-tree').configure_tree(false) end
   }
   use { 'tpope/vim-surround', keys = {{'n', 'ds'}, {'n', 'cs'}}}
   use { 'tpope/vim-commentary', keys = {{ 'n', 'gc' }, { 'v', 'gc' }, { 'n', 'gcc' }}}
