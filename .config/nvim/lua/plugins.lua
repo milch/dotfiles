@@ -1,5 +1,5 @@
 require('packer').startup(function(use)
-    -- Packer can manage itself
+  -- Packer can manage itself
   use { 'wbthomason/packer.nvim' }
   use {
     'lewis6991/impatient.nvim',
@@ -8,9 +8,9 @@ require('packer').startup(function(use)
 
   -- Language support
   use 'sheerun/vim-polyglot'
-  use {'slashmili/alchemist.vim', ft = { 'elixir' } }
+  use { 'slashmili/alchemist.vim', ft = { 'elixir' } }
   use 'milch/vim-fastlane'
-  use { "iamcco/markdown-preview.nvim", run = function() vim.fn["mkdp#util#install"]() end, ft = 'markdown'}
+  use { "iamcco/markdown-preview.nvim", run = function() vim.fn["mkdp#util#install"]() end, ft = 'markdown' }
   use {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
@@ -32,8 +32,8 @@ require('packer').startup(function(use)
     },
     config = function() require('plugins/nvim-tree').configure_tree(false) end
   }
-  use { 'tpope/vim-surround', keys = {{'n', 'ds'}, {'n', 'cs'}}}
-  use { 'tpope/vim-commentary', keys = {{ 'n', 'gc' }, { 'v', 'gc' }, { 'n', 'gcc' }}}
+  use { 'tpope/vim-surround', keys = { { 'n', 'ds' }, { 'n', 'cs' } } }
+  use { 'tpope/vim-commentary', keys = { { 'n', 'gc' }, { 'v', 'gc' }, { 'n', 'gcc' } } }
   use { 'romainl/vim-cool', keys = '/' }
   use { 'tpope/vim-projectionist', cmd = "A" }
 
@@ -94,8 +94,8 @@ require('packer').startup(function(use)
     '907th/vim-auto-save',
     event = 'TextChanged'
   }
-  use { 'critiqjo/lldb.nvim', ft = {'c', 'cpp', 'objc'} }
-  use { 'janko-m/vim-test', ft = {'swift', 'go', 'javascript', 'typescript', 'ruby'} }
+  use { 'critiqjo/lldb.nvim', ft = { 'c', 'cpp', 'objc' } }
+  use { 'janko-m/vim-test', ft = { 'swift', 'go', 'javascript', 'typescript', 'ruby' } }
   use {
     'kshenoy/vim-signature',
     event = 'BufReadPost'
@@ -111,15 +111,15 @@ require('packer').startup(function(use)
 
   use { 'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async', config = function()
     -- See https://github.com/kevinhwang91/nvim-ufo/issues/4#issuecomment-1157716294
-      vim.o.foldcolumn = '0'
-      vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
-      vim.o.foldlevel = 99
-      vim.o.foldlevelstart = 99
-      vim.o.foldenable = true
-      vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
-      vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
-      require('ufo').setup()
-    end
+    vim.o.foldcolumn = '0'
+    vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+    vim.o.foldlevel = 99
+    vim.o.foldlevelstart = 99
+    vim.o.foldenable = true
+    vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
+    vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
+    require('ufo').setup()
+  end
   }
 end)
 
