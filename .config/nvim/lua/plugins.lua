@@ -1,6 +1,10 @@
 require('packer').startup(function(use)
     -- Packer can manage itself
   use { 'wbthomason/packer.nvim' }
+  use {
+    'lewis6991/impatient.nvim',
+    config = function() require('impatient') end
+  }
 
   -- Language support
   use 'sheerun/vim-polyglot'
@@ -106,6 +110,7 @@ require('packer').startup(function(use)
   use { 'dstein64/vim-startuptime', cmd = "StartupTime" }
 
   use { 'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async', config = function()
+    -- See https://github.com/kevinhwang91/nvim-ufo/issues/4#issuecomment-1157716294
       vim.o.foldcolumn = '0'
       vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
       vim.o.foldlevel = 99
