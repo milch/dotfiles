@@ -84,7 +84,7 @@ def install_patched_fonts
 end
 
 def install_patched_sf_mono
-  # return if File.exist?(File.expand_path('~/Library/Fonts/SFMono Regular Nerd Font Complete.otf'))
+  return if File.exist?(File.expand_path('~/Library/Fonts/SFMono Regular Nerd Font Complete.otf'))
 
   Dir.mktmpdir do |tmp|
     Dir.chdir(tmp) do
@@ -96,21 +96,21 @@ def install_patched_sf_mono
 end
 
 def install
-  # to_install = files_to_install
+  to_install = files_to_install
 
   # Grab only the directories and sort them by size so lower levels will be created before higher ones
-  # dirs = to_install.select { |f| File.directory?(f) }
-  #                  .sort_by(&:size)
-  # puts 'Creating directories...'
-  # FileUtils.mkdir_p(dirs.map { |d| File.expand_path(d, '~') })
+  dirs = to_install.select { |f| File.directory?(f) }
+                   .sort_by(&:size)
+  puts 'Creating directories...'
+  FileUtils.mkdir_p(dirs.map { |d| File.expand_path(d, '~') })
 
-  # files = to_install - dirs
-  # puts 'Symlink files...'
-  # files.each do |file|
-  #   in_home_dir = File.expand_path(file, '~')
-  #   in_this_dir = File.expand_path(file, __dir__)
-  #   FileUtils.ln_s(in_this_dir, in_home_dir, force: true)
-  # end
+  files = to_install - dirs
+  puts 'Symlink files...'
+  files.each do |file|
+    in_home_dir = File.expand_path(file, '~')
+    in_this_dir = File.expand_path(file, __dir__)
+    FileUtils.ln_s(in_this_dir, in_home_dir, force: true)
+  end
 
   # install_brew
   # # brew_bundle
