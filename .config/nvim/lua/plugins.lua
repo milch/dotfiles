@@ -11,7 +11,7 @@ require('packer').startup(function(use)
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
     config = function() require('plugins/nvim-treesitter') end,
-    event = "BufEnter"
+    event = { "BufEnter", "BufNewFile" }
   }
 
   use {
