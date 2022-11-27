@@ -93,13 +93,6 @@ set shortmess+=c
 set listchars=tab:>·,trail:~,extends:>,precedes:<
 set list
 
-let g:indentLine_fileTypeExclude = ['json', 'markdown']
-
-let g:signify_sign_weight = "NONE"
-let g:signify_sign_color_inherit_from_linenr = 1
-let g:signify_sign_change = "~"
-let g:signify_sign_change_delete = "~_"
-
 " vim-test config - run Tests in local file
 nmap <silent> <leader>u :TestNearest<CR>
 nmap <silent> <leader>U :TestFile<CR>
@@ -112,14 +105,12 @@ let test#strategy="dispatch"
 let g:dispatch_compilers = {
       \ 'bundle exec': ''}
 
+set shada="'1,/10,<50,s10,h"
 augroup shareData
   autocmd!
   autocmd FocusGained * rshada
   autocmd TextYankPost * wshada
 augroup END
-
-let g:auto_save = 1
-let g:auto_save_events = ["FocusLost", "BufLeave"]
 
 let g:projectionist_heuristics = {
 \ "rails-root/Rakefile": {

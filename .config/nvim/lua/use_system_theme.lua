@@ -47,6 +47,10 @@ function UpdateColorScheme(colorScheme)
 
         hi! link LualineBufferActive lualine_b_inactive
         hi! link LualineBufferInactive lualine_b_normal
+
+        hi GitSignsAdd guifg=#008700
+        hi GitSignsChange guifg=#ec791b
+        hi GitSignsDelete guifg=#af0000
       ]])
       LastColorScheme = 'light'
     end
