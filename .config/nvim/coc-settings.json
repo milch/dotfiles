@@ -50,8 +50,8 @@
   "suggest.detailField": "abbr",
   "suggest.labelMaxLength": 50,
   "suggest.maxCompleteItemCount": 15,
-  "suggest.removeDuplicateItems": true,
   "suggest.snippetIndicator": " ",
+  "suggest.noselect": true,
   "solargraph.diagnostics": true,
   "solargraph.hover": true,
   "solargraph.formatting": true,
@@ -59,6 +59,10 @@
   "codeLens.enable": true,
   "codeLens.position": "eol",
   "diagnostic.virtualText": true,
+  "diagnostic.errorSign": "",
+  "diagnostic.warningSign": "⚠",
+  "diagnostic.infoSign": "",
+  "diagnostic.hintSign": "ﯧ",
   "[ruby][typescript]": {
     "coc.preferences.formatOnSave": true
   },

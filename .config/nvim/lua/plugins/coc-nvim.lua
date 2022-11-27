@@ -68,8 +68,8 @@ keyset('n', '<leader>a', '<Plug>(coc-codeaction)')
 keyset('n', '<leader>rn', '<Plug>(coc-rename)')
 keyset('i', '<c-a>', 'coc#refresh()', { noremap = true, silent = true, expr = true })
 
-keyset("n", "[g", "<Plug>(coc-diagnostic-prev)", { silent = true })
-keyset("n", "]g", "<Plug>(coc-diagnostic-next)", { silent = true })
+keyset("n", "[p", "<Plug>(coc-diagnostic-prev)", { silent = true })
+keyset("n", "[n", "<Plug>(coc-diagnostic-next)", { silent = true })
 
 -- Use K to show documentation in preview window.
 function _G.show_docs()
