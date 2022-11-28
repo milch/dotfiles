@@ -63,6 +63,13 @@ require('packer').startup(function(use)
 
   -- Aesthetics
   use { 'dracula/vim', as = 'dracula' }
+  use {
+    "catppuccin/nvim",
+    as = "catppuccin",
+    config = function()
+      require('plugins.catppuccin')
+    end
+  }
   use 'milch/papercolor-theme'
   use {
     'nvim-lualine/lualine.nvim',

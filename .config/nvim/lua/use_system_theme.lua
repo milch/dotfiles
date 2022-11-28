@@ -12,46 +12,15 @@ function UpdateColorScheme(colorScheme)
   if colorScheme == 'dark' then
     if LastColorScheme ~= 'dark' then
       print('Changing to dark mode')
-      vim.g.dracula_italic=1
-      vim.api.nvim_command("colorscheme Dracula")
+      vim.opt.background = 'dark'
+      vim.api.nvim_command("colorscheme catppuccin-macchiato")
       LastColorScheme = 'dark'
-
-      vim.cmd([[
-        hi! LualineErrorHighlight guifg=NONE ctermfg=NONE guibg=#ff5555 ctermbg=237 gui=NONE cterm=NONE guisp=NONE
-        hi! LualineWarnHighlight guifg=NONE ctermfg=NONE guibg=#ffb86c ctermbg=237 gui=NONE cterm=NONE guisp=NONE
-        hi! LualineInfoHighlight guifg=NONE ctermfg=NONE guibg=#424450 ctermbg=237 gui=NONE cterm=NONE guisp=NONE
-        hi! LualineHintHighlight guifg=NONE ctermfg=NONE guibg=#282A36 ctermbg=237 gui=NONE cterm=NONE guisp=NONE
-
-        hi! link LualineBufferActive lualine_b_inactive
-        hi! link LualineBufferInactive lualine_c_normal
-      ]])
     end
   else
     if LastColorScheme ~= 'light' then
       print('Changing to light mode')
+      vim.api.nvim_command("colorscheme catppuccin-latte")
       vim.opt.background = 'light'
-      vim.g.PaperColor_Theme_Options = {
-        theme = {
-          ['default.light'] = {
-            allow_bold = 1,
-            allow_italic = 1
-          }
-        }
-      }
-      vim.api.nvim_command("colorscheme PaperColor")
-      vim.cmd([[
-        hi! link LualineErrorHighlight CocErrorHighlight
-        hi! link LualineWarnHighlight CocInfoHighlight
-        hi! link LualineInfoHighlight CocWarnHighlight
-        hi! link LualineHintHighlight CocHintHighlight
-
-        hi! link LualineBufferActive lualine_b_inactive
-        hi! link LualineBufferInactive lualine_b_normal
-
-        hi GitSignsAdd guifg=#008700
-        hi GitSignsChange guifg=#ec791b
-        hi GitSignsDelete guifg=#af0000
-      ]])
       LastColorScheme = 'light'
     end
   end

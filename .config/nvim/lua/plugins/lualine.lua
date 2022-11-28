@@ -38,7 +38,7 @@ end
 
 require('lualine').setup({
   options = {
-    theme = 'auto',
+    theme = 'catppuccin',
     ignore_focus = { 'NvimTree', 'TelescopePrompt' },
     icons_enabled = true,
     component_separators = '',
@@ -57,10 +57,6 @@ require('lualine').setup({
           alternate_file = '', -- Text to show to identify the alternate file
           directory = ' ', -- Text to show when the buffer is a directory
         },
-        buffers_color = {
-          active = 'LualineBufferActive',
-          inactive = 'LualineBufferInactive'
-        }
       }
     },
     lualine_c = {

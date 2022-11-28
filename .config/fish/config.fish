@@ -23,18 +23,15 @@ set -x GPG_TTY (tty)
 
 function set_color_scheme
     if test (defaults read -g AppleInterfaceStyle 2>/dev/null || echo '0') = 'Dark'
-        source $HOME/.config/fish/conf.d/dracula.fish
-        set -g theme_color_scheme 'dracula'
+        yes | fish_config theme save 'Catppuccin Macchiato'
         set -gx APPLE_INTERFACE_STYLE 'dark'
 
-        # Without this the base16 themes always override any other theme that's there
-        set -e base16_theme
-        set -gx BAT_THEME 'Dracula'
+        set -gx BAT_THEME 'Catppuccin-macchiato'
     else
-        base16-papercolor-light
-        set -g theme_color_scheme 'nord'
+        yes | fish_config theme save 'Catppuccin Latte'
         set -gx APPLE_INTERFACE_STYLE 'light'
-        set -gx BAT_THEME 'GitHub'
+
+        set -gx BAT_THEME 'Catppucin-latte'
     end
 end
 

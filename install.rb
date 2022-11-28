@@ -114,7 +114,15 @@ def symlink_files
   end
 end
 
-def run_install(options) # rubocop:disable Metrics/CyclomaticComplexity
+def install_bat_theme
+  puts 'Installing bat theme...'
+  `git clone https://github.com/catppuccin/bat /tmp/catppuccin-bat`
+  `mkdir -p "$(bat --config-dir)/themes"`
+  `cp /tmp/catppuccin-bat/*.tmTheme "$(bat --config-dir)/themes"`
+  `bat cache --build`
+end
+
+def run_install(options) # rubocop:disable Metrics/*
   symlink_files if options[:symlink]
   install_brew if options[:install_brew]
   brew_bundle if options[:brew_bundle]
@@ -125,18 +133,20 @@ def run_install(options) # rubocop:disable Metrics/CyclomaticComplexity
     install_tmux_plugin_manager
   end
   install_patched_sf_mono if options[:fonts]
+  install_bat_theme if options[:bat_theme]
 end
 
 def parse_options(args)
   options = {}
   OptionParser.new do |parser|
     parser.on('--symlink', 'Symlink files into the $HOME folder')
-    parser.on('--install-brew', 'Install homebrew')
-    parser.on('--brew-bundle', 'Run brew bundle to install all OS level dependencies')
-    parser.on('--install-runtimes', 'Installs Python & Ruby runtimes')
+    parser.on('--install_brew', 'Install homebrew')
+    parser.on('--brew_bundle', 'Run brew bundle to install all OS level dependencies')
+    parser.on('--install_runtimes', 'Installs Python & Ruby runtimes')
     parser.on('--nvim', 'Installs neovim related dependencies (e.g. package manager)')
     parser.on('--tmux', 'Installs tmux related dependencies (e.g. package manager)')
     parser.on('--fonts', 'Patches and installs fonts with Nerd Fonts patcher')
+    parser.on('--bat_theme', 'Installs themes for bat')
   end.parse!(args, into: options)
   options
 end
@@ -145,7 +155,7 @@ def install(args)
   options = parse_options(args)
 
   if options.empty?
-    %i[symlink install_brew brew_bundle install_runtimes nvim tmux fonts].each do |opt|
+    %i[symlink install_brew brew_bundle install_runtimes nvim tmux fonts bat_theme].each do |opt|
       options[opt] = true
     end
   end
