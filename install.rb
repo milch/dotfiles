@@ -2,6 +2,7 @@
 # frozen_string_literal: true
 
 require 'fileutils'
+require 'optparse'
 require 'tmpdir'
 
 RB_VERSION = '2.7.2'
@@ -95,7 +96,7 @@ def install_patched_sf_mono
   end
 end
 
-def install
+def symlink_files
   to_install = files_to_install
 
   # Grab only the directories and sort them by size so lower levels will be created before higher ones
@@ -111,16 +112,45 @@ def install
     in_this_dir = File.expand_path(file, __dir__)
     FileUtils.ln_s(in_this_dir, in_home_dir, force: true)
   end
-
-  # install_brew
-  # # brew_bundle
-
-  # install_runtimes
-
-  # install_packer_nvim
-  # install_terminfo
-  # install_tmux_plugin_manager
-  install_patched_sf_mono
 end
 
-install
+def run_install(options) # rubocop:disable Metrics/CyclomaticComplexity
+  symlink_files if options[:symlink]
+  install_brew if options[:install_brew]
+  brew_bundle if options[:brew_bundle]
+  install_runtimes if options[:install_runtimes]
+  install_packer_nvim if options[:nvim]
+  if options[:tmux]
+    install_terminfo
+    install_tmux_plugin_manager
+  end
+  install_patched_sf_mono if options[:fonts]
+end
+
+def parse_options(args)
+  options = {}
+  OptionParser.new do |parser|
+    parser.on('--symlink', 'Symlink files into the $HOME folder')
+    parser.on('--install-brew', 'Install homebrew')
+    parser.on('--brew-bundle', 'Run brew bundle to install all OS level dependencies')
+    parser.on('--install-runtimes', 'Installs Python & Ruby runtimes')
+    parser.on('--nvim', 'Installs neovim related dependencies (e.g. package manager)')
+    parser.on('--tmux', 'Installs tmux related dependencies (e.g. package manager)')
+    parser.on('--fonts', 'Patches and installs fonts with Nerd Fonts patcher')
+  end.parse!(args, into: options)
+  options
+end
+
+def install(args)
+  options = parse_options(args)
+
+  if options.empty?
+    %i[symlink install_brew brew_bundle install_runtimes nvim tmux fonts].each do |opt|
+      options[opt] = true
+    end
+  end
+
+  run_install(options)
+end
+
+install(ARGV)
