@@ -28,7 +28,6 @@
 	cmd = /usr/local/bin/ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
 	trustExitCode = true
 [delta]
-	syntax-theme = GitHub
 	line-numbers = true
 [diff "plist"]
 	textconv = /usr/libexec/PlistBuddy -c "Print"

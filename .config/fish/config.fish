@@ -29,10 +29,12 @@ function set_color_scheme
 
         # Without this the base16 themes always override any other theme that's there
         set -e base16_theme
+        set -gx BAT_THEME 'Dracula'
     else
         base16-papercolor-light
         set -g theme_color_scheme 'nord'
         set -gx APPLE_INTERFACE_STYLE 'light'
+        set -gx BAT_THEME 'GitHub'
     end
 end
 
