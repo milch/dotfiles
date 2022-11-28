@@ -14,7 +14,7 @@ require('packer').startup(function(use)
   use {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
-    config = function() require('plugins/nvim-treesitter') end,
+    config = function() require('plugins.nvim-treesitter') end,
     requires = {
       { 'nvim-treesitter/nvim-treesitter-textobjects' }
     }
@@ -23,7 +23,7 @@ require('packer').startup(function(use)
   use {
     'romgrk/nvim-treesitter-context',
     event = "WinScrolled",
-    config = function() require('plugins/nvim-treesitter-context') end,
+    config = function() require('plugins.nvim-treesitter-context') end,
     requires = 'nvim-treesitter/nvim-treesitter',
   }
 
@@ -37,7 +37,7 @@ require('packer').startup(function(use)
     requires = {
       'nvim-tree/nvim-web-devicons',
     },
-    config = function() require('plugins/nvim-tree').configure_tree(false) end
+    config = function() require('plugins.nvim-tree').configure_tree(false) end
   }
   use {
     'kylechui/nvim-surround',
@@ -67,7 +67,7 @@ require('packer').startup(function(use)
   use {
     'nvim-lualine/lualine.nvim',
     requires = { 'nvim-tree/nvim-web-devicons', opt = true },
-    config = function() require('plugins/lualine') end
+    config = function() require('plugins.lualine') end
   }
 
   -- SCM
@@ -89,7 +89,7 @@ require('packer').startup(function(use)
   use {
     "windwp/nvim-autopairs",
     event = "InsertEnter",
-    config = function() require('plugins/nvim-autopairs') end
+    config = function() require('plugins.nvim-autopairs') end
   }
 
   -- Misc
@@ -102,7 +102,7 @@ require('packer').startup(function(use)
         run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
     },
     cmd = "Telescope",
-    config = function() require('plugins/telescope') end,
+    config = function() require('plugins.telescope') end,
     keys = {
       { 'n', '<leader>ff' },
       { 'n', '<leader>fg' },
@@ -116,7 +116,7 @@ require('packer').startup(function(use)
   }
   use {
     "lukas-reineke/indent-blankline.nvim",
-    config = function() require('plugins/indent-blankline') end,
+    config = function() require('plugins.indent-blankline') end,
     event = 'BufReadPost'
   }
   use({
