@@ -64,7 +64,7 @@ require('lualine').setup({
     },
 
     lualine_x = {
-      { 'filename', path = 1 },
+      { 'filename', path = 1, file_status = false },
     },
     lualine_y = {
       {
