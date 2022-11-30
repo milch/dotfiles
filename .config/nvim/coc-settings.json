@@ -63,6 +63,8 @@
   "diagnostic.warningSign": "⚠",
   "diagnostic.infoSign": "",
   "diagnostic.hintSign": "ﯧ",
+  "diagnostic.virtualTextCurrentLineOnly": false,
+  "diagnostic.enableMessage": "never",
   "[ruby][typescript]": {
     "coc.preferences.formatOnSave": true
   },
@@ -80,7 +82,7 @@
   ],
   "java.import.gradle.wrapper.enabled": true,
   "java.import.gradle.java.home": "/Library/Java/JavaVirtualMachines/amazon-corretto-11.jdk/Contents/Home/",
-  "semanticTokens.enable": true,
+  "semanticTokens.enable": false,
   "sumneko-lua.enableNvimLuaDev": true,
   "Lua.telemetry.enable": false
 }
