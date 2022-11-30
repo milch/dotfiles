@@ -163,6 +163,12 @@ require('packer').startup(function(use)
     require('ufo').setup()
   end
   }
+
+  -- Load additional plugins that are only local to the current machine
+  local exists, localPlugins = pcall(require, 'plugins.local')
+  if exists then
+    localPlugins.setup(use)
+  end
 end)
 
 -- Run PackerCompile whenever this file is changed

@@ -22,6 +22,7 @@ vim.g.mapleader = ","
 
 require('plugins')
 require('use_system_theme')
+pcall(require, 'init_local')
 
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
@@ -106,9 +107,3 @@ vim.opt.shada = "'1,/10,<50,s10,h"
 vim.api.nvim_create_augroup('shareData', {})
 vim.api.nvim_create_autocmd('FocusGained', { command = 'rshada' })
 vim.api.nvim_create_autocmd('TextYankPost', { command = 'wshada' })
-
-
---[[
-if filereadable($HOME . "/init_local.vim")
-  source $HOME/init_local.vim
-end ]]
