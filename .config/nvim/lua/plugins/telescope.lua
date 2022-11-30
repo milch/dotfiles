@@ -37,3 +37,14 @@ vim.keymap.set('n', '<leader>p', builtin.registers, {})
 vim.keymap.set('n', '<leader>gb', builtin.git_bcommits, {})
 vim.keymap.set('n', '<leader>gc', builtin.git_commits, {})
 vim.keymap.set('n', '<leader>gs', builtin.git_status, {})
+
+-- -- load refactoring Telescope extension
+-- require("telescope").load_extension("refactoring")
+--
+-- -- remap to open the Telescope refactoring menu in visual mode
+-- vim.api.nvim_set_keymap(
+-- 	"v",
+-- 	"<leader>rr",
+-- 	"<Esc><cmd>lua require('telescope').extensions.refactoring.refactors()<CR>",
+-- 	{ noremap = true }
+-- )

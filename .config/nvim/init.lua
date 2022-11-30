@@ -21,7 +21,7 @@ vim.g.loaded_netrwFileHandlers = 1
 vim.g.mapleader = ","
 
 require('plugins')
-require('use_system_theme')
+require('use_system_theme').UpdateWhenSystemChanges()
 pcall(require, 'init_local')
 
 vim.opt.tabstop = 2

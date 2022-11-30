@@ -19,12 +19,28 @@ require('packer').startup(function(use)
       { 'nvim-treesitter/nvim-treesitter-textobjects' }
     }
   }
-
   use {
     'romgrk/nvim-treesitter-context',
     event = "WinScrolled",
     config = function() require('plugins.nvim-treesitter-context') end,
     requires = 'nvim-treesitter/nvim-treesitter',
+  }
+  use {
+    "ThePrimeagen/refactoring.nvim",
+    requires = {
+      { "nvim-lua/plenary.nvim" },
+      { "nvim-treesitter/nvim-treesitter" }
+    },
+    config = function()
+      require('refactoring').setup({})
+      local opts = { noremap = true, silent = true, expr = false }
+      vim.api.nvim_set_keymap("v", "<leader>re",
+        [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function')<CR>]],
+        opts)
+    end,
+    keys = {
+      { 'v', '<leader>re' }
+    }
   }
 
   use {
@@ -62,7 +78,6 @@ require('packer').startup(function(use)
   }
 
   -- Aesthetics
-  use { 'dracula/vim', as = 'dracula' }
   use {
     "catppuccin/nvim",
     as = "catppuccin",
@@ -70,11 +85,11 @@ require('packer').startup(function(use)
       require('plugins.catppuccin')
     end
   }
-  use 'milch/papercolor-theme'
   use {
     'nvim-lualine/lualine.nvim',
     requires = { 'nvim-tree/nvim-web-devicons', opt = true },
-    config = function() require('plugins.lualine') end
+    config = function() require('plugins.lualine') end,
+    after = 'catppuccin'
   }
 
   -- SCM
@@ -118,7 +133,8 @@ require('packer').startup(function(use)
       { 'n', '<leader>gb' },
       { 'n', '<leader>gc' },
       { 'n', '<leader>gs' },
-    }
+    },
+    module = 'telescope'
   }
   use {
     "lukas-reineke/indent-blankline.nvim",
@@ -130,7 +146,7 @@ require('packer').startup(function(use)
     config = function()
       require("auto-save").setup({
         -- Only trigger when changing files. The default is annoying with linters
-        -- that trigger on file save, as it makes it impossible to make some 
+        -- that trigger on file save, as it makes it impossible to make some
         -- types of changes (e.g. add empty lines)
         trigger_events = { "FocusLost", "BufLeave" }
       })
@@ -163,6 +179,91 @@ require('packer').startup(function(use)
     require('ufo').setup()
   end
   }
+
+  use {
+    'anuvyklack/hydra.nvim',
+    config = function()
+      local Hydra = require('hydra')
+      -- TODO: Refactoring
+      local cmd = require('hydra.keymap-util').cmd
+
+      local hint = [[
+      _f_: files       _m_: marks
+      🭇🬭🬭🬭🬭🬭🬭🬭🬭🬼    _o_: old files   _g_: live grep
+      🭉🭁🭠🭘    🭣🭕🭌🬾   _/_: search in file _r_: resume      
+      🭅█ ▁     █🭐
+      ██🬿      🭊██ 
+      🭋█🬝🮄🮄🮄🮄🮄🮄🮄🮄🬆█🭀  _h_: vim help    _c_: execute command
+      🭤🭒🬺🬹🬱🬭🬭🬭🬭🬵🬹🬹🭝🭙  _k_: keymaps     _;_: commands history 
+      _O_: options     _?_: search history
+      ^
+      _<Enter>_: Telescope           _<Esc>_
+      ]]
+
+      Hydra({
+        name = 'Telescope',
+        hint = hint,
+        config = {
+          color = 'teal',
+          invoke_on_body = true,
+          hint = {
+            position = 'middle',
+            border = 'rounded',
+          },
+        },
+        mode = 'n',
+        body = '<Leader>ft',
+        heads = {
+          { 'f', cmd 'Telescope find_files' },
+          { 'g', cmd 'Telescope live_grep' },
+          { 'o', cmd 'Telescope oldfiles', { desc = 'recently opened files' } },
+          { 'h', cmd 'Telescope help_tags', { desc = 'vim help' } },
+          { 'm', cmd 'MarksListBuf', { desc = 'marks' } },
+          { 'k', cmd 'Telescope keymaps' },
+          { 'O', cmd 'Telescope vim_options' },
+          { 'r', cmd 'Telescope resume' },
+          { '/', cmd 'Telescope current_buffer_fuzzy_find', { desc = 'search in file' } },
+          { '?', cmd 'Telescope search_history', { desc = 'search history' } },
+          { ';', cmd 'Telescope command_history', { desc = 'command-line history' } },
+          { 'c', cmd 'Telescope commands', { desc = 'execute command' } },
+          { '<Enter>', cmd 'Telescope', { exit = true, desc = 'list all pickers' } },
+          { '<Esc>', nil, { exit = true, nowait = true } },
+        }
+      })
+    end
+  }
+
+  use {
+    'gelguy/wilder.nvim',
+    config = function()
+      local wilder = require('wilder')
+      wilder.setup({ modes = { ':', '/', '?' } })
+      local highlighters = {
+        wilder.pcre2_highlighter(),
+        wilder.basic_highlighter(),
+      }
+      wilder.set_option('renderer', wilder.popupmenu_renderer(
+        wilder.popupmenu_border_theme({
+          highlighter = highlighters,
+          left = {
+            ' ',
+            wilder.popupmenu_devicons(),
+            wilder.popupmenu_buffer_flags({
+              flags = ' a + ',
+              icons = { ['+'] = '', a = '', h = '' },
+            }),
+          },
+          right = {
+            ' ',
+            wilder.popupmenu_scrollbar(),
+          },
+          highlights = {
+            accent = wilder.make_hl('WilderAccent', 'Pmenu', { { a = 1 }, { a = 1 }, { foreground = '#f4468f' } }),
+          },
+        }))
+      )
+    end,
+  end
 
   -- Load additional plugins that are only local to the current machine
   local exists, localPlugins = pcall(require, 'plugins.local')
