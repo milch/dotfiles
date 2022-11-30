@@ -235,15 +235,48 @@ require('packer').startup(function(use)
 
   use {
     'gelguy/wilder.nvim',
+    requires = {
+      {'romgrk/fzy-lua-native'},
+    },
+    event = {'CmdlineEnter'},
+    run = ':UpdateRemotePlugins',
     config = function()
       local wilder = require('wilder')
       wilder.setup({ modes = { ':', '/', '?' } })
+      wilder.set_option('pipeline', {
+        wilder.branch(
+          wilder.python_file_finder_pipeline({
+            file_command = function(_, arg)
+              if string.find(arg, '.') ~= nil then
+                return { 'rg', '--files', '--hidden' }
+              else
+                return { 'rg', '--files' }
+              end
+            end,
+            dir_command = { 'fd', '-td' },
+          }),
+          wilder.substitute_pipeline({
+            skip_cmdtype_check = 1,
+          }),
+          wilder.cmdline_pipeline({
+            fuzzy = 2,
+            fuzzy_filter = wilder.lua_fzy_filter(),
+          }),
+          {
+            wilder.check(function(ctx, x) return x == '' end),
+            wilder.history(),
+          },
+          wilder.python_search_pipeline({
+            pattern = 'fuzzy',
+          })
+        ),
+      })
       local highlighters = {
-        wilder.pcre2_highlighter(),
-        wilder.basic_highlighter(),
+        wilder.lua_fzy_highlighter(),
       }
       wilder.set_option('renderer', wilder.popupmenu_renderer(
         wilder.popupmenu_border_theme({
+          border = 'rounded',
           highlighter = highlighters,
           left = {
             ' ',
@@ -263,7 +296,7 @@ require('packer').startup(function(use)
         }))
       )
     end,
-  end
+  }
 
   -- Load additional plugins that are only local to the current machine
   local exists, localPlugins = pcall(require, 'plugins.local')
