@@ -1,14 +1,13 @@
 [include]
 	path = .gitconfig_local
+[include]
+	path = .gitconfig_delta
 [core]
 	excludesfile = ~/.gitignore_global
-	pager = "delta"
 	attributesfile = ~/.gitattributes_global
 [diff]
 	algorithm = histogram
 	colorMoved = default
-[interactive]
-	diffFilter = "delta --color-only"
 [difftool "Kaleidoscope"]
     cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 [difftool]

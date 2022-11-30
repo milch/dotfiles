@@ -21,17 +21,26 @@ set -x MANPAGER 'nvim +Man!'
 
 set -x GPG_TTY (tty)
 
+function update_theme
+    set type $argv[1]
+    set -gx APPLE_INTERFACE_STYLE $type
+    echo """
+    [interactive]
+    diffFilter = delta --$type --color-only
+    [core]
+    pager = delta --$type
+    """ > ~/.gitconfig_delta
+end
+
 function set_color_scheme
     if test (defaults read -g AppleInterfaceStyle 2>/dev/null || echo '0') = 'Dark'
         yes | fish_config theme save 'Catppuccin Macchiato'
-        set -gx APPLE_INTERFACE_STYLE 'dark'
-
         set -gx BAT_THEME 'Catppuccin-macchiato'
+        update_theme dark
     else
         yes | fish_config theme save 'Catppuccin Latte'
-        set -gx APPLE_INTERFACE_STYLE 'light'
-
-        set -gx BAT_THEME 'Catppucin-latte'
+        set -gx BAT_THEME 'Catppuccin-latte'
+        update_theme light
     end
 end
 
