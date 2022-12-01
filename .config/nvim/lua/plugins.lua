@@ -1,3 +1,5 @@
+local fn, fs = vim.fn, vim.fs
+
 require('packer').startup(function(use)
   -- Packer can manage itself
   use { 'wbthomason/packer.nvim' }
@@ -6,23 +8,25 @@ require('packer').startup(function(use)
     config = function() require('impatient') end
   }
 
-  -- Language support
-  use 'sheerun/vim-polyglot'
+  -- Languages
   use { 'slashmili/alchemist.vim', ft = { 'elixir' } }
   use 'milch/vim-fastlane'
   use { "iamcco/markdown-preview.nvim", run = function() vim.fn["mkdp#util#install"]() end, ft = 'markdown' }
+
+  -- Editor
   use {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
-    config = function() require('plugins.nvim-treesitter') end,
+    config = function() require('editor.nvim-treesitter') end,
     requires = {
       { 'nvim-treesitter/nvim-treesitter-textobjects' }
     }
   }
+
   use {
     'romgrk/nvim-treesitter-context',
     event = "WinScrolled",
-    config = function() require('plugins.nvim-treesitter-context') end,
+    config = function() require('editor.nvim-treesitter-context') end,
     requires = 'nvim-treesitter/nvim-treesitter',
   }
   use {
@@ -39,7 +43,9 @@ require('packer').startup(function(use)
         opts)
     end,
     keys = {
-      { 'v', '<leader>re' }
+      { 'v', '<leader>re' },
+      { 'v', '<leader>r' },
+      { 'n', '<leader>r' },
     }
   }
 
@@ -47,14 +53,7 @@ require('packer').startup(function(use)
     'nvim-treesitter/playground',
     cmd = "TSPlaygroundToggle"
   }
-  -- Search, Navigation, etc.
-  use {
-    'nvim-tree/nvim-tree.lua',
-    requires = {
-      'nvim-tree/nvim-web-devicons',
-    },
-    config = function() require('plugins.nvim-tree').configure_tree(false) end
-  }
+
   use {
     'kylechui/nvim-surround',
     keys = { { 'n', 'ds' }, { 'n', 'cs' }, { 'n', 'ys' } },
@@ -62,6 +61,14 @@ require('packer').startup(function(use)
       require('nvim-surround').setup()
     end
   }
+
+  use {
+    'echasnovski/mini.ai',
+    config = function()
+      require('mini.ai').setup()
+    end
+  }
+
   use {
     'numToStr/Comment.nvim',
     keys = { { 'n', 'gc' }, { 'n', 'gb' }, { 'v', 'gc' }, { 'v', 'gb' }, { 'n', 'gcc' }, { 'n', 'gbc' } },
@@ -73,48 +80,15 @@ require('packer').startup(function(use)
   use {
     'tpope/vim-projectionist',
     config = function()
-      require('plugins.projectionist')
+      require('editor.projectionist')
     end,
-  }
-
-  -- Aesthetics
-  use {
-    "catppuccin/nvim",
-    as = "catppuccin",
-    config = function()
-      require('plugins.catppuccin')
-    end
-  }
-  use {
-    'nvim-lualine/lualine.nvim',
-    requires = { 'nvim-tree/nvim-web-devicons', opt = true },
-    config = function() require('plugins.lualine') end,
-    after = 'catppuccin'
-  }
-
-  -- SCM
-  use {
-    'lewis6991/gitsigns.nvim',
-    config = function()
-      require('gitsigns').setup({
-        numhl = true,
-      })
-    end
-  }
-
-  -- Autocomplete, Snippets, Syntax
-  use {
-    'neoclide/coc.nvim',
-    branch = 'release',
-    config = function() require('plugins/coc-nvim') end,
   }
   use {
     "windwp/nvim-autopairs",
     event = "InsertEnter",
-    config = function() require('plugins.nvim-autopairs') end
+    config = function() require('editor.nvim-autopairs') end
   }
 
-  -- Misc
   use {
     'nvim-telescope/telescope.nvim', branch = '0.1.x',
     requires = {
@@ -123,7 +97,7 @@ require('packer').startup(function(use)
         run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
     },
     cmd = "Telescope",
-    config = function() require('plugins.telescope') end,
+    config = function() require('editor.telescope') end,
     keys = {
       { 'n', '<leader>ff' },
       { 'n', '<leader>fg' },
@@ -136,36 +110,38 @@ require('packer').startup(function(use)
     },
     module = 'telescope'
   }
+
+  -- UI
+  use {
+    "catppuccin/nvim",
+    as = "catppuccin",
+    config = function()
+      require('ui.catppuccin')
+    end
+  }
+
+  use {
+    'nvim-tree/nvim-tree.lua',
+    requires = {
+      'nvim-tree/nvim-web-devicons',
+    },
+    config = function() require('ui.nvim-tree').configure_tree(false) end,
+    after = 'catppuccin'
+  }
+
+  use {
+    'nvim-lualine/lualine.nvim',
+    requires = { 'nvim-tree/nvim-web-devicons', opt = true },
+    config = function() require('ui.lualine') end,
+    after = 'catppuccin'
+  }
+
   use {
     "lukas-reineke/indent-blankline.nvim",
-    config = function() require('plugins.indent-blankline') end,
-    event = 'BufReadPost'
+    config = function() require('ui.indent-blankline') end,
+    event = 'BufReadPost',
+    after = 'catppuccin'
   }
-  use({
-    "Pocco81/auto-save.nvim",
-    config = function()
-      require("auto-save").setup({
-        -- Only trigger when changing files. The default is annoying with linters
-        -- that trigger on file save, as it makes it impossible to make some
-        -- types of changes (e.g. add empty lines)
-        trigger_events = { "FocusLost", "BufLeave" }
-      })
-    end
-  })
-  use { 'critiqjo/lldb.nvim', ft = { 'c', 'cpp', 'objc' } }
-  use { 'janko-m/vim-test', ft = { 'swift', 'go', 'javascript', 'typescript', 'ruby' } }
-  use {
-    'kshenoy/vim-signature',
-    event = 'BufReadPost'
-  }
-  -- Auto detect tab/space settings
-  use {
-    'tpope/vim-sleuth',
-    event = 'BufReadPost'
-  }
-
-
-  use { 'dstein64/vim-startuptime', cmd = "StartupTime" }
 
   use { 'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async', config = function()
     -- See https://github.com/kevinhwang91/nvim-ufo/issues/4#issuecomment-1157716294
@@ -181,56 +157,20 @@ require('packer').startup(function(use)
   }
 
   use {
-    'anuvyklack/hydra.nvim',
+    'lewis6991/gitsigns.nvim',
+    event = 'BufReadPost',
     config = function()
-      local Hydra = require('hydra')
-      -- TODO: Refactoring
-      local cmd = require('hydra.keymap-util').cmd
-
-      local hint = [[
-      _f_: files       _m_: marks
-      🭇🬭🬭🬭🬭🬭🬭🬭🬭🬼    _o_: old files   _g_: live grep
-      🭉🭁🭠🭘    🭣🭕🭌🬾   _/_: search in file _r_: resume      
-      🭅█ ▁     █🭐
-      ██🬿      🭊██ 
-      🭋█🬝🮄🮄🮄🮄🮄🮄🮄🮄🬆█🭀  _h_: vim help    _c_: execute command
-      🭤🭒🬺🬹🬱🬭🬭🬭🬭🬵🬹🬹🭝🭙  _k_: keymaps     _;_: commands history 
-      _O_: options     _?_: search history
-      ^
-      _<Enter>_: Telescope           _<Esc>_
-      ]]
-
-      Hydra({
-        name = 'Telescope',
-        hint = hint,
-        config = {
-          color = 'teal',
-          invoke_on_body = true,
-          hint = {
-            position = 'middle',
-            border = 'rounded',
-          },
-        },
-        mode = 'n',
-        body = '<Leader>ft',
-        heads = {
-          { 'f', cmd 'Telescope find_files' },
-          { 'g', cmd 'Telescope live_grep' },
-          { 'o', cmd 'Telescope oldfiles', { desc = 'recently opened files' } },
-          { 'h', cmd 'Telescope help_tags', { desc = 'vim help' } },
-          { 'm', cmd 'MarksListBuf', { desc = 'marks' } },
-          { 'k', cmd 'Telescope keymaps' },
-          { 'O', cmd 'Telescope vim_options' },
-          { 'r', cmd 'Telescope resume' },
-          { '/', cmd 'Telescope current_buffer_fuzzy_find', { desc = 'search in file' } },
-          { '?', cmd 'Telescope search_history', { desc = 'search history' } },
-          { ';', cmd 'Telescope command_history', { desc = 'command-line history' } },
-          { 'c', cmd 'Telescope commands', { desc = 'execute command' } },
-          { '<Enter>', cmd 'Telescope', { exit = true, desc = 'list all pickers' } },
-          { '<Esc>', nil, { exit = true, nowait = true } },
-        }
+      require('gitsigns').setup({
+        numhl = true,
       })
     end
+  }
+
+  -- Completion
+  use {
+    'neoclide/coc.nvim',
+    branch = 'release',
+    config = function() require('completion.coc-nvim') end,
   }
 
   use {
@@ -241,61 +181,41 @@ require('packer').startup(function(use)
     event = {'CmdlineEnter'},
     run = ':UpdateRemotePlugins',
     config = function()
-      local wilder = require('wilder')
-      wilder.setup({ modes = { ':', '/', '?' } })
-      wilder.set_option('pipeline', {
-        wilder.branch(
-          wilder.python_file_finder_pipeline({
-            file_command = function(_, arg)
-              if string.find(arg, '.') ~= nil then
-                return { 'rg', '--files', '--hidden' }
-              else
-                return { 'rg', '--files' }
-              end
-            end,
-            dir_command = { 'fd', '-td' },
-          }),
-          wilder.substitute_pipeline({
-            skip_cmdtype_check = 1,
-          }),
-          wilder.cmdline_pipeline({
-            fuzzy = 2,
-            fuzzy_filter = wilder.lua_fzy_filter(),
-          }),
-          {
-            wilder.check(function(ctx, x) return x == '' end),
-            wilder.history(),
-          },
-          wilder.python_search_pipeline({
-            pattern = 'fuzzy',
-          })
-        ),
-      })
-      local highlighters = {
-        wilder.lua_fzy_highlighter(),
-      }
-      wilder.set_option('renderer', wilder.popupmenu_renderer(
-        wilder.popupmenu_border_theme({
-          border = 'rounded',
-          highlighter = highlighters,
-          left = {
-            ' ',
-            wilder.popupmenu_devicons(),
-            wilder.popupmenu_buffer_flags({
-              flags = ' a + ',
-              icons = { ['+'] = '', a = '', h = '' },
-            }),
-          },
-          right = {
-            ' ',
-            wilder.popupmenu_scrollbar(),
-          },
-          highlights = {
-            accent = wilder.make_hl('WilderAccent', 'Pmenu', { { a = 1 }, { a = 1 }, { foreground = '#f4468f' } }),
-          },
-        }))
-      )
+      require('completion.wilder')
     end,
+  }
+
+  -- Utils
+  use({
+    "Pocco81/auto-save.nvim",
+    event = {'BufReadPost'},
+    config = function()
+      require("auto-save").setup({
+        -- Only trigger when changing files. The default is annoying with linters
+        -- that trigger on file save, as it makes it impossible to make some
+        -- types of changes (e.g. add empty lines)
+        trigger_events = { "FocusLost", "BufLeave" }
+      })
+    end
+  })
+
+  use {
+    'kshenoy/vim-signature',
+    event = {'BufReadPost'}
+  }
+  use {
+    'tpope/vim-sleuth',
+    event = {'BufReadPost'}
+  }
+
+
+  use { 'dstein64/vim-startuptime', cmd = "StartupTime" }
+
+  use {
+    'anuvyklack/hydra.nvim',
+    config = function()
+      require('util.hydra')
+    end
   }
 
   -- Load additional plugins that are only local to the current machine
@@ -310,5 +230,6 @@ vim.cmd([[
   augroup packer_user_config
     autocmd!
     autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+    autocmd BufWritePost .config/nvim/lua/**/*.lua source <afile>
   augroup end
 ]])

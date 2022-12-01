@@ -24,4 +24,4 @@ require("catppuccin").setup({
     }
   end
 })
-require('use_system_theme').ChangeToSystemColor("startup")
+require('ui.use_system_theme').ChangeToSystemColor("startup")
