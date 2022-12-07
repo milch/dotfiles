@@ -1,5 +1,3 @@
-local fn, fs = vim.fn, vim.fs
-
 require('packer').startup(function(use)
   -- Packer can manage itself
   use { 'wbthomason/packer.nvim' }
@@ -99,10 +97,9 @@ require('packer').startup(function(use)
     cmd = "Telescope",
     config = function() require('editor.telescope') end,
     keys = {
-      { 'n', '<leader>ff' },
-      { 'n', '<leader>fg' },
-      { 'n', '<leader>fb' },
-      { 'n', '<leader>fh' },
+      { 'n', '<leader>f' },
+      { 'n', '<leader>g' },
+      { 'n', '<leader>b' },
       { 'n', '<leader>p', },
       { 'n', '<leader>gb' },
       { 'n', '<leader>gc' },

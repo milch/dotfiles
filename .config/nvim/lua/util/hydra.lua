@@ -22,7 +22,7 @@ _<Enter>_: Telescope           _<Esc>_
     },
   },
   mode = 'n',
-  body = '<Leader>ft',
+  body = '<Leader>h',
   heads = {
     { 'f', cmd 'Telescope find_files hidden=true' },
     { 'o', cmd 'Telescope oldfiles', { desc = 'recently opened files' } },

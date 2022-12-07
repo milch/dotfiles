@@ -23,15 +23,18 @@ local gitIfAvailable = function()
   if gitFolder == '' then
     return builtin.find_files()
   else
-    return builtin.git_files()
+    return builtin.git_files({ show_untracked = true })
   end
 end
 
+local find_all = function()
+  return builtin.find_files({ hidden = true, no_ignore = false })
+end
+
 vim.keymap.set('n', '<leader>f', gitIfAvailable, {})
-vim.keymap.set('n', '<leader>p', builtin.find_files, {})
+vim.keymap.set('n', '<leader>p', find_all, {})
 vim.keymap.set('n', '<leader>g', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>b', builtin.buffers, {})
-vim.keymap.set('n', '<leader>h', builtin.help_tags, {})
 
 vim.keymap.set('n', '<leader>gb', builtin.git_bcommits, {})
 vim.keymap.set('n', '<leader>gc', builtin.git_commits, {})
