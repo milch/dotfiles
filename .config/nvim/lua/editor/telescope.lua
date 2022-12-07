@@ -27,24 +27,12 @@ local gitIfAvailable = function()
   end
 end
 
-vim.keymap.set('n', '<leader>ff', gitIfAvailable, {})
-vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
-vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
-vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
-
-vim.keymap.set('n', '<leader>p', builtin.registers, {})
+vim.keymap.set('n', '<leader>f', gitIfAvailable, {})
+vim.keymap.set('n', '<leader>p', builtin.find_files, {})
+vim.keymap.set('n', '<leader>g', builtin.live_grep, {})
+vim.keymap.set('n', '<leader>b', builtin.buffers, {})
+vim.keymap.set('n', '<leader>h', builtin.help_tags, {})
 
 vim.keymap.set('n', '<leader>gb', builtin.git_bcommits, {})
 vim.keymap.set('n', '<leader>gc', builtin.git_commits, {})
 vim.keymap.set('n', '<leader>gs', builtin.git_status, {})
-
--- -- load refactoring Telescope extension
--- require("telescope").load_extension("refactoring")
---
--- -- remap to open the Telescope refactoring menu in visual mode
--- vim.api.nvim_set_keymap(
--- 	"v",
--- 	"<leader>rr",
--- 	"<Esc><cmd>lua require('telescope').extensions.refactoring.refactors()<CR>",
--- 	{ noremap = true }
--- )
