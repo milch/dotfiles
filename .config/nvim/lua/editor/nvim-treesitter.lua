@@ -1,4 +1,4 @@
-require'nvim-treesitter.configs'.setup {
+require 'nvim-treesitter.configs'.setup {
   -- One of "all", "maintained" (parsers with maintainers), or a list of languages
   ensure_installed = "all",
 
@@ -6,14 +6,20 @@ require'nvim-treesitter.configs'.setup {
   sync_install = false,
 
   -- List of parsers to ignore installing
-  ignore_install = { },
+  ignore_install = {},
 
   highlight = {
     -- `false` will disable the whole extension
     enable = true,
 
     -- list of language that will be disabled
-    disable = {},
+    disable = function(lang, bufnr)
+      local lines_cutoff = 10000
+      local size_cutoff = 1024 * 500 -- 500kb
+      local disable = vim.api.nvim_buf_line_count(bufnr) > lines_cutoff or
+          vim.fn.getfsize(vim.api.nvim_buf_get_name(bufnr)) > size_cutoff
+      return disable
+    end,
 
     -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
     -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).

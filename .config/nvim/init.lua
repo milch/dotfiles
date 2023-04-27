@@ -50,14 +50,14 @@ vim.api.nvim_set_keymap('', '<Up>', '<Nop>', {})
 vim.api.nvim_set_keymap('', '<Down>', '<Nop>', {})
 
 -- Viewport will move if Cursor is 10 lines away from the edge
-vim.opt.scrolloff=10
+vim.opt.scrolloff = 10
 
 vim.opt.relativenumber = true -- relative line numbers
 vim.opt.number = true -- But on the current line, show the absolute line number
 
 vim.opt.hidden = true -- Allow hidden buffers
 
-vim.opt.completeopt="menu,menuone,noinsert,noselect"
+vim.opt.completeopt = "menu,menuone,noinsert,noselect"
 
 -- always show signcolumns
 vim.opt.signcolumn = "yes"
@@ -67,7 +67,7 @@ vim.api.nvim_set_keymap('n', 'Y', 'y$', { noremap = true })
 
 vim.api.nvim_create_augroup('Spelling', {})
 vim.api.nvim_create_autocmd('FileType', {
-    pattern = {'markdown','mkd','text','plaintex','tex'},
+    pattern = { 'markdown', 'mkd', 'text', 'plaintex', 'tex' },
     command = 'set spell spelllang=en',
     group = 'Spelling'
 })
@@ -83,10 +83,10 @@ vim.api.nvim_create_autocmd('FocusGained', {
     group = 'fixAutoread'
 })
 
-vim.opt.mouse="a"
+vim.opt.mouse = "a"
 table.insert(vim.opt.shortmess, "c")
 -- vim.opt.shortmess=vim.opt.shortmess .. "c"
-vim.opt.listchars="tab:>·,trail:~,extends:>,precedes:<"
+vim.opt.listchars = "tab:>·,trail:~,extends:>,precedes:<"
 vim.opt.list = true
 
 --[[
@@ -101,9 +101,22 @@ let test#strategy="dispatch"
 
 let g:dispatch_compilers = {
       \ 'bundle exec': ''}
-]]--
+]] --
 
 vim.opt.shada = "'1,/10,<50,s10,h"
 vim.api.nvim_create_augroup('shareData', {})
 vim.api.nvim_create_autocmd('FocusGained', { command = 'rshada' })
 vim.api.nvim_create_autocmd('TextYankPost', { command = 'wshada' })
+
+vim.api.nvim_create_autocmd("BufEnter", {
+    callback = function(args)
+        local max_size = 1024 * 1024
+        if vim.fn.getfsize(args.file) > max_size then
+            vim.cmd [[
+            syntax off
+            let b:coc_enabled=0
+            set inccommand=
+            ]]
+        end
+    end
+})

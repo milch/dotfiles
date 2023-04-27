@@ -65,9 +65,11 @@
   "diagnostic.hintSign": "ﯧ",
   "diagnostic.virtualTextCurrentLineOnly": false,
   "diagnostic.enableMessage": "never",
-  "[ruby][typescript]": {
-    "coc.preferences.formatOnSave": true
+  "[ruby][typescript][rust][lua]": {
+    "coc.preferences.formatOnSave": true,
   },
+  "rust-analyzer.checkOnSave.enable": true,
+  "rust-analyzer.checkOnSave.command": "clippy",
   "coc.preferences.bracketEnterImprove": true,
   "java.configuration.runtimes": [
     {
@@ -84,5 +86,6 @@
   "java.import.gradle.java.home": "/Library/Java/JavaVirtualMachines/amazon-corretto-11.jdk/Contents/Home/",
   "semanticTokens.enable": false,
   "sumneko-lua.enableNvimLuaDev": true,
-  "Lua.telemetry.enable": false
+  "Lua.telemetry.enable": false,
+  "snippets.ultisnips.pythonPrompt": false
 }

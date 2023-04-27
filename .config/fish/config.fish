@@ -1,4 +1,4 @@
-set -gx PATH /opt/homebrew/bin /usr/local/bin $PATH
+set -gx PATH /opt/homebrew/bin /usr/local/bin $HOME/.cargo/bin $PATH
 
 if status --is-interactive; and not functions -q fisher
     set -q XDG_CONFIG_HOME; or set XDG_CONFIG_HOME ~/.config

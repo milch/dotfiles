@@ -15,7 +15,7 @@ vim.g.coc_global_extensions = {
   'coc-jedi', -- Python
   'coc-json',
   'coc-perl',
-  'coc-rls', -- Rust
+  'coc-rust-analyzer', -- Rust
   'coc-solargraph', -- Ruby
   'coc-sourcekit', -- C-family/Swift
   'coc-sql',
@@ -106,14 +106,8 @@ vim.api.nvim_create_autocmd("User", {
   desc = "Update signature help on jump placeholder"
 })
 
----@diagnostic disable-next-line: redefined-local
-local opts = { silent = true, nowait = true }
--- Show all diagnostics.
-keyset("n", "<leader>d", ":<C-u>CocList diagnostics<cr>", opts)
-
-vim.api.nvim_create_autocmd({"BufRead", "VimEnter"}, {
+vim.api.nvim_create_autocmd({ "BufRead", "VimEnter" }, {
   group = "CocGroup",
   command = "if expand('%') =~ \"/private/var/folders\" | call coc#config('coc.preferences.formatOnSaveFiletypes', []) | endif",
   desc = "Disable autoformat on save for temporary folders"
 })
-

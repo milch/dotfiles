@@ -173,9 +173,9 @@ require('packer').startup(function(use)
   use {
     'gelguy/wilder.nvim',
     requires = {
-      {'romgrk/fzy-lua-native'},
+      { 'romgrk/fzy-lua-native' },
     },
-    event = {'CmdlineEnter'},
+    event = { 'CmdlineEnter' },
     run = ':UpdateRemotePlugins',
     config = function()
       require('completion.wilder')
@@ -185,7 +185,6 @@ require('packer').startup(function(use)
   -- Utils
   use({
     "Pocco81/auto-save.nvim",
-    event = {'BufReadPost'},
     config = function()
       require("auto-save").setup({
         -- Only trigger when changing files. The default is annoying with linters
@@ -198,11 +197,11 @@ require('packer').startup(function(use)
 
   use {
     'kshenoy/vim-signature',
-    event = {'BufReadPost'}
+    event = { 'BufReadPost' }
   }
   use {
     'tpope/vim-sleuth',
-    event = {'BufReadPost'}
+    event = { 'BufReadPost' }
   }
 
 
@@ -230,6 +229,51 @@ require('packer').startup(function(use)
       vim.api.nvim_set_keymap('n', '#', [[#<Cmd>lua require('hlslens').start()<CR>]], kopts)
       vim.api.nvim_set_keymap('n', 'g*', [[g*<Cmd>lua require('hlslens').start()<CR>]], kopts)
       vim.api.nvim_set_keymap('n', 'g#', [[g#<Cmd>lua require('hlslens').start()<CR>]], kopts)
+    end
+  }
+
+  use {
+    "nvim-neotest/neotest",
+    requires = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "rouge8/neotest-rust"
+    },
+    config = function()
+      require("neotest").setup({
+        adapters = {
+          require("neotest-rust") {
+          }
+        }
+      })
+    end
+  }
+
+  use {
+    "folke/which-key.nvim",
+    config = function()
+      require("which-key").setup {
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      }
+    end
+  }
+
+  use {
+    "arafatamim/trouble.nvim",
+    requires = "kyazdani42/nvim-web-devicons",
+    config = function()
+      require("trouble").setup {
+        mode = "coc_workspace_diagnostics",
+        auto_open = false, -- automatically open the list when you have diagnostics
+        auto_close = true, -- automatically close the list when you have no diagnostics
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      }
+
+      vim.api.nvim_set_keymap("n", "<leader>d", ":TroubleToggle<CR>", {})
     end
   }
 
