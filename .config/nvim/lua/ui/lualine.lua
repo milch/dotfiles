@@ -36,6 +36,20 @@ local function process_sections(sections)
   return sections
 end
 
+local function getWords()
+  if vim.bo.filetype == "md" or vim.bo.filetype == "txt" or vim.bo.filetype == "markdown" then
+    if vim.fn.wordcount().visual_words == 1 then
+      return tostring(vim.fn.wordcount().visual_words) .. " word"
+    elseif not (vim.fn.wordcount().visual_words == nil) then
+      return tostring(vim.fn.wordcount().visual_words) .. " words"
+    else
+      return tostring(vim.fn.wordcount().words) .. " words"
+    end
+  else
+    return ""
+  end
+end
+
 require('lualine').setup({
   options = {
     theme = 'catppuccin',
@@ -46,7 +60,7 @@ require('lualine').setup({
   },
   sections = process_sections {
     lualine_a = {
-      { 'mode', fmt = function(str) return str:sub(1,1) end },
+      { 'mode', fmt = function(str) return str:sub(1, 1) end },
     },
     lualine_b = {
       {
@@ -60,13 +74,16 @@ require('lualine').setup({
       }
     },
     lualine_c = {
-      {'g:coc_status'}
+      { 'g:coc_status' }
     },
 
     lualine_x = {
       { 'filename', path = 1, file_status = false },
     },
     lualine_y = {
+      {
+        getWords
+      },
       {
         'diagnostics',
         sources = { 'nvim_diagnostic', 'coc' },
@@ -79,7 +96,7 @@ require('lualine').setup({
         'diagnostics',
         sources = { 'nvim_diagnostic', 'coc' },
         diagnostics_color = {
-          warn =  "LualineWarnHighlight",
+          warn = "LualineWarnHighlight",
         },
         sections = { 'warn' }
       },
