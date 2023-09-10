@@ -91,8 +91,11 @@ require('packer').startup(function(use)
     'nvim-telescope/telescope.nvim', branch = '0.1.x',
     requires = {
       { 'nvim-lua/plenary.nvim' },
-      { 'nvim-telescope/telescope-fzf-native.nvim',
-        run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
+      {
+        'nvim-telescope/telescope-fzf-native.nvim',
+        run =
+        'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
+      }
     },
     cmd = "Telescope",
     config = function() require('editor.telescope') end,
@@ -140,16 +143,74 @@ require('packer').startup(function(use)
     after = 'catppuccin'
   }
 
-  use { 'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async', config = function()
+  use { 'kevinhwang91/nvim-ufo', requires = {
+    'kevinhwang91/promise-async',
+    {
+      "luukvbaal/statuscol.nvim",
+      config = function()
+        local builtin = require("statuscol.builtin")
+        require("statuscol").setup(
+          {
+            relculright = true,
+            segments = {
+              { text = { builtin.foldfunc },      click = "v:lua.ScFa" },
+              { text = { "%s" },                  click = "v:lua.ScSa" },
+              { text = { builtin.lnumfunc, " " }, click = "v:lua.ScLa" }
+            }
+          }
+        )
+      end
+    }
+  }, config = function()
     -- See https://github.com/kevinhwang91/nvim-ufo/issues/4#issuecomment-1157716294
-    vim.o.foldcolumn = '0'
+    vim.o.foldcolumn = '1'
     vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
     vim.o.foldlevel = 99
     vim.o.foldlevelstart = 99
     vim.o.foldenable = true
     vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
     vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
-    require('ufo').setup()
+
+    require("ufo").setup(
+      {
+        provider_selector = function(bufnr, filetype, buftype)
+          return { "treesitter", "indent" }
+        end,
+        close_fold_kinds = { "imports", "comment" },
+        fold_virt_text_handler = function(virtText, lnum, endLnum, width, truncate)
+          local newVirtText = {}
+          local totalLines = vim.api.nvim_buf_line_count(0)
+          local foldedLines = endLnum - lnum
+          local suffix = ("  %d %d%%"):format(foldedLines, foldedLines / totalLines * 100)
+          local sufWidth = vim.fn.strdisplaywidth(suffix)
+          local targetWidth = width - sufWidth
+          local curWidth = 0
+          for _, chunk in ipairs(virtText) do
+            local chunkText = chunk[1]
+            local chunkWidth = vim.fn.strdisplaywidth(chunkText)
+            if targetWidth > curWidth + chunkWidth then
+              table.insert(newVirtText, chunk)
+            else
+              chunkText = truncate(chunkText, targetWidth - curWidth)
+              local hlGroup = chunk[2]
+              table.insert(newVirtText, { chunkText, hlGroup })
+              chunkWidth = vim.fn.strdisplaywidth(chunkText)
+              -- str width returned from truncate() may less than 2nd argument, need padding
+              if curWidth + chunkWidth < targetWidth then
+                suffix = suffix .. (" "):rep(targetWidth - curWidth - chunkWidth)
+              end
+              break
+            end
+            curWidth = curWidth + chunkWidth
+          end
+          local rAlignAppndx =
+              math.max(math.min(vim.opt.textwidth["_value"], width - 1) - curWidth - sufWidth, 0)
+          suffix = (" "):rep(rAlignAppndx) .. suffix
+          table.insert(newVirtText, { suffix, "MoreMsg" })
+          return newVirtText
+        end
+      }
+    )
   end
   }
 
@@ -184,7 +245,7 @@ require('packer').startup(function(use)
 
   -- Utils
   use({
-    "Pocco81/auto-save.nvim",
+    "okuuva/auto-save.nvim",
     config = function()
       require("auto-save").setup({
         -- Only trigger when changing files. The default is annoying with linters
