@@ -1,4 +1,4 @@
-require("catppuccin").setup({
+return {
   integrations = {
     coc_nvim = false,
     gitsigns = true,
@@ -23,5 +23,4 @@ require("catppuccin").setup({
       LualineHintHighlight = { fg = lsp.DiagnosticVirtualTextHint.fg, bg = lsp.DiagnosticVirtualTextHint.bg },
     }
   end
-})
-require('ui.use_system_theme').ChangeToSystemColor("startup")
+}

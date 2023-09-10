@@ -1,355 +1,341 @@
-require('packer').startup(function(use)
-  -- Packer can manage itself
-  use { 'wbthomason/packer.nvim' }
-  use {
-    'lewis6991/impatient.nvim',
-    config = function() require('impatient') end
-  }
+local function cmd(str)
+  return "<Cmd>lua " .. str .. "<CR>"
+end
+local silentNoremap = { noremap = true, silent = true }
 
+return {
   -- Languages
-  use { 'slashmili/alchemist.vim', ft = { 'elixir' } }
-  use 'milch/vim-fastlane'
-  use { "iamcco/markdown-preview.nvim", run = function() vim.fn["mkdp#util#install"]() end, ft = 'markdown' }
+  { 'slashmili/alchemist.vim',      ft = { 'elixir' } },
+  'milch/vim-fastlane',
+  { "iamcco/markdown-preview.nvim", build = function() vim.fn["mkdp#util#install"]() end, ft = 'markdown' },
 
   -- Editor
-  use {
+  {
     'nvim-treesitter/nvim-treesitter',
-    run = ':TSUpdate',
-    config = function() require('editor.nvim-treesitter') end,
-    requires = {
-      { 'nvim-treesitter/nvim-treesitter-textobjects' }
+    build = ':TSUpdate',
+    event = { "BufReadPost", "BufNewFile" },
+    opts = require('editor.nvim-treesitter'),
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter-textobjects'
     }
-  }
+  },
 
-  use {
+  {
     'romgrk/nvim-treesitter-context',
     event = "WinScrolled",
-    config = function() require('editor.nvim-treesitter-context') end,
-    requires = 'nvim-treesitter/nvim-treesitter',
-  }
-  use {
+    opts = require('editor.nvim-treesitter-context'),
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+  },
+  {
     "ThePrimeagen/refactoring.nvim",
-    requires = {
+    dependencies = {
       { "nvim-lua/plenary.nvim" },
       { "nvim-treesitter/nvim-treesitter" }
     },
-    config = function()
-      require('refactoring').setup({})
-      local opts = { noremap = true, silent = true, expr = false }
-      vim.api.nvim_set_keymap("v", "<leader>re",
-        [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function')<CR>]],
-        opts)
-    end,
+    opts = {},
     keys = {
-      { 'v', '<leader>re' },
-      { 'v', '<leader>r' },
-      { 'n', '<leader>r' },
+      {
+        '<leader>re',
+        ":Refactor extract<CR>",
+        mode = "v",
+        noremap = true,
+        silent = true,
+        expr = false
+      }
     }
-  }
+  },
 
-  use {
+  {
     'nvim-treesitter/playground',
     cmd = "TSPlaygroundToggle"
-  }
+  },
 
-  use {
-    'kylechui/nvim-surround',
-    keys = { { 'n', 'ds' }, { 'n', 'cs' }, { 'n', 'ys' } },
-    config = function()
-      require('nvim-surround').setup()
-    end
-  }
+  {
+    "kylechui/nvim-surround",
+    event = "VeryLazy",
+    opts = {}
+  },
 
-  use {
+  {
     'echasnovski/mini.ai',
-    config = function()
-      require('mini.ai').setup()
-    end
-  }
+    event = "VeryLazy",
+    opts = {}
+  },
 
-  use {
+  {
     'numToStr/Comment.nvim',
-    keys = { { 'n', 'gc' }, { 'n', 'gb' }, { 'v', 'gc' }, { 'v', 'gb' }, { 'n', 'gcc' }, { 'n', 'gbc' } },
-    config = function()
-      require('Comment').setup()
-    end
-  }
-  use { 'romainl/vim-cool', keys = '/' }
-  use {
+    keys = { 'gc', 'gb', { 'gc', mode = "v" }, { 'gb', mode = "v" }, 'gcc', 'gbc' },
+    opts = {}
+  },
+  {
+    'romainl/vim-cool',
+    keys = '/'
+  },
+  {
     'tpope/vim-projectionist',
     config = function()
       require('editor.projectionist')
     end,
-  }
-  use {
+  },
+  {
     "windwp/nvim-autopairs",
     event = "InsertEnter",
     config = function() require('editor.nvim-autopairs') end
-  }
+  },
 
-  use {
-    'nvim-telescope/telescope.nvim', branch = '0.1.x',
-    requires = {
+  {
+    'nvim-telescope/telescope.nvim',
+    dependencies = {
       { 'nvim-lua/plenary.nvim' },
       {
         'nvim-telescope/telescope-fzf-native.nvim',
-        run =
+        build =
         'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
       }
     },
     cmd = "Telescope",
     config = function() require('editor.telescope') end,
     keys = {
-      { 'n', '<leader>f' },
-      { 'n', '<leader>g' },
-      { 'n', '<leader>b' },
-      { 'n', '<leader>p', },
-      { 'n', '<leader>gb' },
-      { 'n', '<leader>gc' },
-      { 'n', '<leader>gs' },
+      { '<leader>f' },
+      { '<leader>g' },
+      { '<leader>b' },
+      { '<leader>p', },
+      { '<leader>sb' },
+      { '<leader>sc' },
+      { '<leader>ss' },
     },
-    module = 'telescope'
-  }
+  },
 
   -- UI
-  use {
+  {
     "catppuccin/nvim",
-    as = "catppuccin",
-    config = function()
-      require('ui.catppuccin')
+    name = "catppuccin",
+    priority = 1000,
+    opts = require('ui.catppuccin'),
+    init = function()
+      require('ui.use_system_theme').ChangeToSystemColor("startup")
     end
-  }
+  },
 
-  use {
+  {
     'nvim-tree/nvim-tree.lua',
-    requires = {
+    dependencies = {
       'nvim-tree/nvim-web-devicons',
+      'catppuccin',
     },
     config = function() require('ui.nvim-tree').configure_tree(false) end,
-    after = 'catppuccin'
-  }
+  },
 
-  use {
+  {
     'nvim-lualine/lualine.nvim',
-    requires = { 'nvim-tree/nvim-web-devicons', opt = true },
+    event = 'VeryLazy',
+    dependencies = {
+      'nvim-tree/nvim-web-devicons',
+      'catppuccin',
+    },
     config = function() require('ui.lualine') end,
-    after = 'catppuccin'
-  }
+  },
 
-  use {
+  {
     "lukas-reineke/indent-blankline.nvim",
     config = function() require('ui.indent-blankline') end,
     event = 'BufReadPost',
-    after = 'catppuccin'
-  }
+    dependencies = {
+      'catppuccin',
+    },
+  },
 
-  use { 'kevinhwang91/nvim-ufo', requires = {
-    'kevinhwang91/promise-async',
-    {
-      "luukvbaal/statuscol.nvim",
-      config = function()
-        local builtin = require("statuscol.builtin")
-        require("statuscol").setup(
-          {
-            relculright = true,
-            segments = {
-              { text = { builtin.foldfunc },      click = "v:lua.ScFa" },
-              { text = { "%s" },                  click = "v:lua.ScSa" },
-              { text = { builtin.lnumfunc, " " }, click = "v:lua.ScLa" }
-            }
-          }
-        )
-      end
-    }
-  }, config = function()
-    -- See https://github.com/kevinhwang91/nvim-ufo/issues/4#issuecomment-1157716294
-    vim.o.foldcolumn = '1'
-    vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
-    vim.o.foldlevel = 99
-    vim.o.foldlevelstart = 99
-    vim.o.foldenable = true
-    vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
-    vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
-
-    require("ufo").setup(
+  {
+    'kevinhwang91/nvim-ufo',
+    event = "BufReadPost",
+    dependencies = {
+      'kevinhwang91/promise-async',
       {
-        provider_selector = function(bufnr, filetype, buftype)
-          return { "treesitter", "indent" }
-        end,
-        close_fold_kinds = { "imports", "comment" },
-        fold_virt_text_handler = function(virtText, lnum, endLnum, width, truncate)
-          local newVirtText = {}
-          local totalLines = vim.api.nvim_buf_line_count(0)
-          local foldedLines = endLnum - lnum
-          local suffix = ("  %d %d%%"):format(foldedLines, foldedLines / totalLines * 100)
-          local sufWidth = vim.fn.strdisplaywidth(suffix)
-          local targetWidth = width - sufWidth
-          local curWidth = 0
-          for _, chunk in ipairs(virtText) do
-            local chunkText = chunk[1]
-            local chunkWidth = vim.fn.strdisplaywidth(chunkText)
-            if targetWidth > curWidth + chunkWidth then
-              table.insert(newVirtText, chunk)
-            else
-              chunkText = truncate(chunkText, targetWidth - curWidth)
-              local hlGroup = chunk[2]
-              table.insert(newVirtText, { chunkText, hlGroup })
-              chunkWidth = vim.fn.strdisplaywidth(chunkText)
-              -- str width returned from truncate() may less than 2nd argument, need padding
-              if curWidth + chunkWidth < targetWidth then
-                suffix = suffix .. (" "):rep(targetWidth - curWidth - chunkWidth)
-              end
-              break
-            end
-            curWidth = curWidth + chunkWidth
-          end
-          local rAlignAppndx =
-              math.max(math.min(vim.opt.textwidth["_value"], width - 1) - curWidth - sufWidth, 0)
-          suffix = (" "):rep(rAlignAppndx) .. suffix
-          table.insert(newVirtText, { suffix, "MoreMsg" })
-          return newVirtText
+        "luukvbaal/statuscol.nvim",
+        config = function()
+          local builtin = require("statuscol.builtin")
+          require("statuscol").setup(
+            {
+              relculright = true,
+              segments = {
+                { text = { builtin.foldfunc },      click = "v:lua.ScFa" },
+                { text = { "%s" },                  click = "v:lua.ScSa" },
+                { text = { builtin.lnumfunc, " " }, click = "v:lua.ScLa" }
+              }
+            }
+          )
         end
       }
-    )
-  end
-  }
+    },
+    init = function()
+      vim.o.foldcolumn = '1'
+      vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+      vim.o.foldlevel = 99
+      vim.o.foldlevelstart = 99
+      vim.o.foldenable = true
+      vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
+      vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
+    end,
+    opts = {
+      ---@diagnostic disable-next-line: unused-local
+      provider_selector = function(bufnr, filetype, buftype)
+        return { "treesitter", "indent" }
+      end,
+      close_fold_kinds = { "imports", "comment" },
+      fold_virt_text_handler = function(virtText, lnum, endLnum, width, truncate)
+        local newVirtText = {}
+        local totalLines = vim.api.nvim_buf_line_count(0)
+        local foldedLines = endLnum - lnum
+        local suffix = ("  %d %d%%"):format(foldedLines, foldedLines / totalLines * 100)
+        local sufWidth = vim.fn.strdisplaywidth(suffix)
+        local targetWidth = width - sufWidth
+        local curWidth = 0
+        for _, chunk in ipairs(virtText) do
+          local chunkText = chunk[1]
+          local chunkWidth = vim.fn.strdisplaywidth(chunkText)
+          if targetWidth > curWidth + chunkWidth then
+            table.insert(newVirtText, chunk)
+          else
+            chunkText = truncate(chunkText, targetWidth - curWidth)
+            local hlGroup = chunk[2]
+            table.insert(newVirtText, { chunkText, hlGroup })
+            chunkWidth = vim.fn.strdisplaywidth(chunkText)
+            -- str width returned from truncate() may less than 2nd argument, need padding
+            if curWidth + chunkWidth < targetWidth then
+              suffix = suffix .. (" "):rep(targetWidth - curWidth - chunkWidth)
+            end
+            break
+          end
+          curWidth = curWidth + chunkWidth
+        end
+        local rAlignAppndx =
+            math.max(math.min(vim.opt.textwidth["_value"], width - 1) - curWidth - sufWidth, 0)
+        suffix = (" "):rep(rAlignAppndx) .. suffix
+        table.insert(newVirtText, { suffix, "MoreMsg" })
+        return newVirtText
+      end
+    }
+  },
 
-  use {
+  {
     'lewis6991/gitsigns.nvim',
     event = 'BufReadPost',
-    config = function()
-      require('gitsigns').setup({
-        numhl = true,
-      })
-    end
-  }
+    opts = {
+      numhl = true,
+    }
+  },
 
   -- Completion
-  use {
+  {
     'neoclide/coc.nvim',
     branch = 'release',
     config = function() require('completion.coc-nvim') end,
-  }
+  },
 
-  use {
+  {
     'gelguy/wilder.nvim',
-    requires = {
+    dependencies = {
       { 'romgrk/fzy-lua-native' },
     },
     event = { 'CmdlineEnter' },
-    run = ':UpdateRemotePlugins',
+    build = ':UpdateRemotePlugins',
     config = function()
       require('completion.wilder')
     end,
-  }
+  },
 
   -- Utils
-  use({
+  {
     "okuuva/auto-save.nvim",
-    config = function()
-      require("auto-save").setup({
-        -- Only trigger when changing files. The default is annoying with linters
-        -- that trigger on file save, as it makes it impossible to make some
-        -- types of changes (e.g. add empty lines)
-        trigger_events = { "FocusLost", "BufLeave" }
-      })
-    end
-  })
+    opts = {
+      -- Only trigger when changing files. The default is annoying with linters
+      -- that trigger on file save, as it makes it impossible to make some
+      -- types of changes (e.g. add empty lines)
+      trigger_events = { "FocusLost", "BufLeave" }
+    }
+  },
 
-  use {
+  {
     'kshenoy/vim-signature',
     event = { 'BufReadPost' }
-  }
-  use {
+  },
+  {
     'tpope/vim-sleuth',
     event = { 'BufReadPost' }
-  }
+  },
 
-
-  use { 'dstein64/vim-startuptime', cmd = "StartupTime" }
-
-  use {
+  {
     'anuvyklack/hydra.nvim',
     config = function()
       require('util.hydra')
-    end
-  }
+    end,
+    keys = {
+      "<leader>h",
+      "<leader>rf",
+    }
+  },
 
-  use {
+  {
     'kevinhwang91/nvim-hlslens',
-    config = function()
-      require('hlslens').setup()
-      local kopts = { noremap = true, silent = true }
-      vim.api.nvim_set_keymap('n', 'n',
-        [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]],
-        kopts)
-      vim.api.nvim_set_keymap('n', 'N',
-        [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]],
-        kopts)
-      vim.api.nvim_set_keymap('n', '*', [[*<Cmd>lua require('hlslens').start()<CR>]], kopts)
-      vim.api.nvim_set_keymap('n', '#', [[#<Cmd>lua require('hlslens').start()<CR>]], kopts)
-      vim.api.nvim_set_keymap('n', 'g*', [[g*<Cmd>lua require('hlslens').start()<CR>]], kopts)
-      vim.api.nvim_set_keymap('n', 'g#', [[g#<Cmd>lua require('hlslens').start()<CR>]], kopts)
-    end
-  }
+    keys = {
+      '/',
+      { 'n',  [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]], silentNoremap },
+      { 'N', [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]],
+        silentNoremap },
+      { '*',  [[*<Cmd>lua require('hlslens').start()<CR>]],                                             silentNoremap },
+      { '#',  [[#<Cmd>lua require('hlslens').start()<CR>]],                                             silentNoremap },
+      { 'g*', [[g*<Cmd>lua require('hlslens').start()<CR>]],                                            silentNoremap },
+      { 'g#', [[g#<Cmd>lua require('hlslens').start()<CR>]],                                            silentNoremap }
+    },
+    opts = {},
+  },
 
-  use {
+  {
     "nvim-neotest/neotest",
-    requires = {
+    dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
       "rouge8/neotest-rust"
     },
     config = function()
-      require("neotest").setup({
+      require('neotest').setup({
         adapters = {
-          require("neotest-rust") {
-          }
+          require("neotest-rust")
         }
       })
-    end
-  }
+    end,
+    keys = {
+      -- Run nearest test
+      { "<leader>tt", cmd 'require("neotest").run.run()' },
+      -- Run the current file
+      { "<leader>tf", cmd 'require("neotest").run.run(vim.fn.expand("%"))' },
+    }
+  },
 
-  use {
+  {
     "folke/which-key.nvim",
-    config = function()
-      require("which-key").setup {
-        -- your configuration comes here
-        -- or leave it empty to use the default settings
-        -- refer to the configuration section below
-      }
-    end
-  }
+    event = "VeryLazy",
+    opts = {}
+  },
 
-  use {
+  {
     "arafatamim/trouble.nvim",
-    requires = "kyazdani42/nvim-web-devicons",
-    config = function()
-      require("trouble").setup {
-        mode = "coc_workspace_diagnostics",
-        auto_open = false, -- automatically open the list when you have diagnostics
-        auto_close = true, -- automatically close the list when you have no diagnostics
-        -- your configuration comes here
-        -- or leave it empty to use the default settings
-        -- refer to the configuration section below
-      }
+    dependencies = "nvim-tree/nvim-web-devicons",
+    opts = {
+      mode = "coc_workspace_diagnostics",
+      auto_open = false, -- automatically open the list when you have diagnostics
+      auto_close = true, -- automatically close the list when you have no diagnostics
+    },
+    cmd = { "TroubleToggle", "Trouble", "TroubleClose", "TroubleRefresh" },
+    keys = {
+      { "<leader>d", ":TroubleToggle<CR>" }
+    }
+  },
 
-      vim.api.nvim_set_keymap("n", "<leader>d", ":TroubleToggle<CR>", {})
-    end
-  }
-
-  -- Load additional plugins that are only local to the current machine
-  local exists, localPlugins = pcall(require, 'plugins.local')
-  if exists then
-    localPlugins.setup(use)
-  end
-end)
-
--- Run PackerCompile whenever this file is changed
-vim.cmd([[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
-    autocmd BufWritePost .config/nvim/lua/**/*.lua source <afile>
-  augroup end
-]])
+  --   -- Load additional plugins that are only local to the current machine
+  --   local exists, localPlugins = pcall(require, 'plugins.local')
+  --   if exists then
+  --     localPlugins.setup(use)
+  --   end
+  -- end)
+}

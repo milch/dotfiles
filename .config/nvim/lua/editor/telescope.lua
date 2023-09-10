@@ -1,6 +1,6 @@
 local builtin = require('telescope.builtin')
 
-require('telescope').setup{
+require('telescope').setup {
   pickers = {
     find_files = { theme = "dropdown" },
     git_files = { theme = "dropdown" },
@@ -19,7 +19,7 @@ require('telescope').setup{
 require('telescope').load_extension('fzf')
 
 local gitIfAvailable = function()
-  local gitFolder = vim.api.nvim_call_function("finddir", {".git", ";"})
+  local gitFolder = vim.api.nvim_call_function("finddir", { ".git", ";" })
   if gitFolder == '' then
     return builtin.find_files()
   else
@@ -36,6 +36,6 @@ vim.keymap.set('n', '<leader>p', find_all, {})
 vim.keymap.set('n', '<leader>g', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>b', builtin.buffers, {})
 
-vim.keymap.set('n', '<leader>gb', builtin.git_bcommits, {})
-vim.keymap.set('n', '<leader>gc', builtin.git_commits, {})
-vim.keymap.set('n', '<leader>gs', builtin.git_status, {})
+vim.keymap.set('n', '<leader>sb', builtin.git_bcommits, {})
+vim.keymap.set('n', '<leader>sc', builtin.git_commits, {})
+vim.keymap.set('n', '<leader>ss', builtin.git_status, {})

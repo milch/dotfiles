@@ -24,22 +24,20 @@ _<Enter>_: Telescope           _<Esc>_
   mode = 'n',
   body = '<Leader>h',
   heads = {
-    { 'f', cmd 'Telescope find_files hidden=true' },
-    { 'o', cmd 'Telescope oldfiles', { desc = 'recently opened files' } },
-    { 'h', cmd 'Telescope help_tags', { desc = 'vim help' } },
-    { 'k', cmd 'Telescope keymaps' },
-    { 'O', cmd 'Telescope vim_options' },
-    { 'r', cmd 'Telescope resume' },
-    { '/', cmd 'Telescope current_buffer_fuzzy_find', { desc = 'search in file' } },
-    { '?', cmd 'Telescope search_history', { desc = 'search history' } },
-    { ';', cmd 'Telescope command_history', { desc = 'command-line history' } },
-    { 'c', cmd 'Telescope commands', { desc = 'execute command' } },
-    { '<Enter>', cmd 'Telescope', { exit = true, desc = 'list all pickers' } },
-    { '<Esc>', nil, { exit = true, nowait = true } },
+    { 'f',       cmd 'Telescope find_files hidden=true' },
+    { 'o',       cmd 'Telescope oldfiles',                  { desc = 'recently opened files' } },
+    { 'h',       cmd 'Telescope help_tags',                 { desc = 'vim help' } },
+    { 'k',       cmd 'Telescope keymaps' },
+    { 'O',       cmd 'Telescope vim_options' },
+    { 'r',       cmd 'Telescope resume' },
+    { '/',       cmd 'Telescope current_buffer_fuzzy_find', { desc = 'search in file' } },
+    { '?',       cmd 'Telescope search_history',            { desc = 'search history' } },
+    { ';',       cmd 'Telescope command_history',           { desc = 'command-line history' } },
+    { 'c',       cmd 'Telescope commands',                  { desc = 'execute command' } },
+    { '<Enter>', cmd 'Telescope',                           { exit = true, desc = 'list all pickers' } },
+    { '<Esc>',   nil,                                       { exit = true, nowait = true } },
   }
 })
-
-local abc = 'def'
 
 Hydra({
   name = 'Refactor',
@@ -57,14 +55,14 @@ _<Esc>_
       border = 'rounded',
     },
   },
-  mode = {'v'},
+  mode = { 'v' },
   body = '<Leader>rf',
   heads = {
-    { 'e', cmd 'lua require("refactoring").refactor("Extract Function")' },
-    { 'E', cmd 'lua require("refactoring").refactor("Extract Function To File")' },
-    { 'v', cmd 'lua require("refactoring").refactor("Extract Variable")' },
-    { 'V', cmd 'lua require("refactoring").refactor("Inline Variable")' },
-    { '<Esc>', nil, { exit = true, nowait = true } },
+    { 'e',     cmd 'lua require("refactoring").refactor("Extract Function")' },
+    { 'E',     cmd 'lua require("refactoring").refactor("Extract Function To File")' },
+    { 'v',     cmd 'lua require("refactoring").refactor("Extract Variable")' },
+    { 'V',     cmd 'lua require("refactoring").refactor("Inline Variable")' },
+    { '<Esc>', nil,                                                                  { exit = true, nowait = true } },
   }
 })
 
@@ -85,14 +83,14 @@ _<Esc>_
       border = 'rounded',
     },
   },
-  mode = {'n'},
+  mode = { 'n' },
   body = '<Leader>rf',
   heads = {
-    { 'e', cmd 'lua require("refactoring").refactor("Extract Block")' },
-    { 'E', cmd 'lua require("refactoring").refactor("Extract Block To File")' },
-    { 'i', cmd 'lua require("refactoring").refactor("Inline Variable")' },
-    { 'd', cmd 'lua require("refactoring").debug.print_var({ normal = true })' },
-    { 'D', cmd 'lua require("refactoring").debug.cleanup({})' },
-    { '<Esc>', nil, { exit = true, nowait = true } },
+    { 'e',     cmd 'lua require("refactoring").refactor("Extract Block")' },
+    { 'E',     cmd 'lua require("refactoring").refactor("Extract Block To File")' },
+    { 'i',     cmd 'lua require("refactoring").refactor("Inline Variable")' },
+    { 'd',     cmd 'lua require("refactoring").debug.print_var({ normal = true })' },
+    { 'D',     cmd 'lua require("refactoring").debug.cleanup({})' },
+    { '<Esc>', nil,                                                                { exit = true, nowait = true } },
   }
 })

@@ -20,7 +20,21 @@ vim.g.loaded_netrwFileHandlers = 1
 -- Leader -> to prefix your own keybindings
 vim.g.mapleader = ","
 
-require('plugins')
+-- Install lazy.nvim if it does not exist
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+    vim.fn.system({
+        "git",
+        "clone",
+        "--filter=blob:none",
+        "https://github.com/folke/lazy.nvim.git",
+        "--branch=stable", -- latest stable release
+        lazypath,
+    })
+end
+vim.opt.rtp:prepend(lazypath)
+
+require("lazy").setup("plugins")
 require('ui.use_system_theme').UpdateWhenSystemChanges()
 pcall(require, 'init_local')
 
@@ -53,9 +67,9 @@ vim.api.nvim_set_keymap('', '<Down>', '<Nop>', {})
 vim.opt.scrolloff = 10
 
 vim.opt.relativenumber = true -- relative line numbers
-vim.opt.number = true -- But on the current line, show the absolute line number
+vim.opt.number = true         -- But on the current line, show the absolute line number
 
-vim.opt.hidden = true -- Allow hidden buffers
+vim.opt.hidden = true         -- Allow hidden buffers
 
 vim.opt.completeopt = "menu,menuone,noinsert,noselect"
 
@@ -101,7 +115,8 @@ let test#strategy="dispatch"
 
 let g:dispatch_compilers = {
       \ 'bundle exec': ''}
-]] --
+]]
+--
 
 vim.opt.shada = "'1,/10,<50,s10,h"
 vim.api.nvim_create_augroup('shareData', {})

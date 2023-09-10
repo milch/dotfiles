@@ -1,16 +1,15 @@
 local npairs = require('nvim-autopairs')
 npairs.setup({
-  disable_filetype = { "TelescopePrompt" , "NvimTree" },
+  disable_filetype = { "TelescopePrompt", "NvimTree" },
   map_cr = false
 })
 
 local remap = vim.api.nvim_set_keymap
 
 -- skip it, if you use another global object
-_G.MUtils= {}
+_G.MUtils = {}
 
 MUtils.completion_confirm = function()
-  print("HELLO")
   if vim.fn["coc#pum#visible"]() ~= 0 then
     return vim.fn["coc#pum#confirm"]()
   else

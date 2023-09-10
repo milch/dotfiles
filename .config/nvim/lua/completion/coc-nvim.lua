@@ -16,10 +16,10 @@ vim.g.coc_global_extensions = {
   'coc-json',
   'coc-perl',
   'coc-rust-analyzer', -- Rust
-  'coc-solargraph', -- Ruby
-  'coc-sourcekit', -- C-family/Swift
+  'coc-solargraph',    -- Ruby
+  'coc-sourcekit',     -- C-family/Swift
   'coc-sql',
-  'coc-sumneko-lua', -- Lua
+  'coc-sumneko-lua',   -- Lua
   'coc-yaml',
 
   -- Misc
@@ -108,6 +108,7 @@ vim.api.nvim_create_autocmd("User", {
 
 vim.api.nvim_create_autocmd({ "BufRead", "VimEnter" }, {
   group = "CocGroup",
-  command = "if expand('%') =~ \"/private/var/folders\" | call coc#config('coc.preferences.formatOnSaveFiletypes', []) | endif",
+  command =
+  "if expand('%') =~ \"/private/var/folders\" | call coc#config('coc.preferences.formatOnSaveFiletypes', []) | endif",
   desc = "Disable autoformat on save for temporary folders"
 })

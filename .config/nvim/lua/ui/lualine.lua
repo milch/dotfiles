@@ -29,7 +29,7 @@ local function process_sections(sections)
           comp = { comp }
           section[id] = comp
         end
-        comp.separator = { right = ' ' }
+        comp.separator = { right = '' }
       end
     end
   end
@@ -56,7 +56,7 @@ require('lualine').setup({
     ignore_focus = { 'NvimTree', 'TelescopePrompt' },
     icons_enabled = true,
     component_separators = '',
-    section_separators = { left = ' ', right = ' ' },
+    section_separators = { left = '', right = '' },
   },
   sections = process_sections {
     lualine_a = {

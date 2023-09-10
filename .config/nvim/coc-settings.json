@@ -16,8 +16,8 @@
   "suggest.autoTrigger": "always",
   "suggest.completionItemKindLabels": {
     "method": " ",
-    "function": " ",
-    "constructor": " ",
+    "function": "󰊕 ",
+    "constructor": "󰎔 ",
     "variable": " ",
     "field": " ",
     "typeParameter": "T ",
@@ -27,7 +27,7 @@
     "struct": " ",
     "event": " ",
     "operator": " ",
-    "module": " ",
+    "module": "󰅩 ",
     "property": " ",
     "value": " ",
     "enum": " ",
@@ -62,7 +62,7 @@
   "diagnostic.errorSign": "",
   "diagnostic.warningSign": "⚠",
   "diagnostic.infoSign": "",
-  "diagnostic.hintSign": "ﯧ",
+  "diagnostic.hintSign": "󰌵",
   "diagnostic.virtualTextCurrentLineOnly": false,
   "diagnostic.enableMessage": "never",
   "[ruby][typescript][rust][lua]": {
@@ -87,5 +87,11 @@
   "semanticTokens.enable": false,
   "sumneko-lua.enableNvimLuaDev": true,
   "Lua.telemetry.enable": false,
-  "snippets.ultisnips.pythonPrompt": false
+  "snippets.ultisnips.pythonPrompt": false,
+  "lightbulb.text": {
+    // nerd-font: nf-mdi-lightbulb, text used when there're code actions
+    "default": "󰌵",
+    // nerd-font: nf-mdi-auto_fix, text used when there're code actions and quickfix exists
+    "quickfix": "󰁨"
+  }
 }
