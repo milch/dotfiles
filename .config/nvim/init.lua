@@ -99,24 +99,8 @@ vim.api.nvim_create_autocmd('FocusGained', {
 
 vim.opt.mouse = "a"
 table.insert(vim.opt.shortmess, "c")
--- vim.opt.shortmess=vim.opt.shortmess .. "c"
 vim.opt.listchars = "tab:>·,trail:~,extends:>,precedes:<"
 vim.opt.list = true
-
---[[
--- vim-test config - run Tests in local file
-nmap <silent> <leader>u :TestNearest<CR>
-nmap <silent> <leader>U :TestFile<CR>
-nmap <silent> <leader>ua :TestSuite<CR>
-nmap <silent> <leader>ul :TestLast<CR>
-nmap <silent> <leader>uv :TestVisit<CR>
-
-let test#strategy="dispatch"
-
-let g:dispatch_compilers = {
-      \ 'bundle exec': ''}
-]]
---
 
 vim.opt.shada = "'1,/10,<50,s10,h"
 vim.api.nvim_create_augroup('shareData', {})
