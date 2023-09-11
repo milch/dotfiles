@@ -13,11 +13,12 @@ return {
     enable = true,
 
     -- list of language that will be disabled
-    disable = function(lang, bufnr)
+    ---@diagnostic disable-next-line: unused-local
+    disable = function(_lang, bufnr)
       local lines_cutoff = 10000
       local size_cutoff = 1024 * 500 -- 500kb
-      local disable = vim.api.nvim_buf_line_count(bufnr) > lines_cutoff or
-          vim.fn.getfsize(vim.api.nvim_buf_get_name(bufnr)) > size_cutoff
+      local disable = vim.api.nvim_buf_line_count(bufnr) > lines_cutoff
+          or vim.fn.getfsize(vim.api.nvim_buf_get_name(bufnr)) > size_cutoff
       return disable
     end,
 
@@ -35,7 +36,7 @@ return {
         ["af"] = "@function.outer",
         ["if"] = "@function.inner",
         ["ab"] = "@block.outer",
-        ["ib"] = '@block.inner',
+        ["ib"] = "@block.inner",
         ["ac"] = "@class.outer",
         ["ic"] = "@class.inner",
       },
@@ -47,10 +48,10 @@ return {
       -- and should return the mode ('v', 'V', or '<c-v>') or a table
       -- mapping query_strings to modes.
       selection_modes = {
-        ['@parameter.outer'] = 'v', -- charwise
-        ['@function.outer'] = 'V',  -- linewise
-        ['@class.outer'] = '<c-v>', -- blockwise
+        ["@parameter.outer"] = "v", -- charwise
+        ["@function.outer"] = "V", -- linewise
+        ["@class.outer"] = "<c-v>", -- blockwise
       },
-    }
-  }
+    },
+  },
 }

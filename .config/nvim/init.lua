@@ -23,20 +23,20 @@ vim.g.mapleader = ","
 -- Install lazy.nvim if it does not exist
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-    vim.fn.system({
-        "git",
-        "clone",
-        "--filter=blob:none",
-        "https://github.com/folke/lazy.nvim.git",
-        "--branch=stable", -- latest stable release
-        lazypath,
-    })
+	vim.fn.system({
+		"git",
+		"clone",
+		"--filter=blob:none",
+		"https://github.com/folke/lazy.nvim.git",
+		"--branch=stable", -- latest stable release
+		lazypath,
+	})
 end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup("plugins")
-require('ui.use_system_theme').UpdateWhenSystemChanges()
-pcall(require, 'init_local')
+require("ui.use_system_theme").UpdateWhenSystemChanges()
+pcall(require, "init_local")
 
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
@@ -58,10 +58,10 @@ vim.opt.writebackup = true
 vim.opt.swapfile = true
 
 -- No Arrow keys
-vim.api.nvim_set_keymap('', '<Left>', '<Nop>', {})
-vim.api.nvim_set_keymap('', '<Right>', '<Nop>', {})
-vim.api.nvim_set_keymap('', '<Up>', '<Nop>', {})
-vim.api.nvim_set_keymap('', '<Down>', '<Nop>', {})
+vim.api.nvim_set_keymap("", "<Left>", "<Nop>", {})
+vim.api.nvim_set_keymap("", "<Right>", "<Nop>", {})
+vim.api.nvim_set_keymap("", "<Up>", "<Nop>", {})
+vim.api.nvim_set_keymap("", "<Down>", "<Nop>", {})
 
 -- Viewport will move if Cursor is 10 lines away from the edge
 vim.opt.scrolloff = 10
@@ -77,24 +77,24 @@ vim.opt.completeopt = "menu,menuone,noinsert,noselect"
 vim.opt.signcolumn = "yes"
 
 -- Make Y behave like D
-vim.api.nvim_set_keymap('n', 'Y', 'y$', { noremap = true })
+vim.api.nvim_set_keymap("n", "Y", "y$", { noremap = true })
 
-vim.api.nvim_create_augroup('Spelling', {})
-vim.api.nvim_create_autocmd('FileType', {
-    pattern = { 'markdown', 'mkd', 'text', 'plaintex', 'tex' },
-    command = 'set spell spelllang=en',
-    group = 'Spelling'
+vim.api.nvim_create_augroup("Spelling", {})
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "markdown", "mkd", "text", "plaintex", "tex" },
+	command = "set spell spelllang=en",
+	group = "Spelling",
 })
 
 -- Working with buffers
-vim.api.nvim_set_keymap('n', '<Tab>', ':bn<CR>', { silent = true })
-vim.api.nvim_set_keymap('n', '<S-Tab>', ':bp<CR>', { silent = true })
-vim.api.nvim_set_keymap('n', '<leader>q', ':bd<CR>', { silent = true })
+vim.api.nvim_set_keymap("n", "<Tab>", ":bn<CR>", { silent = true })
+vim.api.nvim_set_keymap("n", "<S-Tab>", ":bp<CR>", { silent = true })
+vim.api.nvim_set_keymap("n", "<leader>q", ":bd<CR>", { silent = true })
 
-vim.api.nvim_create_augroup('fixAutoread', {})
-vim.api.nvim_create_autocmd('FocusGained', {
-    command = 'silent! checktime',
-    group = 'fixAutoread'
+vim.api.nvim_create_augroup("fixAutoread", {})
+vim.api.nvim_create_autocmd("FocusGained", {
+	command = "silent! checktime",
+	group = "fixAutoread",
 })
 
 vim.opt.mouse = "a"
@@ -103,19 +103,18 @@ vim.opt.listchars = "tab:>·,trail:~,extends:>,precedes:<"
 vim.opt.list = true
 
 vim.opt.shada = "'1,/10,<50,s10,h"
-vim.api.nvim_create_augroup('shareData', {})
-vim.api.nvim_create_autocmd('FocusGained', { command = 'rshada' })
-vim.api.nvim_create_autocmd('TextYankPost', { command = 'wshada' })
+vim.api.nvim_create_augroup("shareData", {})
+vim.api.nvim_create_autocmd("FocusGained", { command = "rshada" })
+vim.api.nvim_create_autocmd("TextYankPost", { command = "wshada" })
 
 vim.api.nvim_create_autocmd("BufEnter", {
-    callback = function(args)
-        local max_size = 1024 * 1024
-        if vim.fn.getfsize(args.file) > max_size then
-            vim.cmd [[
+	callback = function(args)
+		local max_size = 1024 * 1024
+		if vim.fn.getfsize(args.file) > max_size then
+			vim.cmd([[
             syntax off
-            let b:coc_enabled=0
             set inccommand=
-            ]]
-        end
-    end
+            ]])
+		end
+	end,
 })
