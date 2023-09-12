@@ -1,4 +1,4 @@
-local wezterm = require 'wezterm'
+local w = require("wezterm")
 local module = {}
 
 --- walk panes that are on the same axis as the tab's active pane
@@ -18,22 +18,22 @@ local function walk_siblings(axis, tab, window, pane, do_func)
   end
 
   -- [[DEBUG
-  wezterm.log_info(string.format("initial pane: %s", tab:active_pane()))
+  w.log_info(string.format("initial pane: %s", tab:active_pane()))
   --]]
 
   -- loop on siblings backward and forward, starting from initial pane
-  for _, step_dir in ipairs { 'prev', 'next' } do
+  for _, step_dir in ipairs({ "prev", "next" }) do
     -- [[DEBUG
-    wezterm.log_info(string.format("checking %s siblings", step_dir))
+    w.log_info(string.format("checking %s siblings", step_dir))
     --]]
 
     local last_pane = tab:active_pane()
     window:perform_action(
-      wezterm.action.ActivatePaneDirection(step_dir == "prev" and prev_dir or next_dir),
+      w.action.ActivatePaneDirection(step_dir == "prev" and prev_dir or next_dir),
       tab:active_pane()
     )
     -- [[DEBUG
-    wezterm.log_info(string.format("new active pane: %s", tab:active_pane()))
+    w.log_info(string.format("new active pane: %s", tab:active_pane()))
     --]]
     local new_pane = tab:active_pane()
 
@@ -46,23 +46,20 @@ local function walk_siblings(axis, tab, window, pane, do_func)
       end
       last_pane = tab:active_pane()
       window:perform_action(
-        wezterm.action.ActivatePaneDirection(step_dir == "prev" and prev_dir or next_dir),
+        w.action.ActivatePaneDirection(step_dir == "prev" and prev_dir or next_dir),
         tab:active_pane()
       )
       new_pane = tab:active_pane()
       -- [[DEBUG
-      wezterm.log_info(string.format("new active pane: %s", tab:active_pane()))
+      w.log_info(string.format("new active pane: %s", tab:active_pane()))
       --]]
       i = i + 1
     end
 
     -- back to initial pane
-    window:perform_action(
-      wezterm.action.ActivatePaneByIndex(initial_pane_idx),
-      tab:active_pane()
-    )
+    window:perform_action(w.action.ActivatePaneByIndex(initial_pane_idx), tab:active_pane())
     -- [[DEBUG
-    wezterm.log_info(string.format("back to initial pane: %s", tab:active_pane()))
+    w.log_info(string.format("back to initial pane: %s", tab:active_pane()))
     --]]
   end
 
@@ -80,21 +77,14 @@ function module.balance_panes(axis)
     local balanced_size = math.floor(tab_size / #siblings)
     local pane_size_key = axis == "x" and "cols" or "viewport_rows"
 
-    wezterm.log_info(
-      string.format(
-        "resizing %s panes on %s axis to %s cells",
-        #siblings,
-        axis,
-        balanced_size
-      )
-    )
+    w.log_info(string.format("resizing %s panes on %s axis to %s cells", #siblings, axis, balanced_size))
 
     walk_siblings(axis, tab, window, pane, function(pane)
       local pane_size = pane:get_dimensions()[pane_size_key]
       local adj_amount = pane_size - balanced_size
       local adj_dir = adj_amount < 0 and next_dir or prev_dir
       adj_amount = math.abs(adj_amount)
-      wezterm.log_info(
+      w.log_info(
         string.format(
           "adjusting pane [%s] from %s by %s cells %s",
           pane,
@@ -103,25 +93,35 @@ function module.balance_panes(axis)
           adj_dir
         )
       )
-      window:perform_action(
-        wezterm.action.AdjustPaneSize({ adj_dir, adj_amount }),
-        pane
-      )
+      window:perform_action(w.action.AdjustPaneSize({ adj_dir, adj_amount }), pane)
     end)
   end
 end
 
-wezterm.on("augment-command-palette", function()
+w.on("augment-command-palette", function()
   return {
     {
       brief = "Balance panes horizontally",
-      action = wezterm.action_callback(module.balance_panes("x")),
+      action = w.action_callback(module.balance_panes("x")),
     },
     {
       brief = "Balance panes vertically",
-      action = wezterm.action_callback(module.balance_panes("y")),
+      action = w.action_callback(module.balance_panes("y")),
     },
   }
 end)
+
+function module.split_and_balance(split_opts)
+  return w.action_callback(function(window, pane)
+    local axis
+    if split_opts.direction == "Up" or split_opts.direction == "Down" then
+      axis = "y"
+    else
+      axis = "x"
+    end
+    window:perform_action(w.action.SplitPane(split_opts), pane)
+    module.balance_panes(axis)(window, pane)
+  end)
+end
 
 return module
