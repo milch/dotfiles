@@ -39,6 +39,8 @@ return {
         ["ib"] = "@block.inner",
         ["ac"] = "@class.outer",
         ["ic"] = "@class.inner",
+        ["ip"] = "@parameter.inner",
+        ["ap"] = "@parameter.outer",
       },
       -- You can choose the select mode (default is charwise 'v')
       --

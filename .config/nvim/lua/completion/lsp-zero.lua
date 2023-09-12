@@ -29,10 +29,10 @@ require("mason-lspconfig").setup({
 		"jdtls",
 		"jedi_language_server", -- Python
 		"jsonls",
-		"lua_ls", -- Lua
+		"lua_ls",             -- Lua
 		"perlnavigator",
-		"rust_analyzer", -- Rust
-		"solargraph", -- Ruby
+		"rust_analyzer",      -- Rust
+		"solargraph",         -- Ruby
 		"sqlls",
 		"tsserver",
 		"yamlls",
