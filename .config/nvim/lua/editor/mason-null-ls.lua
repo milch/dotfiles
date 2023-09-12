@@ -38,22 +38,12 @@ nls.setup({
 				group = augroup,
 				buffer = bufnr,
 			})
-			local callback = function(opts)
-				return function()
-					vim.lsp.buf.format(opts)
-				end
-			end
 
 			vim.api.nvim_create_autocmd("BufWritePre", {
 				group = augroup,
 				buffer = bufnr,
-				callback = callback({ bufnr = bufnr, async = false }),
+				command = "undojoin | LspFormatting sync",
 			})
-			-- vim.api.nvim_create_autocmd("User", {
-			--   pattern = "AutoSaveWritePre",
-			--   group = augroup,
-			--   callback = callback(bufnr, false)
-			-- })
 		end
 	end,
 })
