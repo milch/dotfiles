@@ -8,6 +8,9 @@ local act = w.action
 local config = {
   color_scheme = color.scheme_for_appearance(color.get_appearance()),
   hide_tab_bar_if_only_one_tab = true,
+  window_padding = {
+    top = 18,
+  },
   font = w.font("SF Mono", { weight = "Medium" }),
   font_size = 14.0,
   freetype_load_target = "Light",
@@ -69,6 +72,7 @@ local config = {
     saturation = 0.95,
     brightness = 0.95,
   },
+  window_decorations = "RESIZE",
 }
 
 return config
