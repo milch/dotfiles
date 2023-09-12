@@ -1,4 +1,4 @@
-set -gx PATH /opt/homebrew/bin /usr/local/bin $HOME/.cargo/bin $PATH
+set -gx PATH /Applications/WezTerm.app/Contents/MacOS /opt/homebrew/bin /usr/local/bin $HOME/.cargo/bin $PATH
 
 if status --is-interactive; and not functions -q fisher
     set -q XDG_CONFIG_HOME; or set XDG_CONFIG_HOME ~/.config
@@ -29,17 +29,17 @@ function update_theme
     diffFilter = delta --$type --color-only
     [core]
     pager = delta --$type
-    """ > ~/.gitconfig_delta
+    """ >~/.gitconfig_delta
 end
 
 function set_color_scheme
-    if test (defaults read -g AppleInterfaceStyle 2>/dev/null || echo '0') = 'Dark'
+    if test (defaults read -g AppleInterfaceStyle 2>/dev/null || echo '0') = Dark
         yes | fish_config theme save 'Catppuccin Macchiato'
-        set -gx BAT_THEME 'Catppuccin-macchiato'
+        set -gx BAT_THEME Catppuccin-macchiato
         update_theme dark
     else
         yes | fish_config theme save 'Catppuccin Latte'
-        set -gx BAT_THEME 'Catppuccin-latte'
+        set -gx BAT_THEME Catppuccin-latte
         update_theme light
     end
 end
