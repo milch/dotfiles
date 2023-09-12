@@ -27,6 +27,7 @@ return {
 		opts = require("editor.nvim-treesitter"),
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter-textobjects",
+			"RRethy/nvim-treesitter-endwise",
 		},
 		config = function(_, opts)
 			require("nvim-treesitter.configs").setup(opts)
@@ -91,11 +92,9 @@ return {
 		end,
 	},
 	{
-		"windwp/nvim-autopairs",
-		event = "InsertEnter",
-		config = function()
-			require("editor.nvim-autopairs")
-		end,
+		"altermo/ultimate-autopair.nvim",
+		event = { "InsertEnter", "CmdlineEnter" },
+		opts = {},
 	},
 
 	{

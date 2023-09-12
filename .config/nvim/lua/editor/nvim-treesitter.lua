@@ -8,6 +8,10 @@ return {
   -- List of parsers to ignore installing
   ignore_install = {},
 
+  endwise = {
+    enable = true,
+  },
+
   highlight = {
     -- `false` will disable the whole extension
     enable = true,
