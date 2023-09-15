@@ -1,4 +1,5 @@
 local hyper = { "ctrl", "alt", "cmd" }
+local shiftHyper = { "ctrl", "alt", "cmd", "shift" }
 
 -- Helper functions
 
@@ -162,6 +163,54 @@ windowMovement(hyper, "Right")
 windowMovement(hyper, "Left")
 windowMovement(hyper, "Up")
 windowMovement(hyper, "Down")
+
+---@param screen hs.screen
+---@param window hs.window
+---@param direction string
+local function moveFrameToEdge(screen, window, direction)
+  local screenFrame = screen:frame()
+
+  local frameAtEdges = {
+    ["Right"] = function()
+      local frame = window:frame()
+      frame.x = round(screenFrame.x + screenFrame.w - frame.w)
+      return frame
+    end,
+    ["Left"] = function()
+      local frame = window:frame()
+      frame.x = screenFrame.x
+      return frame
+    end,
+    ["Up"] = function()
+      local frame = window:frame()
+      frame.y = screenFrame.y
+      return frame
+    end,
+    ["Down"] = function()
+      local frame = window:frame()
+      frame.y = round(screenFrame.y + screenFrame.h - frame.h)
+      return frame
+    end,
+  }
+
+  return frameAtEdges[direction]()
+end
+
+-- Push the window up to the border of the screen
+local function push(modifier, directionKey)
+  hs.hotkey.bind(modifier, directionKey, function()
+    local win = hs.window.focusedWindow()
+
+    local foundFrame = moveFrameToEdge(win:screen(), win, directionKey)
+
+    win:setFrame(foundFrame)
+  end)
+end
+
+push(shiftHyper, "Right")
+push(shiftHyper, "Left")
+push(shiftHyper, "Up")
+push(shiftHyper, "Down")
 
 -- Move window to a different screen
 hs.hotkey.bind(hyper, "Tab", function()
