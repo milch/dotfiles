@@ -13,7 +13,7 @@ local function round(x)
   return x + 0.5 - (x + 0.5) % 1
 end
 
-local function compareFrame(lhs, rhs)
+local function framesEqual(lhs, rhs)
   local deltaX = lhs.x - rhs.x
   local deltaY = lhs.y - rhs.y
   local deltaH = lhs.h - rhs.h
@@ -90,7 +90,14 @@ local function frames(screen)
       frame.w = round(screenFrame.w / f)
       return frame
     end, range(supportedFractionCount, 2)),
-    ["Up"] = { screenFrame },
+    ["Up"] = map(function(f)
+      local frame = screen:frame()
+      frame.x = screenFrame.x
+      frame.y = screenFrame.y
+      frame.w = round(screenFrame.w)
+      frame.h = round(screenFrame.h / f)
+      return frame
+    end, range(3, 1)),
     ["Down"] = map(function(f)
       local frame = screen:frame()
       frame.x = screenFrame.x + round(screenFrame.w / 3)
@@ -107,7 +114,7 @@ end
 local function findNextFrame(screen, currentFrame, type)
   local framesOfType = frames(screen)[type]
   for idx, frame in pairs(framesOfType) do
-    if compareFrame(frame, currentFrame) then
+    if framesEqual(frame, currentFrame) then
       return framesOfType[idx + 1]
     end
   end
