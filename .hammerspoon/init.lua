@@ -2,6 +2,9 @@ local hyper = { "ctrl", "alt", "cmd" }
 
 -- Helper functions
 
+---Returns `true` if the file at the given `name` exists
+---@param name string
+---@return boolean
 local function fileExists(name)
   if type(name) ~= "string" then
     return false
@@ -9,10 +12,17 @@ local function fileExists(name)
   return hs.fs.displayName(name) ~= nil
 end
 
+---Round `x` to the nearest integer
+---@param x number
+---@return number
 local function round(x)
   return x + 0.5 - (x + 0.5) % 1
 end
 
+---Compares frames to check for equality
+---@param lhs hs.geometry
+---@param rhs hs.geometry
+---@return boolean
 local function framesEqual(lhs, rhs)
   local deltaX = lhs.x - rhs.x
   local deltaY = lhs.y - rhs.y
@@ -23,6 +33,10 @@ local function framesEqual(lhs, rhs)
   return rms <= 10.0
 end
 
+---Applies `func` to each member of the array and returns a new array with the result
+---@param func any
+---@param array any
+---@return table
 local function map(func, array)
   local new_array = {}
   for idx, value in ipairs(array) do
@@ -31,6 +45,10 @@ local function map(func, array)
   return new_array
 end
 
+---Returns an array with `num` elements starting at index `start`, where each value is equal to the index
+---@param num number
+---@param start number
+---@return table
 local function range(num, start)
   local arr = {}
   for i = start, num, 1 do
@@ -70,6 +88,9 @@ spoon.SpoonInstall:andUse("EmmyLua")
 hs.pathwatcher.new(hammerspoonConfigFolder, reloadConfig):start()
 hs.alert.show("Config loaded")
 
+---Returns a table of fractional window frames for the given direction, e.g. right half of screen, right quarter of screen, etc.
+---@param screen hs.screen
+---@return table
 local function frames(screen)
   local screenFrame = screen:frame()
   local supportedFractionCount = 8
@@ -111,6 +132,10 @@ local function frames(screen)
   return frameSizes
 end
 
+---@param screen hs.screen
+---@param currentFrame hs.geometry
+---@param type string
+---@return hs.geometry
 local function findNextFrame(screen, currentFrame, type)
   local framesOfType = frames(screen)[type]
   for idx, frame in pairs(framesOfType) do
@@ -141,7 +166,6 @@ windowMovement(hyper, "Down")
 -- Move window to a different screen
 hs.hotkey.bind(hyper, "Tab", function()
   local win = hs.window.focusedWindow()
-  -- local f = win:frame()
   local screen = win:screen()
 
   win:centerOnScreen(screen:next(), true)
