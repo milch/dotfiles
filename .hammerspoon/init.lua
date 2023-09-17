@@ -221,3 +221,51 @@ hs.hotkey.bind(hyper, "Tab", function()
 
   win:centerOnScreen(screen:next(), true)
 end)
+
+---Returns the windows which are visible on the screen, i.e. filters out windows obscured by other windows over them
+---@return hs.window[]
+local function getVisibleWindows()
+  local orderedWindows = hs.window.orderedWindows()
+  local visibleWindows = { orderedWindows[1] }
+  local screenFrame = hs.window.focusedWindow():screen():frame()
+  local obscuredArea = hs.geometry.copy(orderedWindows[1]:frame())
+
+  for _, window in pairs(orderedWindows) do
+    local windowFrame = window:screen():frame():intersect(window:frame())
+    if not windowFrame:inside(obscuredArea) then
+      table.insert(visibleWindows, window)
+      -- Not entirely accurate but close enough
+      obscuredArea = obscuredArea:union(windowFrame)
+      if framesEqual(obscuredArea, screenFrame) then
+        break
+      end
+    end
+  end
+
+  return visibleWindows
+end
+
+---Arranges windows side by side in a row or column
+---@param axis "x"|"y"
+---@param windows hs.window[]
+local function arrangeWindowsOnAxis(axis, windows)
+  table.sort(windows, function(lhs, rhs)
+    return lhs:frame()[axis] < rhs:frame()[axis]
+  end)
+
+  hs.grid.setGrid(axis == "x" and #windows .. "x1" or "1x" .. #windows)
+  hs.grid.setMargins("0,0")
+  for idx, window in pairs(windows) do
+    hs.grid.set(window, (axis == "x" and (idx - 1) .. ",0" or "0," .. (idx - 1)) .. " 1x1")
+  end
+end
+
+-- Arrange windows equally in a row
+hs.hotkey.bind(hyper, "r", function()
+  arrangeWindowsOnAxis("x", getVisibleWindows())
+end)
+
+-- Arrange windows equally in a column
+hs.hotkey.bind(hyper, "c", function()
+  arrangeWindowsOnAxis("y", getVisibleWindows())
+end)
