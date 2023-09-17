@@ -51,7 +51,7 @@ end
 ---Returns an array with `num` elements starting at index `start`, where each value is equal to the index
 ---@param num number
 ---@param start number
----@return table
+---@return number[]
 local function range(num, start)
   local arr = {}
   for i = start, num, 1 do
@@ -93,7 +93,7 @@ hs.alert.show("Config loaded")
 
 ---Returns a table of fractional window frames for the given direction, e.g. right half of screen, right quarter of screen, etc.
 ---@param screen hs.screen
----@return table
+---@return table<string, hs.geometry[]>
 local function frames(screen)
   local screenFrame = screen:frame()
   local supportedFractionCount = 8
