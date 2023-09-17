@@ -4,8 +4,11 @@ end
 
 local bind = vim.keymap.set
 local silentNoremap = { noremap = true, silent = true }
+local extend = function(t1, t2)
+	return vim.tbl_extend("keep", t1, t2)
+end
 
-bind("n", "<leader>l", ":Lazy<CR>", silentNoremap)
+bind("n", "<leader>l", ":Lazy<CR>", extend(silentNoremap, { desc = "Show lazy plugin manager" }))
 
 return {
 	-- Languages
@@ -185,8 +188,8 @@ return {
 			vim.o.foldlevel = 99
 			vim.o.foldlevelstart = 99
 			vim.o.foldenable = true
-			bind("n", "zR", cmd([[require("ufo").openAllFolds]]))
-			bind("n", "zM", cmd([[require("ufo").closeAllFolds]]))
+			bind("n", "zR", cmd([[require("ufo").openAllFolds]]), { desc = "Open all folds" })
+			bind("n", "zM", cmd([[require("ufo").closeAllFolds]]), { desc = "Close all folds" })
 		end,
 		opts = require("ui.nvim-ufo"),
 	},
@@ -425,6 +428,10 @@ return {
 	{
 		"folke/which-key.nvim",
 		event = "VeryLazy",
+		init = function()
+			vim.o.timeout = true
+			vim.o.timeoutlen = 300
+		end,
 		opts = {},
 	},
 
