@@ -35,10 +35,12 @@ local function framesEqual(lhs, rhs)
 end
 
 ---Applies `func` to each member of the array and returns a new array with the result
----@param func any
----@param array any
----@return table
-local function map(func, array)
+---@generic T
+---@generic U
+---@param array T[]
+---@param func fun(elem: T): U
+---@return U[]
+local function map(array, func)
   local new_array = {}
   for idx, value in ipairs(array) do
     new_array[idx] = func(value)
@@ -101,33 +103,33 @@ local function frames(screen)
   middleThird.w = screenFrame.w / 3
 
   local frameSizes = {
-    ["Right"] = map(function(f)
+    ["Right"] = map(range(supportedFractionCount, 2), function(f)
       local frame = screen:frame()
       frame.x = round(screenFrame.x + (screenFrame.w / f * (f - 1)))
       frame.w = round(screenFrame.w / f)
       return frame
-    end, range(supportedFractionCount, 2)),
-    ["Left"] = map(function(f)
+    end),
+    ["Left"] = map(range(supportedFractionCount, 2), function(f)
       local frame = screen:frame()
       frame.w = round(screenFrame.w / f)
       return frame
-    end, range(supportedFractionCount, 2)),
-    ["Up"] = map(function(f)
+    end),
+    ["Up"] = map(range(3, 1), function(f)
       local frame = screen:frame()
       frame.x = screenFrame.x
       frame.y = screenFrame.y
       frame.w = round(screenFrame.w)
       frame.h = round(screenFrame.h / f)
       return frame
-    end, range(3, 1)),
-    ["Down"] = map(function(f)
+    end),
+    ["Down"] = map(range(3, 1), function(f)
       local frame = screen:frame()
       frame.x = screenFrame.x + round(screenFrame.w / 3)
       frame.y = screenFrame.y + round(screenFrame.h / f * (f - 1))
       frame.w = round(screenFrame.w / 3)
       frame.h = round(screenFrame.h / f)
       return frame
-    end, range(3, 1)),
+    end),
   }
 
   return frameSizes
