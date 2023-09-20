@@ -19,6 +19,10 @@ nls.setup({
 		nls.builtins.formatting.clang_format,
 		nls.builtins.formatting.eslint_d,
 		nls.builtins.formatting.prettierd,
+		nls.builtins.formatting.prettier.with({
+			-- prettierd doesn't pick up plugins due to https://github.com/fsouza/prettierd/issues/352, so just use prettier for htmlhugo
+			filetypes = { "htmlhugo" },
+		}),
 		nls.builtins.formatting.rustfmt,
 		nls.builtins.formatting.swift_format,
 		nls.builtins.formatting.xmllint,

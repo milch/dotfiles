@@ -33,8 +33,13 @@ cmp.setup({
 	preselect = cmp.PreselectMode.None,
 	formatting = {
 		fields = { "kind", "abbr", "menu" },
-		format = function(_, vim_item)
-			vim_item.kind = cmp_kinds[vim_item.kind] .. "  " or ""
+		format = function(entry, vim_item)
+			vim_item = require("tailwindcss-colorizer-cmp").formatter(entry, vim_item)
+
+			if cmp_kinds[vim_item.kind] then
+				vim_item.kind = cmp_kinds[vim_item.kind] .. "  "
+			end
+
 			return vim_item
 		end,
 	},

@@ -31,6 +31,7 @@ return {
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter-textobjects",
 			"RRethy/nvim-treesitter-endwise",
+			"windwp/nvim-ts-autotag",
 		},
 		config = function(_, opts)
 			require("nvim-treesitter.configs").setup(opts)
@@ -469,6 +470,14 @@ return {
 			vim.keymap.set("n", "<leader><leader>k", require("smart-splits").swap_buf_up)
 			vim.keymap.set("n", "<leader><leader>l", require("smart-splits").swap_buf_right)
 		end,
+	},
+
+	{
+		"phelipetls/vim-hugo",
+	},
+	{
+		"roobert/tailwindcss-colorizer-cmp.nvim",
+		opts = {},
 	},
 
 	--   -- Load additional plugins that are only local to the current machine

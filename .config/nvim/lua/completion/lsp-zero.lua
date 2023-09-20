@@ -25,6 +25,7 @@ require("mason-lspconfig").setup({
 		"cssls",
 		"docker_compose_language_service",
 		"dockerls",
+		"gopls",
 		"html",
 		"jdtls",
 		"jedi_language_server", -- Python
@@ -34,6 +35,7 @@ require("mason-lspconfig").setup({
 		"rust_analyzer",      -- Rust
 		"solargraph",         -- Ruby
 		"sqlls",
+		"tailwindcss",
 		"tsserver",
 		"yamlls",
 	},
@@ -44,6 +46,17 @@ require("mason-lspconfig").setup({
 
 local lua_opts = lsp_zero.nvim_lua_ls()
 require("lspconfig").lua_ls.setup(lua_opts)
+require("lspconfig").tailwindcss.setup({
+	init_options = {
+		userLanguages = {
+			-- Support completions in hugo html templates
+			htmlhugo = "html",
+			-- Defaults: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#tailwindcss
+			eelixir = "html-eex",
+			eruby = "erb",
+		},
+	},
+})
 
 local diagnosticsIcons = {
 	error = "",
