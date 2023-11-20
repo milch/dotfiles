@@ -1,12 +1,22 @@
 local nls = require("null-ls")
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+local eslint_config_files = { ".eslintrc.js", ".eslintrc.cjs", ".eslintrc.yaml", ".eslintrc.yml", ".eslintrc.json" }
+
 nls.setup({
 	root_dir = require("null-ls.utils").root_pattern(".null-ls-root", ".neoconf.json", "Makefile", ".git"),
 	sources = {
-		nls.builtins.code_actions.eslint_d,
+		nls.builtins.code_actions.eslint_d.with({
+			condition = function(utils)
+				return utils.root_has_file(eslint_config_files)
+			end,
+		}),
 		nls.builtins.code_actions.shellcheck,
 		nls.builtins.diagnostics.cfn_lint,
-		nls.builtins.diagnostics.eslint_d,
+		nls.builtins.diagnostics.eslint_d.with({
+			condition = function(utils)
+				return utils.root_has_file(eslint_config_files)
+			end,
+		}),
 		nls.builtins.diagnostics.fish,
 		nls.builtins.formatting.fish_indent,
 		nls.builtins.formatting.shfmt,
@@ -17,7 +27,11 @@ nls.setup({
 		nls.builtins.diagnostics.swiftlint,
 		nls.builtins.diagnostics.tidy,
 		nls.builtins.formatting.clang_format,
-		nls.builtins.formatting.eslint_d,
+		nls.builtins.formatting.eslint_d.with({
+			condition = function(utils)
+				return utils.root_has_file(eslint_config_files)
+			end,
+		}),
 		nls.builtins.formatting.prettierd,
 		nls.builtins.formatting.prettier.with({
 			-- prettierd doesn't pick up plugins due to https://github.com/fsouza/prettierd/issues/352, so just use prettier for htmlhugo
