@@ -122,7 +122,7 @@ def install_bat_theme
   `bat cache --build`
 end
 
-def run_install(options) # rubocop:disable Metrics/*
+def run_install(options)
   symlink_files if options[:symlink]
   install_brew if options[:install_brew]
   brew_bundle if options[:brew_bundle]
