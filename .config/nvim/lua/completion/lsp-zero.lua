@@ -14,7 +14,8 @@ lsp_zero.on_attach(function(client, bufnr)
 	bind("n", "<leader>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts)
 	bind("n", "<leader>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts)
 	bind("n", "<leader>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts)
-	-- bind('n', 'gr', ':Lspsaga finder<CR>', opts)
+	bind("n", "gd", ":Lspsaga goto_definition", opts)
+	bind("n", "gr", ":Lspsaga finder<CR>", opts)
 end)
 
 require("mason").setup({})
@@ -30,10 +31,11 @@ require("mason-lspconfig").setup({
 		"jdtls",
 		"jedi_language_server", -- Python
 		"jsonls",
-		"lua_ls",             -- Lua
+		"smithy_ls",
+		"lua_ls",      -- Lua
 		"perlnavigator",
-		"rust_analyzer",      -- Rust
-		"solargraph",         -- Ruby
+		"rust_analyzer", -- Rust
+		"solargraph",  -- Ruby
 		"sqlls",
 		"tailwindcss",
 		"tsserver",
