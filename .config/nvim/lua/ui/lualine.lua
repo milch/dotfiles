@@ -78,9 +78,7 @@ require("lualine").setup({
 				},
 			},
 		},
-		lualine_c = {
-			{ "vim.lsp.status()" },
-		},
+		lualine_c = {},
 
 		lualine_x = {},
 		lualine_y = {
