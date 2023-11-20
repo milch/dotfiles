@@ -1,6 +1,6 @@
 local builtin = require('telescope.builtin')
 
-require('telescope').setup {
+require('telescope').setup({
   pickers = {
     find_files = { theme = "dropdown" },
     git_files = { theme = "dropdown" },
@@ -15,7 +15,7 @@ require('telescope').setup {
       case_mode = "smart_case"
     }
   }
-}
+})
 require('telescope').load_extension('fzf')
 
 local gitIfAvailable = function()
