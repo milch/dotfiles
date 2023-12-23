@@ -50,10 +50,12 @@ cmp.setup({
 	},
 	window = {},
 	mapping = cmp.mapping.preset.insert({
-		["<C-b>"] = cmp.mapping.scroll_docs(-4),
-		["<C-f>"] = cmp.mapping.scroll_docs(4),
+		["<C-u>"] = cmp.mapping.scroll_docs(-4),
+		["<C-d>"] = cmp.mapping.scroll_docs(4),
+
 		["<C-a>"] = cmp.mapping.complete(),
 		["<C-e>"] = cmp.mapping.abort(),
+
 		["<CR>"] = cmp.mapping({
 			i = function(fallback)
 				if cmp.visible() and cmp.get_active_entry() then
@@ -67,6 +69,10 @@ cmp.setup({
 		}),
 		["<Tab>"] = cmp_action.luasnip_next(),
 		["<S-Tab>"] = cmp_action.luasnip_shift_supertab(),
+
+		-- Navigate between snippet placeholder
+		["<C-f>"] = cmp_action.luasnip_jump_forward(),
+		["<C-b>"] = cmp_action.luasnip_jump_backward(),
 	}),
 	sources = cmp.config.sources({
 		{ name = "nvim_lsp" },
