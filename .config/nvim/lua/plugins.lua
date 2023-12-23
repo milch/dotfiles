@@ -232,6 +232,18 @@ return {
 		end,
 	},
 
+	{
+		"jay-babu/mason-nvim-dap.nvim",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"mfussenegger/nvim-dap",
+			"rcarriga/nvim-dap-ui",
+		},
+		config = function()
+			require("editor.debugging")
+		end,
+	},
+
 	-- LSP Support
 	{
 		"neovim/nvim-lspconfig",
