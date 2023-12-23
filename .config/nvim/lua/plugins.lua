@@ -87,7 +87,7 @@ return {
 	},
 	{
 		"romainl/vim-cool",
-		keys = "/",
+		keys = { "/", "*", "#" },
 	},
 	{
 		"tpope/vim-projectionist",
@@ -117,6 +117,7 @@ return {
 		keys = {
 			{ "<leader>f" },
 			{ "<leader>g" },
+			{ "<leader>G" },
 			{ "<leader>b" },
 			{ "<leader>p" },
 			{ "<leader>sb" },
@@ -188,8 +189,8 @@ return {
 			vim.o.foldlevel = 99
 			vim.o.foldlevelstart = 99
 			vim.o.foldenable = true
-			bind("n", "zR", cmd([[require("ufo").openAllFolds]]), { desc = "Open all folds" })
-			bind("n", "zM", cmd([[require("ufo").closeAllFolds]]), { desc = "Close all folds" })
+			bind("n", "zR", cmd([[require("ufo").openAllFolds()]]), { desc = "Open all folds" })
+			bind("n", "zM", cmd([[require("ufo").closeAllFolds()]]), { desc = "Close all folds" })
 		end,
 		opts = require("ui.nvim-ufo"),
 	},
@@ -382,33 +383,36 @@ return {
 			"/",
 			{
 				"n",
-				[[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]],
-				silentNoremap,
+				[[<Cmd>execute('normal! ' . v:count1 . 'nzzzv')<CR><Cmd>lua require('hlslens').start()<CR>]],
+				extend(silentNoremap, { desc = "Go to next search result" }),
 			},
 			{
 				"N",
-				[[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]],
-				silentNoremap,
+				[[<Cmd>execute('normal! ' . v:count1 . 'Nzzzv')<CR><Cmd>lua require('hlslens').start()<CR>]],
+				extend(silentNoremap, { desc = "Go to previous search result" }),
 			},
 			{
 				"*",
-				[[*<Cmd>lua require('hlslens').start()<CR>]],
-				silentNoremap,
+				[[*zz<Cmd>lua require('hlslens').start()<CR>]],
+				extend(silentNoremap, { desc = "Find word under cursor" }),
 			},
 			{
 				"#",
-				[[#<Cmd>lua require('hlslens').start()<CR>]],
-				silentNoremap,
+				[[#zz<Cmd>lua require('hlslens').start()<CR>]],
+				extend(silentNoremap, { desc = "Find word under cursor before current position" }),
 			},
 			{
 				"g*",
-				[[g*<Cmd>lua require('hlslens').start()<CR>]],
-				silentNoremap,
+				[[g*zz<Cmd>lua require('hlslens').start()<CR>]],
+				extend(silentNoremap, { desc = "Find word under cursor, including partial matches" }),
 			},
 			{
 				"g#",
-				[[g#<Cmd>lua require('hlslens').start()<CR>]],
-				silentNoremap,
+				[[g#zz<Cmd>lua require('hlslens').start()<CR>]],
+				extend(
+					silentNoremap,
+					{ desc = "Find word under cursor before current position, including partial matches" }
+				),
 			},
 		},
 		opts = {},
