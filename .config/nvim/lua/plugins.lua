@@ -490,10 +490,14 @@ return {
 		opts = {},
 	},
 
-	--   -- Load additional plugins that are only local to the current machine
-	--   local exists, localPlugins = pcall(require, 'plugins.local')
-	--   if exists then
-	--     localPlugins.setup(use)
-	--   end
-	-- end)
+	{
+		"mbbill/undotree",
+		keys = {
+			"<leader>u",
+		},
+		cmd = { "UndotreeToggle" },
+		config = function()
+			require("util.undotree")
+		end,
+	},
 }
