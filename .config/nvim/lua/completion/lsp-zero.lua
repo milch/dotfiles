@@ -7,15 +7,20 @@ lsp_zero.on_attach(function(client, bufnr)
 	local opts = { buffer = bufnr, silent = true }
 	lsp_zero.default_keymaps(opts)
 
-	bind("n", "<leader>rn", ":Lspsaga rename<CR>", opts)
 	bind("x", "gf", ":LspZeroFormat<CR>", opts)
 	bind("v", "gf", ":LspZeroFormat<CR>", opts)
 	bind("n", "gf", ":LspZeroFormat<CR>", opts)
-	bind("n", "<leader>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts)
-	bind("n", "<leader>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts)
-	bind("n", "<leader>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts)
-	bind("n", "gd", ":Lspsaga goto_definition", opts)
-	bind("n", "gr", ":Lspsaga finder<CR>", opts)
+
+	bind("n", "<leader>rn", ":Lspsaga rename<CR>", opts)
+	bind("n", "gd", ":Lspsaga goto_definition<CR>", opts)
+	bind("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
+	bind("n", "[n", ":Lspsaga diagnostic_jump_next<CR>", opts)
+	bind("n", "[p", ":Lspsaga diagnostic_jump_prev<CR>", opts)
+	bind("n", "<leader>a", ":Lspsaga code_action<CR>", opts)
+	bind("n", "K", ":Lspsaga hover_doc<CR>", opts)
+	bind("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>", opts)
+	bind("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
+	bind("n", "gl", "<cmd>lua vim.diagnostic.open_float()<cr>", opts)
 end)
 
 require("mason").setup({})
@@ -32,10 +37,10 @@ require("mason-lspconfig").setup({
 		"jedi_language_server", -- Python
 		"jsonls",
 		"smithy_ls",
-		"lua_ls",      -- Lua
+		"lua_ls", -- Lua
 		"perlnavigator",
 		"rust_analyzer", -- Rust
-		"solargraph",  -- Ruby
+		"solargraph", -- Ruby
 		"sqlls",
 		"tailwindcss",
 		"tsserver",
