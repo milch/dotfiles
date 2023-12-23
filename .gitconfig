@@ -5,7 +5,6 @@
 [core]
 	excludesfile = ~/.gitignore_global
 	attributesfile = ~/.gitattributes_global
-	pager = delta --light
 [diff]
 	algorithm = histogram
 	colorMoved = default
@@ -39,5 +38,3 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
-[interactive]
-	diffFilter = delta --light --color-only
