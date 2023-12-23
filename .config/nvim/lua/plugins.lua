@@ -213,10 +213,22 @@ return {
 			"williamboman/mason-lspconfig.nvim",
 		},
 		init = function()
-			vim.opt.updatetime = 100
+			vim.opt.updatetime = 50
 		end,
 		config = function()
 			require("completion.lsp-zero")
+		end,
+	},
+
+	{
+		"simrat39/rust-tools.nvim",
+		dependencies = {
+			"williamboman/mason-lspconfig.nvim",
+			"mfussenegger/nvim-dap",
+		},
+		ft = "rust",
+		config = function()
+			require("lang.rust")
 		end,
 	},
 
