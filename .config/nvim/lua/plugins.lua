@@ -1,5 +1,5 @@
 local function cmd(str)
-	return "<Cmd>lua " .. str .. "<CR>"
+	return "<cmd>lua " .. str .. "<CR>"
 end
 
 local bind = vim.keymap.set
@@ -107,8 +107,7 @@ return {
 			{ "nvim-lua/plenary.nvim" },
 			{
 				"nvim-telescope/telescope-fzf-native.nvim",
-				build =
-				"cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+				build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
 			},
 		},
 		cmd = "Telescope",
@@ -256,18 +255,29 @@ return {
 			finder = {
 				keys = {
 					toggle_or_open = "<CR>",
+					quit = { "q", "<ESC>" },
+				},
+			},
+			diagnostic = {
+				keys = {
+					quit = { "q", "<ESC>" },
+				},
+			},
+			rename = {
+				keys = {
+					quit = { "<C-c>" },
+				},
+			},
+			code_action = {
+				keys = {
+					quit = { "q", "<ESC>" },
 				},
 			},
 		},
 		event = "LspAttach",
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter", -- optional
-			"nvim-tree/nvim-web-devicons",  -- optional
-		},
-		keys = {
-			{ "[n",        ":Lspsaga diagnostic_jump_next<CR>", silent = true },
-			{ "[p",        ":Lspsaga diagnostic_jump_prev<CR>", silent = true },
-			{ "<leader>a", ":Lspsaga code_action<CR>" },
+			"nvim-tree/nvim-web-devicons", -- optional
 		},
 	},
 	{
