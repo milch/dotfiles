@@ -48,6 +48,8 @@ require("mason-lspconfig").setup({
 	},
 	handlers = {
 		lsp_zero.default_setup,
+		-- Will be loaded on rust ft by Lazy
+		["rust_analyzer"] = function() end,
 	},
 })
 
