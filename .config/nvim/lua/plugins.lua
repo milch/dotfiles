@@ -8,11 +8,12 @@ local extend = function(t1, t2)
 	return vim.tbl_extend("keep", t1, t2)
 end
 
-bind("n", "<leader>l", ":Lazy<CR>", extend(silentNoremap, { desc = "Show lazy plugin manager" }))
+bind("n", "<leader>l", function()
+	require("lazy").home()
+end, extend(silentNoremap, { desc = "Show lazy plugin manager" }))
 
-return {
+local specs = {
 	-- Languages
-	{ "slashmili/alchemist.vim", ft = { "elixir" } },
 	"milch/vim-fastlane",
 	{
 		"iamcco/markdown-preview.nvim",
@@ -32,40 +33,18 @@ return {
 			"nvim-treesitter/nvim-treesitter-textobjects",
 			"RRethy/nvim-treesitter-endwise",
 			"windwp/nvim-ts-autotag",
+			{
+				"romgrk/nvim-treesitter-context",
+				event = "WinScrolled",
+				opts = require("editor.nvim-treesitter-context"),
+				dependencies = { "nvim-treesitter/nvim-treesitter" },
+			},
 		},
 		config = function(_, opts)
 			require("nvim-treesitter.configs").setup(opts)
+
+			vim.treesitter.language.register("html", "htmlhugo")
 		end,
-	},
-
-	{
-		"romgrk/nvim-treesitter-context",
-		event = "WinScrolled",
-		opts = require("editor.nvim-treesitter-context"),
-		dependencies = { "nvim-treesitter/nvim-treesitter" },
-	},
-	{
-		"ThePrimeagen/refactoring.nvim",
-		dependencies = {
-			{ "nvim-lua/plenary.nvim" },
-			{ "nvim-treesitter/nvim-treesitter" },
-		},
-		opts = {},
-		keys = {
-			{
-				"<leader>re",
-				":Refactor extract<CR>",
-				mode = "v",
-				noremap = true,
-				silent = true,
-				expr = false,
-			},
-		},
-	},
-
-	{
-		"nvim-treesitter/playground",
-		cmd = "TSPlaygroundToggle",
 	},
 
 	{
@@ -97,8 +76,22 @@ return {
 	},
 	{
 		"altermo/ultimate-autopair.nvim",
-		event = { "InsertEnter", "CmdlineEnter" },
-		opts = {},
+		event = { "InsertEnter", "CmdlineEnter", "TermEnter", "CursorMoved" },
+		opts = {
+			bs = { space = "balance", indent_ignore = true, single_delete = true },
+			cr = { autoclose = true },
+			close = { enable = true },
+			fastwarp = {
+				multi = true,
+				{},
+				{
+					faster = true,
+					map = "<C-A-e>",
+					cmap = "<C-A-e>",
+				},
+			},
+			tabout = { enable = true, hopout = true },
+		},
 	},
 
 	{
@@ -234,6 +227,7 @@ return {
 
 	{
 		"jay-babu/mason-nvim-dap.nvim",
+		keys = { "<leader>x" },
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"mfussenegger/nvim-dap",
@@ -332,21 +326,11 @@ return {
 		end,
 	},
 	{
-		"kevinhwang91/nvim-bqf",
-		ft = "qf",
-		opts = {
-			func_map = {
-				openc = "<CR>",
-				open = "o",
-			},
-			auto_resize_height = true,
-		},
-	},
-	{
 		"ray-x/lsp_signature.nvim",
 		opts = {
 			hint_enable = false,
 		},
+		event = { "VeryLazy" },
 		config = function(_, opts)
 			require("lsp_signature").setup(opts)
 		end,
@@ -382,23 +366,14 @@ return {
 	},
 
 	{
-		"kshenoy/vim-signature",
-		event = { "BufReadPost" },
-	},
-	{
+		-- Automatically set the indent width based on what is already used in the file
 		"tpope/vim-sleuth",
 		event = { "BufReadPost" },
 	},
 
 	{
 		"anuvyklack/hydra.nvim",
-		config = function()
-			require("util.hydra")
-		end,
-		keys = {
-			"<leader>h",
-			"<leader>rf",
-		},
+		lazy = true,
 	},
 
 	{
@@ -443,28 +418,6 @@ return {
 	},
 
 	{
-		"nvim-neotest/neotest",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-treesitter/nvim-treesitter",
-			"rouge8/neotest-rust",
-		},
-		config = function()
-			require("neotest").setup({
-				adapters = {
-					require("neotest-rust"),
-				},
-			})
-		end,
-		keys = {
-			-- Run nearest test
-			{ "<leader>tt", cmd('require("neotest").run.run()') },
-			-- Run the current file
-			{ "<leader>tf", cmd('require("neotest").run.run(vim.fn.expand("%"))') },
-		},
-	},
-
-	{
 		"folke/which-key.nvim",
 		event = "VeryLazy",
 		init = function()
@@ -475,6 +428,17 @@ return {
 	},
 
 	{
+		"kevinhwang91/nvim-bqf",
+		ft = "qf",
+		opts = {
+			func_map = {
+				openc = "<CR>",
+				open = "o",
+			},
+			auto_resize_height = true,
+		},
+	},
+	{
 		"folke/trouble.nvim",
 		dependencies = "nvim-tree/nvim-web-devicons",
 		opts = {
@@ -483,7 +447,7 @@ return {
 		},
 		cmd = { "TroubleToggle", "Trouble", "TroubleClose", "TroubleRefresh" },
 		keys = {
-			{ "<leader>d", ":TroubleToggle<CR>" },
+			{ "<leader>d", ":TroubleToggle<CR>", { desc = "Toggle Trouble window" } },
 		},
 	},
 	{
@@ -503,10 +467,10 @@ return {
 			vim.keymap.set("n", "<C-k>", require("smart-splits").move_cursor_up)
 			vim.keymap.set("n", "<C-l>", require("smart-splits").move_cursor_right)
 			-- swapping buffers between windows
-			vim.keymap.set("n", "<leader><leader>h", require("smart-splits").swap_buf_left)
-			vim.keymap.set("n", "<leader><leader>j", require("smart-splits").swap_buf_down)
-			vim.keymap.set("n", "<leader><leader>k", require("smart-splits").swap_buf_up)
-			vim.keymap.set("n", "<leader><leader>l", require("smart-splits").swap_buf_right)
+			vim.keymap.set("n", "<A-S-h>", require("smart-splits").swap_buf_left)
+			vim.keymap.set("n", "<A-S-j>", require("smart-splits").swap_buf_down)
+			vim.keymap.set("n", "<A-S-k>", require("smart-splits").swap_buf_up)
+			vim.keymap.set("n", "<A-S-l>", require("smart-splits").swap_buf_right)
 		end,
 	},
 
@@ -515,6 +479,7 @@ return {
 	},
 	{
 		"roobert/tailwindcss-colorizer-cmp.nvim",
+		lazy = true,
 		opts = {},
 	},
 
@@ -528,4 +493,47 @@ return {
 			require("util.undotree")
 		end,
 	},
+
+	{
+		"ThePrimeagen/harpoon",
+		branch = "harpoon2",
+		keys = {
+			{
+				"<leader>Hr",
+				cmd([[require("harpoon"):list:remove()]]),
+				{ desc = "Remove file from Harpoon quick menu" },
+			},
+
+			{ "<leader>Ha", cmd([[harpoon:list():append()]]), { desc = "Add file to Harpoon quick menu" } },
+			{
+				"<leader>h",
+				cmd([[
+				require("harpoon").ui:toggle_quick_menu(require("harpoon"):list())
+				]]),
+				{ desc = "Toggle harpoon quick menu" },
+			},
+		},
+		config = function()
+			require("util.harpoon")
+		end,
+	},
+	{
+		"NeogitOrg/neogit",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"sindrets/diffview.nvim",
+			"nvim-telescope/telescope.nvim",
+		},
+		config = true,
+		cmd = { "Neogit" },
+	},
 }
+
+local loaded, local_specs = pcall(require, "local")
+if loaded then
+	for i = 1, #local_specs do
+		table.insert(specs, local_specs[i])
+	end
+end
+
+return specs

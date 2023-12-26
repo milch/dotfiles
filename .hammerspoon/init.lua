@@ -269,3 +269,7 @@ end)
 hs.hotkey.bind(hyper, "c", function()
   arrangeWindowsOnAxis("y", getVisibleWindows())
 end)
+
+local function growOrShrinkInDirection(direction)
+  local focused = hs.window.focusedWindow()
+end

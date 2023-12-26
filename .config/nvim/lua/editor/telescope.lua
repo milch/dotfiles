@@ -77,16 +77,12 @@ local find_all = function()
 	})
 end
 
-vim.keymap.set("n", "<leader>f", gitIfAvailable, {})
-vim.keymap.set("n", "<leader>p", find_all, {})
-vim.keymap.set("n", "<leader>g", builtin.live_grep, {})
+vim.keymap.set("n", "<leader>f", gitIfAvailable, { desc = "Find git files" })
+vim.keymap.set("n", "<leader>p", find_all, { desc = "Find all files" })
+vim.keymap.set("n", "<leader>g", builtin.live_grep, { desc = "Live grep" })
 vim.keymap.set("n", "<leader>G", function()
 	builtin.live_grep({
 		additional_args = { "--no-ignore-vcs", "--hidden", "--glob", "!.git" },
 	})
-end, {})
-vim.keymap.set("n", "<leader>b", builtin.buffers, {})
-
-vim.keymap.set("n", "<leader>sb", builtin.git_bcommits, {})
-vim.keymap.set("n", "<leader>sc", builtin.git_commits, {})
-vim.keymap.set("n", "<leader>ss", builtin.git_status, {})
+end, { desc = "Live grep, including hidden & ignored files" })
+vim.keymap.set("n", "<leader>b", builtin.buffers, { desc = "Find open buffers" })

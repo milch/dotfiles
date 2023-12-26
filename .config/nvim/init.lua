@@ -1,5 +1,3 @@
-require("disable_defaults")
-
 -- Leader -> to prefix your own keybindings
 vim.g.mapleader = ","
 
@@ -17,13 +15,31 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup({
-	import = "plugins",
+local theme = require("ui.use_system_theme")
+
+require("lazy").setup("plugins", {
 	change_detection = {
 		notify = false,
 	},
+	install = {
+		colorscheme = { theme.GetColorScheme(theme.DetermineTheme("startup")) },
+	},
+	performance = {
+		rtp = {
+			disabled_plugins = {
+				"gzip",
+				"netrwPlugin",
+				"spellfile",
+				"tarPlugin",
+				"tohtml",
+				"tutor",
+				"zipPlugin",
+			},
+		},
+	},
 })
-require("ui.use_system_theme").UpdateWhenSystemChanges()
+
+theme.UpdateWhenSystemChanges()
 pcall(require, "init_local")
 require("opt")
 require("keybindings")

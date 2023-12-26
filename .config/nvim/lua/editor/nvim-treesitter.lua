@@ -14,6 +14,7 @@ return {
 
   autotag = {
     enable = true,
+    filetypes = { "html", "htmlhugo" },
   },
 
   highlight = {

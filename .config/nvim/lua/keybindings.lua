@@ -25,3 +25,9 @@ bind(
 	[[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
 	{ desc = "Write :%s for the word under the cursor" }
 )
+bind(
+	"x",
+	"<leader>s",
+	[[y:%s/\<<C-r>0\>/<C-r>0/gI<Left><Left><Left>]],
+	{ desc = "Write :%s for the word under the cursor" }
+)

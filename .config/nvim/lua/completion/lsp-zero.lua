@@ -37,10 +37,10 @@ require("mason-lspconfig").setup({
 		"jedi_language_server", -- Python
 		"jsonls",
 		"smithy_ls",
-		"lua_ls", -- Lua
+		"lua_ls",      -- Lua
 		"perlnavigator",
 		"rust_analyzer", -- Rust
-		"solargraph", -- Ruby
+		"solargraph",  -- Ruby
 		"sqlls",
 		"tailwindcss",
 		"tsserver",
@@ -84,6 +84,7 @@ vim.diagnostic.config({
 	float = {
 		source = true,
 	},
+	update_in_insert = true,
 })
 
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/issues/428

@@ -60,7 +60,7 @@ nls.setup({
 			vim.api.nvim_create_autocmd("BufWritePre", {
 				group = augroup,
 				buffer = bufnr,
-				command = "undojoin | LspFormatting sync",
+				command = "LspFormatting sync",
 			})
 		end
 	end,
