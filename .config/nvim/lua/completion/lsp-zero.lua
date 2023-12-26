@@ -37,10 +37,10 @@ require("mason-lspconfig").setup({
 		"jedi_language_server", -- Python
 		"jsonls",
 		"smithy_ls",
-		"lua_ls",      -- Lua
+		"lua_ls", -- Lua
 		"perlnavigator",
 		"rust_analyzer", -- Rust
-		"solargraph",  -- Ruby
+		"solargraph", -- Ruby
 		"sqlls",
 		"tailwindcss",
 		"tsserver",
@@ -65,6 +65,12 @@ require("lspconfig").tailwindcss.setup({
 			eruby = "erb",
 		},
 	},
+})
+require("lspconfig").solargraph.setup({
+	root_dir = require("lspconfig.util").root_pattern(".git", "Gemfile", "Rakefile", "Guardfile"),
+})
+require("lspconfig").rubocop.setup({
+	root_dir = require("lspconfig.util").root_pattern(".git", "Gemfile", "Rakefile", "Guardfile"),
 })
 
 local diagnosticsIcons = {

@@ -298,18 +298,29 @@ local specs = {
 			"nvim-treesitter/nvim-treesitter", -- optional
 			"nvim-tree/nvim-web-devicons", -- optional
 		},
+		keys = {
+			{ "[n", ":Lspsaga diagnostic_jump_next<CR>", silent = true },
+			{ "[p", ":Lspsaga diagnostic_jump_prev<CR>", silent = true },
+			{ "<leader>a", ":Lspsaga code_action<CR>" },
+		},
 	},
 	{
 		"j-hui/fidget.nvim",
-		tag = "legacy",
 		event = "LspAttach",
 		opts = {
-			text = {
-				spinner = "dots",
-			},
-			sources = {
-				["null-ls"] = {
-					ignore = true,
+			progress = {
+				display = {
+					format_message = function(msg)
+						if
+							msg.title == "diagnostics_on_open"
+							or msg.title == "diagnostics"
+							or msg.title == "code_action"
+						then
+							return nil
+						end
+
+						return require("fidget.progress.display").default_format_message(msg)
+					end,
 				},
 			},
 		},
@@ -431,10 +442,6 @@ local specs = {
 		"kevinhwang91/nvim-bqf",
 		ft = "qf",
 		opts = {
-			func_map = {
-				openc = "<CR>",
-				open = "o",
-			},
 			auto_resize_height = true,
 		},
 	},
@@ -504,7 +511,7 @@ local specs = {
 				{ desc = "Remove file from Harpoon quick menu" },
 			},
 
-			{ "<leader>Ha", cmd([[harpoon:list():append()]]), { desc = "Add file to Harpoon quick menu" } },
+			{ "<leader>Ha", cmd([[require("harpoon"):list():append()]]), { desc = "Add file to Harpoon quick menu" } },
 			{
 				"<leader>h",
 				cmd([[

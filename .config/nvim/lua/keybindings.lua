@@ -31,3 +31,18 @@ bind(
 	[[y:%s/\<<C-r>0\>/<C-r>0/gI<Left><Left><Left>]],
 	{ desc = "Write :%s for the word under the cursor" }
 )
+
+bind("n", "<leader>c", function()
+	local qf_exists = false
+	for _, win in pairs(vim.fn.getwininfo()) do
+		if win["quickfix"] == 1 then
+			qf_exists = true
+		end
+	end
+
+	if qf_exists then
+		vim.cmd("cclose")
+	else
+		vim.cmd("copen")
+	end
+end, { desc = "Toggle quickfix list" })
