@@ -264,12 +264,12 @@ bind(hyper, "l", yabai_focus("east"))
 local function yabai_swap(dir)
 	return exec(
 		"/opt/homebrew/bin/yabai -m window --swap "
-			.. dir
-			.. " || (/opt/homebrew/bin/yabai -m window --display "
-			.. dir
-			.. "; /opt/homebrew/bin/yabai -m display --focus "
-			.. dir
-			.. ")"
+		.. dir
+		.. " || (/opt/homebrew/bin/yabai -m window --display "
+		.. dir
+		.. "; /opt/homebrew/bin/yabai -m display --focus "
+		.. dir
+		.. ")"
 	)
 end
 -- swap windows
@@ -306,16 +306,39 @@ end
 bind(hyper, "[", yabai_move_and_follow("prev"))
 bind(hyper, "]", yabai_move_and_follow("next"))
 
-local function delayed(fn, delay)
-	return hs.timer.delayed.new(delay, fn):start()
+-- Workaround for macOS' weird behaviour where when "Displays have their own spaces" is on,
+-- it then treats the space numbers as absolute, i.e. if display 1 has 3 spaces and
+-- display 2 has 3 spaces then pressing the shortcut to switch to space 1 will always
+-- go to space 1 on display 1, even if the current focus is on display 2. I just keep
+-- 9 spaces on every display and then assign different modifiers to each display. The shortcuts
+-- need to be mutually exclusive, otherwise it doesn't trigger correctly, and (for some reason)
+-- can't contain `fn`.
+local function switch_to_space(num)
+	return function()
+		if hs.screen.primaryScreen() == hs.screen.mainScreen() then
+			hs.eventtap.keyStroke({ "ctrl", "alt" }, num)
+		else
+			hs.eventtap.keyStroke({ "ctrl", "cmd" }, num)
+		end
+	end
 end
+
+bind(hyper, "1", switch_to_space("1"))
+bind(hyper, "2", switch_to_space("2"))
+bind(hyper, "3", switch_to_space("3"))
+bind(hyper, "4", switch_to_space("4"))
+bind(hyper, "5", switch_to_space("5"))
+bind(hyper, "6", switch_to_space("6"))
+bind(hyper, "7", switch_to_space("7"))
+bind(hyper, "8", switch_to_space("8"))
+bind(hyper, "9", switch_to_space("9"))
 
 -- # move window to space #
 local function move_window(space_num)
 	return function()
 		local focusedWindow = hs.window.focusedWindow()
 		hs.spaces.moveWindowToSpace(focusedWindow, hs.spaces.spacesForScreen()[tonumber(space_num)])
-		hs.eventtap.keyStroke(hyper, space_num)
+		switch_to_space(space_num)
 		focusedWindow:focus()
 	end
 end

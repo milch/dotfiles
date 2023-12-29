@@ -1,3 +1,5 @@
+#!/usr/bin/env sh
+
 # bsp, stack or float
 yabai -m config layout bsp
 
@@ -19,6 +21,8 @@ yabai -m rule --add app="(^Karabiner-Elements$)" manage=off
 yabai -m rule --add app="(^Karabiner-EventViewer$)" manage=off
 yabai -m rule --add app="(^Hammerspoon$)" manage=off
 yabai -m rule --add app="(^FaceTime$)" manage=off
+yabai -m rule --add app="(^Cisco AnyConnect Secure Mobility Client$)" manage=off
+yabai -m rule --add app="(^Dash$)" manage=off
 # yabai -m rule --add app="(^Finder$)" title="Copying..." manage=off
 
 # vim:ft=bash
