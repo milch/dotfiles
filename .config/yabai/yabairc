@@ -1,0 +1,24 @@
+# bsp, stack or float
+yabai -m config layout bsp
+
+# Mouse-related settings
+yabai -m config mouse_follows_focus on
+
+yabai -m config mouse_modifier alt
+
+# left-click + drag to resize the window
+yabai -m config mouse_action1 resize
+# right-click + drag to move the window
+yabai -m config mouse_action2 move
+# Swap windows when they are dragged on top of each other
+yabai -m config mouse_drop_action swap
+
+# Disable management for these apps:
+yabai -m rule --add app="(^System Settings$)" manage=off
+yabai -m rule --add app="(^Karabiner-Elements$)" manage=off
+yabai -m rule --add app="(^Karabiner-EventViewer$)" manage=off
+yabai -m rule --add app="(^Hammerspoon$)" manage=off
+yabai -m rule --add app="(^FaceTime$)" manage=off
+# yabai -m rule --add app="(^Finder$)" title="Copying..." manage=off
+
+# vim:ft=bash
