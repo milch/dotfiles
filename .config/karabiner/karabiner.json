@@ -24,13 +24,18 @@
                 "from": {
                   "key_code": "caps_lock",
                   "modifiers": {
-                    "optional": ["any"]
+                    "optional": [
+                      "any"
+                    ]
                   }
                 },
                 "to": [
                   {
                     "key_code": "left_control",
-                    "modifiers": ["left_command", "left_option"]
+                    "modifiers": [
+                      "left_command",
+                      "left_option"
+                    ]
                   }
                 ],
                 "to_if_alone": [
@@ -48,20 +53,52 @@
               {
                 "conditions": [
                   {
-                    "bundle_identifiers": ["com.quip.Desktop"],
+                    "bundle_identifiers": [
+                      "com.quip.Desktop"
+                    ],
                     "type": "frontmost_application_if"
                   }
                 ],
                 "from": {
                   "key_code": "n",
                   "modifiers": {
-                    "mandatory": ["left_gui"]
+                    "mandatory": [
+                      "left_gui"
+                    ]
                   }
                 },
                 "to": [
                   {
                     "key_code": "y",
-                    "modifiers": ["left_gui"],
+                    "modifiers": [
+                      "left_gui"
+                    ],
+                    "repeat": true
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
+          },
+          {
+            "description": "Map right option to command+control+option",
+            "manipulators": [
+              {
+                "from": {
+                  "key_code": "right_option",
+                  "modifiers": {
+                    "optional": [
+                      "any"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "left_control",
+                    "modifiers": [
+                      "left_option",
+                      "left_command"
+                    ],
                     "repeat": true
                   }
                 ],

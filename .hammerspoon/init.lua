@@ -215,20 +215,12 @@ push(shiftHyper, "Left")
 push(shiftHyper, "Up")
 push(shiftHyper, "Down")
 
--- Move window to a different screen
-bind(hyper, "Tab", function()
-	local win = hs.window.focusedWindow()
-	local screen = win:screen()
-
-	win:centerOnScreen(screen:next(), true)
-end)
-
 local function yabai(args, completion)
 	return function()
 		local yabai_output = ""
 		local yabai_error = ""
 		-- Runs in background very fast
-		local yabai_task = hs.task.new("/opt/homebrew/bin/yabai", nil, function(_task, stdout, stderr)
+		local yabai_task = hs.task.new("/opt/homebrew/bin/yabai", nil, function(task, stdout, stderr)
 			--print("stdout:"..stdout, "stderr:"..stderr)
 			if stdout ~= nil then
 				yabai_output = yabai_output .. stdout
@@ -240,30 +232,57 @@ local function yabai(args, completion)
 		end, args)
 		if type(completion) == "function" then
 			yabai_task:setCallback(function()
-				completion(yabai_output, yabai_error)
+				completion(yabai_task:terminationStatus(), yabai_output, yabai_error)
 			end)
 		end
 		yabai_task:start()
 	end
 end
 
-bind(hyper, "h", yabai({ "-m", "window", "--focus", "west" }))
-bind(hyper, "j", yabai({ "-m", "window", "--focus", "south" }))
-bind(hyper, "k", yabai({ "-m", "window", "--focus", "north" }))
-bind(hyper, "l", yabai({ "-m", "window", "--focus", "east" }))
+local function exec(cmd)
+	return function()
+		local task = hs.task.new("/bin/zsh", nil, function()
+			return true
+		end, { "-c", cmd })
+		task:start()
+	end
+end
 
+local function yabai_focus(dir)
+	return yabai({ "-m", "window", "--focus", dir }, function(status)
+		if status ~= 0 then
+			yabai({ "-m", "display", "--focus", dir })()
+		end
+	end)
+end
+
+bind(hyper, "h", yabai_focus("west"))
+bind(hyper, "j", yabai_focus("south"))
+bind(hyper, "k", yabai_focus("north"))
+bind(hyper, "l", yabai_focus("east"))
+
+local function yabai_swap(dir)
+	return exec(
+		"/opt/homebrew/bin/yabai -m window --swap "
+			.. dir
+			.. " || (/opt/homebrew/bin/yabai -m window --display "
+			.. dir
+			.. "; /opt/homebrew/bin/yabai -m display --focus "
+			.. dir
+			.. ")"
+	)
+end
 -- swap windows
-bind(shiftHyper, "h", yabai({ "-m", "window", "--swap", "west" }))
-bind(shiftHyper, "j", yabai({ "-m", "window", "--swap", "south" }))
-bind(shiftHyper, "k", yabai({ "-m", "window", "--swap", "north" }))
-bind(shiftHyper, "l", yabai({ "-m", "window", "--swap", "east" }))
+bind(shiftHyper, "h", yabai_swap("west"))
+bind(shiftHyper, "j", yabai_swap("south"))
+bind(shiftHyper, "k", yabai_swap("north"))
+bind(shiftHyper, "l", yabai_swap("east"))
 
 bind(hyper, "x", yabai({ "-m", "space", "--mirror", "x-axis" }))
 bind(hyper, "y", yabai({ "-m", "space", "--mirror", "y-axis" }))
 
 bind(hyper, "r", yabai({ "-m", "space", "--rotate", "270" }))
-
--- bind(hyper, "y", yabai({ "-m", "config", "--space", "y-axis" }))
+bind(shiftHyper, "r", yabai({ "-m", "config", "--space", "mouse", "layout", "bsp" }))
 
 bind(hyper, "t", yabai({ "-m", "window", "--toggle", "float", "--grid", "4:4:1:1:2:2" }))
 
@@ -272,14 +291,7 @@ bind(hyper, "f", yabai({ "-m", "window", "--toggle", "zoom-fullscreen" }))
 -- balance out tree of windows (resize to occupy same area)
 bind(hyper, "0", yabai({ "-m", "space", "--balance" }))
 
--- move window and split
--- ctrl + alt - j : yabai -m window --warp south
--- ctrl + alt - k : yabai -m window --warp north
--- ctrl + alt - h : yabai -m window --warp west
--- ctrl + alt - l : yabai -m window --warp east
-
 -- move window to prev and next space
-
 local function yabai_move_and_follow(dir)
 	local focusedWindow = hs.window.focusedWindow()
 	return yabai({ "-m", "window", "--space", dir }, function()
@@ -319,5 +331,10 @@ bind(shiftHyper, "8", move_window("8"))
 bind(shiftHyper, "9", move_window("9"))
 
 bind(hyper, "q", yabai({ "--stop-service" }))
-bind(hyper, "a", yabai({ "--start-service" }))
-bind(shiftHyper, "q", yabai({ "--restart-service" }))
+bind(shiftHyper, "q", yabai({ "--start-service" }))
+
+-- Toggle whether a window is split vertically or horizontally
+bind(hyper, "s", yabai({ "-m", "window", "--toggle", "split" }))
+
+-- Move window to a different screen
+bind(hyper, "Tab", yabai({ "-m", "window", "--display", "next" }))
