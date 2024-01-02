@@ -2,6 +2,8 @@ local hyper = { "ctrl", "alt", "cmd" }
 local shiftHyper = { "ctrl", "alt", "cmd", "shift" }
 local bind = hs.hotkey.bind
 
+local yabai_bin = "/opt/homebrew/bin/yabai"
+
 -- Helper functions
 
 ---Returns `true` if the file at the given `name` exists
@@ -92,135 +94,12 @@ spoon.SpoonInstall:andUse("EmmyLua")
 hs.pathwatcher.new(hammerspoonConfigFolder, reloadConfig):start()
 hs.alert.show("Config loaded")
 
----Returns a table of fractional window frames for the given direction, e.g. right half of screen, right quarter of screen, etc.
----@param screen hs.screen
----@return tablewstring, hs.geometry[]w
-local function frames(screen)
-	local screenFrame = screen:frame()
-	local supportedFractionCount = 8
-
-	local middleThird = screen:frame()
-	middleThird.x = screenFrame.x + (screenFrame.w / 3)
-	middleThird.w = screenFrame.w / 3
-
-	local frameSizes = {
-		["Right"] = map(range(supportedFractionCount, 2), function(f)
-			local frame = screen:frame()
-			frame.x = round(screenFrame.x + (screenFrame.w / f * (f - 1)))
-			frame.w = round(screenFrame.w / f)
-			return frame
-		end),
-		["Left"] = map(range(supportedFractionCount, 2), function(f)
-			local frame = screen:frame()
-			frame.w = round(screenFrame.w / f)
-			return frame
-		end),
-		["Up"] = map(range(3, 1), function(f)
-			local frame = screen:frame()
-			frame.x = screenFrame.x
-			frame.y = screenFrame.y
-			frame.w = round(screenFrame.w)
-			frame.h = round(screenFrame.h / f)
-			return frame
-		end),
-		["Down"] = map(range(3, 1), function(f)
-			local frame = screen:frame()
-			frame.x = screenFrame.x + round(screenFrame.w / 3)
-			frame.y = screenFrame.y + round(screenFrame.h / f * (f - 1))
-			frame.w = round(screenFrame.w / 3)
-			frame.h = round(screenFrame.h / f)
-			return frame
-		end),
-	}
-
-	return frameSizes
-end
-
----@param screen hs.screen
----@param currentFrame hs.geometry
----@param type string
----@return hs.geometry
-local function findNextFrame(screen, currentFrame, type)
-	local framesOfType = frames(screen)[type]
-	for idx, frame in pairs(framesOfType) do
-		if framesEqual(frame, currentFrame) then
-			return framesOfType[idx + 1]
-		end
-	end
-
-	-- Default to the first available frame
-	return framesOfType[1]
-end
-
-local function windowMovement(keys, direction)
-	bind(keys, direction, function()
-		local win = hs.window.focusedWindow()
-
-		local foundFrame = findNextFrame(win:screen(), win:frame(), direction)
-
-		win:setFrame(foundFrame)
-	end)
-end
-
-windowMovement(hyper, "Right")
-windowMovement(hyper, "Left")
-windowMovement(hyper, "Up")
-windowMovement(hyper, "Down")
-
----@param screen hs.screen
----@param window hs.window
----@param direction string
-local function moveFrameToEdge(screen, window, direction)
-	local screenFrame = screen:frame()
-
-	local frameAtEdges = {
-		["Right"] = function()
-			local frame = window:frame()
-			frame.x = round(screenFrame.x + screenFrame.w - frame.w)
-			return frame
-		end,
-		["Left"] = function()
-			local frame = window:frame()
-			frame.x = screenFrame.x
-			return frame
-		end,
-		["Up"] = function()
-			local frame = window:frame()
-			frame.y = screenFrame.y
-			return frame
-		end,
-		["Down"] = function()
-			local frame = window:frame()
-			frame.y = round(screenFrame.y + screenFrame.h - frame.h)
-			return frame
-		end,
-	}
-
-	return frameAtEdges[direction]()
-end
-
--- Push the window up to the border of the screen
-local function push(modifier, directionKey)
-	bind(modifier, directionKey, function()
-		local win = hs.window.focusedWindow()
-
-		local foundFrame = moveFrameToEdge(win:screen(), win, directionKey)
-
-		win:setFrame(foundFrame)
-	end)
-end
-
-push(shiftHyper, "Right")
-push(shiftHyper, "Left")
-push(shiftHyper, "Up")
-push(shiftHyper, "Down")
-
 local function yabai(args, completion)
 	return function()
 		local yabai_output = ""
 		local yabai_error = ""
 		-- Runs in background very fast
-		local yabai_task = hs.task.new("/opt/homebrew/bin/yabai", nil, function(task, stdout, stderr)
+		local yabai_task = hs.task.new(yabai_bin, nil, function(task, stdout, stderr)
 			--print("stdout:"..stdout, "stderr:"..stderr)
 			if stdout ~= nil then
 				yabai_output = yabai_output .. stdout
@@ -263,13 +142,18 @@ bind(hyper, "l", yabai_focus("east"))
 
 local function yabai_swap(dir)
 	return exec(
-		"/opt/homebrew/bin/yabai -m window --swap "
-		.. dir
-		.. " || (/opt/homebrew/bin/yabai -m window --display "
-		.. dir
-		.. "; /opt/homebrew/bin/yabai -m display --focus "
-		.. dir
-		.. ")"
+		yabai_bin
+			.. " -m window --swap "
+			.. dir
+			.. " || ("
+			.. yabai_bin
+			.. " -m window --display "
+			.. dir
+			.. "; "
+			.. yabai_bin
+			.. " -m display --focus "
+			.. dir
+			.. ")"
 	)
 end
 -- swap windows
@@ -285,6 +169,20 @@ bind(hyper, "r", yabai({ "-m", "space", "--rotate", "270" }))
 bind(shiftHyper, "r", yabai({ "-m", "config", "--space", "mouse", "layout", "bsp" }))
 
 bind(hyper, "t", yabai({ "-m", "window", "--toggle", "float", "--grid", "4:4:1:1:2:2" }))
+bind(
+	shiftHyper,
+	"t",
+	yabai({ "-m", "config", "--space", "mouse", "layout" }, function(_, out)
+		local layout = string.match(out, "[a-zA-Z]+")
+		if layout == "bsp" then
+			hs.alert.show("Stack")
+			yabai({ "-m", "config", "--space", "mouse", "layout", "stack" })()
+		else
+			hs.alert.show("BSP")
+			yabai({ "-m", "config", "--space", "mouse", "layout", "bsp" })()
+		end
+	end)
+)
 
 -- maximize a window
 bind(hyper, "f", yabai({ "-m", "window", "--toggle", "zoom-fullscreen" }))
@@ -361,3 +259,48 @@ bind(hyper, "s", yabai({ "-m", "window", "--toggle", "split" }))
 
 -- Move window to a different screen
 bind(hyper, "Tab", yabai({ "-m", "window", "--display", "next" }))
+
+bind(
+	hyper,
+	"`",
+	yabai({ "-m", "config", "--space", "mouse", "layout" }, function(_, out)
+		local layout = string.match(out, "[a-zA-Z]+")
+		if layout == "stack" then
+			exec(yabai_bin .. " -m window --focus stack.next || " .. yabai_bin .. " -m window --focus stack.first")()
+		else
+			local windows = hs.window.visibleWindows()
+			local mainScreen = hs.screen.mainScreen()
+			local focusedWindow = hs.window.focusedWindow()
+			for index, window in ipairs(windows) do
+				if
+					window:isVisible()
+					and window:isStandard()
+					and window:screen():id() == mainScreen:id()
+					and window:id() ~= focusedWindow:id()
+				then
+					window:focus()
+					break
+				end
+			end
+		end
+	end)
+)
+
+local delta = "40"
+bind(
+	hyper,
+	"left",
+	exec(
+		yabai_bin
+			.. " -m window --resize left:-"
+			.. delta
+			.. ":0 || "
+			.. yabai_bin
+			.. "-m window --resize right:-"
+			.. delta
+			.. ":0"
+	)
+)
+bind(hyper, "right", yabai({ "-m", "window", "--resize", "left:" .. delta .. ":0" }))
+bind(hyper, "up", yabai({ "-m", "window", "--resize", "top:0:-" .. delta }))
+bind(hyper, "down", yabai({ "-m", "window", "--resize", "top:0:" .. delta }))
