@@ -29,6 +29,8 @@ local cmp_kinds = {
 	TypeParameter = "",
 }
 
+vim.api.nvim_set_hl(0, "CmpGhostText", { link = "NonText", default = true })
+
 cmp.setup({
 	preselect = cmp.PreselectMode.None,
 	formatting = {
@@ -53,7 +55,7 @@ cmp.setup({
 		["<C-u>"] = cmp.mapping.scroll_docs(-4),
 		["<C-d>"] = cmp.mapping.scroll_docs(4),
 
-		["<C-a>"] = cmp.mapping.complete(),
+		["<C-Space>"] = cmp.mapping.complete(),
 		["<C-e>"] = cmp.mapping.abort(),
 
 		["<CR>"] = cmp.mapping({
@@ -67,8 +69,18 @@ cmp.setup({
 			s = cmp.mapping.confirm({ select = true }),
 			c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
 		}),
-		["<Tab>"] = cmp_action.luasnip_next(),
-		["<S-Tab>"] = cmp_action.luasnip_shift_supertab(),
+		["<Tab>"] = cmp.mapping(function(fallback)
+			if cmp.visible() then
+				if #cmp.get_entries() == 1 then
+					cmp.confirm({ select = true })
+				else
+					cmp.select_next_item()
+				end
+			else
+				fallback()
+			end
+		end, { "i", "s" }),
+		["<S-Tab>"] = cmp.mapping.select_prev_item(),
 
 		-- Navigate between snippet placeholder
 		["<C-f>"] = cmp_action.luasnip_jump_forward(),
@@ -79,4 +91,9 @@ cmp.setup({
 		{ name = "luasnip" }, -- For luasnip users.
 		{ name = "path" },
 	}),
+	experimental = {
+		ghost_text = {
+			hl_group = "CmpGhostText",
+		},
+	},
 })
