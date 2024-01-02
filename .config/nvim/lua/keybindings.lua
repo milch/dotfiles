@@ -16,7 +16,7 @@ bind("n", "<C-d>", "<C-d>zz", { desc = "Move one page down (keep cursor centered
 bind("n", "<C-u>", "<C-u>zz", { desc = "Move one page up (keep cursor centered)" })
 bind("n", "<C-o>", "<C-o>zz", { desc = "Move to previous location (keep cursor centered)" })
 
-bind("x", "<C-p>", [["_dP]], { desc = "Replace the selection with the paste buffer, preserve the buffer" })
+bind("v", "<leader>p", [["_dP]], { desc = "Replace the selection with the paste buffer, preserve the buffer" })
 bind({ "n", "v" }, "<leader>y", [["+y]], { desc = "Copy to system clipboard" })
 bind("n", "<leader>Y", [["+Y]], { desc = "Copy to system clipboard" })
 
