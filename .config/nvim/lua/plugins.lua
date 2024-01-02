@@ -347,14 +347,45 @@ local specs = {
 		end,
 	},
 	{
-		"jay-babu/mason-null-ls.nvim",
-		event = { "BufReadPre", "BufNewFile" },
-		dependencies = {
-			"williamboman/mason.nvim",
-			"nvimtools/none-ls.nvim",
+		"williamboman/mason.nvim",
+		cmd = { "Mason", "MasonLog", "MasonUpdate" },
+		opts = {
+			ensure_installed = {
+				"cfn_lint",
+				"eslint_d",
+				"fish_indent",
+				"flake8",
+				"jsonlint",
+				"markdown_lint",
+				"markdownlint",
+				"prettier",
+				"prettierd",
+				"rubocop",
+				"shellcheck",
+				"shfmt",
+				"stylua",
+				"swift_format",
+				"yamlfmt",
+				"yamllint",
+			},
 		},
+	},
+	{
+		"mfussenegger/nvim-lint",
+		event = require("editor.nvim-lint").events,
 		config = function()
-			require("editor.mason-null-ls")
+			require("editor.nvim-lint").setup()
+		end,
+	},
+	{
+		"stevearc/conform.nvim",
+		event = { "BufWritePre" },
+		cmd = { "ConformInfo" },
+		init = function()
+			vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+		end,
+		config = function()
+			require("editor.conform")
 		end,
 	},
 
