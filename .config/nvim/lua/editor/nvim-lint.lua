@@ -10,7 +10,6 @@ M.linters_by_ft = {
 	json = { "cfn_lint" },
 	ruby = { "ruby" },
 	html = { "tidy" },
-	htmlhugo = { "tidy" },
 	typescript = { "eslint_d" },
 	javascript = { "eslint_d" },
 	python = { "flake8" },

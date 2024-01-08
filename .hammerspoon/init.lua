@@ -16,53 +16,6 @@ local function fileExists(name)
 	return hs.fs.displayName(name) ~= nil
 end
 
----Round `x` to the nearest integer
----@param x number
----@return number
-local function round(x)
-	return x + 0.5 - (x + 0.5) % 1
-end
-
----Compares frames to check for equality
----@param lhs hs.geometry
----@param rhs hs.geometry
----@return boolean
-local function framesEqual(lhs, rhs)
-	local deltaX = lhs.x - rhs.x
-	local deltaY = lhs.y - rhs.y
-	local deltaH = lhs.h - rhs.h
-	local deltaW = lhs.w - rhs.w
-
-	local rms = (deltaX ^ 2 + deltaY ^ 2 + deltaH ^ 2 + deltaW ^ 2) ^ 0.5
-	return rms <= 10.0
-end
-
----Applies `func` to each member of the array and returns a new array with the result
----@generic T
----@generic U
----@param array T[]
----@param func fun(elem: T): U
----@return U[]
-local function map(array, func)
-	local new_array = {}
-	for idx, value in ipairs(array) do
-		new_array[idx] = func(value)
-	end
-	return new_array
-end
-
----Returns an array with `num` elements starting at index `start`, where each value is equal to the index
----@param num number
----@param start number
----@return number[]
-local function range(num, start)
-	local arr = {}
-	for i = start, num, 1 do
-		arr[#arr + 1] = i
-	end
-	return arr
-end
-
 -- Auto reload config on changes
 local function reloadConfig(files)
 	local doReload = false

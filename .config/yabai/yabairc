@@ -23,6 +23,11 @@ yabai -m rule --add app="(^Hammerspoon$)" manage=off
 yabai -m rule --add app="(^FaceTime$)" manage=off
 yabai -m rule --add app="(^Cisco AnyConnect Secure Mobility Client$)" manage=off
 yabai -m rule --add app="(^Dash$)" manage=off
-# yabai -m rule --add app="(^Finder$)" title="Copying..." manage=off
+yabai -m rule --add app="(^.*iStat Menus Status.*$)" mouse_follows_focus=off manage=off
+yabai -m rule --add app="(^Finder$)" title="Copying..." manage=off
+
+# Re-focus an active window when closing the last window of an application
+# See https://github.com/koekeishiya/yabai/issues/1445
+yabai -m signal --add event=window_destroyed active=yes action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse &> /dev/null || yabai -m window --focus \$(yabai -m query --windows --space | jq .[0].id) &> /dev/null"
 
 # vim:ft=bash

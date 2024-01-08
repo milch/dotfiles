@@ -17,11 +17,11 @@ def install_terminfo
 end
 
 def install_tmux_plugin_manager
-  return if Dir.exist?(File.expand_path('~/.tmux/plugins/tpm'))
+  return if Dir.exist?(File.expand_path('~/.config/tmux/plugins/tpm'))
 
   puts 'Installing tpm...'
 
-  `git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm`
+  `git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm`
 end
 
 def install_packer_nvim
@@ -122,7 +122,13 @@ def install_bat_theme
   `bat cache --build`
 end
 
+def set_key_repeat
+  `defaults write -g InitialKeyRepeat -int 10` # normal minimum is 15 (225 ms)
+  `defaults write -g KeyRepeat -int 1` # normal minimum is 2 (30 ms)`
+end
+
 def run_install(options)
+  set_key_repeat if options[:set_key_repeat]
   symlink_files if options[:symlink]
   install_brew if options[:install_brew]
   brew_bundle if options[:brew_bundle]
@@ -147,6 +153,7 @@ def parse_options(args)
     parser.on('--tmux', 'Installs tmux related dependencies (e.g. package manager)')
     parser.on('--fonts', 'Patches and installs fonts with Nerd Fonts patcher')
     parser.on('--bat_theme', 'Installs themes for bat')
+    parser.on('--set_key_repeat', 'Sets the key repeat speed')
   end.parse!(args, into: options)
   options
 end
@@ -155,7 +162,7 @@ def install(args)
   options = parse_options(args)
 
   if options.empty?
-    %i[symlink install_brew brew_bundle install_runtimes nvim tmux fonts bat_theme].each do |opt|
+    %i[symlink install_brew brew_bundle install_runtimes nvim tmux fonts bat_theme set_key_repeat].each do |opt|
       options[opt] = true
     end
   end

@@ -565,6 +565,33 @@ local specs = {
 		config = true,
 		cmd = { "Neogit" },
 	},
+	{
+		"stevearc/resession.nvim",
+		event = "BufReadPre",
+		init = function()
+			vim.api.nvim_create_autocmd("VimEnter", {
+				callback = function()
+					-- Only load the session if nvim was started with no args
+					if vim.fn.argc(-1) == 0 then
+						-- Save these to a different directory, so our manual sessions don't get polluted
+						require("resession").load(vim.fn.getcwd(), { dir = "dirsession", silence_errors = true })
+					end
+				end,
+			})
+			vim.api.nvim_create_autocmd("VimLeavePre", {
+				callback = function()
+					require("resession").save(vim.fn.getcwd(), { dir = "dirsession", notify = false })
+				end,
+			})
+		end,
+		opts = {
+			autosave = {
+				enabled = true,
+				interval = 60,
+				notify = false,
+			},
+		},
+	},
 }
 
 local loaded, local_specs = pcall(require, "local")

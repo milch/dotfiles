@@ -33,15 +33,19 @@ function update_theme
 end
 
 function set_color_scheme
-    if test (defaults read -g AppleInterfaceStyle 2>/dev/null || echo '0') = Dark
+    if test "$apple_interface_style" = dark
         yes | fish_config theme save 'Catppuccin Macchiato'
         set -gx BAT_THEME Catppuccin-macchiato
-        update_theme dark
     else
         yes | fish_config theme save 'Catppuccin Latte'
         set -gx BAT_THEME Catppuccin-latte
-        update_theme light
     end
+    update_theme "$apple_interface_style"
+end
+
+function dark_notify
+    set current_dir (dirname (status --current-filename))
+    $current_dir/dark_notify.sh &
 end
 
 status --is-interactive; and set_color_scheme
@@ -53,10 +57,13 @@ status --is-interactive; and test -e ~/.config/fish/local.fish; and source ~/.co
 alias cp='rsync --info=progress2'
 
 if status --is-interactive
-    function update_color_scheme -d 'Set color scheme after every call' --on-event fish_postexec
+    function update_color_scheme -d 'Set color scheme after every call' --on-variable apple_interface_style
         set_color_scheme
     end
 
+    dark_notify
+
     fish_vi_key_bindings
     starship init fish | source
+    zoxide init fish | source
 end
