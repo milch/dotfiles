@@ -8,6 +8,8 @@ local extend = function(t1, t2)
 	return vim.tbl_extend("keep", t1, t2)
 end
 
+local fileEvents = { "BufReadPost", "BufNewFile", "User FixResession" }
+
 bind("n", "<leader>l", function()
 	require("lazy").home()
 end, extend(silentNoremap, { desc = "Show lazy plugin manager" }))
@@ -27,7 +29,7 @@ local specs = {
 	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
-		event = { "BufReadPost", "BufNewFile" },
+		event = fileEvents,
 		opts = require("editor.nvim-treesitter"),
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter-textobjects",
@@ -137,7 +139,7 @@ local specs = {
 			"catppuccin",
 		},
 		config = function()
-			require("ui.nvim-tree").configure_tree(false)
+			require("ui.nvim-tree").configure_tree(true)
 		end,
 	},
 
@@ -158,7 +160,7 @@ local specs = {
 		config = function()
 			require("ui.indent-blankline")
 		end,
-		event = "BufReadPost",
+		event = fileEvents,
 		dependencies = {
 			"catppuccin",
 		},
@@ -166,7 +168,7 @@ local specs = {
 
 	{
 		"kevinhwang91/nvim-ufo",
-		event = "BufReadPost",
+		event = fileEvents,
 		dependencies = {
 			"kevinhwang91/promise-async",
 			{
@@ -190,7 +192,7 @@ local specs = {
 
 	{
 		"lewis6991/gitsigns.nvim",
-		event = "BufReadPost",
+		event = fileEvents,
 		opts = {
 			numhl = true,
 		},
@@ -199,7 +201,7 @@ local specs = {
 	-- Completion
 	{
 		"VonHeikemen/lsp-zero.nvim",
-		event = { "BufReadPost", "BufNewFile" },
+		event = fileEvents,
 		branch = "v3.x",
 		dependencies = {
 			"williamboman/mason.nvim",
@@ -392,7 +394,7 @@ local specs = {
 	-- Utils
 	{
 		"pocco81/auto-save.nvim",
-		event = "BufReadPost",
+		event = fileEvents,
 		config = function()
 			require("auto-save").setup({
 				-- Only trigger when changing files. The default is annoying with linters
@@ -410,7 +412,7 @@ local specs = {
 	{
 		-- Automatically set the indent width based on what is already used in the file
 		"tpope/vim-sleuth",
-		event = { "BufReadPost" },
+		event = fileEvents,
 	},
 
 	{
@@ -575,6 +577,7 @@ local specs = {
 					if vim.fn.argc(-1) == 0 then
 						-- Save these to a different directory, so our manual sessions don't get polluted
 						require("resession").load(vim.fn.getcwd(), { dir = "dirsession", silence_errors = true })
+						vim.cmd("doautocmd User FixResession")
 					end
 				end,
 			})
@@ -591,6 +594,124 @@ local specs = {
 				notify = false,
 			},
 		},
+	},
+	{
+		"epwalsh/obsidian.nvim",
+		version = "*", -- recommended, use latest release instead of latest commit
+		lazy = true,
+		ft = "markdown",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"hrsh7th/nvim-cmp",
+			"nvim-telescope/telescope.nvim",
+			"nvim-treesitter/nvim-treesitter",
+			-- see below for full list of optional dependencies 👇
+		},
+		cmd = {
+			"ObsidianSearch",
+			"ObsidianNew",
+			"ObsidianQuickSwitch",
+			"ObsidianTags",
+			"ObsidianToday",
+			"ObsidianYesterday",
+			"ObsidianTomorrow",
+		},
+		opts = {
+			workspaces = {
+				{
+					name = "notes",
+					path = "~/Notes/",
+				},
+			},
+			daily_notes = {
+				folder = "0 Inbox",
+			},
+			notes_subdir = "0 Inbox",
+			follow_url_func = function(url)
+				vim.fn.jobstart({ "open", url })
+			end,
+			completion = {
+				min_chars = 1,
+				new_notes_location = "notes_subdir",
+			},
+			-- Optional, customize how names/IDs for new notes are created.
+			note_id_func = function(title)
+				return title
+			end,
+
+			open_app_foreground = true,
+
+			use_advanced_uri = true,
+
+			mappings = {
+				-- Overrides the 'gf' mapping to work on markdown/wiki links within your vault.
+				["gf"] = {
+					action = function()
+						return require("obsidian").util.gf_passthrough()
+					end,
+					opts = { noremap = false, expr = true, buffer = true },
+				},
+				-- Toggle check-boxes.
+				["<CR>"] = {
+					action = function()
+						return require("obsidian").util.toggle_checkbox()
+					end,
+					opts = { buffer = true },
+				},
+			},
+
+			attachments = {
+				img_folder = "Attachments",
+			},
+			-- Optional, for templates (see below).
+			templates = {
+				subdir = "Templates",
+				date_format = "%Y-%m-%d",
+				time_format = "%H:%M",
+				-- A map for custom variables, the key should be the variable and the value a function
+				substitutions = {},
+			},
+			note_frontmatter_func = function(note)
+				local out = {
+					id = note.id,
+					aliases = note.aliases,
+					tags = note.tags,
+					created_date = os.date("%Y-%m-%d", os.time()),
+				}
+				-- `note.metadata` contains any manually added fields in the frontmatter.
+				-- So here we just make sure those fields are kept in the frontmatter.
+				if note.metadata ~= nil and not vim.tbl_isempty(note.metadata) then
+					for k, v in pairs(note.metadata) do
+						out[k] = v
+					end
+				end
+				return out
+			end,
+		},
+		init = function()
+			local set_opts = function()
+				vim.opt_local.conceallevel = 1
+				local opts = { noremap = true, silent = true, buffer = true }
+
+				vim.keymap.set("n", "<leader>f", ":ObsidianQuickSwitch<CR>", opts)
+				vim.keymap.set("n", "<leader>od", ":ObsidianToday<CR>", opts)
+				vim.keymap.set("n", "<leader>oo", ":ObsidianOpen<CR>", opts)
+				vim.keymap.set("n", "<leader>ob", ":ObsidianBacklinks<CR>", opts)
+				vim.keymap.set("n", "<leader>ot", ":ObsidianTemplate<CR>", opts)
+				vim.keymap.set("n", "<leader>oqs", ":ObsidianQuickSwitch<CR>", opts)
+				vim.keymap.set("n", "<leader>of", ":ObsidianSearch<CR>", opts)
+				vim.keymap.set("n", "<leader>op", ":ObsidianPasteImg<CR>", opts)
+				vim.keymap.set("v", "<leader>ol", ":ObsidianLinkNew<CR>", opts)
+			end
+			vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
+				pattern = "*.md",
+				callback = set_opts,
+			})
+			vim.api.nvim_create_autocmd({ "User" }, {
+				pattern = "FixResession",
+				callback = set_opts,
+			})
+		end,
 	},
 }
 

@@ -27,6 +27,13 @@ M.linters = {
 			)
 		end,
 	},
+	markdownlint = {
+		condition = function(ctx)
+			local normalized_obsidian_vault = vim.fs.normalize("~/Notes/")
+			local normalized_path = vim.fs.normalize(ctx.filename)
+			return normalized_path:sub(1, #normalized_obsidian_vault) ~= normalized_obsidian_vault
+		end,
+	},
 	cfn_lint = {
 		condition = function()
 			local lines = vim.api.nvim_buf_get_lines(0, 0, 10, false)

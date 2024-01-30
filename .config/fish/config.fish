@@ -1,4 +1,4 @@
-set -gx PATH /Applications/WezTerm.app/Contents/MacOS /opt/homebrew/bin /usr/local/bin $HOME/.cargo/bin $PATH
+set -gx PATH /Applications/WezTerm.app/Contents/MacOS /opt/homebrew/bin /usr/local/bin $HOME/.cargo/bin $HOME/.local/bin $PATH
 
 if status --is-interactive; and not functions -q fisher
     set -q XDG_CONFIG_HOME; or set XDG_CONFIG_HOME ~/.config
