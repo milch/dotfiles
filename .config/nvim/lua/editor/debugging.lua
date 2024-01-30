@@ -26,7 +26,7 @@ require("hydra")({
 		},
 	},
 	mode = { "n" },
-	body = "<leader>x",
+	body = "<leader>xd",
 	heads = {
 		{ "H", dap.step_out, { desc = "step out" } },
 		{ "J", dap.step_over, { desc = "step over" } },

@@ -14,7 +14,7 @@ require("conform").setup({
 		typescript = { { "prettierd", "prettier" } },
 		json = { { "prettierd", "prettier", "jq" } },
 		ruby = { "rubocop" },
-		markdown = { "markdown_lint" },
+		markdown = { "markdownlint" },
 		yaml = { "yamlfmt" },
 	},
 

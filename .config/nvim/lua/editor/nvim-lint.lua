@@ -21,10 +21,11 @@ M.linters_by_ft = {
 M.linters = {
 	eslint_d = {
 		condition = function(ctx)
-			return vim.fs.find(
+			local found_files = vim.fs.find(
 				{ ".eslintrc.js", ".eslintrc.cjs", ".eslintrc.yaml", ".eslintrc.yml", ".eslintrc.json" },
-				{ path = ctx.filename, upward = true }
+				{ path = ctx.filename, upward = true, stop = vim.loop.os_homedir() }
 			)
+			return #found_files > 0
 		end,
 	},
 	markdownlint = {

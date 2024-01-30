@@ -229,7 +229,7 @@ local specs = {
 
 	{
 		"jay-babu/mason-nvim-dap.nvim",
-		keys = { "<leader>x" },
+		keys = { "<leader>xd" },
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"mfussenegger/nvim-dap",
@@ -418,6 +418,10 @@ local specs = {
 	{
 		"anuvyklack/hydra.nvim",
 		lazy = true,
+		keys = { "<leader>xg" },
+		config = function()
+			require("util.hydra")
+		end,
 	},
 
 	{
@@ -427,35 +431,32 @@ local specs = {
 			{
 				"n",
 				[[<Cmd>execute('normal! ' . v:count1 . 'nzzzv')<CR><Cmd>lua require('hlslens').start()<CR>]],
-				extend(silentNoremap, { desc = "Go to next search result" }),
+				desc = "Go to next search result",
 			},
 			{
 				"N",
 				[[<Cmd>execute('normal! ' . v:count1 . 'Nzzzv')<CR><Cmd>lua require('hlslens').start()<CR>]],
-				extend(silentNoremap, { desc = "Go to previous search result" }),
+				desc = "Go to previous search result",
 			},
 			{
 				"*",
 				[[*zz<Cmd>lua require('hlslens').start()<CR>]],
-				extend(silentNoremap, { desc = "Find word under cursor" }),
+				desc = "Find word under cursor",
 			},
 			{
 				"#",
 				[[#zz<Cmd>lua require('hlslens').start()<CR>]],
-				extend(silentNoremap, { desc = "Find word under cursor before current position" }),
+				desc = "Find word under cursor before current position",
 			},
 			{
 				"g*",
 				[[g*zz<Cmd>lua require('hlslens').start()<CR>]],
-				extend(silentNoremap, { desc = "Find word under cursor, including partial matches" }),
+				desc = "Find word under cursor, including partial matches",
 			},
 			{
 				"g#",
 				[[g#zz<Cmd>lua require('hlslens').start()<CR>]],
-				extend(
-					silentNoremap,
-					{ desc = "Find word under cursor before current position, including partial matches" }
-				),
+				desc = "Find word under cursor before current position, including partial matches",
 			},
 		},
 		opts = {},
@@ -487,7 +488,7 @@ local specs = {
 		},
 		cmd = { "TroubleToggle", "Trouble", "TroubleClose", "TroubleRefresh" },
 		keys = {
-			{ "<leader>d", ":TroubleToggle<CR>", { desc = "Toggle Trouble window" } },
+			{ "<leader>d", ":TroubleToggle<CR>", desc = "Toggle Trouble window" },
 		},
 	},
 	{
@@ -541,20 +542,40 @@ local specs = {
 			{
 				"<leader>Hr",
 				cmd([[require("harpoon"):list:remove()]]),
-				{ desc = "Remove file from Harpoon quick menu" },
+				desc = "Remove file from Harpoon quick menu",
 			},
 
-			{ "<leader>Ha", cmd([[require("harpoon"):list():append()]]), { desc = "Add file to Harpoon quick menu" } },
+			{ "<leader>Ha", cmd([[require("harpoon"):list():append()]]), desc = "Add file to Harpoon quick menu" },
 			{
 				"<leader>h",
 				cmd([[
 				require("harpoon").ui:toggle_quick_menu(require("harpoon"):list())
 				]]),
-				{ desc = "Toggle harpoon quick menu" },
+				desc = "Toggle harpoon quick menu",
+			},
+			{
+				"<M-7>", -- Right hand
+				cmd([[ require("harpoon"):list():select(1) ]]),
+				desc = "Go to harpoon file #1",
+			},
+			{
+				"<M-8>", -- Right hand
+				cmd([[ require("harpoon"):list():select(2) ]]),
+				desc = "Go to harpoon file #2",
+			},
+			{
+				"<M-9>", -- Right hand
+				cmd([[ require("harpoon"):list():select(3) ]]),
+				desc = "Go to harpoon file #3",
+			},
+			{
+				"<M-0>", -- Right hand
+				cmd([[ require("harpoon"):list():select(4) ]]),
+				desc = "Go to harpoon file #4",
 			},
 		},
 		config = function()
-			require("util.harpoon")
+			require("util.harpoon").setup()
 		end,
 	},
 	{
@@ -564,7 +585,11 @@ local specs = {
 			"sindrets/diffview.nvim",
 			"nvim-telescope/telescope.nvim",
 		},
-		config = true,
+		opts = {
+			integration = {
+				diffview = true,
+			},
+		},
 		cmd = { "Neogit" },
 	},
 	{
@@ -575,7 +600,20 @@ local specs = {
 				callback = function()
 					-- Only load the session if nvim was started with no args
 					if vim.fn.argc(-1) == 0 then
-						-- Save these to a different directory, so our manual sessions don't get polluted
+						local args = {}
+						for _, arg in pairs(vim.v.argv) do
+							if
+								arg ~= "nvim"
+								and arg ~= "--embed"
+								-- Commands like +Man!
+								and not string.find(arg, "^+")
+								-- ARGF
+								and not string.find(arg, "^-")
+							then
+								args[#args + 1] = arg
+							end
+						end
+						if #args ~= 0 then
 						require("resession").load(vim.fn.getcwd(), { dir = "dirsession", silence_errors = true })
 						vim.cmd("doautocmd User FixResession")
 					end

@@ -1,4 +1,5 @@
 local hyper = { "ctrl", "alt", "cmd" }
+local fnHyper = { "ctrl", "alt", "cmd", "fn" }
 local shiftHyper = { "ctrl", "alt", "cmd", "shift" }
 local bind = hs.hotkey.bind
 
