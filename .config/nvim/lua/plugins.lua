@@ -706,8 +706,7 @@ local specs = {
 	{
 		"epwalsh/obsidian.nvim",
 		version = "*", -- recommended, use latest release instead of latest commit
-		lazy = true,
-		ft = "markdown",
+		lazy = false,
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"hrsh7th/nvim-cmp",
@@ -715,14 +714,16 @@ local specs = {
 			"nvim-treesitter/nvim-treesitter",
 			-- see below for full list of optional dependencies 👇
 		},
-		cmd = {
-			"ObsidianSearch",
-			"ObsidianNew",
-			"ObsidianQuickSwitch",
-			"ObsidianTags",
-			"ObsidianToday",
-			"ObsidianYesterday",
-			"ObsidianTomorrow",
+		keys = {
+			{ "<leader>od", ":ObsidianToday<CR>" },
+			{ "<leader>oo", ":ObsidianOpen<CR>" },
+			{ "<leader>ob", ":ObsidianBacklinks<CR>" },
+			{ "<leader>ot", ":ObsidianTemplate<CR>" },
+			{ "<leader>oqs", ":ObsidianQuickSwitch<CR>" },
+			{ "<leader>of", ":ObsidianSearch<CR>" },
+			{ "<leader>op", ":ObsidianPasteImg<CR>" },
+			{ "<leader>ol", ":ObsidianLinkNew<CR>" },
+			{ "<leader>f", ":ObsidianQuickSwitch<CR>" },
 		},
 		opts = {
 			workspaces = {
@@ -796,29 +797,15 @@ local specs = {
 				return out
 			end,
 		},
+		cond = function()
+			local normalized_obsidian_vault = vim.fs.normalize("~/Notes/")
+			local normalized_path = vim.fs.normalize(vim.fn.getcwd())
+			return normalized_path:sub(1, #normalized_obsidian_vault) == normalized_obsidian_vault
+		end,
 		init = function()
-			local set_opts = function()
-				vim.opt_local.conceallevel = 1
-				local opts = { noremap = true, silent = true, buffer = true }
-
-				vim.keymap.set("n", "<leader>f", ":ObsidianQuickSwitch<CR>", opts)
-				vim.keymap.set("n", "<leader>od", ":ObsidianToday<CR>", opts)
-				vim.keymap.set("n", "<leader>oo", ":ObsidianOpen<CR>", opts)
-				vim.keymap.set("n", "<leader>ob", ":ObsidianBacklinks<CR>", opts)
-				vim.keymap.set("n", "<leader>ot", ":ObsidianTemplate<CR>", opts)
-				vim.keymap.set("n", "<leader>oqs", ":ObsidianQuickSwitch<CR>", opts)
-				vim.keymap.set("n", "<leader>of", ":ObsidianSearch<CR>", opts)
-				vim.keymap.set("n", "<leader>op", ":ObsidianPasteImg<CR>", opts)
-				vim.keymap.set("v", "<leader>ol", ":ObsidianLinkNew<CR>", opts)
-			end
-			vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
-				pattern = "*.md",
-				callback = set_opts,
-			})
-			vim.api.nvim_create_autocmd({ "User" }, {
-				pattern = "FixResession",
-				callback = set_opts,
-			})
+			local opts = { noremap = true, silent = true, buffer = true }
+			vim.keymap.set("n", "<leader>f", ":ObsidianQuickSwitch<CR>", opts)
+			vim.opt_local.conceallevel = 1
 		end,
 	},
 }
