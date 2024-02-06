@@ -13,7 +13,7 @@ vim.opt.smartcase = true
 -- Turn off backups
 vim.opt.backup = false
 vim.opt.writebackup = true
-vim.opt.swapfile = true
+vim.opt.swapfile = false
 
 -- Persistent undos for working with undotree
 vim.opt.undodir = os.getenv("HOME") .. "/.local/share/nvim/undodir"

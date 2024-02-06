@@ -8,7 +8,77 @@ local extend = function(t1, t2)
 	return vim.tbl_extend("keep", t1, t2)
 end
 
-local fileEvents = { "BufReadPost", "BufNewFile", "User FixResession" }
+local lazy_file_events = { "BufReadPost", "BufNewFile", "BufWritePre" }
+
+-- https://github.com/LazyVim/LazyVim/blob/a50f92f7550fb6e9f21c0852e6cb190e6fcd50f5/lua/lazyvim/util/plugin.lua#L60
+local function lazy_file()
+	local use_lazy_file = vim.fn.argc(-1) > 0
+
+	-- Add support for the LazyFile event
+	local Event = require("lazy.core.handler.event")
+
+	if use_lazy_file then
+		-- We'll handle delayed execution of events ourselves
+		Event.mappings.LazyFile = { id = "LazyFile", event = "User", pattern = "LazyFile" }
+		Event.mappings["User LazyFile"] = Event.mappings.LazyFile
+	else
+		-- Don't delay execution of LazyFile events, but let lazy know about the mapping
+		Event.mappings.LazyFile = { id = "LazyFile", event = { "BufReadPost", "BufNewFile", "BufWritePre" } }
+		Event.mappings["User LazyFile"] = Event.mappings.LazyFile
+		return
+	end
+
+	local events = {} ---@type {event: string, buf: number, data?: any}[]
+
+	local done = false
+	local function load()
+		if #events == 0 or done then
+			return
+		end
+		done = true
+		vim.api.nvim_del_augroup_by_name("lazy_file")
+
+		---@type table<string,string[]>
+		local skips = {}
+		for _, event in ipairs(events) do
+			skips[event.event] = skips[event.event] or Event.get_augroups(event.event)
+		end
+
+		vim.api.nvim_exec_autocmds("User", { pattern = "LazyFile", modeline = false })
+		for _, event in ipairs(events) do
+			if vim.api.nvim_buf_is_valid(event.buf) then
+				Event.trigger({
+					event = event.event,
+					exclude = skips[event.event],
+					data = event.data,
+					buf = event.buf,
+				})
+				if vim.bo[event.buf].filetype then
+					Event.trigger({
+						event = "FileType",
+						buf = event.buf,
+					})
+				end
+			end
+		end
+		vim.api.nvim_exec_autocmds("CursorMoved", { modeline = false })
+		events = {}
+	end
+
+	-- schedule wrap so that nested autocmds are executed
+	-- and the UI can continue rendering without blocking
+	load = vim.schedule_wrap(load)
+
+	vim.api.nvim_create_autocmd(lazy_file_events, {
+		group = vim.api.nvim_create_augroup("lazy_file", { clear = true }),
+		callback = function(event)
+			table.insert(events, event)
+			load()
+		end,
+	})
+end
+
+lazy_file()
 
 bind("n", "<leader>l", function()
 	require("lazy").home()
@@ -29,7 +99,6 @@ local specs = {
 	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
-		event = fileEvents,
 		opts = require("editor.nvim-treesitter"),
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter-textobjects",
@@ -160,7 +229,7 @@ local specs = {
 		config = function()
 			require("ui.indent-blankline")
 		end,
-		event = fileEvents,
+		event = { "LazyFile" },
 		dependencies = {
 			"catppuccin",
 		},
@@ -168,7 +237,7 @@ local specs = {
 
 	{
 		"kevinhwang91/nvim-ufo",
-		event = fileEvents,
+		event = { "LazyFile" },
 		dependencies = {
 			"kevinhwang91/promise-async",
 			{
@@ -192,7 +261,7 @@ local specs = {
 
 	{
 		"lewis6991/gitsigns.nvim",
-		event = fileEvents,
+		event = { "LazyFile" },
 		opts = {
 			numhl = true,
 		},
@@ -201,7 +270,7 @@ local specs = {
 	-- Completion
 	{
 		"VonHeikemen/lsp-zero.nvim",
-		event = fileEvents,
+		event = { "LazyFile" },
 		branch = "v3.x",
 		dependencies = {
 			"williamboman/mason.nvim",
@@ -394,7 +463,7 @@ local specs = {
 	-- Utils
 	{
 		"pocco81/auto-save.nvim",
-		event = fileEvents,
+		event = { "LazyFile" },
 		config = function()
 			require("auto-save").setup({
 				-- Only trigger when changing files. The default is annoying with linters
@@ -412,7 +481,7 @@ local specs = {
 	{
 		-- Automatically set the indent width based on what is already used in the file
 		"tpope/vim-sleuth",
-		event = fileEvents,
+		event = { "LazyFile" },
 	},
 
 	{
@@ -613,9 +682,10 @@ local specs = {
 								args[#args + 1] = arg
 							end
 						end
-						if #args ~= 0 then
-						require("resession").load(vim.fn.getcwd(), { dir = "dirsession", silence_errors = true })
-						vim.cmd("doautocmd User FixResession")
+						if #args == 0 then
+							require("resession").load(vim.fn.getcwd(), { dir = "dirsession", silence_errors = false })
+							vim.cmd("doautocmd BufReadPost")
+						end
 					end
 				end,
 			})
