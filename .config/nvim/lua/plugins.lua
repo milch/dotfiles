@@ -803,9 +803,14 @@ local specs = {
 			return normalized_path:sub(1, #normalized_obsidian_vault) == normalized_obsidian_vault
 		end,
 		init = function()
-			local opts = { noremap = true, silent = true, buffer = true }
-			vim.keymap.set("n", "<leader>f", ":ObsidianQuickSwitch<CR>", opts)
-			vim.opt_local.conceallevel = 1
+			vim.api.nvim_create_autocmd({ "BufEnter" }, {
+				group = vim.api.nvim_create_augroup("obsidian", { clear = true }),
+				callback = function()
+					local opts = { noremap = true, silent = true, buffer = true }
+					vim.keymap.set("n", "<leader>f", ":ObsidianQuickSwitch<CR>", opts)
+					vim.opt_local.conceallevel = 2
+				end,
+			})
 		end,
 	},
 }
