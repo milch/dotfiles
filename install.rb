@@ -11,8 +11,9 @@ PYTHON_VERSION = '3.9.1'
 def install_terminfo
   Dir.chdir(File.expand_path('~')) do
     puts 'Installing terminfo files...'
-    `/opt/homebrew/opt/ncurses/bin/infocmp -x tmux-256color > /tmp/tmux-256color.terminfo.txt`
-    `/opt/homebrew/opt/ncurses/bin/tic -o ~/.terminfo /tmp/tmux-256color.terminfo.txt`
+    terminfo_dir = File.join(File.expand_path('~'), '.terminfo', '74')
+    FileUtils.mkdir_p(terminfo_dir)
+    `cp /opt/homebrew/Cellar/ncurses/6.4/share/terminfo/74/tmux-256color #{terminfo_dir}`
   end
 end
 

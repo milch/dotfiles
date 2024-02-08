@@ -19,15 +19,15 @@
 )
    
 (defalias
- home_a (tap-hold-next-release 200 a lsft)
- home_s (tap-hold-next-release 200 s lctl)
- home_d (tap-hold-next-release 200 d lalt)
- home_f (tap-hold-next-release 200 f lmet)
+ home_a (tap-hold-next-release 175 a lsft)
+ home_s (tap-hold-next-release 175 s lctl)
+ home_d (tap-hold-next-release 175 d lalt)
+ home_f (tap-hold-next-release 175 f lmet)
 
- home_j (tap-hold-next-release 200 j rmet)
- home_k (tap-hold-next-release 200 k lalt)
- home_l (tap-hold-next-release 200 l rctl)
- home_; (tap-hold-next-release 200 ; rsft)
+ home_j (tap-hold-next-release 175 j rmet)
+ home_k (tap-hold-next-release 175 k lalt)
+ home_l (tap-hold-next-release 175 l rctl)
+ home_; (tap-hold-next-release 175 ; rsft)
 
  ;; let's use caps as control unless double-tapped
  esccaps (tap-hold-next-release 200 esc (around lctl (around lalt lmet)))

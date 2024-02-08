@@ -684,7 +684,10 @@ local specs = {
 						end
 						if #args == 0 then
 							require("resession").load(vim.fn.getcwd(), { dir = "dirsession", silence_errors = false })
-							vim.cmd("doautocmd BufReadPost")
+							-- See: https://github.com/stevearc/resession.nvim/issues/44
+							-- We re-trigger events here such that LSPs get attached
+							vim.cmd.doautoall("BufReadPost")
+							vim.cmd.doautoall("BufEnter")
 						end
 					end
 				end,
@@ -712,7 +715,6 @@ local specs = {
 			"hrsh7th/nvim-cmp",
 			"nvim-telescope/telescope.nvim",
 			"nvim-treesitter/nvim-treesitter",
-			-- see below for full list of optional dependencies 👇
 		},
 		keys = {
 			{ "<leader>od", ":ObsidianToday<CR>" },
@@ -742,6 +744,7 @@ local specs = {
 			completion = {
 				min_chars = 1,
 				new_notes_location = "notes_subdir",
+				prepend_note_path = true,
 			},
 			-- Optional, customize how names/IDs for new notes are created.
 			note_id_func = function(title)
@@ -803,7 +806,7 @@ local specs = {
 			return normalized_path:sub(1, #normalized_obsidian_vault) == normalized_obsidian_vault
 		end,
 		init = function()
-			vim.api.nvim_create_autocmd({ "BufEnter" }, {
+			vim.api.nvim_create_autocmd({ "BufEnter", "BufReadPost" }, {
 				group = vim.api.nvim_create_augroup("obsidian", { clear = true }),
 				callback = function()
 					local opts = { noremap = true, silent = true, buffer = true }
