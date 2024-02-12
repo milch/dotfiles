@@ -1,5 +1,12 @@
 local slow_format_filetypes = {}
 
+local function filter_note_template(self, ctx)
+	local templates_path = vim.fs.normalize("~/Notes/Templates/")
+	local normalized_path = vim.fs.normalize(ctx.filename)
+	local is_notes_path = normalized_path:sub(1, #templates_path) == templates_path
+	return not is_notes_path
+end
+
 require("conform").setup({
 	formatters_by_ft = {
 		lua = { "stylua" },
@@ -43,6 +50,18 @@ require("conform").setup({
 	formatters = {
 		shfmt = {
 			prepend_args = { "-i", "2" },
+		},
+		prettierd = {
+			inherit = true,
+			condition = filter_note_template,
+		},
+		prettier = {
+			inherit = true,
+			condition = filter_note_template,
+		},
+		markdownlint = {
+			inherit = true,
+			condition = filter_note_template,
 		},
 	},
 })

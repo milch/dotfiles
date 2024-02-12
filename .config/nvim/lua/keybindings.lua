@@ -8,6 +8,24 @@ bind("n", "<Tab>", ":bn<CR>", { silent = true, desc = "Open next buffer" })
 bind("n", "<S-Tab>", ":bp<CR>", { silent = true, desc = "Open previous buffer" })
 bind("n", "<leader>q", ":bd<CR>", { silent = true, desc = "Close current buffer" })
 
+local function goto_buffer(num)
+	-- Buffer numbers don't necessarily start at 1, and change as buffers get
+	-- deleted. This goes to the first buffer listed, same order as `:ls`
+	return function()
+		local buffers = vim.api.nvim_list_bufs()
+		local listed = vim.tbl_filter(function(val)
+			return vim.fn.buflisted(val) == 1
+		end, buffers)
+		vim.api.nvim_set_current_buf(listed[num])
+	end
+end
+
+bind("n", "<M-a>", goto_buffer(1), { desc = "Go directly to buffer 1" })
+bind("n", "<M-r>", goto_buffer(2), { desc = "Go directly to buffer 2" })
+bind("n", "<M-s>", goto_buffer(3), { desc = "Go directly to buffer 3" })
+bind("n", "<M-t>", goto_buffer(4), { desc = "Go directly to buffer 4" })
+bind("n", "<M-d>", goto_buffer(5), { desc = "Go directly to buffer 5" })
+
 bind("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move selected lines up" })
 bind("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move selecetd lines down" })
 

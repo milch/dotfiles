@@ -662,39 +662,54 @@ local specs = {
 		cmd = { "Neogit" },
 	},
 	{
+		dir = "~/Developer/kitty-scrollback.nvim/",
+		enabled = true,
+		lazy = true,
+		cmd = { "KittyScrollbackGenerateKittens", "KittyScrollbackCheckHealth" },
+		event = { "User KittyScrollbackLaunch" },
+		config = function()
+			require("kitty-scrollback").setup()
+		end,
+	},
+	{
 		"stevearc/resession.nvim",
 		event = "BufReadPre",
 		init = function()
+			local should_load = function()
+				if vim.fn.argc(-1) ~= 0 then
+					return false
+				end
+				local args = {}
+				for _, arg in pairs(vim.v.argv) do
+					-- Commands like +Man!
+					local is_cmd = string.find(arg, "^+")
+					-- ARGF
+					local is_argf = string.find(arg, "^-$")
+					if arg ~= "nvim" and arg ~= "--embed" or is_cmd or is_argf then
+						args[#args + 1] = arg
+					end
+				end
+				if #args == 0 then
+					return true
+				end
+			end
 			vim.api.nvim_create_autocmd("VimEnter", {
 				callback = function()
-					-- Only load the session if nvim was started with no args
-					if vim.fn.argc(-1) == 0 then
-						local args = {}
-						for _, arg in pairs(vim.v.argv) do
-							if
-								arg ~= "nvim"
-								and arg ~= "--embed"
-								-- Commands like +Man!
-								and not string.find(arg, "^+")
-								-- ARGF
-								and not string.find(arg, "^-")
-							then
-								args[#args + 1] = arg
-							end
-						end
-						if #args == 0 then
-							require("resession").load(vim.fn.getcwd(), { dir = "dirsession", silence_errors = false })
-							-- See: https://github.com/stevearc/resession.nvim/issues/44
-							-- We re-trigger events here such that LSPs get attached
-							vim.cmd.doautoall("BufReadPost")
-							vim.cmd.doautoall("BufEnter")
-						end
+					if should_load() then
+						require("resession").load(vim.fn.getcwd(), { dir = "dirsession", silence_errors = false })
+						-- See: https://github.com/stevearc/resession.nvim/issues/44
+						-- We re-trigger events here such that LSPs get attached
+						vim.cmd.doautoall("BufReadPost")
+						vim.cmd.doautoall("BufEnter")
 					end
 				end,
 			})
 			vim.api.nvim_create_autocmd("VimLeavePre", {
 				callback = function()
-					require("resession").save(vim.fn.getcwd(), { dir = "dirsession", notify = false })
+					-- We called it with truly empty args or a file/dir
+					if should_load() or vim.fn.argc(-1) ~= 0 then
+						require("resession").save(vim.fn.getcwd(), { dir = "dirsession", notify = false })
+					end
 				end,
 			})
 		end,
@@ -736,6 +751,7 @@ local specs = {
 			},
 			daily_notes = {
 				folder = "0 Inbox",
+				template = "Templates/daily-note.md",
 			},
 			notes_subdir = "0 Inbox",
 			follow_url_func = function(url)
@@ -781,7 +797,17 @@ local specs = {
 				date_format = "%Y-%m-%d",
 				time_format = "%H:%M",
 				-- A map for custom variables, the key should be the variable and the value a function
-				substitutions = {},
+				substitutions = {
+					yesterday = function()
+						return os.date("%Y-%m-%d", os.time() - 24 * 60 * 60)
+					end,
+					tomorrow = function()
+						return os.date("%Y-%m-%d", os.time() + 24 * 60 * 60)
+					end,
+					today_alias = function()
+						return tostring(os.date("%B %-d, %Y", os.time()))
+					end,
+				},
 			},
 			note_frontmatter_func = function(note)
 				local out = {
@@ -815,6 +841,14 @@ local specs = {
 				end,
 			})
 		end,
+	},
+	{
+		"folke/zen-mode.nvim",
+		opts = {
+			plugins = {
+				tmux = { enabled = true },
+			},
+		},
 	},
 }
 
