@@ -623,22 +623,22 @@ local specs = {
 				desc = "Toggle harpoon quick menu",
 			},
 			{
-				"<M-7>", -- Right hand
+				"<M-n>", -- Right hand
 				cmd([[ require("harpoon"):list():select(1) ]]),
 				desc = "Go to harpoon file #1",
 			},
 			{
-				"<M-8>", -- Right hand
+				"<M-e>", -- Right hand
 				cmd([[ require("harpoon"):list():select(2) ]]),
 				desc = "Go to harpoon file #2",
 			},
 			{
-				"<M-9>", -- Right hand
+				"<M-i>", -- Right hand
 				cmd([[ require("harpoon"):list():select(3) ]]),
 				desc = "Go to harpoon file #3",
 			},
 			{
-				"<M-0>", -- Right hand
+				"<M-o>", -- Right hand
 				cmd([[ require("harpoon"):list():select(4) ]]),
 				desc = "Go to harpoon file #4",
 			},
@@ -751,7 +751,7 @@ local specs = {
 			},
 			daily_notes = {
 				folder = "0 Inbox",
-				template = "Templates/daily-note.md",
+				template = "daily-note.md",
 			},
 			notes_subdir = "0 Inbox",
 			follow_url_func = function(url)
