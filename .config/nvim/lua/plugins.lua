@@ -701,6 +701,8 @@ local specs = {
 						-- We re-trigger events here such that LSPs get attached
 						vim.cmd.doautoall("BufReadPost")
 						vim.cmd.doautoall("BufEnter")
+						-- statuscol doesn't work without this when loading a session
+						vim.o.statuscolumn = "%!v:lua.StatusCol()"
 					end
 				end,
 			})
