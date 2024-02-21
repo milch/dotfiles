@@ -761,12 +761,20 @@ local specs = {
 			end,
 			completion = {
 				min_chars = 1,
-				new_notes_location = "notes_subdir",
-				prepend_note_path = true,
 			},
+			new_notes_location = "notes_subdir",
 			-- Optional, customize how names/IDs for new notes are created.
 			note_id_func = function(title)
 				return title
+			end,
+
+			wiki_link_func = function(opts)
+				local parent = vim.fs.basename(vim.fs.dirname(opts.path))
+				if opts.label ~= opts.path then
+					return string.format("[[%s|%s]]", opts.id, parent .. "/" .. opts.label)
+				else
+					return string.format("[[%s]]", opts.id)
+				end
 			end,
 
 			open_app_foreground = true,
