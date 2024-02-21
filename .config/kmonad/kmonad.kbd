@@ -15,24 +15,55 @@
 ;; fn   -> fn
 
 (defsrc
-    caps    a    s    d    f    g    h    j    k    l    ;
+    esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
+    grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+    tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+    caps a    s    d    f    g    h    j    k    l    ;    '    ret
+    lsft z    x    c    v    b    n    m    ,    .    /    rsft up
+    fn   lctl lalt lmet           spc            rmet ralt left down rght
 )
    
 (defalias
  home_a (tap-hold-next-release 175 a lsft)
- home_s (tap-hold-next-release 175 s lctl)
- home_d (tap-hold-next-release 175 d lalt)
- home_f (tap-hold-next-release 175 f lmet)
+ home_r (tap-hold-next-release 175 r lctl)
+ home_s (tap-hold-next-release 175 s lalt)
+ home_t (tap-hold-next-release 175 t lmet)
 
- home_j (tap-hold-next-release 175 j rmet)
- home_k (tap-hold-next-release 175 k lalt)
- home_l (tap-hold-next-release 175 l rctl)
- home_; (tap-hold-next-release 175 ; rsft)
+ home_n (tap-hold-next-release 175 n rmet)
+ home_e (tap-hold-next-release 175 e lalt)
+ home_i (tap-hold-next-release 175 i rctl)
+ home_o (tap-hold-next-release 175 o rsft)
 
- ;; let's use caps as control unless double-tapped
- esccaps (tap-hold-next-release 200 esc (around lctl (around lalt lmet)))
+ num_z  (tap-hold-next-release 175 z (layer-toggle num))
+ num_/  (tap-hold-next-release 175 / (layer-toggle num))
+
+ fn (around (layer-toggle function) fn)
 )
 
-(deflayer homerowmods
-    @esccaps @home_a   @home_s   @home_d   @home_f   g   h   @home_j   @home_k   @home_l   @home_;
+(deflayer default
+  _       brdn    brup    lp      mctl    bldn    blup    prev    pp      next    mute    vold    volu
+  _       _       _       _       _       _       _       _       _       _       _       _       _    _
+  _       q       w       f       p       g       j       l       u       y       ;       [       ]    \
+  esc     @home_a @home_r @home_s @home_t d       h       @home_n @home_e @home_i @home_o '       ret
+  _       @num_z  x       c       v       b       k       m       ,       .       @num_/  rsft    up
+  @fn     _       _       _                       _                       _       _       left    down right
+)
+
+(deflayer num
+  _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    1    2    3    4    5    6    7    8    9    0    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _              _              _    _    _    _    _
+)
+
+
+(deflayer function
+  _    f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _              _              _    _    _    _    _
 )
