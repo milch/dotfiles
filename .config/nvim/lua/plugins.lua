@@ -196,6 +196,9 @@ local specs = {
 		name = "catppuccin",
 		priority = 1000,
 		opts = require("ui.catppuccin"),
+		-- Pin until this is resolved:
+		-- https://github.com/catppuccin/nvim/issues/669
+		commit = "9703f227bfab20d04bcee62d2f08f1795723b4ae",
 		init = function()
 			require("ui.use_system_theme").ChangeToSystemColor("startup")
 		end,
