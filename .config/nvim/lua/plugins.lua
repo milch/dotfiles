@@ -768,8 +768,17 @@ local specs = {
 				return title
 			end,
 
+			---@param opts {path: string, label: string, id: string|?}
+			---@return string
 			wiki_link_func = function(opts)
 				local parent = vim.fs.basename(vim.fs.dirname(opts.path))
+				local parts = vim.split(parent, " - ", { plain = true })
+				if #parts > 1 then
+					parent = parts[#parts]
+				end
+				if opts.id == "Index" then
+					return string.format("[[%s|%s]]", opts.path, parent)
+				end
 				if opts.label ~= opts.path then
 					return string.format("[[%s|%s]]", opts.id, parent .. "/" .. opts.label)
 				else
