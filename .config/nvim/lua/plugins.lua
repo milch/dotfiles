@@ -196,9 +196,6 @@ local specs = {
 		name = "catppuccin",
 		priority = 1000,
 		opts = require("ui.catppuccin"),
-		-- Pin until this is resolved:
-		-- https://github.com/catppuccin/nvim/issues/669
-		commit = "9703f227bfab20d04bcee62d2f08f1795723b4ae",
 		init = function()
 			require("ui.use_system_theme").ChangeToSystemColor("startup")
 		end,
@@ -665,16 +662,6 @@ local specs = {
 		cmd = { "Neogit" },
 	},
 	{
-		dir = "~/Developer/kitty-scrollback.nvim/",
-		enabled = true,
-		lazy = true,
-		cmd = { "KittyScrollbackGenerateKittens", "KittyScrollbackCheckHealth" },
-		event = { "User KittyScrollbackLaunch" },
-		config = function()
-			require("kitty-scrollback").setup()
-		end,
-	},
-	{
 		"stevearc/resession.nvim",
 		event = "BufReadPre",
 		init = function()
@@ -728,7 +715,8 @@ local specs = {
 	},
 	{
 		"epwalsh/obsidian.nvim",
-		version = "*", -- recommended, use latest release instead of latest commit
+		-- Temporarily disable `version` until new release with the note_path_func is made
+		-- version = "*", -- recommended, use latest release instead of latest commit
 		lazy = false,
 		dependencies = {
 			"nvim-lua/plenary.nvim",
@@ -766,9 +754,28 @@ local specs = {
 				min_chars = 1,
 			},
 			new_notes_location = "notes_subdir",
-			-- Optional, customize how names/IDs for new notes are created.
+
+			--- @param title string
 			note_id_func = function(title)
-				return title
+				print("Getting id for title: " .. title)
+				local suffix = ""
+				if title ~= nil then
+					suffix = title:gsub(" ", "-"):gsub("[^A-Za-z0-9-]", "")
+				else
+					for _ = 1, 4 do
+						suffix = suffix .. string.char(math.random(65, 90))
+					end
+				end
+				return tostring(os.date("%Y%m%d%H%M")) .. "-" .. suffix
+			end,
+
+			---@param spec { id: string, dir: obsidian.Path, title: string|? }
+			note_path_func = function(spec)
+				if spec.title == nil then
+					return spec.dir / tostring(spec.id)
+				else
+					return spec.dir / tostring(spec.title)
+				end
 			end,
 
 			---@param opts {path: string, label: string, id: string|?}
@@ -778,6 +785,9 @@ local specs = {
 				local parts = vim.split(parent, " - ", { plain = true })
 				if #parts > 1 then
 					parent = parts[#parts]
+				end
+				if parent == "0 Inbox" then
+					return string.format("[[%s|%s]]", opts.id, opts.label)
 				end
 				if opts.id == "Index" then
 					return string.format("[[%s|%s]]", opts.path, parent)

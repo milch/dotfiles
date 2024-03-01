@@ -23,14 +23,31 @@ return {
 			},
 		},
 	},
-	custom_highlights = function()
-		local lsp = require("catppuccin.groups.integrations.native_lsp").get()
-		-- Overwrite the native colors to remove the italics
+	custom_highlights = function(C)
+		local darken = require("catppuccin.utils.colors").darken
+		local error = C.red
+		local warning = C.yellow
+		local info = C.sky
+		local hint = C.teal
+		local darkening_percentage = 0.095
+
 		return {
-			LualineErrorHighlight = { fg = lsp.DiagnosticVirtualTextError.fg, bg = lsp.DiagnosticVirtualTextError.bg },
-			LualineWarnHighlight = { fg = lsp.DiagnosticVirtualTextWarn.fg, bg = lsp.DiagnosticVirtualTextWarn.bg },
-			LualineInfoHighlight = { fg = lsp.DiagnosticVirtualTextInfo.fg, bg = lsp.DiagnosticVirtualTextInfo.bg },
-			LualineHintHighlight = { fg = lsp.DiagnosticVirtualTextHint.fg, bg = lsp.DiagnosticVirtualTextHint.bg },
+			LualineErrorHighlight = {
+				bg = darken(error, darkening_percentage, C.base),
+				fg = error,
+			},
+			LualineWarnHighlight = {
+				bg = darken(warning, darkening_percentage, C.base),
+				fg = warning,
+			},
+			LualineInfoHighlight = {
+				bg = darken(info, darkening_percentage, C.base),
+				fg = info,
+			},
+			LualineHintHighlight = {
+				bg = darken(hint, darkening_percentage, C.base),
+				fg = hint,
+			},
 		}
 	end,
 }
