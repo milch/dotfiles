@@ -787,15 +787,15 @@ local specs = {
 					parent = parts[#parts]
 				end
 				if parent == "0 Inbox" then
-					return string.format("[[%s|%s]]", opts.id, opts.label)
+					return string.format("[[%s|%s]]", opts.path, opts.label)
 				end
 				if opts.id == "Index" then
 					return string.format("[[%s|%s]]", opts.path, parent)
 				end
 				if opts.label ~= opts.path then
-					return string.format("[[%s|%s]]", opts.id, parent .. "/" .. opts.label)
+					return string.format("[[%s|%s]]", opts.path, parent .. "/" .. opts.label)
 				else
-					return string.format("[[%s]]", opts.id)
+					return string.format("[[%s]]", opts.path)
 				end
 			end,
 

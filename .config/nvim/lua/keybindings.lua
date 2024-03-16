@@ -16,7 +16,9 @@ local function goto_buffer(num)
 		local listed = vim.tbl_filter(function(val)
 			return vim.fn.buflisted(val) == 1
 		end, buffers)
-		vim.api.nvim_set_current_buf(listed[num])
+		if #listed >= num then
+			vim.api.nvim_set_current_buf(listed[num])
+		end
 	end
 end
 
