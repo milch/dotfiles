@@ -187,12 +187,7 @@ bind(hyper, "9", switch_to_space("9"))
 
 -- # move window to space #
 local function move_window(space_num)
-	return function()
-		local focusedWindow = hs.window.focusedWindow()
-		hs.spaces.moveWindowToSpace(focusedWindow, hs.spaces.spacesForScreen()[tonumber(space_num)])
-		switch_to_space(space_num)
-		focusedWindow:focus()
-	end
+	return yabai({ "-m", "window", "--space", space_num, "--focus" })
 end
 
 bind(shiftHyper, "1", move_window("1"))
