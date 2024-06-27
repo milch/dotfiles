@@ -85,6 +85,16 @@ bind("n", "<leader>l", function()
 end, extend(silentNoremap, { desc = "Show lazy plugin manager" }))
 
 local specs = {
+	{
+		"catppuccin/nvim",
+		name = "catppuccin",
+		priority = 1000,
+		lazy = false,
+		opts = require("ui.catppuccin"),
+		init = function()
+			require("ui.use_system_theme").ChangeToSystemColor("startup")
+		end,
+	},
 	-- Languages
 	"milch/vim-fastlane",
 	{
@@ -191,15 +201,6 @@ local specs = {
 	},
 
 	-- UI
-	{
-		"catppuccin/nvim",
-		name = "catppuccin",
-		priority = 1000,
-		opts = require("ui.catppuccin"),
-		init = function()
-			require("ui.use_system_theme").ChangeToSystemColor("startup")
-		end,
-	},
 
 	{
 		"nvim-tree/nvim-tree.lua",

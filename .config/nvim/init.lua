@@ -16,13 +16,17 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local theme = require("ui.use_system_theme")
+theme.UpdateWhenSystemChanges()
+
+local startupTheme = theme.DetermineTheme("startup")
+vim.opt.background = startupTheme
 
 require("lazy").setup("plugins", {
 	change_detection = {
 		notify = false,
 	},
 	install = {
-		colorscheme = { theme.GetColorScheme(theme.DetermineTheme("startup")) },
+		colorscheme = { theme.GetColorScheme(startupTheme) },
 	},
 	performance = {
 		rtp = {
@@ -39,7 +43,6 @@ require("lazy").setup("plugins", {
 	},
 })
 
-theme.UpdateWhenSystemChanges()
 pcall(require, "init_local")
 require("opt")
 require("keybindings")
