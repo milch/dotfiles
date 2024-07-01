@@ -688,12 +688,6 @@ local specs = {
 				callback = function()
 					if should_load() then
 						require("resession").load(vim.fn.getcwd(), { dir = "dirsession", silence_errors = false })
-						-- See: https://github.com/stevearc/resession.nvim/issues/44
-						-- We re-trigger events here such that LSPs get attached
-						vim.cmd.doautoall("BufReadPost")
-						vim.cmd.doautoall("BufEnter")
-						-- statuscol doesn't work without this when loading a session
-						vim.o.statuscolumn = "%!v:lua.StatusCol()"
 					end
 				end,
 			})
@@ -716,8 +710,7 @@ local specs = {
 	},
 	{
 		"epwalsh/obsidian.nvim",
-		-- Temporarily disable `version` until new release with the note_path_func is made
-		-- version = "*", -- recommended, use latest release instead of latest commit
+		version = "*", -- recommended, use latest release instead of latest commit
 		lazy = false,
 		dependencies = {
 			"nvim-lua/plenary.nvim",
