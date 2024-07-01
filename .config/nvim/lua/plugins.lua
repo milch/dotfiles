@@ -123,8 +123,6 @@ local specs = {
 		},
 		config = function(_, opts)
 			require("nvim-treesitter.configs").setup(opts)
-
-			vim.treesitter.language.register("html", "htmlhugo")
 		end,
 	},
 
@@ -585,9 +583,6 @@ local specs = {
 		end,
 	},
 
-	{
-		"phelipetls/vim-hugo",
-	},
 	{
 		"roobert/tailwindcss-colorizer-cmp.nvim",
 		lazy = true,
