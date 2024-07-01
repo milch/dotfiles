@@ -3,7 +3,7 @@ return {
 	provider_selector = function(bufnr, filetype, buftype)
 		return { "treesitter", "indent" }
 	end,
-	close_fold_kinds = { "imports", "comment" },
+	close_fold_kinds_for_ft = { default = { "imports", "comment" } },
 	fold_virt_text_handler = function(virtText, lnum, endLnum, width, truncate)
 		local newVirtText = {}
 		local totalLines = vim.api.nvim_buf_line_count(0)
