@@ -39,7 +39,7 @@ M.linters = {
 		condition = function()
 			local lines = vim.api.nvim_buf_get_lines(0, 0, 10, false)
 			local buffer_contents = table.concat(lines, "\n")
-			local matches = vim.fn.matchlist(buffer_contents, [[\(Resources\|AWSTemplateFormatVersion\)]])
+			local matches = vim.fn.matchlist(buffer_contents, [[\C\(Resources\|AWSTemplateFormatVersion\)]])
 
 			return #matches > 0
 		end,
