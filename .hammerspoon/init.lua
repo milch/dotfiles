@@ -185,9 +185,33 @@ bind(hyper, "7", switch_to_space("7"))
 bind(hyper, "8", switch_to_space("8"))
 bind(hyper, "9", switch_to_space("9"))
 
+local cached_space_ids = {}
 -- # move window to space #
 local function move_window(space_num)
-	return yabai({ "-m", "window", "--space", space_num, "--focus" })
+	return function()
+		-- This returns the space's ID, which is different from the mission control index that yabai uses
+		local target_space_id = hs.spaces.spacesForScreen()[tonumber(space_num)]
+		yabai({ "-m", "query", "--spaces", "id,index" }, function(_, result)
+			local space_id_to_idx = hs.json.decode(result)
+			local find_id = function(elem)
+				return elem.id == target_space_id
+			end
+			local ok, space = pcall(hs.fnutils.find, space_id_to_idx, find_id)
+			if ok then
+				cached_space_ids = space_id_to_idx
+			else
+				print("yabai sporadically errorred ... using cached space id to index mappings: " .. result)
+				space = hs.fnutils.find(cached_space_ids, find_id)
+			end
+			if space ~= nil and space.index ~= nil then
+				local cmd = { "-m", "window", "--space", tostring(space.index), "--focus" }
+				print(hs.inspect(cmd))
+				yabai(cmd)()
+			else
+				hs.alert("No space found :(")
+			end
+		end)()
+	end
 end
 
 bind(shiftHyper, "1", move_window("1"))
