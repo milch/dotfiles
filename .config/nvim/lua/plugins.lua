@@ -554,9 +554,9 @@ local specs = {
 			auto_open = false, -- automatically open the list when you have diagnostics
 			auto_close = true, -- automatically close the list when you have no diagnostics
 		},
-		cmd = { "TroubleToggle", "Trouble", "TroubleClose", "TroubleRefresh" },
+		cmd = "Trouble",
 		keys = {
-			{ "<leader>d", ":TroubleToggle<CR>", desc = "Toggle Trouble window" },
+			{ "<leader>d", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics (Trouble)" },
 		},
 	},
 	{
