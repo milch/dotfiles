@@ -659,7 +659,6 @@ local specs = {
 	},
 	{
 		"stevearc/resession.nvim",
-		event = "BufReadPre",
 		init = function()
 			local should_load = function()
 				if vim.fn.argc(-1) ~= 0 then
@@ -685,6 +684,7 @@ local specs = {
 						require("resession").load(vim.fn.getcwd(), { dir = "dirsession", silence_errors = false })
 					end
 				end,
+				nested = true,
 			})
 			vim.api.nvim_create_autocmd("VimLeavePre", {
 				callback = function()
