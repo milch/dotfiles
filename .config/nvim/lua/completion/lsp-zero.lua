@@ -72,6 +72,15 @@ require("lspconfig").solargraph.setup({
 require("lspconfig").rubocop.setup({
 	root_dir = require("lspconfig.util").root_pattern(".git", "Gemfile", "Rakefile", "Guardfile"),
 })
+require("lspconfig").sourcekit.setup({
+	capabilities = {
+		workspace = {
+			didChangeWatchedFiles = {
+				dynamicRegistration = true,
+			},
+		},
+	},
+})
 
 local diagnosticsIcons = {
 	error = "",
