@@ -7,6 +7,7 @@ local function filter_note_template(self, ctx)
 	return not is_notes_path
 end
 
+local js_formatters = { { "prettierd", "prettier" } }
 require("conform").setup({
 	formatters_by_ft = {
 		lua = { "stylua" },
@@ -17,8 +18,10 @@ require("conform").setup({
 		python = { "flake8" },
 		rust = { "rustfmt" },
 		swift = { "swift_format" },
-		javascript = { { "prettierd", "prettier" } },
-		typescript = { { "prettierd", "prettier" } },
+		javascript = js_formatters,
+		typescript = js_formatters,
+		javascriptreact = js_formatters,
+		typescriptreact = js_formatters,
 		json = { { "prettierd", "prettier", "jq" } },
 		ruby = { "rubocop" },
 		markdown = { { "prettierd", "prettier" }, "markdownlint" },

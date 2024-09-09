@@ -11,6 +11,7 @@ M.linters_by_ft = {
 	ruby = { "ruby" },
 	html = { "tidy" },
 	typescript = { "eslint_d" },
+	typescriptreact = { "eslint_d" },
 	javascript = { "eslint_d" },
 	python = { "flake8" },
 }

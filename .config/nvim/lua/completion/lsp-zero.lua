@@ -43,7 +43,7 @@ require("mason-lspconfig").setup({
 		"solargraph", -- Ruby
 		"sqlls",
 		"tailwindcss",
-		"tsserver",
+		"ts_ls",
 		"yamlls",
 	},
 	handlers = {
