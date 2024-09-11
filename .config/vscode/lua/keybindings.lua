@@ -37,9 +37,14 @@ bind("n", "gcc", "<Plug>VSCodeCommentaryLine")
 
 -- TODO
 local opts = { silent = true }
-bind("x", "gf", ":LspZeroFormat<CR>", opts)
-bind("v", "gf", ":LspZeroFormat<CR>", opts)
-bind("n", "gf", ":LspZeroFormat<CR>", opts)
+local vscode = function(arg)
+	return "<Cmd>lua require('vscode').call('" .. arg .. "')<CR>"
+end
+bind("x", "gf", vscode("editor.action.formatSelection"), opts)
+bind("v", "gf", vscode("editor.action.formatSelection"), opts)
+bind("n", "gf", vscode("editor.action.formatSelection"), opts)
+
+bind("n", "<leader>rn", vscode("editor.action.rename"), opts)
 
 bind("n", "<leader>rn", ":Lspsaga rename<CR>", opts)
 bind("n", "gd", ":Lspsaga goto_definition<CR>", opts)
