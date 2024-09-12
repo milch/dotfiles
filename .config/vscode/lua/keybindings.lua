@@ -45,14 +45,15 @@ bind("v", "gf", vscode("editor.action.formatSelection"), opts)
 bind("n", "gf", vscode("editor.action.formatSelection"), opts)
 
 bind("n", "<leader>rn", vscode("editor.action.rename"), opts)
+bind("n", "gd", vscode("editor.action.revealDefinition"), opts)
+bind("n", "gr", vscode("editor.action.referenceSearch.trigger"), opts)
 
-bind("n", "<leader>rn", ":Lspsaga rename<CR>", opts)
-bind("n", "gd", ":Lspsaga goto_definition<CR>", opts)
-bind("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
 bind("n", "[d", ":Lspsaga diagnostic_jump_next<CR>", opts)
 bind("n", "]d", ":Lspsaga diagnostic_jump_prev<CR>", opts)
-bind("n", "<leader>a", ":Lspsaga code_action<CR>", opts)
-bind("n", "K", ":Lspsaga hover_doc<CR>", opts)
+
+bind("n", "<leader>a", "code action", opts)
+bind("n", "K", vscode("editor.action.showHover"), opts)
+
 bind("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>", opts)
 bind("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
 bind("n", "gl", "<cmd>lua vim.diagnostic.open_float()<cr>", opts)
