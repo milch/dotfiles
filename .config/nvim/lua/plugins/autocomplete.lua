@@ -71,7 +71,7 @@ return {
 			preselect = cmp.PreselectMode.None,
 			formatting = {
 				fields = { "kind", "abbr", "menu" },
-				format = function(entry, vim_item)
+				format = function(_, vim_item)
 					if cmp_kinds[vim_item.kind] then
 						vim_item.kind = cmp_kinds[vim_item.kind] .. "  "
 					end
@@ -127,6 +127,7 @@ return {
 					c = cmp.mapping.select_prev_item(),
 					s = cmp.mapping.select_prev_item(),
 				},
+				["<C-y>"] = cmp.mapping.confirm({ select = true }),
 			}),
 			sources = cmp.config.sources({
 				{ name = "nvim_lsp" },
