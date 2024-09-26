@@ -23,14 +23,12 @@ M.UpdateColorScheme = function(theme)
 	local colorscheme = M.GetColorScheme(theme)
 	if theme == "dark" then
 		if LastColorScheme ~= "dark" then
-			print("Changing to dark mode")
 			vim.opt.background = "dark"
 			vim.api.nvim_command("colorscheme " .. colorscheme)
 			LastColorScheme = "dark"
 		end
 	else
 		if LastColorScheme ~= "light" then
-			print("Changing to light mode")
 			vim.opt.background = "light"
 			vim.api.nvim_command("colorscheme " .. colorscheme)
 			LastColorScheme = "light"

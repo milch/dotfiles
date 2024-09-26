@@ -3,7 +3,7 @@ vim.g.mapleader = ","
 
 -- Install lazy.nvim if it does not exist
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
+if not vim.uv.fs_stat(lazypath) then
 	vim.fn.system({
 		"git",
 		"clone",
@@ -21,7 +21,13 @@ theme.UpdateWhenSystemChanges()
 local startupTheme = theme.DetermineTheme("startup")
 vim.opt.background = startupTheme
 
-require("lazy").setup("plugins", {
+require("lazy_file").setup()
+require("lazy").setup({
+	spec = {
+		{ import = "plugins" },
+		{ import = "plugins.lsp" },
+		{ import = "plugins.lang" },
+	},
 	change_detection = {
 		notify = false,
 	},
@@ -43,9 +49,9 @@ require("lazy").setup("plugins", {
 	},
 })
 
-pcall(require, "init_local")
 require("opt")
-require("keybindings")
+require("keybindings").set()
+require("disable_defaults")
 
 -- Blink the thing that you just yanked
 vim.api.nvim_create_autocmd("TextYankPost", {
