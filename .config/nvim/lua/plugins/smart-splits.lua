@@ -6,6 +6,7 @@ return {
 			-- resizing splits
 			-- these keymaps will also accept a range,
 			-- for example `10<A-h>` will `resize_left` by `(10 * config.default_amount)`
+			-- TODO: Bindings conflict with Aerospace
 			{ "<A-h>", ":lua require('smart-splits').resize_left()<CR>", silent = true },
 			{ "<A-j>", ":lua require('smart-splits').resize_down()<CR>", silent = true },
 			{ "<A-k>", ":lua require('smart-splits').resize_up()<CR>", silent = true },
