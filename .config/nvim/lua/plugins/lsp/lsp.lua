@@ -72,7 +72,6 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		event = { "LazyFile" },
-		branch = "v3.x",
 		dependencies = {
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
