@@ -70,20 +70,17 @@ cmd-alt-h = [] # Disable "hide others"
 # TODO: Consider setting up a separate mode for resize/swap
 # https://github.com/nikitabobko/AeroSpace/issues/406 / https://github.com/nikitabobko/AeroSpace/issues/406
 
-alt-enter = 'exec-and-forget wezterm start'
-alt-shift-enter = '''exec-and-forget osascript -e '
+alt-enter = 'exec-and-forget /Applications/WezTerm.app/Contents/MacOS/wezterm start'
+alt-shift-enter = '''exec-and-forget pgrep -x Arc && osascript -e '
+tell application "Arc"
+     make new window
+     activate
+end tell' || osascript -e '
 tell application "Safari"
     make new document at end of documents
     activate
 end tell'
 '''
-
-# TODO: Run this or Safari depending on the default browser
-# tell application "Arc"
-#      make new window
-#      activate
-# end tell
-
 
 # All possible keys:
 # - Letters.        a, b, c, ..., z
@@ -188,6 +185,11 @@ if.app-id = 'com.apple.Safari'
 if.during-aerospace-startup = true
 run = ['move-node-to-workspace S']
 
+[[on-window-detected]]
+if.app-id = 'company.thebrowser.Browser'
+if.during-aerospace-startup = true
+run = ['move-node-to-workspace S']
+
 # [C]hat
 [[on-window-detected]]
 if.app-id = 'com.apple.MobileSMS'
@@ -223,4 +225,5 @@ run = ['move-node-to-workspace G']
 # [T]erminal
 [[on-window-detected]]
 if.app-id = 'com.github.wez.wezterm'
+if.during-aerospace-startup = true
 run = ['move-node-to-workspace T']
