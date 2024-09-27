@@ -28,6 +28,7 @@
 	trustExitCode = true
 [delta]
 	line-numbers = true
+	tabs = 2
 [diff "plist"]
 	textconv = /usr/libexec/PlistBuddy -c "Print"
 	binary = true
