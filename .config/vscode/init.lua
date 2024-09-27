@@ -13,9 +13,8 @@ if not vim.loop.fs_stat(lazypath) then
 		lazypath,
 	})
 end
-print(vim.inspect())
 vim.opt.rtp:prepend(lazypath)
-vim.opt.rtp:prepend("/Users/manu/dotfiles/.config/vscode/")
+vim.opt.rtp:prepend(vim.fn.expand("~/.config/vscode/"))
 
 require("lazy").setup("plugins", {
 	performance = {
