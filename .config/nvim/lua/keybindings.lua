@@ -38,7 +38,7 @@ function M.set()
 	bind({ "n", "v" }, "<leader>y", [["+y]], { desc = "Copy to system clipboard" })
 	bind("n", "<leader>Y", [["+Y]], { desc = "Copy to system clipboard" })
 
-	bind("n", "<leader>w", [[:w<CR>]], { desc = "Save" })
+	bind("n", "<leader>w", [[<cmd>:w<CR>]], { desc = "Save", silent = true })
 
 	bind("n", "<leader>vs", function()
 		local filename = vim.fn.expand("%")
