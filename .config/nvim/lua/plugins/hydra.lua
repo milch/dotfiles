@@ -1,8 +1,8 @@
 return {
 	{
-		"anuvyklack/hydra.nvim",
+		"nvimtools/hydra.nvim",
 		lazy = true,
-		keys = { "<leader>xg" },
+		keys = { "<leader>xg", { desc = "Git operations" } },
 		config = function()
 			local Hydra = require("hydra")
 			local gitsigns = require("gitsigns")
@@ -11,8 +11,9 @@ return {
  _J_: next hunk      _s_: stage hunk        _x_: show deleted   _b_: blame line
  _K_: prev hunk      _u_: undo stage hunk   _p_: preview hunk   _B_: blame show full
  _S_: stage buffer   _d_: diff this         _D_: close diff     _/_: show base file
+ _R_: reset hunk
  ^
- ^ ^              _<Enter>_: Neogit              _q_: exit
+ ^ ^                                             _q_: exit
  ]]
 
 			Hydra({
@@ -84,7 +85,14 @@ return {
 						end,
 					},
 					{ "/", gitsigns.show, { exit = true } }, -- show the base of the file
-					{ "<Enter>", "<cmd>Neogit<CR>", { exit = true } },
+					{
+						"R",
+						function()
+							vim.bo.modifiable = true
+							gitsigns.reset_hunk()
+							vim.bo.modifiable = false
+						end,
+					},
 					{ "q", nil, { exit = true, nowait = true } },
 				},
 			})
