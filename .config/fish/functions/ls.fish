@@ -1,4 +1,3 @@
-function ls --wraps='eza --long --icons=always --no-filesize --no-user --no-permissions --no-time' --description 'alias ls=eza --long --icons=always --no-filesize --no-user --no-permissions --no-time'
-  eza --long --icons=always --no-filesize --no-user --no-permissions --no-time $argv
-        
+function ls --wraps='eza --icons=always' --description 'alias ls=eza --icons=always'
+    eza --icons=always -w 120 --group-directories-first --across $argv
 end
