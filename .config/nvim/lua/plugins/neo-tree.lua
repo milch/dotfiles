@@ -1,4 +1,5 @@
--- TODO: Keymap for showing gitignore'd files
+local very_first_call = true
+local current_buffer = ""
 return {
 	{
 		"nvim-neo-tree/neo-tree.nvim",
@@ -8,8 +9,6 @@ return {
 			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
 			"MunifTanjim/nui.nvim",
-			-- TODO: Research enabling images
-			-- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
 		},
 		deactivate = function()
 			vim.cmd([[Neotree close]])
@@ -18,7 +17,14 @@ return {
 			{
 				"-",
 				function()
-					require("neo-tree.command").execute({ toggle = true, dir = vim.uv.cwd(), position = "float" })
+					current_buffer = vim.api.nvim_buf_get_name(0)
+					require("neo-tree.command").execute({
+						toggle = true,
+						dir = vim.uv.cwd(),
+						position = "float",
+						reveal = very_first_call,
+					})
+					very_first_call = false
 				end,
 				desc = "Explorer NeoTree (cwd)",
 			},
@@ -77,6 +83,9 @@ return {
 						desc = "Open with System Application",
 					},
 					["/"] = "filter_as_you_type",
+					["f"] = function(state)
+						require("neo-tree.sources.manager").navigate(state, vim.uv.cwd(), current_buffer)
+					end,
 				},
 			},
 			event_handlers = {
