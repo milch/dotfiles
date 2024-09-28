@@ -137,15 +137,6 @@ return {
 						vim.lsp.inlay_hint.enable(true, { bufnr = buffer })
 					end
 				end)
-
-				-- code lens
-				M.on_supports_method("textDocument/codeLens", function(_, buffer)
-					vim.lsp.codelens.refresh()
-					vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
-						buffer = buffer,
-						callback = vim.lsp.codelens.refresh,
-					})
-				end)
 			end
 
 			vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
