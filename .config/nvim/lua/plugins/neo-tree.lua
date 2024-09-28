@@ -76,6 +76,7 @@ return {
 						end,
 						desc = "Open with System Application",
 					},
+					["/"] = "filter_as_you_type",
 				},
 			},
 			event_handlers = {
