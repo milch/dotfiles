@@ -128,20 +128,11 @@ def set_key_repeat
   `defaults write -g KeyRepeat -int 1` # normal minimum is 2 (30 ms)`
 end
 
-def install_kmonad
-  `brew install haskell-stack`
-  kmonad_dir = '/tmp/kmonad'
-  `git clone --recursive https://github.com/vosaica/kmonad.git #{kmonad_dir}` unless Dir.exist?(kmonad_dir)
-  unless File.exist?(File.expand_path('~/.local/bin/kmonad'))
-    Dir.chdir(kmonad_dir) do
-      `git checkout Dev-DriverKit-v3.1.0`
-      `git submodule update --init`
-      `stack build --flag kmonad:dext --extra-include-dirs=c_src/mac/Karabiner-DriverKit-VirtualHIDDevice/include/pqrs/karabiner/driverkit:c_src/mac/Karabiner-DriverKit-VirtualHIDDevice/src/Client/vendor/include`
-      `stack install --flag kmonad:dext --extra-include-dirs=c_src/mac/Karabiner-DriverKit-VirtualHIDDevice/include/pqrs/karabiner/driverkit:c_src/mac/Karabiner-DriverKit-VirtualHIDDevice/src/Client/vendor/include`
+def install_kanata
+  `cargo install kanata` unless File.exist?(`which kanata`.chomp)
+  kanata_path = `which kanata`.chomp
 
-      puts 'Go to Settings > Privacy & Security > Input Monitoring and add `/bin/launchctl`and the kmonad binary.'
-    end
-  end
+  puts "Go to Settings > Privacy & Security > Input Monitoring and add `/bin/launchctl`and the #{kanata_path} binary."
 
   username = `whoami`.chomp
   plist = <<~PLIST
@@ -150,27 +141,28 @@ def install_kmonad
     <plist version="1.0">
       <dict>
         <key>Label</key>
-        <string>local.kmonad</string>
+        <string>local.kanata</string>
         <key>Program</key>
-        <string>/Users/#{username}/.local/bin/kmonad</string>
+        <string>#{kanata_path}</string>
         <key>ProgramArguments</key>
         <array>
-          <string>/Users/#{username}/.local/bin/kmonad</string>
-            <string>/Users/#{username}/.config/kmonad/kmonad.kbd</string>
+          <string>#{kanata_path}</string>
+          <string>--cfg</string>
+          <string>/Users/#{username}/.config/kanata/kanata.kbd</string>
         </array>
         <key>RunAtLoad</key>
         <true />
         <key>StandardOutPath</key>
-        <string>/tmp/kmonad.stdout</string>
+        <string>/tmp/kanata.stdout</string>
         <key>StandardErrorPath</key>
-        <string>/tmp/kmonad.stderr</string>
+        <string>/tmp/kanata.stderr</string>
       </dict>
     </plist>
   PLIST
-  File.write('/tmp/local.kmonad.plist', plist)
+  File.write('/tmp/local.kanata.plist', plist)
   puts 'Now run these two commands:'
-  puts 'sudo cp /tmp/local.kmonad.plist /Library/LaunchDaemons/local.kmonad.plist'
-  puts 'sudo launchctl load -w /Library/LaunchDaemons/local.kmonad.plist'
+  puts 'sudo cp /tmp/local.kanata.plist /Library/LaunchDaemons/local.kanata.plist'
+  puts 'sudo launchctl load -w /Library/LaunchDaemons/local.kanata.plist'
 end
 
 def run_install(options)
@@ -186,7 +178,7 @@ def run_install(options)
   end
   install_patched_sf_mono if options[:fonts]
   install_bat_theme if options[:bat_theme]
-  install_kmonad if options[:kmonad]
+  install_kanata if options[:kanata]
 end
 
 def parse_options(args)
@@ -201,7 +193,7 @@ def parse_options(args)
     parser.on('--fonts', 'Patches and installs fonts with Nerd Fonts patcher')
     parser.on('--bat_theme', 'Installs themes for bat')
     parser.on('--set_key_repeat', 'Sets the key repeat speed')
-    parser.on('--kmonad', 'Install KMonad')
+    parser.on('--kanata', 'Install kanata')
   end.parse!(args, into: options)
   options
 end
@@ -210,7 +202,7 @@ def install(args)
   options = parse_options(args)
 
   if options.empty?
-    %i[symlink install_brew brew_bundle install_runtimes nvim tmux fonts bat_theme set_key_repeat kmonad].each do |opt|
+    %i[symlink install_brew brew_bundle install_runtimes nvim tmux fonts bat_theme set_key_repeat kanata].each do |opt|
       options[opt] = true
     end
   end
