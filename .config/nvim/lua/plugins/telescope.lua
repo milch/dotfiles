@@ -23,7 +23,7 @@ return {
 
 			if num_selections > 1 then
 				actions.send_selected_to_qflist(prompt_bufnr)
-				actions.open_qflist()
+				actions.open_qflist(prompt_bufnr)
 			else
 				actions.file_edit(prompt_bufnr)
 			end
@@ -103,7 +103,9 @@ return {
 		-- TODO: Move to `keys`
 		bind("n", "<leader>f", gitIfAvailable, { desc = "Find git files" })
 		bind("n", "<leader>p", find_all, { desc = "Find all files" })
-		bind("n", "<leader>g", builtin.live_grep, { desc = "Live grep" })
+		bind("n", "<leader>g", function()
+			builtin.live_grep({ additional_args = { "--hidden" } })
+		end, { desc = "Live grep" })
 		bind("n", "<leader>G", function()
 			builtin.live_grep({
 				additional_args = { "--no-ignore-vcs", "--hidden", "--glob", "!.git" },
