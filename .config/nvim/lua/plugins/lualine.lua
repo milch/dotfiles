@@ -2,7 +2,7 @@ return {
 	"nvim-lualine/lualine.nvim",
 	event = "VeryLazy",
 	dependencies = {
-		"nvim-tree/nvim-web-devicons",
+		"echasnovski/mini.icons",
 		"catppuccin",
 	},
 	config = function()
@@ -80,7 +80,7 @@ return {
 				},
 				lualine_b = {
 					{
-						"buffers",
+						require("plugins.lualine.harpoon-component"),
 						hide_filename_extension = true,
 						symbols = {
 							modified = " ●", -- Text to show when the buffer is modified

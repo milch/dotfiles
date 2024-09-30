@@ -7,24 +7,16 @@ function M.set()
 	bind("n", "Y", "y$", { noremap = true, desc = "Make Y behave like D" })
 
 	local function goto_buffer(num)
-		-- Buffer numbers don't necessarily start at 1, and change as buffers get
-		-- deleted. This goes to the first buffer listed, same order as `:ls`
 		return function()
-			local buffers = vim.api.nvim_list_bufs()
-			local listed = vim.tbl_filter(function(val)
-				return vim.fn.buflisted(val) == 1
-			end, buffers)
-			if #listed >= num then
-				vim.api.nvim_set_current_buf(listed[num])
-			end
+			require("plugins.lualine.harpoon-component").buffer_jump(num, true)
 		end
 	end
 
-	bind("n", "<M-a>", goto_buffer(1), { desc = "Go directly to buffer 1" })
-	bind("n", "<M-r>", goto_buffer(2), { desc = "Go directly to buffer 2" })
-	bind("n", "<M-s>", goto_buffer(3), { desc = "Go directly to buffer 3" })
-	bind("n", "<M-t>", goto_buffer(4), { desc = "Go directly to buffer 4" })
-	bind("n", "<M-d>", goto_buffer(5), { desc = "Go directly to buffer 5" })
+	bind("n", "<M-1>", goto_buffer(1), { desc = "Go directly to buffer 1" })
+	bind("n", "<M-2>", goto_buffer(2), { desc = "Go directly to buffer 2" })
+	bind("n", "<M-3>", goto_buffer(3), { desc = "Go directly to buffer 3" })
+	bind("n", "<M-4>", goto_buffer(4), { desc = "Go directly to buffer 4" })
+	bind("n", "<M-5>", goto_buffer(5), { desc = "Go directly to buffer 5" })
 
 	bind("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move selected lines up" })
 	bind("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move selecetd lines down" })
