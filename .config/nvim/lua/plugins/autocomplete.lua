@@ -72,7 +72,7 @@ return {
 				end,
 			},
 			window = {},
-			mapping = cmp.mapping.preset.insert({
+			mapping = {
 				["<C-b>"] = cmp.mapping.scroll_docs(-4),
 				["<C-f>"] = cmp.mapping.scroll_docs(4),
 
@@ -96,7 +96,7 @@ return {
 					cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
 				end, { "i", "c", "s" }),
 				["<C-y>"] = cmp.mapping.confirm({ select = true }),
-			}),
+			},
 			sources = cmp.config.sources({
 				{ name = "nvim_lsp" },
 				{ name = "path" },
