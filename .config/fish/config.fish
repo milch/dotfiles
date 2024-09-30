@@ -1,7 +1,7 @@
 set -gx PATH /opt/homebrew/opt/ncurses/bin /Applications/WezTerm.app/Contents/MacOS /opt/homebrew/bin /usr/local/bin $HOME/.cargo/bin $HOME/.local/bin $PATH
+set -gx XDG_CONFIG_HOME "$HOME/.config"
 
 if status --is-interactive; and not functions -q fisher
-    set -q XDG_CONFIG_HOME; or set XDG_CONFIG_HOME ~/.config
     curl https://git.io/fisher --create-dirs -sLo $XDG_CONFIG_HOME/fish/functions/fisher.fish
     fish -c fisher
 end
@@ -24,12 +24,7 @@ set -x GPG_TTY (tty)
 function update_theme
     set type $argv[1]
     set -gx APPLE_INTERFACE_STYLE $type
-    echo """
-    [interactive]
-    diffFilter = delta --$type --color-only
-    [core]
-    pager = delta --$type
-    """ >~/.gitconfig_delta
+    set -gx DELTA_FEATURES "+$type-style"
 end
 
 function set_color_scheme
@@ -55,6 +50,7 @@ status --is-interactive; and source (pyenv init -|psub); and source (rbenv init 
 status --is-interactive; and test -e ~/.config/fish/local.fish; and source ~/.config/fish/local.fish
 
 alias cp='rsync --info=progress2'
+alias lg='TERM=screen-256color lazygit'
 
 if status --is-interactive
     function update_color_scheme -d 'Set color scheme after every call' --on-variable apple_interface_style

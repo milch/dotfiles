@@ -1,19 +1,19 @@
 [include]
 	path = .gitconfig_local
-[include]
-	path = .gitconfig_delta
+[interactive]
+	diffFilter = delta --color-only
 [core]
+	pager = delta
 	excludesfile = ~/.gitignore_global
 	attributesfile = ~/.gitattributes_global
 [diff]
 	algorithm = histogram
 	colorMoved = default
-[difftool "Kaleidoscope"]
-	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+	tool = Kaleidoscope
 [difftool]
 	prompt = false
-[diff]
-	tool = Kaleidoscope
+[difftool "Kaleidoscope"]
+	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 [mergetool "Kaleidoscope"]
 	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" \"$REMOTE\"
 [mergetool]
@@ -29,6 +29,10 @@
 [delta]
 	line-numbers = true
 	tabs = 2
+[delta "light-style"]
+	dark = false
+[delta "dark-style"]
+	dark = true
 [diff "plist"]
 	textconv = /usr/libexec/PlistBuddy -c "Print"
 	binary = true
