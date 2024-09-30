@@ -17,8 +17,17 @@ function M:name()
 end
 
 function M:get_props()
-	M.super.get_props(self)
-	self.icon = require("mini.icons").get("file", self.full_path) .. " "
+	-- No buffer loaded for this yet
+	if self.bufnr == 0 then
+		self.file = ""
+		self.buftype = ""
+		self.filetype = ""
+		self.modified_icon = ""
+		self.alternate_file_icon = ""
+		self.icon = require("mini.icons").get("file", self.full_path) .. " "
+	else
+		M.super.get_props(self)
+	end
 end
 
 function M:render()
