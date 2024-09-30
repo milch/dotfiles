@@ -7,6 +7,13 @@ return {
 		"nvim-treesitter/nvim-treesitter-textobjects",
 		"RRethy/nvim-treesitter-endwise",
 		{
+			"andymass/vim-matchup",
+			init = function()
+				vim.api.nvim_set_hl(0, "MatchWord", { underdashed = true })
+				vim.api.nvim_set_hl(0, "MatchWordCur", { underdouble = true, bold = true })
+			end,
+		},
+		{
 			"romgrk/nvim-treesitter-context",
 			event = "WinScrolled",
 			opts = {
@@ -52,6 +59,7 @@ return {
 		ensure_installed = {
 			"bash",
 			"fish",
+			"regex",
 			"smithy",
 			"vimdoc",
 			"yaml",
@@ -67,6 +75,10 @@ return {
 		ignore_install = {},
 
 		endwise = {
+			enable = true,
+		},
+
+		matchup = {
 			enable = true,
 		},
 
