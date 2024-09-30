@@ -20,23 +20,21 @@
   tap-time 150
   hold-time 125
 
-  left-hand-keys (
-    q w f p g
-    a r s t d
-    z x c v b
-  )
-  right-hand-keys (
-    j l u y ;
-    h n e i o
-    k m , . /
-  )
+    left-hand-keys (
+      q w e r t
+      z x c v b
+    )
+    right-hand-keys (
+      y u i o p
+      n m , . /
+    )
 )
 (deflayer base
   esc  🔅   🔆    ✗    ✗    ✗    ✗    ◀◀   ▶⏸   ▶▶   🔇   🔉   🔊
   _       _       _       _       _       _       _       _       _       _       _       _       _    _
   _       q       w       f       p       g       j       l       u       y       ;       [       ]    \
   esc     @home_a @home_r @home_s @home_t @home_d       @home_h       @home_n @home_e @home_i @home_o '       ret
-  _       @num_z  x       c       v       b       k       m       ,       .       @num_/  rsft    up
+  @cw       @num_z  x       c       v       b       k       m       ,       .       @num_/  rsft    up
   @fn     _       _       _                       _                       _       _       left    down right
 )
 
@@ -75,6 +73,7 @@
     (layer-switch nomods)
     (on-idle-fakekey to-base tap 20)
   )
+  cw (caps-word 2000)
 
 
   home_a (tap-hold-release-keys $tap-time $hold-time (multi a @tap) lsft $left-hand-keys) 
