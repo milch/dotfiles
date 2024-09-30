@@ -80,6 +80,11 @@ config.keys = {
 		mods = "CMD|SHIFT",
 		action = tmux_binding("n"),
 	},
+	{
+		key = "g",
+		mods = "CMD",
+		action = tmux_binding("g"),
+	},
 }
 
 for i = 1, 9, 1 do
