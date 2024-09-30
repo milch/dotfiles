@@ -22,7 +22,10 @@ config.default_prog = { "/opt/homebrew/bin/tmux", "new", "-A", "-s", "default" }
 config.window_padding = {
 	top = 18,
 }
-config.font = w.font("SF Mono", { weight = "Medium" })
+config.font = w.font_with_fallback({
+	{ family = "SF Mono", weight = "Medium" },
+	{ family = "SF Pro", weight = "Medium" }, -- For SF Symbols
+})
 config.font_size = 14.0
 config.freetype_load_target = "Light"
 config.freetype_load_flags = "NO_HINTING"
