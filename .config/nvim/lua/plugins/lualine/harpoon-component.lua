@@ -97,9 +97,9 @@ function M.buffer_jump(buf_pos, bang)
 end
 
 vim.cmd([[
-  function! LualineSwitchHarpoon(bufnr, mouseclicks, mousebutton, modifiers)
-    execute ":lua require('plugins.lualine.harpoon-component').buffer_jump(" . a:bufnr . ")"
-  endfunction
+	function! LualineSwitchHarpoon(bufnr, mouseclicks, mousebutton, modifiers)
+		execute ":lua require('plugins.lualine.harpoon-component').buffer_jump(" . a:bufnr . ")"
+	endfunction
 ]])
 
 return M
