@@ -5,12 +5,21 @@ bind("n", "<leader>l", function()
 end, { desc = "Show lazy plugin manager", silent = true, noremap = true })
 
 return {
-	{ "nvim-lua/plenary.nvim" }, -- Everything uses plenary
+	{ "nvim-lua/plenary.nvim", lazy = true }, -- Everything uses plenary
 	-- Editor
 	{
 		"kylechui/nvim-surround",
 		event = "VeryLazy",
 		opts = {},
+	},
+
+	{
+		"echasnovski/mini.icons",
+		lazy = true,
+		config = function()
+			require("mini.icons").setup()
+			MiniIcons.mock_nvim_web_devicons()
+		end,
 	},
 
 	{
@@ -67,7 +76,9 @@ return {
 	},
 	{
 		"folke/trouble.nvim",
-		dependencies = "nvim-tree/nvim-web-devicons",
+		dependencies = {
+			"echasnovski/mini.icons",
+		},
 		opts = {
 			auto_open = false, -- automatically open the list when you have diagnostics
 			auto_close = true, -- automatically close the list when you have no diagnostics
