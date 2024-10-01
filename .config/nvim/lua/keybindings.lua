@@ -44,27 +44,22 @@ function M.set()
 
 	bind(
 		"n",
-		"<leader>sc",
+		"<leader>cs",
 		[[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
-		{ desc = "[S]ubstitute, [c]hanging to a new word" }
+		{ desc = "Substitute word under cursor" }
 	)
 	bind(
 		"n",
-		"<leader>sr",
+		"<leader>sS",
 		[[:%s/\<<C-r><C-w>\>//gI<Left><Left><Left>]],
-		{ desc = "[S]ubstitute, [r]eplacing the existing word" }
+		{ desc = "Substitue word under cursor (replace)" }
 	)
+	bind("x", "<leader>cs", [[y:%s/\<<C-r>0\>/<C-r>0/gI<Left><Left><Left>]], { desc = "Substitute word under cursor" })
 	bind(
 		"x",
-		"<leader>sc",
-		[[y:%s/\<<C-r>0\>/<C-r>0/gI<Left><Left><Left>]],
-		{ desc = "[S]ubstitute, [c]hanging to a new word" }
-	)
-	bind(
-		"x",
-		"<leader>sr",
+		"<leader>sS",
 		[[y:%s/\<<C-r>0\>//gI<Left><Left><Left>]],
-		{ desc = "[S]ubstitute, [r]eplacing the existing word" }
+		{ desc = "Substitue word under cursor (replace)" }
 	)
 
 	bind("n", "<leader>xq", function()
