@@ -1,5 +1,18 @@
 local bind = vim.keymap.set
 
+local function get_visual_selection()
+	local _, ls, cs = unpack(vim.fn.getpos("v"))
+	local _, le, ce = unpack(vim.fn.getpos("."))
+
+	-- nvim_buf_get_text requires start and end args be in correct order
+	ls, le = math.min(ls, le), math.max(ls, le)
+	cs, ce = math.min(cs, ce), math.max(cs, ce)
+
+	local text = table.concat(vim.api.nvim_buf_get_text(0, ls - 1, cs - 1, le - 1, ce, {}), "\n")
+
+	return text:gsub("([ %(%)])", "\\%1")
+end
+
 return {
 	"nvim-telescope/telescope.nvim",
 	dependencies = {
@@ -47,6 +60,8 @@ return {
 			defaults = {
 				mappings = {
 					i = {
+						["<Up>"] = actions.cycle_history_prev,
+						["<Down>"] = actions.cycle_history_next,
 						["<C-r>"] = actions.to_fuzzy_refine,
 						["<C-i>"] = function(prompt_bufnr)
 							local query = action_state:get_current_line()
@@ -106,6 +121,9 @@ return {
 		bind("n", "<leader>g", function()
 			builtin.live_grep({ additional_args = { "--hidden" } })
 		end, { desc = "Live grep" })
+		bind("v", "<leader>g", function()
+			builtin.live_grep({ additional_args = { "--hidden" }, default_text = get_visual_selection() })
+		end, { desc = "Live grep for visual selection" })
 		bind("n", "<leader>G", function()
 			builtin.live_grep({
 				additional_args = { "--no-ignore-vcs", "--hidden", "--glob", "!.git" },
