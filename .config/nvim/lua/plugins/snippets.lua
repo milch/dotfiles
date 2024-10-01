@@ -19,7 +19,7 @@ return {
 					vim.snippet.expand(args.body)
 				end,
 			}
-			table.insert(opts.sources, { name = "snippets" })
+			table.insert(opts.sources, { name = "snippets", group_index = 2 })
 		end,
 		keys = {
 			{
