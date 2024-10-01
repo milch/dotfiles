@@ -237,3 +237,8 @@ run = ['move-node-to-workspace G']
 if.app-id = 'com.github.wez.wezterm'
 if.during-aerospace-startup = true
 run = ['move-node-to-workspace T']
+
+# [V]ideo chat
+[[on-window-detected]]
+if.app-id = 'com.amazon.Amazon-Chime'
+run = ['move-node-to-workspace V']
