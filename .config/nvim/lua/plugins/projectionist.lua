@@ -27,6 +27,6 @@ return {
 		}
 	end,
 	keys = {
-		{ "<leader>sa", "<cmd>Alternate<CR>", silent = true, desc = "[S]witch to [A]lternate file" },
+		{ "<leader>so", "<cmd>Alternate<CR>", silent = true, desc = "[S]witch to [O]ther file" },
 	},
 }

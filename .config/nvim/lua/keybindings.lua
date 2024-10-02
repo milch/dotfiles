@@ -59,7 +59,7 @@ function M.set()
 		"x",
 		"<leader>sS",
 		[[y:%s/\<<C-r>0\>//gI<Left><Left><Left>]],
-		{ desc = "Substitue word under cursor (replace)" }
+		{ desc = "Substitute word under cursor (replace)" }
 	)
 
 	bind("n", "<leader>xq", function()
