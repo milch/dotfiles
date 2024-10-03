@@ -102,6 +102,9 @@ return {
 					cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
 				end, { "i", "c", "s" }),
 				["<C-y>"] = cmp.mapping.confirm({ select = true }),
+
+				["<C-d>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select, count = 8 }),
+				["<C-u>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select, count = 8 }),
 			},
 			sources = cmp.config.sources({
 				{ name = "nvim_lsp" },
