@@ -32,6 +32,7 @@ return {
 	dependencies = {
 		"hrsh7th/cmp-path",
 		"hrsh7th/cmp-nvim-lsp",
+		"hrsh7th/cmp-nvim-lsp-signature-help",
 		"hrsh7th/cmp-cmdline",
 		"hrsh7th/cmp-buffer",
 	},
@@ -72,6 +73,11 @@ return {
 				end,
 			},
 			window = {},
+			view = {
+				entries = {
+					follow_cursor = true,
+				},
+			},
 			mapping = {
 				["<C-b>"] = cmp.mapping.scroll_docs(-4),
 				["<C-f>"] = cmp.mapping.scroll_docs(4),
@@ -100,6 +106,7 @@ return {
 			sources = cmp.config.sources({
 				{ name = "nvim_lsp" },
 				{ name = "path" },
+				{ name = "nvim_lsp_signature_help" },
 			}),
 			experimental = {
 				ghost_text = {
