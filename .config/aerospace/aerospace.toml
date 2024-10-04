@@ -242,3 +242,7 @@ run = ['move-node-to-workspace T']
 [[on-window-detected]]
 if.app-id = 'com.amazon.Amazon-Chime'
 run = ['move-node-to-workspace V']
+
+[workspace-to-monitor-force-assignment]
+S = [".*LEN.*", ".*Acer.*"]
+T = [".*LEN.*", ".*Acer.*"]
