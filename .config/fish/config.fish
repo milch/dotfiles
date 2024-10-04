@@ -47,7 +47,7 @@ status --is-interactive; and set_color_scheme
 
 status --is-interactive; and source (pyenv init -|psub); and source (rbenv init -|psub); and source (nodenv init -|psub)
 
-status --is-interactive; and test -e ~/.config/fish/local.fish; and source ~/.config/fish/local.fish
+test -e ~/.config/fish/local.fish; and source ~/.config/fish/local.fish
 
 alias cp='rsync --info=progress2'
 alias lg='TERM=screen-256color lazygit'
