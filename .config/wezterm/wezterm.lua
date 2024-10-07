@@ -101,4 +101,10 @@ config.set_environment_variables = {
 }
 config.window_decorations = "RESIZE"
 
+local ok, local_config = pcall(require, "local")
+
+if ok then
+	local_config.update_config(config)
+end
+
 return config

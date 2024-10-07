@@ -116,18 +116,25 @@ set -g @dark-notify-theme-path-light "$HOME/.config/tmux/catppuccin-latte.conf"
 set -g @dark-notify-theme-path-dark "$HOME/.config/tmux/catppuccin-macchiato.conf"
 
 set -g @session-wizard 't'
+if-shell "test -e ~/.local/state/tmux/tmux-dark-notify-theme.conf" \
+     "source-file ~/.local/state/tmux/tmux-dark-notify-theme.conf"
 
 # Load local config, if available
 if-shell "test -e $HOME/.config/tmux/local.conf" \
     "source-file $HOME/.config/tmux/local.conf"
 
-if-shell "test -e ~/.local/state/tmux/tmux-dark-notify-theme.conf" \
-     "source-file ~/.local/state/tmux/tmux-dark-notify-theme.conf"
-
 # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
 run '~/.config/tmux/plugins/tpm/tpm'
 
+<<<<<<< HEAD
 set -g status-left "#{E:@catppuccin_status_session} "
 set -g status-left-length 25
 set -g status-right "#{E:@catppuccin_status_directory}"
+=======
 
+run-shell '~/.config/tmux/plugins/tpm/tpm' # Or however you source tpm.
+
+if-shell "test -e ~/.local/state/tmux/tmux-dark-notify-theme.conf" \
+     "source-file ~/.local/state/tmux/tmux-dark-notify-theme.conf"
+
+>>>>>>> aeacd0e (Load local config files for tmux, wezterm)
