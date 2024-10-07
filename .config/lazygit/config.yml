@@ -8,7 +8,7 @@ git:
     # diff-so-fancy
     # delta --dark --paging=never
     # ydiff -p cat -s --wrap --width={{columnWidth}}
-    pager: delta --paging=never --true-color always --line-numbers --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"
+    pager: ~/.config/lazygit/delta.sh --paging=never --true-color always --line-numbers --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"
   # list of branches that are considered 'main' branches, used when displaying commits
   mainBranches:
     - master
