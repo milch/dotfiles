@@ -12,37 +12,43 @@ return {
 		opts = { ensure_installed = { "rustfmt" } },
 	},
 	{
-		"simrat39/rust-tools.nvim",
-		dependencies = {
-			"williamboman/mason-lspconfig.nvim",
-			"mfussenegger/nvim-dap",
-		},
-		ft = "rust",
-		config = function()
-			local codelldb_root = require("mason-registry").get_package("codelldb"):get_install_path()
-			local liblldb_path = codelldb_root .. "/extension/lldb/lib/liblldb.dylib"
-
-			require("mason-lspconfig").setup_handlers({
-				["rust_analyzer"] = function()
-					require("rust-tools").setup({
-						server = {
-							settings = {
-								["rust-analyzer"] = {
-									checkOnSave = {
-										command = "clippy",
-									},
-								},
+		"mrcjkb/rustaceanvim",
+		opts = {
+			server = {
+				on_attach = function(_, bufnr)
+					vim.lsp.buf.code_action = function()
+						vim.cmd.RustLsp("codeAction")
+					end
+					vim.keymap.set("n", "<leader>dr", function()
+						vim.cmd.RustLsp("debuggables")
+					end, { desc = "Rust Debuggables", buffer = bufnr })
+				end,
+				default_settings = {
+					-- rust-analyzer language server configuration
+					["rust-analyzer"] = {
+						cargo = {
+							allFeatures = true,
+							loadOutDirsFromCheck = true,
+							buildScripts = {
+								enable = true,
 							},
 						},
-						dap = {
-							adapter = require("rust-tools.dap").get_codelldb_adapter(
-								vim.fn.exepath("codelldb"),
-								liblldb_path
-							),
+						-- Add clippy lints for Rust.
+						checkOnSave = true,
+						procMacro = {
+							enable = true,
+							ignored = {
+								["async-trait"] = { "async_trait" },
+								["napi-derive"] = { "napi" },
+								["async-recursion"] = { "async_recursion" },
+							},
 						},
-					})
-				end,
-			})
+					},
+				},
+			},
+		},
+		config = function(_, opts)
+			vim.g.rustaceanvim = vim.tbl_deep_extend("keep", vim.g.rustaceanvim or {}, opts or {})
 		end,
 	},
 }
