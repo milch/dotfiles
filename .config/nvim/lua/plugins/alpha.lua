@@ -74,8 +74,10 @@ return {
 
 						section_harpoon.val[#section_harpoon.val + 1] = button
 					end
-					table.insert(theta.layout, 3, { type = "padding", val = 2 })
-					table.insert(theta.layout, 4, section_harpoon)
+					if harpoon:list():length() ~= 0 then
+						table.insert(theta.layout, 3, { type = "padding", val = 2 })
+						table.insert(theta.layout, 4, section_harpoon)
+					end
 					pcall(vim.cmd.AlphaRedraw)
 				end,
 			})
