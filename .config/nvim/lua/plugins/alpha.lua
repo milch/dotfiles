@@ -81,6 +81,30 @@ return {
 					pcall(vim.cmd.AlphaRedraw)
 				end,
 			})
+			vim.api.nvim_create_autocmd("User", {
+				once = true,
+				pattern = "LazyVimStarted",
+				callback = function()
+					local stats = require("lazy").stats()
+					local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
+					table.insert(theta.layout, { type = "padding", val = 1 })
+					table.insert(theta.layout, {
+						type = "text",
+						val = "⚡ Neovim loaded "
+							.. stats.loaded
+							.. "/"
+							.. stats.count
+							.. " plugins in "
+							.. ms
+							.. "ms",
+						opts = {
+							hl = "NonText",
+							position = "center",
+						},
+					})
+					pcall(vim.cmd.AlphaRedraw)
+				end,
+			})
 		end,
 	},
 }
