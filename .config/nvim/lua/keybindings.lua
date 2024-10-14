@@ -83,8 +83,14 @@ function M.set()
 	-- buffers
 	bind("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
 	bind("n", "]b", "<cmd>bnext<cr>", { desc = "Next Buffer" })
-	bind("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
-	bind("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
+
+	bind("n", "<S-h>", function()
+		require("plugins.lualine.harpoon-component").bprev()
+	end, { desc = "Prev Buffer" })
+	bind("n", "<S-l>", function()
+		require("plugins.lualine.harpoon-component").bnext()
+	end, { desc = "Next Buffer" })
+
 	bind("n", "<leader>bd", vim.cmd.bdelete, { desc = "Delete Buffer" })
 
 	-- commenting

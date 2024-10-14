@@ -8,6 +8,8 @@ local default_options = {
 	disabled_buftypes = { "quickfix", "prompt" },
 }
 
+M.last_pos = 1
+
 -- TODO: always draw harpoon section
 
 function M:init(options)
@@ -78,6 +80,8 @@ function M.buffer_jump(buf_pos, bang)
 	else
 		buf_pos = tonumber(buf_pos)
 	end
+	M.last_pos = buf_pos
+
 	if buf_pos < 1 or buf_pos > #M.coordinates then
 		if bang ~= "!" then
 			error("Error: Unable to jump buffer position out of range")
@@ -85,6 +89,7 @@ function M.buffer_jump(buf_pos, bang)
 			return
 		end
 	end
+
 	local coordinate = M.coordinates[buf_pos]
 	local harpoon = require("harpoon")
 	if coordinate.kind == "harpoon" then
@@ -94,6 +99,34 @@ function M.buffer_jump(buf_pos, bang)
 	else
 		error("Error: unknown coordinate kind " .. coordinate.kind)
 	end
+end
+
+local function move_dir(dir)
+	local cur_idx = M.last_pos
+	local coordinate = M.coordinates[cur_idx]
+	if coordinate ~= nil and coordinate.bufnr ~= vim.fn.bufnr("%") then
+		for coord_idx, coord in ipairs(M.coordinates) do
+			if coord.bufnr == vim.fn.bufnr("%") then
+				cur_idx = coord_idx
+				break
+			end
+		end
+	end
+	cur_idx = cur_idx + dir
+	if cur_idx < 1 then
+		cur_idx = #M.coordinates
+	end
+	if cur_idx > #M.coordinates then
+		cur_idx = 1
+	end
+	M.buffer_jump(cur_idx)
+end
+
+function M.bnext()
+	move_dir(1)
+end
+function M.bprev()
+	move_dir(-1)
 end
 
 vim.cmd([[
