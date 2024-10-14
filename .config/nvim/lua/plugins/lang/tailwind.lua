@@ -8,7 +8,7 @@ return {
 		},
 	},
 	{
-		"hrsh7th/nvim-cmp",
+		"nvim-cmp",
 		dependencies = {
 			{ "roobert/tailwindcss-colorizer-cmp.nvim", opts = {} },
 		},

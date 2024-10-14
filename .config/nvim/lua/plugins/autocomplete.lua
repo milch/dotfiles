@@ -27,7 +27,8 @@ local cmp_kinds = {
 }
 
 return {
-	"hrsh7th/nvim-cmp",
+	"iguanacucumber/magazine.nvim",
+	name = "nvim-cmp", -- Otherwise highlighting gets messed up
 	event = { "InsertEnter", "CmdlineEnter" },
 	dependencies = {
 		"hrsh7th/cmp-path",
@@ -62,12 +63,36 @@ return {
 		})
 		return {
 			preselect = cmp.PreselectMode.None,
+			performance = {
+				debounce = 0,
+			},
 			formatting = {
 				fields = { "kind", "abbr", "menu" },
-				format = function(_, vim_item)
+				format = function(entry, vim_item)
 					if cmp_kinds[vim_item.kind] then
 						vim_item.kind = cmp_kinds[vim_item.kind] .. "  "
 					end
+					local highlights = {}
+
+					-- you will likely not want to get this query every single time for performance but this is an example
+					local query = vim.treesitter.query.get(vim.bo.filetype, "highlights")
+					local str = vim_item.abbr
+
+					local success, parser = pcall(vim.treesitter.get_string_parser, str, vim.bo.filetype)
+					if success then
+						local tree = parser:parse(true)[1]
+						local root = tree:root()
+						for id, node in query:iter_captures(root, str, 0, -1) do
+							local name = "@" .. query.captures[id] .. "." .. vim.bo.filetype
+							local hl = vim.api.nvim_get_hl_id_by_name(name)
+							local range = { node:range() }
+							local _, nscol, _, necol = range[1], range[2], range[3], range[4]
+
+							table.insert(highlights, { hl, range = { nscol, necol } })
+						end
+					end
+
+					vim_item.abbr_hl_group = highlights
 
 					return vim_item
 				end,
