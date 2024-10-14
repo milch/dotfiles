@@ -18,8 +18,8 @@ function M.set()
 	bind("n", "<M-4>", goto_buffer(4), { desc = "Go directly to buffer 4" })
 	bind("n", "<M-5>", goto_buffer(5), { desc = "Go directly to buffer 5" })
 
-	bind("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move selected lines up" })
-	bind("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move selecetd lines down" })
+	bind("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move selected lines up", silent = true })
+	bind("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move selecetd lines down", silent = true })
 
 	bind("n", "J", "mzJ`zmz", { desc = "Join lines (keep cursor position the same)" })
 	bind("n", "<C-d>", "<C-d>zz", { desc = "Move one page down (keep cursor centered)" })
