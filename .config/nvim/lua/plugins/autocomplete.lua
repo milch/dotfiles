@@ -43,7 +43,14 @@ return {
 		vim.api.nvim_set_hl(0, "CmpGhostText", { link = "NonText", default = true })
 
 		cmp.setup.cmdline(":", {
-			mapping = cmp.mapping.preset.cmdline(),
+			mapping = cmp.mapping.preset.cmdline({
+				["<C-j>"] = cmp.mapping(function()
+					cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
+				end, { "i", "c", "s" }),
+				["<C-k>"] = cmp.mapping(function()
+					cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
+				end, { "i", "c", "s" }),
+			}),
 			sources = cmp.config.sources({
 				{ name = "path" },
 			}, {
@@ -56,7 +63,14 @@ return {
 			}),
 		})
 		cmp.setup.cmdline("/", {
-			mapping = cmp.mapping.preset.cmdline(),
+			mapping = cmp.mapping.preset.cmdline({
+				["<C-j>"] = cmp.mapping(function()
+					cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
+				end, { "i", "c", "s" }),
+				["<C-k>"] = cmp.mapping(function()
+					cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
+				end, { "i", "c", "s" }),
+			}),
 			sources = {
 				{ name = "buffer" },
 			},
