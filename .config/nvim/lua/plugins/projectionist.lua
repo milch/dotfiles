@@ -1,6 +1,7 @@
 return {
 	"tpope/vim-projectionist",
-	config = function()
+	lazy = false,
+	init = function()
 		vim.g.projectionist_heuristics = {
 			["rails-root/Rakefile"] = {
 				["rails-root/spec/*_spec.rb"] = { alternate = "rails-root/{}.rb" },
@@ -27,6 +28,6 @@ return {
 		}
 	end,
 	keys = {
-		{ "<leader>so", "<cmd>Alternate<CR>", silent = true, desc = "[S]witch to [O]ther file" },
+		{ "<leader>so", "<cmd>A<CR>", silent = true, desc = "[S]witch to [O]ther file" },
 	},
 }
