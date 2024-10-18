@@ -35,7 +35,7 @@ local find_all = function()
 	return require("telescope.builtin").find_files({
 		prompt_title = "All Files",
 		hidden = true,
-		no_ignore = false,
+		no_ignore = true,
 		find_command = { "rg", "--files", "--color", "never", "--glob", "!.git" },
 	})
 end
