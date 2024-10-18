@@ -9,7 +9,11 @@ return {
 	{
 		"epwalsh/obsidian.nvim",
 		version = "*", -- recommended, use latest release instead of latest commit
-		lazy = false,
+		lazy = true,
+		event = {
+			"BufReadPre " .. vim.fn.expand("~") .. "/Notes/*.md",
+			"BufNewFile " .. vim.fn.expand("~") .. "/Notes/*.md",
+		},
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-cmp",
@@ -151,11 +155,6 @@ return {
 				return out
 			end,
 		},
-		cond = function()
-			local normalized_obsidian_vault = vim.fs.normalize("~/Notes/")
-			local normalized_path = vim.fs.normalize(vim.fn.getcwd())
-			return normalized_path:sub(1, #normalized_obsidian_vault) == normalized_obsidian_vault
-		end,
 		init = function()
 			vim.api.nvim_create_autocmd({ "BufEnter", "BufReadPost" }, {
 				group = vim.api.nvim_create_augroup("obsidian", { clear = true }),
