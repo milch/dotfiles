@@ -33,13 +33,13 @@ return {
 			servers = {
 				solargraph = {
 					root_dir = ruby_root,
-					enabled = false,
 				},
 				rubocop = {
 					root_dir = ruby_root,
 				},
 				ruby_lsp = {
 					root_dir = ruby_root,
+					enabled = false,
 				},
 			},
 		},
