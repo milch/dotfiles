@@ -52,9 +52,10 @@ function M:buffers()
 	local buffers = {}
 	for idx, buf in pairs(vim.api.nvim_list_bufs()) do
 		local buftype = vim.api.nvim_get_option_value("buftype", { buf = buf })
-		for _, h in pairs(harpoons) do
+		for harpoon_idx, h in pairs(harpoons) do
 			if h.full_path == vim.api.nvim_buf_get_name(buf) then
 				h.bufnr = buf
+				coordinates[harpoon_idx].bufnr = buf
 				goto continue
 			end
 		end
