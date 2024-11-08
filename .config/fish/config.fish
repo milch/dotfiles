@@ -19,8 +19,6 @@ set -gx LC_ALL "en_US.UTF-8"
 
 set -x MANPAGER 'nvim +Man!'
 
-set -x GPG_TTY (tty)
-
 function update_theme
     set type $argv[1]
     set -gx APPLE_INTERFACE_STYLE $type
