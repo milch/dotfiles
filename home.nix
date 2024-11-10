@@ -13,6 +13,10 @@ let
     rev = "d2bbee4f7e7d5bac63c054e4d8eca57954b31471";
     hash = "sha256-x1yqPCWuoBSx/cI94eA+AWwhiSA42cLNUOFJl7qjhmw=";
   };
+  update-bundle = ''
+      export PATH="${lib.makeBinPath [ pkgs.ruby ]}:$PATH"
+      bundle install --frozen
+  '';
 in
 {
   # This value determines the Home Manager release that your configuration is
@@ -50,6 +54,16 @@ in
     ".config/fish/dark_notify.sh".source = .config/fish/dark_notify.sh;
     ".config/fish/themes/Catppuccin Latte.theme".source = "${catppuccin-fish}/themes/Catppuccin Latte.theme";
     ".config/fish/themes/Catppuccin Macchiato.theme".source = "${catppuccin-fish}/themes/Catppuccin Macchiato.theme";
+
+
+    "Gemfile" = {
+      source = ./Gemfile;
+      onChange = update-bundle;
+    };
+    "Gemfile.lock" = {
+      source = ./Gemfile.lock;
+      onChange = update-bundle;
+    };
   };
 
   # You can also manage environment variables but you will have to manually
