@@ -59,6 +59,26 @@
   #  /etc/profiles/per-user/davish/etc/profile.d/hm-session-vars.sh
   #
   # if you don't want to manage your shell through Home Manager.
+  home.shellAliases = {
+    cp = "rsync --info=progress2";
+    ls = "eza --icons=always -w 120 --group-directories-first --across";
+    pcd = "fzf-cdhist-widget";
+    lg = "TERM=screen-256color lazygit";
+    cat = "bat";
+    be = "bundler exec";
+    bi = "bundler install";
+    bu = "bundler update";
+    ga = "git add";
+    gb = "git branch";
+    gc = "git commit";
+    gca = "git commit --amend --no-edit";
+    gcm = "git commit --message";
+    gco = "git checkout";
+    gpull = "git pull";
+    gpush = "git push";
+    gs = "git status";
+  };
+
   home.sessionVariables = {
     # EDITOR = "emacs";
   };
