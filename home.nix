@@ -33,7 +33,18 @@ in
   home.preferXdgDirectories = true;
 
   home.file = {
+    ".config/nvim/init.lua".source = .config/nvim/init.lua;
+    ".config/nvim/lua".source = .config/nvim/lua;
+
+    ".config/aerospace/aerospace.toml".source = .config/aerospace/aerospace.toml;
+
     ".config/lazygit".source = .config/lazygit;
+
+    ".config/rubocop/config.yml".source = .config/rubocop/config.yml;
+
+    ".config/starship.toml".source = .config/starship.toml;
+
+    ".config/wezterm".source = .config/wezterm;
 
     ".config/tmux/catppuccin-latte.conf".source = .config/tmux/catppuccin-latte.conf;
     ".config/tmux/catppuccin-macchiato.conf".source = .config/tmux/catppuccin-macchiato.conf;
