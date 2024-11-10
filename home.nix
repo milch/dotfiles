@@ -45,6 +45,7 @@ in
     # '')
   ];
   home.file = {
+    ".config/lazygit".source = .config/lazygit;
 
     ".config/fish/dark_notify.sh".source = .config/fish/dark_notify.sh;
     ".config/fish/themes/Catppuccin Latte.theme".source = "${catppuccin-fish}/themes/Catppuccin Latte.theme";
@@ -99,6 +100,9 @@ in
     GIT_EDITOR = "nvim";
     VISUAL = "nvim";
     MANPAGER = "nvim +Man!";
+  };
+
+  home.activation = {
   };
 
   # Let Home Manager install and manage itself.
@@ -156,6 +160,79 @@ in
       "Catppuccin Macchiato" = {
         src = catppuccin-bat;
         file = "themes/Catppuccin Macchiato.tmTheme";
+      };
+    };
+  };
+
+  programs.git = {
+    enable = true;
+    lfs.enable = true;
+    delta = {
+      enable = true;
+      options = {
+        line-numbers = true;
+        tabs = 2;
+      };
+    };
+    attributes = [
+      "*.m     diff=objc"
+      "*.mm    diff=objc"
+      "*.cs    diff=csharp"
+      "*.css   diff=css"
+      "*.html  diff=html"
+      "*.xhtml diff=html"
+      "*.exs   diff=elixir"
+      "*.pl    diff=perl"
+      "*.py    diff=python"
+      "*.md    diff=markdown"
+      "*.rake  diff=ruby"
+      "*.rs    diff=rust"
+      "*.el    diff=lisp"
+      "*.plist diff=plist"
+    ];
+    ignores = [
+      # Compiled source
+      "*.com"
+      "*.class"
+      "*.dll"
+      "*.exe"
+      "*.o"
+      "*.so"
+      "*.dylib"
+
+      # Logs and databases
+      "*.log"
+      "*.sqlite"
+
+      # OS generated files
+      ".DS_Store"
+      ".DS_Store?"
+      "._*"
+      ".Spotlight-V100"
+      ".Trashes"
+      "ehthumbs.db"
+      "Thumbs.db"
+
+      ".solargraph.yml"
+    ];
+    extraConfig = {
+      pull = {
+        rebase = true;
+      };
+      rebase = {
+        autostash = true;
+      };
+      diff = {
+        algorithm = "histogram";
+        colorMoved = "default";
+      };
+      difftool.prompt = false;
+      mergetool.prompt = false;
+      "delta \"light-style\"".dark = false;
+      "delta \"dark-style\"".dark = true;
+      "diff \"plist\"" = {
+        textconv = "/usr/libexec/PlistBuddy -c \"Print\"";
+        binary = true;
       };
     };
   };
