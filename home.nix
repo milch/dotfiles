@@ -237,4 +237,15 @@ in
     };
   };
 
+  programs.readline = {
+    enable = true;
+    bindings = {
+      "\\e[A" = "history-search-backward";
+      "\\e[B" = "history-search-forward";
+    };
+    variables = {
+      "show-all-if-ambiguous" = true;
+      "completion-ignore-case" = true;
+    };
+  };
 }
