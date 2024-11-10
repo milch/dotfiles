@@ -52,6 +52,7 @@ in
     ".config/tmux/tmux.conf".source = .config/tmux/tmux.conf;
 
     ".config/fish/dark_notify.sh".source = .config/fish/dark_notify.sh;
+    ".config/fish/functions".source = .config/fish/functions;
     ".config/fish/themes/Catppuccin Latte.theme".source = "${catppuccin-fish}/themes/Catppuccin Latte.theme";
     ".config/fish/themes/Catppuccin Macchiato.theme".source = "${catppuccin-fish}/themes/Catppuccin Macchiato.theme";
 
@@ -122,8 +123,6 @@ in
 
   programs.fish = {
     enable = true;
-    shellAliases = {
-    };
     interactiveShellInit = ''
       function update_theme
         set type $argv[1]
