@@ -28,28 +28,17 @@ in
   # release notes.
   home.stateVersion = "24.05"; # Please read the comment before changing.
 
-  # The home.packages option allows you to install Nix packages into your
-  # environment.
-  home.packages = [
-    # # Adds the 'hello' command to your environment. It prints a friendly
-    # # "Hello, world!" when run.
-    # pkgs.hello
+  home.packages = [ ];
 
-    # # It is sometimes useful to fine-tune packages, for example, by applying
-    # # overrides. You can do that directly here, just don't forget the
-    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-    # # fonts?
-    # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
+  home.preferXdgDirectories = true;
 
-    # # You can also create simple shell scripts directly inside your
-    # # configuration. For example, this adds a command 'my-hello' to your
-    # # environment:
-    # (pkgs.writeShellScriptBin "my-hello" ''
-    #   echo "Hello, ${config.home.username}!"
-    # '')
-  ];
   home.file = {
     ".config/lazygit".source = .config/lazygit;
+
+    ".config/tmux/catppuccin-latte.conf".source = .config/tmux/catppuccin-latte.conf;
+    ".config/tmux/catppuccin-macchiato.conf".source = .config/tmux/catppuccin-macchiato.conf;
+    ".config/tmux/catppuccin-reset.conf".source = .config/tmux/catppuccin-reset.conf;
+    ".config/tmux/tmux.conf".source = .config/tmux/tmux.conf;
 
     ".config/fish/dark_notify.sh".source = .config/fish/dark_notify.sh;
     ".config/fish/themes/Catppuccin Latte.theme".source = "${catppuccin-fish}/themes/Catppuccin Latte.theme";
@@ -66,16 +55,6 @@ in
     };
   };
 
-  # You can also manage environment variables but you will have to manually
-  # source
-  #
-  #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
-  #
-  # or
-  #
-  #  /etc/profiles/per-user/davish/etc/profile.d/hm-session-vars.sh
-  #
-  # if you don't want to manage your shell through Home Manager.
   home.shellAliases = {
     cp = "rsync --info=progress2";
     ls = "eza --icons=always -w 120 --group-directories-first --across";
@@ -117,6 +96,14 @@ in
   };
 
   home.activation = {
+    installTerminfo = lib.hm.dag.entryAfter ["writeBoundary"] ''
+      mkdir -p $HOME/.terminfo/74
+      cp -f /opt/homebrew/Cellar/ncurses/6.5/share/terminfo/74/tmux-256color $HOME/.terminfo/74
+    '';
+    installTpm = lib.hm.dag.entryAfter ["writeBoundary"] ''
+      export PATH="${lib.makeBinPath [ pkgs.git ]}:$PATH"
+      test -d $HOME/.config/tmux/plugins/tpm || git clone https://github.com/tmux-plugins/tpm $HOME/.config/tmux/plugins/tpm
+    '';
   };
 
   # Let Home Manager install and manage itself.
