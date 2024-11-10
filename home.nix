@@ -1,9 +1,20 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
+let
+  catppuccin-fish = pkgs.fetchFromGitHub {
+    owner = "catppuccin";
+    repo = "fish";
+    rev = "cc8e4d8fffbdaab07b3979131030b234596f18da";
+    hash = "sha256-udiU2TOh0lYL7K7ylbt+BGlSDgCjMpy75vQ98C1kFcc=";
+  };
+  catppuccin-bat = pkgs.fetchFromGitHub {
+    owner = "catppuccin";
+    repo = "bat";
+    rev = "d2bbee4f7e7d5bac63c054e4d8eca57954b31471";
+    hash = "sha256-x1yqPCWuoBSx/cI94eA+AWwhiSA42cLNUOFJl7qjhmw=";
+  };
+in
 {
-  # Home Manager needs a bit of information about you and the paths it should
-  # manage.
-
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
   # introduces backwards incompatible changes.
@@ -33,20 +44,11 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
   ];
-
-  # Home Manager is pretty good at managing dotfiles. The primary way to manage
-  # plain files is through 'home.file'.
   home.file = {
-    # # Building this configuration will create a copy of 'dotfiles/screenrc' in
-    # # the Nix store. Activating the configuration will then make '~/.screenrc' a
-    # # symlink to the Nix store copy.
-    # ".screenrc".source = dotfiles/screenrc;
 
-    # # You can also set the file content immediately.
-    # ".gradle/gradle.properties".text = ''
-    #   org.gradle.console=verbose
-    #   org.gradle.daemon.idletimeout=3600000
-    # '';
+    ".config/fish/dark_notify.sh".source = .config/fish/dark_notify.sh;
+    ".config/fish/themes/Catppuccin Latte.theme".source = "${catppuccin-fish}/themes/Catppuccin Latte.theme";
+    ".config/fish/themes/Catppuccin Macchiato.theme".source = "${catppuccin-fish}/themes/Catppuccin Macchiato.theme";
   };
 
   # You can also manage environment variables but you will have to manually
@@ -79,10 +81,83 @@
     gs = "git status";
   };
 
+  home.sessionPath = [
+    "/opt/homebrew/bin"
+    "/opt/homebrew/opt/ncurses/bin"
+    "/Applications/WezTerm.app/Contents/MacOS"
+    "/usr/local/bin"
+    "$HOME/.cargo/bin"
+    "$HOME/.local/bin"
+  ];
+
   home.sessionVariables = {
-    # EDITOR = "emacs";
+    LANG = "en_US.UTF-8";
+    LC_COLLATE = "en_US.UTF-8";
+    LC_ALL = "en_US.UTF-8";
+    XDG_CONFIG_HOME = "$HOME/.config";
+    EDITOR = "nvim";
+    GIT_EDITOR = "nvim";
+    VISUAL = "nvim";
+    MANPAGER = "nvim +Man!";
   };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+  programs.fish = {
+    enable = true;
+    shellAliases = {
+    };
+    interactiveShellInit = ''
+      function update_theme
+        set type $argv[1]
+        set -gx APPLE_INTERFACE_STYLE $type
+        set -gx DELTA_FEATURES "+$type-style"
+      end
+
+      function set_color_scheme
+        if test "$apple_interface_style" = dark
+          yes | fish_config theme save 'Catppuccin Macchiato'
+          set -gx BAT_THEME "Catppuccin Macchiato"
+        else
+          yes | fish_config theme save 'Catppuccin Latte'
+          set -gx BAT_THEME "Catppuccin Latte"
+        end
+        update_theme "$apple_interface_style"
+      end
+
+      function dark_notify
+        $HOME/.config/fish/dark_notify.sh &
+      end
+
+      set_color_scheme
+
+      test -e ~/.config/fish/local.fish; and source ~/.config/fish/local.fish
+
+      function update_color_scheme -d 'Set color scheme after every call' --on-variable apple_interface_style
+        set_color_scheme
+      end
+
+      dark_notify
+
+      fish_vi_key_bindings
+      starship init fish | source
+      zoxide init fish | source
+    '';
+  };
+
+  programs.bat = {
+    enable = true;
+    themes = {
+      "Catppuccin Latte" = {
+        src = catppuccin-bat;
+        file = "themes/Catppuccin Latte.tmTheme";
+      };
+      "Catppuccin Macchiato" = {
+        src = catppuccin-bat;
+        file = "themes/Catppuccin Macchiato.tmTheme";
+      };
+    };
+  };
+
 }
