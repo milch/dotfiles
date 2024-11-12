@@ -25,11 +25,10 @@ return {
 			{ "<leader>oo", "<cmd>ObsidianOpen<CR>" },
 			{ "<leader>ob", "<cmd>ObsidianBacklinks<CR>" },
 			{ "<leader>ot", "<cmd>ObsidianTemplate<CR>" },
-			{ "<leader>oqs", "<cmd>ObsidianQuickSwitch<CR>" },
+			{ "<leader>os", "<cmd>ObsidianQuickSwitch<CR>" },
 			{ "<leader>of", "<cmd>ObsidianSearch<CR>" },
 			{ "<leader>op", "<cmd>ObsidianPasteImg<CR>" },
 			{ "<leader>ol", "<cmd>ObsidianLinkNew<CR>" },
-			{ "<leader>f", "<cmd>ObsidianQuickSwitch<CR>" },
 		},
 		opts = {
 			ui = { enable = false },
@@ -95,6 +94,22 @@ return {
 					return string.format("[[%s]]", opts.path)
 				end
 			end,
+			note_frontmatter_func = function(note)
+				local out = {
+					id = note.id,
+					aliases = note.aliases,
+					tags = note.tags,
+					created_date = os.date("%Y-%m-%d", os.time()),
+				}
+				-- `note.metadata` contains any manually added fields in the frontmatter.
+				-- So here we just make sure those fields are kept in the frontmatter.
+				if note.metadata ~= nil and not vim.tbl_isempty(note.metadata) then
+					for k, v in pairs(note.metadata) do
+						out[k] = v
+					end
+				end
+				return out
+			end,
 
 			open_app_foreground = true,
 
@@ -138,29 +153,11 @@ return {
 					end,
 				},
 			},
-			note_frontmatter_func = function(note)
-				local out = {
-					id = note.id,
-					aliases = note.aliases,
-					tags = note.tags,
-					created_date = os.date("%Y-%m-%d", os.time()),
-				}
-				-- `note.metadata` contains any manually added fields in the frontmatter.
-				-- So here we just make sure those fields are kept in the frontmatter.
-				if note.metadata ~= nil and not vim.tbl_isempty(note.metadata) then
-					for k, v in pairs(note.metadata) do
-						out[k] = v
-					end
-				end
-				return out
-			end,
 		},
 		init = function()
 			vim.api.nvim_create_autocmd({ "BufEnter", "BufReadPost" }, {
 				group = vim.api.nvim_create_augroup("obsidian", { clear = true }),
 				callback = function()
-					local opts = { noremap = true, silent = true, buffer = true }
-					vim.keymap.set("n", "<leader>f", ":ObsidianQuickSwitch<CR>", opts)
 					vim.opt_local.conceallevel = 2
 				end,
 			})
