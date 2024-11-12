@@ -7,6 +7,49 @@ return {
 				enabled = true,
 				backend = "builtin",
 				show_numbers = true,
+				get_config = function(opts)
+					if opts.kind == "codeaction" then
+						return {
+							backend = "builtin",
+							builtin = {
+								min_height = 0,
+								max_width = 0.5,
+								relative = "cursor",
+								border = "none",
+								show_numbers = true,
+								buf_options = {},
+								win_options = {
+									cursorline = true,
+									cursorlineopt = "both",
+									number = true,
+								},
+								override = function(config)
+									config.row = 1
+									return config
+								end,
+							},
+						}
+					end
+				end,
+				format_item_override = {
+					codeaction = function(kind)
+						print(kind.action.kind)
+						local symbols = {
+							quickfix = { "󰁨", { link = "DiagnosticInfo" } },
+							others = { "?", { link = "DiagnosticWarning" } },
+							refactor = { "", { link = "DiagnosticWarning" } },
+							["refactor.move"] = { "󰪹", { link = "DiagnosticInfo" } },
+							["refactor.extract"] = { "", { link = "DiagnosticError" } },
+							["refactor.rewrite"] = { "󰑕", { link = "DiagnosticError" } },
+							["source.organizeImports"] = { "", { link = "TelescopeResultVariable" } },
+							["source.fixAll"] = { "", { link = "TelescopeResultVariable" } },
+							["source"] = { "", { link = "DiagnosticError" } },
+							["rename"] = { "󰑕", { link = "DiagnosticWarning" } },
+							["codeAction"] = { "", { link = "DiagnosticError" } },
+						}
+						return string.format("%s%s", symbols[kind.action.kind][1] .. " ", kind.action.title)
+					end,
+				},
 			},
 		},
 	},
