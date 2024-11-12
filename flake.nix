@@ -227,6 +227,7 @@
           "sf-symbols"
           "slack"
           "steam"
+          "thingsmacsandboxhelper"
           "ultimaker-cura"
           "suspicious-package"
           "topaz-photo-ai"
