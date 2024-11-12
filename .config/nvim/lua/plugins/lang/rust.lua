@@ -8,6 +8,36 @@ return {
 		opts = { formatters_by_ft = { rust = { "rustfmt" } } },
 	},
 	{
+		"saecki/crates.nvim",
+		tag = "stable",
+		event = { "BufRead Cargo.toml" },
+		opts = {
+			open_programs = { "open" },
+			popup = {
+				autofocus = true,
+			},
+			lsp = {
+				enabled = true,
+				on_attach = function(client, bufnr)
+					require("keybindings").set_lsp()
+				end,
+				actions = true,
+				completion = true,
+				hover = true,
+			},
+			completion = {
+				cmp = {
+					enabled = true,
+				},
+				crates = {
+					enabled = true,
+					min_chars = 2,
+					max_results = 10,
+				},
+			},
+		},
+	},
+	{
 		"mrcjkb/rustaceanvim",
 		opts = {
 			server = {
