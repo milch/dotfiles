@@ -56,6 +56,8 @@ in
     ".config/fish/themes/Catppuccin Latte.theme".source = "${catppuccin-fish}/themes/Catppuccin Latte.theme";
     ".config/fish/themes/Catppuccin Macchiato.theme".source = "${catppuccin-fish}/themes/Catppuccin Macchiato.theme";
 
+    ".markdownlintrc".source = ./.markdownlintrc;
+    ".yamllint.yaml".source = ./.yamllint.yaml;
 
     "Gemfile" = {
       source = ./Gemfile;
