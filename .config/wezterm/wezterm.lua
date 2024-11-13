@@ -85,6 +85,11 @@ config.keys = {
 		mods = "CMD",
 		action = tmux_binding("g"),
 	},
+	{
+		key = "b",
+		mods = "CMD",
+		action = tmux_binding("b"),
+	},
 }
 
 for i = 1, 9, 1 do
