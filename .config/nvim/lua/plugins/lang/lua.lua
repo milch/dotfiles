@@ -5,7 +5,7 @@ return {
 	},
 	{
 		"williamboman/mason.nvim",
-		opts = { ensure_installed = { "stylua" } },
+		opts = { ensure_installed = { "stylua", "lua-language-server" } },
 	},
 	{
 		"stevearc/conform.nvim",
