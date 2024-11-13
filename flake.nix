@@ -24,6 +24,7 @@
         exiftool
         eza
         fd
+        ffmpeg
         fswatch
         fzf
         gh
@@ -40,6 +41,7 @@
         lazygit
         neofetch
         neovim
+        nmap
         nodejs
         pam-reattach
         pandoc
@@ -55,6 +57,7 @@
         tmux
         tree
         tree-sitter
+        wget
         zoxide
       ];
       environment.shells = [ pkgs.fish ];
@@ -146,6 +149,11 @@
             "/Applications/CARROTweather.app"
             "/System/Applications/iPhone Mirroring.app"
           ];
+          # Disables hot corners
+          wvous-br-corner = 1;
+          wvous-bl-corner = 1;
+          wvous-tl-corner = 1;
+          wvous-tr-corner = 1;
         };
         menuExtraClock = {
           Show24Hour = true;
@@ -155,6 +163,15 @@
       };
 
       system.defaults.CustomUserPreferences = {
+        "com.apple.dock" = {
+          "expose-group-apps" = 1;
+        };
+        "com.apple.Safari" = {
+          ShowOverlayStatusBar = 1;
+          AlwaysRestoreSessionAtLaunch = 1;
+          CloseTabsAutomatically = 1;
+          EnableNarrowTabs = 1;
+        };
         "com.apple.Spotlight" = {
           "NSStatusItem Visible Item-0" = 0;
         };
@@ -178,6 +195,7 @@
           "tmux"
           "xcodesorg/made/xcodes"
           "ncurses"
+          "xcode-build-server"
         ];
         masApps = {
           "1Blocker" = 1365531024;
@@ -186,6 +204,7 @@
           "CARROT Weather" = 993487541;
           "Consent-O-Matic" = 1606897889;
           "Dark Reader for Safari" = 1438243180;
+          "Daisy Disk" = 411643860;
           "Flighty" = 1358823008;
           "Goodnotes" = 1444383602;
           "Patterns" = 429449079;
@@ -207,6 +226,7 @@
           "arq"
           "bettertouchtool"
           "calibre"
+          "dash@6"
           "fantastical"
           "fastrawviewer"
           "font-sf-mono"
