@@ -8,10 +8,6 @@ return {
 		opts = { ensure_installed = { "clangd" } },
 	},
 	{
-		"stevearc/conform.nvim",
-		opts = { formatters_by_ft = { swift = { "swift_format" } } },
-	},
-	{
 		"neovim/nvim-lspconfig",
 		opts = {
 			servers = {
