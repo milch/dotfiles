@@ -184,7 +184,7 @@
       homebrew = {
         enable = true;
         onActivation.upgrade = true;
-        onActivation.cleanup = "uninstall";
+        onActivation.cleanup = "zap";
         taps = [
           "cormacrelf/tap"
           "nikitabobko/tap"
