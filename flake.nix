@@ -36,6 +36,7 @@
         ijq
         imagemagick
         iperf
+        jankyborders
         jq
         just
         lazygit
