@@ -201,6 +201,7 @@
           "1Blocker" = 1365531024;
           "1Password for Safari" = 1569813296;
           "Amphetamine" = 937984704;
+          "Blackmagic Disk Speed Test" = 425264550;
           "CARROT Weather" = 993487541;
           "Consent-O-Matic" = 1606897889;
           "Dark Reader for Safari" = 1438243180;
@@ -227,6 +228,7 @@
           "bettertouchtool"
           "calibre"
           "dash@6"
+          "expressvpn"
           "fantastical"
           "fastrawviewer"
           "font-sf-mono"
@@ -242,6 +244,7 @@
           "obsidian"
           "ollama"
           "orbstack"
+          "plex"
           "provisionql"
           "rocket"
           "sf-symbols"
