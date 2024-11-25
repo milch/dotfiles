@@ -160,6 +160,9 @@ in
       fish_vi_key_bindings
       starship init fish | source
       zoxide init fish | source
+
+      # Enable nix-shell to work in fish
+      ${pkgs.any-nix-shell}/bin/any-nix-shell fish --info-right | source
     '';
   };
 
