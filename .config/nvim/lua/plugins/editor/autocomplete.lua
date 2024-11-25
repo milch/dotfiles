@@ -24,6 +24,7 @@ local cmp_kinds = {
 	Event = "",
 	Operator = "",
 	TypeParameter = "",
+	Supermaven = "",
 }
 
 return {

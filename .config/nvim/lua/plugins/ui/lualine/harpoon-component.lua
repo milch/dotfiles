@@ -1,7 +1,7 @@
 local Buffer = require("lualine.components.buffers.buffer")
 
 local M = require("lualine.components.buffers.init"):extend()
-local Harpoon = require("plugins.lualine.harpoon")
+local Harpoon = require("plugins.ui.lualine.harpoon")
 
 local default_options = {
 	disabled_filetypes = {},
@@ -132,7 +132,7 @@ end
 
 vim.cmd([[
 	function! LualineSwitchHarpoon(bufnr, mouseclicks, mousebutton, modifiers)
-		execute ":lua require('plugins.lualine.harpoon-component').buffer_jump(" . a:bufnr . ")"
+		execute ":lua require('plugins.ui.lualine.harpoon-component').buffer_jump(" . a:bufnr . ")"
 	endfunction
 ]])
 

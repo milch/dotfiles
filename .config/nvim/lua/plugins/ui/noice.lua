@@ -16,7 +16,7 @@ return {
 								max_width = 0.5,
 								relative = "cursor",
 								border = "none",
-								show_numbers = true,
+								-- show_numbers = true,
 								buf_options = {},
 								win_options = {
 									cursorline = true,
@@ -33,7 +33,6 @@ return {
 				end,
 				format_item_override = {
 					codeaction = function(kind)
-						print(kind.action.kind)
 						local symbols = {
 							quickfix = { "󰁨", { link = "DiagnosticInfo" } },
 							others = { "?", { link = "DiagnosticWarning" } },
@@ -47,7 +46,11 @@ return {
 							["rename"] = { "󰑕", { link = "DiagnosticWarning" } },
 							["codeAction"] = { "", { link = "DiagnosticError" } },
 						}
-						return string.format("%s%s", symbols[kind.action.kind][1] .. " ", kind.action.title)
+						local symbol = symbols[kind.action.kind]
+						if symbol == nil then
+							symbol = symbols.others
+						end
+						return string.format("%s%s", symbol[1] .. " ", kind.action.title)
 					end,
 				},
 			},

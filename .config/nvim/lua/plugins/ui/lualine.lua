@@ -80,7 +80,7 @@ return {
 				},
 				lualine_b = {
 					{
-						require("plugins.lualine.harpoon-component"),
+						require("plugins.ui.lualine.harpoon-component"),
 						hide_filename_extension = true,
 						symbols = {
 							modified = " ●", -- Text to show when the buffer is modified

@@ -79,45 +79,43 @@ return {
 		init = function()
 			vim.opt.updatetime = 50
 		end,
-		opts = function()
-			return {
-				---@type vim.diagnostic.Opts
-				diagnostics = {
-					underline = true,
-					virtual_text = {
-						source = "if_many",
-					},
-					severity_sort = true,
-					float = {
-						source = true,
-					},
-					update_in_insert = true,
-					signs = {
-						text = {
-							[vim.diagnostic.severity.ERROR] = M.diagnosticsIcons.error,
-							[vim.diagnostic.severity.WARN] = M.diagnosticsIcons.warn,
-							[vim.diagnostic.severity.HINT] = M.diagnosticsIcons.hint,
-							[vim.diagnostic.severity.INFO] = M.diagnosticsIcons.info,
-						},
+		opts = {
+			---@type vim.diagnostic.Opts
+			diagnostics = {
+				underline = true,
+				virtual_text = {
+					source = "if_many",
+				},
+				severity_sort = true,
+				float = {
+					source = true,
+				},
+				update_in_insert = true,
+				signs = {
+					text = {
+						[vim.diagnostic.severity.ERROR] = M.diagnosticsIcons.error,
+						[vim.diagnostic.severity.WARN] = M.diagnosticsIcons.warn,
+						[vim.diagnostic.severity.HINT] = M.diagnosticsIcons.hint,
+						[vim.diagnostic.severity.INFO] = M.diagnosticsIcons.info,
 					},
 				},
-				inlay_hints = {
-					enabled = true,
-					exclude = { "vue" }, -- filetypes for which you don't want to enable inlay hints
-				},
-				servers = {},
-				---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
-				setup = {
-					-- example to setup with typescript.nvim
-					-- tsserver = function(_, opts)
-					--   require("typescript").setup({ server = opts })
-					--   return true
-					-- end,
-					-- Specify * to use this function as a fallback for any server
-					-- ["*"] = function(server, opts) end,
-				},
-			}
-		end,
+			},
+			inlay_hints = {
+				enabled = true,
+				exclude = { "vue" }, -- filetypes for which you don't want to enable inlay hints
+			},
+			servers = {},
+			---@type table<string, fun(server:string, opts:lspconfig.options):boolean?>
+			setup = {
+				-- example to setup with typescript.nvim
+				-- tsserver = function(_, opts)
+				--   require("typescript").setup({ server = opts })
+				--   return true
+				-- end,
+				-- Specify * to use this function as a fallback for any server
+				-- ["*"] = function(server, opts) end,
+			},
+		},
 		config = function(_, opts)
 			if type(opts.diagnostics.signs) ~= "boolean" then
 				for severity, icon in pairs(opts.diagnostics.signs.text) do

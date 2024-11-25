@@ -1,5 +1,11 @@
 return {
 	{
+		"neovim/nvim-lspconfig",
+		opts = function(_, opts)
+			opts.servers.sourcekit = {}
+		end,
+	},
+	{
 		"wojciech-kulik/xcodebuild.nvim",
 		ft = { "objc", "swift" },
 		dependencies = {

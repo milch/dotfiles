@@ -8,7 +8,7 @@ function M.set()
 
 	local function goto_buffer(num)
 		return function()
-			require("plugins.lualine.harpoon-component").buffer_jump(num, true)
+			require("plugins.ui.lualine.harpoon-component").buffer_jump(num, true)
 		end
 	end
 
@@ -85,10 +85,10 @@ function M.set()
 	bind("n", "]b", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 
 	bind("n", "<S-h>", function()
-		require("plugins.lualine.harpoon-component").bprev()
+		require("plugins.ui.lualine.harpoon-component").bprev()
 	end, { desc = "Prev Buffer" })
 	bind("n", "<S-l>", function()
-		require("plugins.lualine.harpoon-component").bnext()
+		require("plugins.ui.lualine.harpoon-component").bnext()
 	end, { desc = "Next Buffer" })
 
 	bind("n", "<leader>bd", vim.cmd.bdelete, { desc = "Delete Buffer" })

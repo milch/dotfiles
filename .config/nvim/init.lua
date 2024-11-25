@@ -24,9 +24,11 @@ vim.opt.background = startupTheme
 require("lazy_file").setup()
 require("lazy").setup({
 	spec = {
-		{ import = "plugins" },
-		{ import = "plugins.lsp" },
+		{ import = "plugins.editor" },
 		{ import = "plugins.lang" },
+		{ import = "plugins.lsp" },
+		{ import = "plugins.misc" },
+		{ import = "plugins.ui" },
 	},
 	change_detection = {
 		notify = false,
