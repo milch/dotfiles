@@ -43,6 +43,33 @@ return {
 		},
 	},
 	{
+		"rgroli/other.nvim",
+		opts = {
+			mappings = {
+				{
+					pattern = "lib/(.*).ts$",
+					target = "test/%1.test.ts",
+					context = "test",
+				},
+				{
+					pattern = "test/(.*).test.ts$",
+					target = "lib/%1.ts",
+					context = "source",
+				},
+				{
+					pattern = "src/(.*).ts$",
+					target = "tests/%1.test.ts",
+					context = "test",
+				},
+				{
+					pattern = "tests/(.*).test.ts$",
+					target = "src/%1.ts",
+					context = "source",
+				},
+			},
+		},
+	},
+	{
 		"neovim/nvim-lspconfig",
 		opts = {
 			servers = {
