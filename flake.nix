@@ -50,6 +50,7 @@
         pkgs.home-manager
         python3
         qmk
+        rename
         ripgrep
         rsync
         ruby
