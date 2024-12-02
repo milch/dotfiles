@@ -229,7 +229,7 @@
           "arq"
           "bettertouchtool"
           "calibre"
-          "dash@6"
+          "dash"
           "expressvpn"
           "fantastical"
           "fastrawviewer"
