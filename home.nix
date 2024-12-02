@@ -264,4 +264,7 @@ in
       "completion-ignore-case" = true;
     };
   };
+
+  # Fallback if something doesn't work in fish
+  programs.zsh.enable = true;
 }
