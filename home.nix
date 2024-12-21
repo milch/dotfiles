@@ -48,7 +48,6 @@ in
 
     ".config/tmux/catppuccin-latte.conf".source = .config/tmux/catppuccin-latte.conf;
     ".config/tmux/catppuccin-macchiato.conf".source = .config/tmux/catppuccin-macchiato.conf;
-    ".config/tmux/catppuccin-reset.conf".source = .config/tmux/catppuccin-reset.conf;
     ".config/tmux/tmux.conf".source = .config/tmux/tmux.conf;
 
     ".config/fish/dark_notify.sh".source = .config/fish/dark_notify.sh;
