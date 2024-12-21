@@ -171,7 +171,7 @@
             "/Applications/DaVinci Resolve/DaVinci Resolve.app"
             "/System/Applications/Music.app"
             "/Applications/WezTerm.app"
-            "/Applications/Xcode-16.1.0.app"
+            "/Applications/Xcode-16.2.0.app"
             "/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app"
             "/System/Applications/Messages.app"
             "/System/Applications/Mail.app"
