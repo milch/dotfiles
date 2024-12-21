@@ -32,11 +32,11 @@ return {
 	name = "nvim-cmp", -- Otherwise highlighting gets messed up
 	event = { "InsertEnter", "CmdlineEnter" },
 	dependencies = {
-		"hrsh7th/cmp-path",
-		"hrsh7th/cmp-nvim-lsp",
-		"hrsh7th/cmp-nvim-lsp-signature-help",
-		"hrsh7th/cmp-cmdline",
-		"hrsh7th/cmp-buffer",
+		{ "iguanacucumber/mag-nvim-lsp", name = "cmp-nvim-lsp", opts = {} },
+		{ "iguanacucumber/mag-buffer", name = "cmp-buffer" },
+		{ "iguanacucumber/mag-cmdline", name = "cmp-cmdline" },
+		{ "https://codeberg.org/FelipeLema/cmp-async-path" },
+		{ "hrsh7th/cmp-nvim-lsp-signature-help" },
 	},
 	opts = function()
 		local cmp = require("cmp")
@@ -53,7 +53,7 @@ return {
 				end, { "i", "c", "s" }),
 			}),
 			sources = cmp.config.sources({
-				{ name = "path" },
+				{ name = "async_path" },
 			}, {
 				{
 					name = "cmdline",
@@ -148,7 +148,7 @@ return {
 			},
 			sources = cmp.config.sources({
 				{ name = "nvim_lsp" },
-				{ name = "path" },
+				{ name = "async_path" },
 				{ name = "nvim_lsp_signature_help" },
 			}),
 			experimental = {
