@@ -67,6 +67,34 @@ in
       source = ./Gemfile.lock;
       onChange = update-bundle;
     };
+
+    ".unison/sync-user-prefs.prf" = {
+      text = ''
+      # Roots of the synchronization
+      ## unison currently not support ~/$HOME in preference file
+      root = ${config.home.homeDirectory}
+      root = ${config.home.homeDirectory}/dotfiles/unison
+      prefer = newer
+      atomic = Name .git*
+      auto = true
+      batch = true
+      times = true
+      terse = true
+
+      # Keep a backup copy of every file in a central location
+      backuplocation = central
+      backupdir = ${config.home.homeDirectory}/.local/state/unison
+      backup = Name *
+      backupprefix = $VERSION.
+      backupsuffix =
+
+      ## macOS
+      path = Library/Preferences/com.apple.symbolichotkeys.plist
+      path = Library/Preferences/com.apple.print.custompresets.plist
+      path = Library/Preferences/com.apple.print.custompapers.plist
+      ignore = Name {.DS_Store}
+      '';
+    };
   };
 
   home.shellAliases = {

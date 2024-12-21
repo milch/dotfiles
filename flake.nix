@@ -59,6 +59,7 @@
         tmux
         tree
         tree-sitter
+        unison
         wget
         zoxide
       ];
@@ -104,6 +105,37 @@
           auth       optional       ${pkgs.pam-reattach}/lib/pam/pam_reattach.so
           auth       sufficient     pam_tid.so
           '';
+      };
+
+      environment.userLaunchAgents = {
+        "syncUserPreferences.plist" = {
+          enable = true;
+          text = ''
+            <?xml version="1.0" encoding="UTF-8"?>
+            <!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+            <plist version="1.0">
+              <dict>
+                <key>Label</key>
+                <string>unison.user-pref-sync</string>
+                <key>ProgramArguments</key>
+                <array>
+                  <string>${pkgs.unison}</string>
+                  <string>-ui</string>
+                  <string>text</string>
+                  <string>sync-user-prefs</string>
+                </array>
+                <key>RunAtLoad</key>
+                <true/>
+                <key>StartInterval</key>
+                <integer>300</integer>
+                <key>StandardOutPath</key>
+                <string>/Users/manu/Library/Logs/unison/user-pref-sync.log</string>
+                <key>StandardErrorPath</key>
+                <string>/Users/manu/Library/Logs/unison/user-pref-sync-err.log</string>
+              </dict>
+            </plist>
+          '';
+        };
       };
 
       system.keyboard.enableKeyMapping = true;
