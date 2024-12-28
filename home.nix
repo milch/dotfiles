@@ -91,6 +91,13 @@ in
       path = Library/Preferences/com.apple.symbolichotkeys.plist
       path = Library/Preferences/com.apple.print.custompresets.plist
       path = Library/Preferences/com.apple.print.custompapers.plist
+
+      # Alfred
+      path = Library/Preferences/com.runningwithcrayons.Alfred-Preferences.plist
+
+      # Ice
+      path = Library/Preferences/com.jordanbaird.Ice.plist
+
       ignore = Name {.DS_Store}
       '';
     };
