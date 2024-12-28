@@ -119,7 +119,7 @@
                 <string>unison.user-pref-sync</string>
                 <key>ProgramArguments</key>
                 <array>
-                  <string>${pkgs.unison}</string>
+                  <string>${pkgs.unison}/bin/unison</string>
                   <string>-ui</string>
                   <string>text</string>
                   <string>sync-user-prefs</string>

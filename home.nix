@@ -98,6 +98,9 @@ in
       # Ice
       path = Library/Preferences/com.jordanbaird.Ice.plist
 
+      # Rocket
+      path = Library/Preferences/net.matthewpalmer.Rocket.plist
+
       ignore = Name {.DS_Store}
       '';
     };
