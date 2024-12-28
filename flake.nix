@@ -164,7 +164,7 @@
         };
         WindowManager.EnableStandardClickToShowDesktop = false;
         dock = {
-          expose-group-by-app = true;
+          expose-group-apps = true;
           persistent-apps = [
             "/System/Applications/Photos.app"
             "/Applications/Adobe Lightroom Classic/Adobe Lightroom Classic.app"
