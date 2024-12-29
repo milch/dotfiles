@@ -163,5 +163,9 @@ return {
 		},
 		{ "<leader>sr", picker("resume"), desc = "Resume previous telescope" },
 		{ "<leader>s'", picker("registers"), desc = "Find registers" },
+		{ "<leader>li", picker("lsp_incoming_calls"), desc = "LSP incoming calls" },
+		{ "<leader>lo", picker("lsp_outgoing_calls"), desc = "LSP outgoing calls" },
+		{ "<leader>ld", picker("lsp_document_symbols"), desc = "LSP document symbols" },
+		{ "<leader>ls", picker("lsp_workspace_symbols"), desc = "LSP workspace symbols" },
 	},
 }

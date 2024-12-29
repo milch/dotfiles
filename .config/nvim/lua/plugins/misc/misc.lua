@@ -1,6 +1,6 @@
 local bind = vim.keymap.set
 
-bind("n", "<leader>l", function()
+bind("n", "<leader>xl", function()
 	require("lazy").home()
 end, { desc = "Show lazy plugin manager", silent = true, noremap = true })
 
@@ -84,8 +84,10 @@ return {
 			auto_close = true, -- automatically close the list when you have no diagnostics
 		},
 		cmd = "Trouble",
+		-- stylua: ignore
 		keys = {
 			{ "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics (Trouble)" },
+			{ "<leader>xs", "<cmd>Trouble lsp_document_symbols toggle focus=false win.position=right<cr>", desc = "LSP Document Symbols (Trouble)" },
 		},
 	},
 }
