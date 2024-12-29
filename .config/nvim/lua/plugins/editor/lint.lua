@@ -93,6 +93,7 @@ return {
 				typescriptreact = { "eslint_d" },
 				javascript = { "eslint_d" },
 				python = { "flake8" },
+				zig = { "zig" },
 			}
 
 			vim.api.nvim_create_autocmd(events, {

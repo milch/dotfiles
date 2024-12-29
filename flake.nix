@@ -61,6 +61,7 @@
         tree-sitter
         unison
         wget
+        zig
         zoxide
       ];
       environment.shells = [ pkgs.fish ];
