@@ -170,7 +170,7 @@
             "/Applications/Adobe Lightroom Classic/Adobe Lightroom Classic.app"
             "/Applications/DaVinci Resolve/DaVinci Resolve.app"
             "/System/Applications/Music.app"
-            "/Applications/WezTerm.app"
+            "/Applications/Ghostty.app"
             "/Applications/Xcode-16.2.0.app"
             "/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app"
             "/System/Applications/Messages.app"
@@ -226,7 +226,6 @@
         ];
         brews = [
           "cormacrelf/tap/dark-notify"
-          "tmux"
           "xcodesorg/made/xcodes"
           "ncurses"
           "xcode-build-server"
@@ -267,6 +266,7 @@
           "fastrawviewer"
           "font-sf-mono"
           "font-sf-pro"
+          "ghostty"
           "google-chrome"
           "homerow"
           "istat-menus"

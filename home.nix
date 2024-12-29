@@ -55,6 +55,8 @@ in
     ".config/fish/themes/Catppuccin Latte.theme".source = "${catppuccin-fish}/themes/Catppuccin Latte.theme";
     ".config/fish/themes/Catppuccin Macchiato.theme".source = "${catppuccin-fish}/themes/Catppuccin Macchiato.theme";
 
+    ".config/ghostty/config".source = .config/ghostty/config;
+
     ".markdownlintrc".source = ./.markdownlintrc;
     ".yamllint.yaml".source = ./.yamllint.yaml;
 
@@ -200,6 +202,8 @@ in
 
       # Enable nix-shell to work in fish
       ${pkgs.any-nix-shell}/bin/any-nix-shell fish --info-right | source
+
+      test -n "$GHOSTTY_RESOURCES_DIR"; and source "$GHOSTTY_RESOURCES_DIR"/shell-integration/fish/vendor_conf.d/ghostty-shell-integration.fish
     '';
   };
 

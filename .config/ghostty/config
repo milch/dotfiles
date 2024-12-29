@@ -1,0 +1,34 @@
+font-family = "SF Mono"
+font-style = Medium
+font-size = 14
+window-theme = system
+macos-titlebar-style = hidden
+window-padding-balance = true
+window-padding-y = 9,0
+window-padding-x = 4
+theme = light:catppuccin-latte,dark:catppuccin-macchiato
+window-colorspace = display-p3
+confirm-close-surface = false
+
+# tmux helpers
+command = /run/current-system/sw/bin/tmux new -A -s default
+
+keybind = cmd+d=text:\x01%
+keybind = cmd+shift+d=text:\x01"
+keybind = cmd+k=text:\x01k
+keybind = cmd+j=text:\x01t
+keybind = cmd+t=text:\x01c
+keybind = cmd+shift+t=text:\x01T
+keybind = cmd+comma=text:\x01,
+keybind = cmd+g=text:\x01g
+keybind = cmd+b=text:\x01b
+
+keybind = cmd+one=text:\x011
+keybind = cmd+two=text:\x012
+keybind = cmd+three=text:\x013
+keybind = cmd+four=text:\x014
+keybind = cmd+five=text:\x015
+keybind = cmd+six=text:\x016
+keybind = cmd+seven=text:\x017
+keybind = cmd+eight=text:\x018
+keybind = cmd+nine=text:\x019
