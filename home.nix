@@ -288,7 +288,7 @@ in
       "delta \"light-style\"".dark = false;
       "delta \"dark-style\"".dark = true;
       "diff \"plist\"" = {
-        textconv = "/usr/libexec/PlistBuddy -c \"Print\"";
+        textconv = "plutil -p";
         binary = true;
       };
     };
