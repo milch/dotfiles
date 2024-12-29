@@ -2,7 +2,9 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		opts = function(_, opts)
-			opts.servers.sourcekit = {}
+			opts.servers.sourcekit = {
+				cmd = { vim.trim(vim.fn.system("xcrun -f sourcekit-lsp")) },
+			}
 		end,
 	},
 	{
