@@ -15,10 +15,11 @@ end
 
 local function picker(kind, args)
 	return function()
+		local pickerOpts = args
 		if type(args) == "function" then
-			args = args()
+			pickerOpts = args()
 		end
-		require("telescope.builtin")[kind](args)
+		require("telescope.builtin")[kind](pickerOpts)
 	end
 end
 
