@@ -55,6 +55,7 @@
         rsync
         ruby
         rustup
+        shellcheck
         starship
         tmux
         tree
