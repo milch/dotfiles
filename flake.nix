@@ -239,7 +239,6 @@
           "Blackmagic Disk Speed Test" = 425264550;
           "CARROT Weather" = 993487541;
           "Consent-O-Matic" = 1606897889;
-          "Dark Reader for Safari" = 1438243180;
           "Daisy Disk" = 411643860;
           "Flighty" = 1358823008;
           "Goodnotes" = 1444383602;
@@ -252,6 +251,7 @@
           "Telegram" = 747648890;
           "WireGuard" = 1451685025;
           "Parcel" = 639968404;
+          "Noir" = 1592917505;
         };
         casks = [
           "1password"
