@@ -103,6 +103,9 @@ in
       # Rocket
       path = Library/Preferences/net.matthewpalmer.Rocket.plist
 
+      # Karabiner (the UI writes to this - unison works better than HM for this)
+      path = .config/karabiner/karabiner.json
+
       ignore = Name {.DS_Store}
       '';
     };
