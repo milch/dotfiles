@@ -263,6 +263,7 @@
           "bettertouchtool"
           "calibre"
           "dash"
+          "discord"
           "expressvpn"
           "fantastical"
           "fastrawviewer"
@@ -286,10 +287,10 @@
           "sf-symbols"
           "slack"
           "steam"
-          "thingsmacsandboxhelper"
-          "ultimaker-cura"
           "suspicious-package"
+          "thingsmacsandboxhelper"
           "topaz-photo-ai"
+          "ultimaker-cura"
           "wezterm"
         ];
       };
