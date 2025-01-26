@@ -292,6 +292,7 @@
           "thingsmacsandboxhelper"
           "topaz-photo-ai"
           "ultimaker-cura"
+          "utm"
           "wezterm"
         ];
       };
