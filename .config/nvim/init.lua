@@ -56,6 +56,9 @@ require("lazy").setup({
 require("opt")
 require("keybindings").set()
 require("disable_defaults")
+if vim.g.neovide then
+	require("neovide")
+end
 
 -- Blink the thing that you just yanked
 vim.api.nvim_create_autocmd("TextYankPost", {
