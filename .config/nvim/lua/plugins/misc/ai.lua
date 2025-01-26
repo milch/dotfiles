@@ -11,7 +11,7 @@ return {
 				ollama = {
 					api_key_name = "",
 					endpoint = "http://localhost:11434/v1",
-					model = "qwen2.5-coder:32b",
+					model = "deepseek-r1:32b",
 					parse_curl_args = function(opts, code_opts)
 						return {
 							url = opts.endpoint .. "/chat/completions",
