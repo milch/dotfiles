@@ -229,6 +229,7 @@
           "cormacrelf/tap/dark-notify"
           "xcodesorg/made/xcodes"
           "ncurses"
+          "coreutils"
           "xcode-build-server"
         ];
         masApps = {
