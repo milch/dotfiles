@@ -259,6 +259,7 @@
           "aerospace"
           "alfred"
           "apparency"
+          "astropad-studio"
           "arq"
           "bettertouchtool"
           "calibre"
