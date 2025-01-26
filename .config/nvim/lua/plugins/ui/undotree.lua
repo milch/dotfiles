@@ -4,7 +4,7 @@ return {
 		keys = {
 			{
 				"<leader>u",
-				":UndotreeToggle<CR>",
+				"<cmd>UndotreeToggle<cr>",
 				desc = "Open Undotree",
 			},
 		},
