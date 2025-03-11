@@ -77,8 +77,7 @@ cmd-alt-h = [] # Disable "hide others"
 # TODO: Consider setting up a separate mode for resize/swap
 # https://github.com/nikitabobko/AeroSpace/issues/406 / https://github.com/nikitabobko/AeroSpace/issues/406
 
-alt-enter = '''
-    exec-and-forget pgrep -x "Ghostty" > /dev/null || open -a Ghostty && osascript -e 'tell application "System Events" to tell application process "Ghostty" to click menu item "New Window" of menu "File" of menu bar 1'
+alt-enter = '''exec-and-forget pgrep -x "Ghostty" > /dev/null || open -a Ghostty && osascript -e 'tell application "System Events" to tell application process "Ghostty" to click menu item "New Window" of menu "File" of menu bar 1'
 '''
 
 alt-shift-enter = '''exec-and-forget pgrep -x Arc && osascript -e '
@@ -133,33 +132,33 @@ alt-shift-equal = 'resize smart +50'
 # Only alt +left hand keys
 alt-a = 'workspace A' # In your config, you can drop workspace bindings that you don't need
 alt-b = 'workspace B'
-alt-c = 'workspace C'
-alt-d = 'workspace D'
-alt-f = 'workspace F'
-alt-g = 'workspace G'
-alt-p = 'workspace P'
+alt-c = 'workspace 􁒘'
+alt-d = 'workspace 􀝋'
+alt-f = 'workspace 􀏆'
+alt-g = 'workspace 􀉉'
+alt-p = 'workspace 􀑁'
 alt-q = 'workspace Q'
 alt-r = 'workspace R'
-alt-s = 'workspace S'
-alt-t = 'workspace T'
-alt-v = 'workspace V'
+alt-s = 'workspace 􀎬'
+alt-t = 'workspace 􀩼'
+alt-v = 'workspace 􀍉'
 alt-w = 'workspace W'
-alt-x = 'workspace X'
+alt-x = 'workspace 􀙄'
 alt-z = 'workspace Z'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
 alt-shift-a = ['move-node-to-workspace A', 'workspace A']
 alt-shift-b = ['move-node-to-workspace B', 'workspace B']
-alt-shift-c = ['move-node-to-workspace C', 'workspace C']
-alt-shift-d = ['move-node-to-workspace D', 'workspace D']
-alt-shift-f = ['move-node-to-workspace F', 'workspace F']
-alt-shift-g = ['move-node-to-workspace G', 'workspace G']
-alt-shift-p = ['move-node-to-workspace P', 'workspace P']
+alt-shift-c = ['move-node-to-workspace 􁒘', 'workspace 􁒘']
+alt-shift-d = ['move-node-to-workspace 􀝋', 'workspace 􀝋']
+alt-shift-f = ['move-node-to-workspace 􀏆', 'workspace 􀏆']
+alt-shift-g = ['move-node-to-workspace 􀉉', 'workspace 􀉉']
+alt-shift-p = ['move-node-to-workspace 􀑁', 'workspace 􀑁']
 alt-shift-q = ['move-node-to-workspace Q', 'workspace Q']
 alt-shift-r = ['move-node-to-workspace R', 'workspace R']
-alt-shift-s = ['move-node-to-workspace S', 'workspace S']
-alt-shift-t = ['move-node-to-workspace T', 'workspace T']
-alt-shift-v = ['move-node-to-workspace V', 'workspace V']
+alt-shift-s = ['move-node-to-workspace 􀎬', 'workspace 􀎬']
+alt-shift-t = ['move-node-to-workspace 􀩼', 'workspace 􀩼']
+alt-shift-v = ['move-node-to-workspace 􀍉', 'workspace 􀍉']
 alt-shift-w = ['move-node-to-workspace W', 'workspace W']
 alt-shift-x = ['move-node-to-workspace X', 'workspace X']
 alt-shift-z = ['move-node-to-workspace Z', 'workspace Z']
@@ -206,60 +205,60 @@ run = ['layout floating']
 [[on-window-detected]]
 if.app-id = 'com.apple.Safari'
 if.during-aerospace-startup = true
-run = ['move-node-to-workspace S']
+run = ['move-node-to-workspace 􀎬']
 
 [[on-window-detected]]
 if.app-id = 'company.thebrowser.Browser'
 if.during-aerospace-startup = true
-run = ['move-node-to-workspace S']
+run = ['move-node-to-workspace 􀎬']
 
 # [C]hat
 [[on-window-detected]]
 if.app-id = 'com.apple.MobileSMS'
-run = ['move-node-to-workspace C']
+run = ['move-node-to-workspace 􁒘']
 
 [[on-window-detected]]
 if.app-id = 'ru.keepcoder.Telegram'
-run = ['move-node-to-workspace C']
+run = ['move-node-to-workspace 􁒘']
 
 # [D]
 [[on-window-detected]]
 if.app-id = 'com.tinyspeck.slackmacgap'
-run = ['move-node-to-workspace D']
+run = ['move-node-to-workspace 􀝋']
 
 # [P]roductivity
 [[on-window-detected]]
 if.app-id = 'md.obsidian'
-run = ['move-node-to-workspace P']
+run = ['move-node-to-workspace 􀑁']
 
 [[on-window-detected]]
 if.app-id = 'com.culturedcode.ThingsMac'
-run = ['move-node-to-workspace P']
+run = ['move-node-to-workspace 􀑁']
 
 # [G]roupware
 [[on-window-detected]]
 if.app-id = 'com.apple.mail'
-run = ['move-node-to-workspace G']
+run = ['move-node-to-workspace 􀉉']
 
 [[on-window-detected]]
 if.app-id = 'com.flexibits.fantastical2.mac'
-run = ['move-node-to-workspace G']
+run = ['move-node-to-workspace 􀉉']
 
 [[on-window-detected]]
 if.app-id = 'com.busymac.busycal3'
-run = ['move-node-to-workspace G']
+run = ['move-node-to-workspace 􀉉']
 
 # [T]erminal
 [[on-window-detected]]
 if.app-id = 'com.github.wez.wezterm'
 if.during-aerospace-startup = true
-run = ['move-node-to-workspace T']
+run = ['move-node-to-workspace 􀩼']
 
 # [V]ideo chat
 [[on-window-detected]]
 if.app-id = 'com.amazon.Amazon-Chime'
-run = ['move-node-to-workspace V']
+run = ['move-node-to-workspace 􀍉']
 
 [workspace-to-monitor-force-assignment]
-S = [".*LEN.*", ".*Acer.*"]
-T = [".*LEN.*", ".*Acer.*"]
+"􀩼"  = [".*LEN.*", ".*Acer.*"]
+"􀎬"  = [".*LEN.*", ".*Acer.*"]
