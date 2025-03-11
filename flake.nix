@@ -20,6 +20,7 @@
         bat
         cmake
         delta
+        dust
         eternal-terminal
         exiftool
         eza
@@ -218,6 +219,7 @@
 
       homebrew = {
         enable = true;
+        onActivation.autoUpdate = true;
         onActivation.upgrade = true;
         onActivation.cleanup = "zap";
         taps = [
@@ -263,6 +265,7 @@
           "arq"
           "bettertouchtool"
           "calibre"
+          "calibrite-profiler"
           "dash"
           "discord"
           "expressvpn"
