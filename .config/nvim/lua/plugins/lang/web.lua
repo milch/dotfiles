@@ -1,4 +1,4 @@
-local js_formatters = { { "prettierd", "prettier" } }
+local js_formatters = { "prettierd", "prettier", stop_after_first = true }
 
 return {
 	{
@@ -27,7 +27,7 @@ return {
 				"css-lsp",
 				"html-lsp",
 				"json-lsp",
-			}, js_formatters[1]),
+			}, js_formatters),
 		},
 	},
 	{
@@ -38,7 +38,7 @@ return {
 				typescript = js_formatters,
 				javascriptreact = js_formatters,
 				typescriptreact = js_formatters,
-				json = { { "prettierd", "prettier", "jq" } },
+				json = { "prettierd", "prettier", "jq", stop_after_first = true },
 			},
 		},
 	},
