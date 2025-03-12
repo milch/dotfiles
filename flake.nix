@@ -67,10 +67,7 @@
         zoxide
       ];
       environment.shells = [ pkgs.fish ];
-
-      # Auto upgrade nix package and the daemon service.
-      services.nix-daemon.enable = true;
-      # nix.package = pkgs.nix;
+      nix.enable = true;
 
       # Necessary for using flakes on this system.
       nix.settings.experimental-features = "nix-command flakes";
@@ -100,14 +97,14 @@
       };
 
 
-      # Enable sudo to unlock with touch ID
-      security.pam.enableSudoTouchIdAuth = true;
-      # Make touch ID sudo work with tmux
-      environment.etc."pam.d/sudo_local" = {
-        text = ''
-          auth       optional       ${pkgs.pam-reattach}/lib/pam/pam_reattach.so
-          auth       sufficient     pam_tid.so
-          '';
+      security.pam.services.sudo_local = {
+        enable = true;
+        # Make touch ID sudo work with tmux
+        reattach = true;
+        # Enable sudo to unlock with touch ID
+        touchIdAuth = true;
+        # Enable sudo to unlock with Apple Watch
+        watchIdAuth = true;
       };
 
       environment.userLaunchAgents = {
@@ -287,6 +284,7 @@
           "obsidian"
           "ollama"
           "orbstack"
+          "orion"
           "plex"
           "provisionql"
           "rocket"
