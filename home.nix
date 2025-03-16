@@ -200,11 +200,14 @@ in
       dark_notify
 
       fish_vi_key_bindings
-      starship init fish | source
-      zoxide init fish | source
+      ${pkgs.starship}/bin/starship init fish | source
+      ${pkgs.zoxide}/bin/zoxide init fish | source
 
       # Enable nix-shell to work in fish
       ${pkgs.any-nix-shell}/bin/any-nix-shell fish --info-right | source
+
+      # Set up atuin integration
+      ${pkgs.atuin}/bin/atuin init --disable-up-arrow fish | source
 
       test -n "$GHOSTTY_RESOURCES_DIR"; and source "$GHOSTTY_RESOURCES_DIR"/shell-integration/fish/vendor_conf.d/ghostty-shell-integration.fish
     '';

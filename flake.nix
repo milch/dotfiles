@@ -16,6 +16,7 @@
       # $ nix-env -qaP | grep wget
       environment.systemPackages = with pkgs; [
         aria2
+        atuin
         awscli2
         bat
         cmake
