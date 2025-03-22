@@ -42,20 +42,18 @@
         jq
         just
         lazygit
+        mise
         neofetch
         neovim
         nmap
-        nodejs
         pam-reattach
         pandoc
         parallel
         pkgs.home-manager
-        python3
         qmk
         rename
         ripgrep
         rsync
-        ruby
         rustup
         shellcheck
         starship
@@ -228,6 +226,7 @@
         brews = [
           "cormacrelf/tap/dark-notify"
           "xcodesorg/made/xcodes"
+          "libyaml" # Dependency for ruby-build (mise)
           "ncurses"
           "coreutils"
           "xcode-build-server"

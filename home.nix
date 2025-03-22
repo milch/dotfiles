@@ -60,6 +60,15 @@ in
     ".markdownlintrc".source = ./.markdownlintrc;
     ".yamllint.yaml".source = ./.yamllint.yaml;
 
+    ".config/mise/config.toml" = {
+      text = ''
+        [tools]
+        node = 'lts'
+        python = '3'
+        ruby = '3'
+      '';
+    };
+
     "Gemfile" = {
       source = ./Gemfile;
       onChange = update-bundle;
@@ -208,6 +217,8 @@ in
 
       # Set up atuin integration
       ${pkgs.atuin}/bin/atuin init --disable-up-arrow fish | source
+      
+      ${pkgs.mise}/bin/mise activate fish | source
 
       test -n "$GHOSTTY_RESOURCES_DIR"; and source "$GHOSTTY_RESOURCES_DIR"/shell-integration/fish/vendor_conf.d/ghostty-shell-integration.fish
     '';
