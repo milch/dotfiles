@@ -64,10 +64,6 @@ return {
 				rubocop = {
 					root_dir = ruby_root,
 				},
-				ruby_lsp = {
-					root_dir = ruby_root,
-					enabled = false,
-				},
 			},
 		},
 	},
