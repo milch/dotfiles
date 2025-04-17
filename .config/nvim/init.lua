@@ -21,15 +21,24 @@ theme.UpdateWhenSystemChanges()
 local startupTheme = theme.DetermineTheme("startup")
 vim.opt.background = startupTheme
 
-require("lazy_file").setup()
-require("lazy").setup({
-	spec = {
+local specs = {
 		{ import = "plugins.editor" },
 		{ import = "plugins.lang" },
 		{ import = "plugins.lsp" },
 		{ import = "plugins.misc" },
 		{ import = "plugins.ui" },
-	},
+};
+
+local opt_folder = vim.fn.stdpath('config') .. "/lua/opt"
+if vim.uv.fs_stat(opt_folder) then
+	for dir, type in vim.fs.dir(opt_folder, { depth = 1 }) do
+		table.insert(specs, { import = "opt." .. dir })
+	end
+end
+
+require("lazy_file").setup()
+require("lazy").setup({
+	spec = specs,
 	change_detection = {
 		notify = false,
 	},

@@ -27,7 +27,14 @@ in
   # Common dotfiles
   home.file = {
     ".config/nvim/init.lua".source = ../../.config/nvim/init.lua;
-    ".config/nvim/lua".source = ../../.config/nvim/lua;
+    ".config/nvim/lua/plugins".source = ../../.config/nvim/lua/plugins;
+    ".config/nvim/lua/ui".source = ../../.config/nvim/lua/ui;
+    ".config/nvim/lua/disable_defaults.lua".source = ../../.config/nvim/lua/disable_defaults.lua;
+    ".config/nvim/lua/opt.lua".source = ../../.config/nvim/lua/opt.lua;
+    ".config/nvim/lua/neovide.lua".source = ../../.config/nvim/lua/neovide.lua;
+    ".config/nvim/lua/lazy_file.lua".source = ../../.config/nvim/lua/lazy_file.lua;
+    ".config/nvim/lua/keybindings.lua".source = ../../.config/nvim/lua/keybindings.lua;
+
 
     ".config/aerospace/aerospace.toml".source = ../../.config/aerospace/aerospace.toml;
 
