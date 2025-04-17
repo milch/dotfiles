@@ -79,9 +79,9 @@
             <key>StartInterval</key>
             <integer>300</integer>
             <key>StandardOutPath</key>
-            <string>/Users/manu/Library/Logs/unison/user-pref-sync.log</string>
+            <string>/tmp/user-pref-sync.log</string>
             <key>StandardErrorPath</key>
-            <string>/Users/manu/Library/Logs/unison/user-pref-sync-err.log</string>
+            <string>/tmp/user-pref-sync-err.log</string>
           </dict>
         </plist>
       '';
