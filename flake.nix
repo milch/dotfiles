@@ -16,8 +16,10 @@
 
     system.stateVersion = 5;
 
+    lib = import nixpkgs.lib;
+
     # Function to create a Darwin system configuration
-    mkDarwinSystem = { hostConfig, system ? "aarch64-darwin" }:
+    mkDarwinSystem = { hostConfig, hostHomeModule ? ./nix/shared/home.nix, system ? "aarch64-darwin" }:
       nix-darwin.lib.darwinSystem {
         inherit system;
         modules = [
@@ -31,7 +33,7 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             # Use shared home-manager config for all hosts
-            home-manager.users.manu = import ./nix/shared/home.nix;
+            home-manager.users.manu = hostHomeModule;
           }
         ];
       };
@@ -42,7 +44,8 @@
     darwinConfigurations = {
       # Personal laptop configuration
       "Auri" = mkDarwinSystem {
-        hostConfig = import ./nix/hosts/auri.nix;
+        hostConfig = import ./nix/hosts/auri/flake.nix;
+        hostHomeModule = import ./nix/hosts/auri/home.nix;
       };
 
       # Example: Add more host configurations as needed

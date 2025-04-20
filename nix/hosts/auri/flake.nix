@@ -14,7 +14,6 @@
     shell = pkgs.fish;
   };
 
-  # TODO: merge with shared
   environment.systemPackages = [
     pkgs.exiftool
     pkgs.ffmpeg
