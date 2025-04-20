@@ -90,4 +90,18 @@ return {
 			{ "<leader>xs", "<cmd>Trouble lsp_document_symbols toggle focus=false win.position=right<cr>", desc = "LSP Document Symbols (Trouble)" },
 		},
 	},
+	{
+		"folke/zen-mode.nvim",
+		opts = {
+			gitsigns = {
+				enable = true,
+			},
+			tmux = {
+				enable = true,
+			},
+		},
+		keys = {
+			{ "<leader>xz", "<cmd>ZenMode<cr>", desc = "Toggle Zen Mode" },
+		},
+	},
 }
