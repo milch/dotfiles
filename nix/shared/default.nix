@@ -17,6 +17,7 @@
     fzf
     git
     go
+    harper
     htop
     httpie
     hyperfine

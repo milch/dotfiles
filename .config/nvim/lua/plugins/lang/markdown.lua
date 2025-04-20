@@ -50,4 +50,20 @@ return {
 		dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.icons" },
 		ft = "markdown",
 	},
+	{
+		"neovim/nvim-lspconfig",
+		opts = function(_, opts)
+			opts.servers["harper_ls"] = {
+				settings = {
+					["harper-ls"] = {
+						userDictPath = vim.fn.stdpath("config") .. "/spell/en.utf-8.add",
+						linters = {
+							SentenceCapitalization = false,
+							SpellCheck = false,
+						},
+					},
+				},
+			}
+		end,
+	},
 }
