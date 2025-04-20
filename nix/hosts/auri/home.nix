@@ -1,4 +1,3 @@
-# This file contains shared home-manager configuration that can be imported by both personal and work machines
 { config, pkgs, lib, ... }:
 
 {
