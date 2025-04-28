@@ -1,6 +1,7 @@
 { pkgs, ... }:
 
 {
+  imports = [ ../../shared/default.nix ];
   networking.computerName = "Auri";
   nixpkgs.hostPlatform = "aarch64-darwin";
 

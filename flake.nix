@@ -11,7 +11,6 @@
 
   outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager }:
   let
-    sharedConfiguration = import ./nix/shared/default.nix;
 
     system.stateVersion = 5;
 
@@ -19,7 +18,6 @@
       nix-darwin.lib.darwinSystem {
         inherit system;
         modules = [
-          sharedConfiguration
           hostConfig
           home-manager.darwinModules.home-manager
           {
