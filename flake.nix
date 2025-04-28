@@ -11,12 +11,8 @@
 
   outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager }:
   let
-
-    system.stateVersion = 5;
-
-    mkDarwinSystem = { hostConfig, hostHomeModule ? ./nix/shared/home.nix, system ? "aarch64-darwin" }:
+    mkDarwinSystem = { hostConfig, hostHomeModule ? ./nix/shared/home.nix }:
       nix-darwin.lib.darwinSystem {
-        inherit system;
         modules = [
           hostConfig
           home-manager.darwinModules.home-manager
