@@ -69,6 +69,8 @@ in
       '';
     };
 
+    "Library/Services/Copy Current Safari URL.workflow".source = ../../Library/Services + "/Copy Current Safari URL.workflow";
+
     "Gemfile" = {
       source = ../../Gemfile;
       onChange = update-bundle;

@@ -110,6 +110,35 @@
   system.defaults.spaces.spans-displays = true;
 
   # Common Homebrew configuration
+  system.defaults.CustomUserPreferences = {
+    "com.apple.dock" = {
+      "expose-group-apps" = 1;
+    };
+    "com.apple.Safari" = {
+      ShowOverlayStatusBar = 1;
+      AlwaysRestoreSessionAtLaunch = 1;
+      CloseTabsAutomatically = 1;
+      EnableNarrowTabs = 1;
+      NSUserKeyEquivalents = {
+        "Copy Current Safari URL" = "@$c";
+      };
+    };
+    "com.apple.Spotlight" = {
+      "NSStatusItem Visible Item-0" = 0;
+    };
+    "com.apple.controlcenter" = {
+      "NSStatusItem Visible NowPlaying" = 1;
+      "NSStatusItem Visible Sound" = 1;
+    };
+  };
+  system.defaults.dock = {
+    expose-group-apps = true;
+    wvous-br-corner = 1;
+    wvous-bl-corner = 1;
+    wvous-tl-corner = 1;
+    wvous-tr-corner = 1;
+  };
+
   homebrew = {
     enable = true;
     onActivation.autoUpdate = true;
