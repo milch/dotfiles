@@ -104,6 +104,11 @@
   system.defaults.spaces.spans-displays = true;
 
   system.defaults.CustomUserPreferences = {
+    "NSGlobalDomain" = {
+      NSUserKeyEquivalents = {
+        "Duplicate Tab" = "@$d";
+      };
+    };
     "com.apple.dock" = {
       "expose-group-apps" = 1;
     };
