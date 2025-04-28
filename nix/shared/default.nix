@@ -1,8 +1,6 @@
-# This file contains shared configuration that can be imported by both personal and work machines
-{ pkgs, lib, ... }:
+{ pkgs,  ... }:
 
 {
-  # Common system packages that should be available on all machines
   environment.systemPackages = with pkgs; [
     aria2
     atuin
@@ -46,18 +44,15 @@
     zoxide
   ];
 
-  # Common shell configuration
   environment.shells = [ pkgs.fish ];
   programs.fish.enable = true;
   programs.zsh.enable = true;
 
   system.stateVersion = 5;
 
-  # Nix configuration
   nix.enable = true;
   nix.settings.experimental-features = "nix-command flakes";
 
-  # Personal Unison sync configuration
   environment.userLaunchAgents = {
     "syncUserPreferences.plist" = {
       enable = true;
@@ -89,7 +84,6 @@
     };
   };
 
-  # System defaults that are common across machines
   system.defaults.NSGlobalDomain = {
     AppleInterfaceStyleSwitchesAutomatically = true;
     AppleICUForce24HourTime = true;
@@ -109,7 +103,6 @@
 
   system.defaults.spaces.spans-displays = true;
 
-  # Common Homebrew configuration
   system.defaults.CustomUserPreferences = {
     "com.apple.dock" = {
       "expose-group-apps" = 1;
@@ -193,14 +186,12 @@
     ];
   };
 
-  # Common security settings
   security.pam.services.sudo_local = {
     enable = true;
     reattach = true;
     touchIdAuth = true;
     watchIdAuth = true;
   };
-
   # The platform the configuration will be used on
   nixpkgs.hostPlatform = "aarch64-darwin";
 }
