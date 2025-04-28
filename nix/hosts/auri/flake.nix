@@ -2,6 +2,7 @@
 
 {
   networking.computerName = "Auri";
+  nixpkgs.hostPlatform = "aarch64-darwin";
 
   users.knownUsers = [ "manu" ];
   users.users.manu = {
