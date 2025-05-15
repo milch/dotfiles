@@ -92,6 +92,8 @@ function M.set()
 	bind("n", "gco", "o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Below" })
 	bind("n", "gcO", "O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Above" })
 
+	bind("i", "<M-BS>", "<C-w>", { desc = "Delete a whole word in insert mode with Alt+Backspace" })
+
 	-- Groups from Lazy
 	-- { "<leader><tab>", group = "tabs" },
 	-- { "<leader>c", group = "code" },
