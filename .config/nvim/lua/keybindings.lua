@@ -40,21 +40,26 @@ function M.set()
 	bind(
 		"n",
 		"<leader>cs",
-		[[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
+		[[:%s/\V<C-r>=escape(expand('<cword>'), '/\')<CR>/<C-r>=escape(expand('<cword>'), '/\')<CR>/gI<Left><Left><Left>]],
 		{ desc = "Substitute word under cursor" }
 	)
 	bind(
 		"n",
-		"<leader>sS",
-		[[:%s/\<<C-r><C-w>\>//gI<Left><Left><Left>]],
+		"<leader>cS",
+		[[:%s/\V<C-r>=escape(expand('<cword>'), '/\')<CR>//gI<Left><Left><Left>]],
 		{ desc = "Substitue word under cursor (replace)" }
 	)
-	bind("x", "<leader>cs", [[y:%s/\<<C-r>0\>/<C-r>0/gI<Left><Left><Left>]], { desc = "Substitute word under cursor" })
 	bind(
 		"x",
-		"<leader>sS",
-		[[y:%s/\<<C-r>0\>//gI<Left><Left><Left>]],
-		{ desc = "Substitute word under cursor (replace)" }
+		"<leader>cs",
+		[[y:%s/\V<C-r>=escape(@", '/\')<CR>/<C-r>=escape(@", '/\')<CR>/gI<Left><Left><Left>]],
+		{ desc = "Substitute selected text" }
+	)
+	bind(
+		"x",
+		"<leader>cS",
+		[[y:%s/\V<C-r>=escape(@", '/\')<CR>//gI<Left><Left><Left>]],
+		{ desc = "Substitute selected text (replace)" }
 	)
 
 	bind("n", "<leader>xq", function()
