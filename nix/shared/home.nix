@@ -50,9 +50,16 @@ in
     ".config/tmux/tmux.conf".source = ../../.config/tmux/tmux.conf;
 
     ".config/fish/dark_notify.sh".source = ../../.config/fish/dark_notify.sh;
-    ".config/fish/functions".source = ../../.config/fish/functions;
     ".config/fish/themes/Catppuccin Latte.theme".source = "${catppuccin-fish}/themes/Catppuccin Latte.theme";
     ".config/fish/themes/Catppuccin Macchiato.theme".source = "${catppuccin-fish}/themes/Catppuccin Macchiato.theme";
+
+    ".config/fish/functions/cdh.fish".source = ../../.config/fish/functions/cdh.fish;
+    ".config/fish/functions/cssh.fish".source = ../../.config/fish/functions/cssh.fish;
+    ".config/fish/functions/fssh.fish".source = ../../.config/fish/functions/fssh.fish;
+    ".config/fish/functions/git_changed.fish".source = ../../.config/fish/functions/git_changed.fish;
+    ".config/fish/functions/git_dirty.fish".source = ../../.config/fish/functions/git_dirty.fish;
+    ".config/fish/functions/gpm.fish".source = ../../.config/fish/functions/gpm.fish;
+    ".config/fish/functions/up.fish".source = ../../.config/fish/functions/up.fish;
 
     ".config/ghostty/config".source = ../../.config/ghostty/config;
 
