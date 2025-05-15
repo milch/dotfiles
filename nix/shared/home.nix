@@ -18,6 +18,7 @@ let
       export PATH="${lib.makeBinPath [ pkgs.ruby ]}:$PATH"
       bundle install --frozen
   '';
+  mkOutOfStoreSymlink = config.lib.file.mkOutOfStoreSymlink;
 in
 {
   home.stateVersion = "24.05";
