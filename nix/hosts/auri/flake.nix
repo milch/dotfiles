@@ -33,16 +33,18 @@
     "Consent-O-Matic" = 1606897889;
     "Flighty" = 1358823008;
     "Goodnotes" = 1444383602;
+    "Noir" = 1592917505;
+    "Parcel" = 639968404;
+    "Refined GitHub" = 1519867270;
     "Save to Reader" = 1640236961;
     "SponsorBlock for Safari" = 1573461917;
     "StopTheMadness Pro" = 6471380298;
     "Surfingkeys" = 1609752330;
     "WireGuard" = 1451685025;
-    "Parcel" = 639968404;
-    "Noir" = 1592917505;
   };
   homebrew.casks = [
     "astropad-studio"
+    "balenaetcher"
     "calibre"
     "calibrite-profiler"
     "discord"
