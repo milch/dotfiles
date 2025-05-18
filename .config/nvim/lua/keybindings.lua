@@ -32,16 +32,6 @@ function M.set()
 
 	bind("n", "<leader>w", [[<cmd>:w<CR>]], { desc = "Save", silent = true })
 
-	bind("n", "<leader>vs", function()
-		local filename = vim.fn.expand("%")
-		local cursor = vim.api.nvim_win_get_cursor(0)
-		vim.api.nvim_cmd({
-			cmd = "!",
-			args = { "code", "-g", filename .. ":" .. cursor[1] .. ":" .. cursor[2] + 1, "." },
-			mods = { silent = true },
-		}, {})
-	end, { desc = "Open in vscode" })
-
 	bind(
 		"n",
 		"<leader>cs",

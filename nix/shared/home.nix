@@ -44,8 +44,6 @@ in
 
     ".config/starship.toml".source = ../../.config/starship.toml;
 
-    ".config/wezterm".source = ../../.config/wezterm;
-
     ".config/tmux/catppuccin-latte.conf".source = ../../.config/tmux/catppuccin-latte.conf;
     ".config/tmux/catppuccin-macchiato.conf".source = ../../.config/tmux/catppuccin-macchiato.conf;
     ".config/tmux/tmux.conf".source = ../../.config/tmux/tmux.conf;
