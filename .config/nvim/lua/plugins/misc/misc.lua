@@ -28,11 +28,6 @@ return {
 		opts = {},
 	},
 
-	{
-		"romainl/vim-cool",
-		keys = { "/", "*", "#" },
-	},
-
 	-- Utils
 	{
 		"pocco81/auto-save.nvim",
