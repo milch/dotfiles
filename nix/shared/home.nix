@@ -34,6 +34,7 @@ in
     ".config/nvim/lua/neovide.lua".source = ../../.config/nvim/lua/neovide.lua;
     ".config/nvim/lua/lazy_file.lua".source = ../../.config/nvim/lua/lazy_file.lua;
     ".config/nvim/lua/keybindings.lua".source = ../../.config/nvim/lua/keybindings.lua;
+    ".config/nvim/lua/search_and_replace.lua".source = ../../.config/nvim/lua/search_and_replace.lua;
 
 
     ".config/aerospace/aerospace.toml".source = ../../.config/aerospace/aerospace.toml;

@@ -26,7 +26,10 @@ function M.set()
 	bind("n", "<C-u>", "<C-u>zz", { desc = "Move one page up (keep cursor centered)" })
 	bind("n", "<C-o>", "<C-o>zz", { desc = "Move to previous location (keep cursor centered)" })
 
-	bind("n", "<Esc>", "<cmd>noh<cr>", { desc = "Clear search highlight" })
+	local sar = require("search_and_replace")
+	bind("n", "<Esc>", "<cmd>nohlsearch<cr>", { desc = "Clear search highlight" })
+	bind({ "n", "x" }, "s", sar.searchAndReplaceOperator, { expr = true, desc = "Search and replace operator" })
+	bind("n", "s*", sar.searchAndReplaceCursorWord, { silent = true, desc = "Search and replace word under cursor" })
 
 	bind("v", "<leader>p", [["_dP]], { desc = "Replace the selection with the paste buffer, preserve the buffer" })
 	bind({ "n", "v" }, "<leader>y", [["+y]], { desc = "Copy to system clipboard" })
