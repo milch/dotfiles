@@ -23,6 +23,7 @@
     jankyborders
     jq
     lazygit
+    markdownlint-cli
     mise
     neofetch
     neovim
