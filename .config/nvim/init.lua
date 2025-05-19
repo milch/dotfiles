@@ -22,11 +22,11 @@ local startupTheme = theme.DetermineTheme("startup")
 vim.opt.background = startupTheme
 
 local specs = {
-		{ import = "plugins.editor" },
-		{ import = "plugins.lang" },
-		{ import = "plugins.lsp" },
-		{ import = "plugins.misc" },
-		{ import = "plugins.ui" },
+	{ import = "plugins.editor" },
+	{ import = "plugins.lang" },
+	{ import = "plugins.lsp" },
+	{ import = "plugins.misc" },
+	{ import = "plugins.ui" },
 };
 
 local opt_folder = vim.fn.stdpath('config') .. "/lua/opt"
