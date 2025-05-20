@@ -77,6 +77,25 @@ function M.set()
 		end
 	end, { desc = "Toggle quickfix list" })
 
+	-- Removes the quickfix entry that the cursor is on with `dd`
+	vim.api.nvim_create_autocmd('FileType', {
+		pattern = 'qf',
+		callback = function()
+			bind("n", "dd", function()
+				local currentId = vim.fn.line('.') - 1
+				local quickfixList = vim.fn.getqflist()
+				table.remove(quickfixList, currentId + 1)
+				vim.fn.setqflist(quickfixList, 'r')
+				local newIdx = math.min(currentId + 1, #quickfixList)
+				if #quickfixList > 0 then
+					vim.api.nvim_win_set_cursor(0, { newIdx, 0 })
+				else
+					vim.cmd.cclose()
+				end
+			end, { buffer = 0, noremap = true, silent = true })
+		end
+	})
+
 	bind("n", "[q", vim.cmd.cprev, { desc = "Previous Quickfix" })
 	bind("n", "]q", vim.cmd.cnext, { desc = "Next Quickfix" })
 
