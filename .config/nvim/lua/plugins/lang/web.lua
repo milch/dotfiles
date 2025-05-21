@@ -57,8 +57,8 @@ return {
 					context = "source",
 				},
 				{
-					pattern = "src/(.*).ts$",
-					target = "tests/%1.test.ts",
+					pattern = "(.*)/src/(.*).ts$",
+					target = "%1/tests/%2.test.ts",
 					context = "test",
 				},
 				{
