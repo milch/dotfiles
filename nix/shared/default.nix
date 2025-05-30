@@ -121,6 +121,7 @@
       EnableNarrowTabs = 1;
       NSUserKeyEquivalents = {
         "Copy Current Safari URL" = "@$c";
+        "Summarize Current Page" = "@$s";
       };
     };
     "com.apple.Spotlight" = {

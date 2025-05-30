@@ -37,7 +37,6 @@ in
     ".config/nvim/lua/keybindings.lua".source = ../../.config/nvim/lua/keybindings.lua;
     ".config/nvim/lua/search_and_replace.lua".source = ../../.config/nvim/lua/search_and_replace.lua;
 
-
     ".config/aerospace/aerospace.toml".source = ../../.config/aerospace/aerospace.toml;
 
     ".config/lazygit".source = ../../.config/lazygit;
@@ -77,6 +76,7 @@ in
     };
 
     "Library/Services/Copy Current Safari URL.workflow".source = ../../Library/Services + "/Copy Current Safari URL.workflow";
+    "Library/Services/Summarize Current Page.workflow".source = ../../Library/Services + "/Summarize Current Page.workflow";
 
     "Gemfile" = {
       source = ../../Gemfile;
