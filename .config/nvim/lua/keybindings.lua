@@ -159,10 +159,10 @@ function M.set_lsp(_, bufnr)
 	bind("n", "gr", vim.lsp.buf.references, opts)
 
 	opts.desc = "Go to previous diagnostic"
-	bind("n", "[d", vim.diagnostic.goto_prev, opts)
+	bind("n", "[d", function() vim.diagnostic.jump({ count = -1 }) end, opts)
 
 	opts.desc = "Go to next diagnostic"
-	bind("n", "]d", vim.diagnostic.goto_next, opts)
+	bind("n", "]d", function() vim.diagnostic.jump({ count = 1 }) end, opts)
 
 	opts.desc = "Show documentation for symbol under cursor"
 	bind("n", "K", vim.lsp.buf.hover, opts)
