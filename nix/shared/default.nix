@@ -9,6 +9,7 @@
     cmake
     delta
     dust
+    eslint_d
     eternal-terminal
     eza
     fd
