@@ -13,6 +13,7 @@
     eternal-terminal
     eza
     fd
+    fswatch
     fzf
     git
     go
