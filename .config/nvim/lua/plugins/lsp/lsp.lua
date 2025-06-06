@@ -83,9 +83,7 @@ return {
 			---@type vim.diagnostic.Opts
 			diagnostics = {
 				underline = true,
-				virtual_text = {
-					source = "if_many",
-				},
+				virtual_text = false,
 				severity_sort = true,
 				float = {
 					source = true,
@@ -197,4 +195,26 @@ return {
 			M.on_attach(M._check_methods)
 		end,
 	},
+	{
+		"rachartier/tiny-inline-diagnostic.nvim",
+		event = "LspAttach",
+		priority = 1000, -- needs to be loaded in first
+		opts = {
+			hi = {
+				background = "None",
+			},
+			options = {
+				show_source = {
+					if_many = true
+				},
+				use_icons_from_diagnostic = true,
+				multilines = {
+					enabled = true,
+					always_show = true
+				},
+				show_all_diags_on_cursor_line = true,
+				enable_on_insert = true
+			}
+		}
+	}
 }
