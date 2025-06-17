@@ -14,6 +14,7 @@ return {
 				bash = { "shfmt" },
 				zsh = { "shfmt" },
 				fish = { "fish_indent" },
+				python = { "black" },
 				yaml = { "yamlfmt" },
 			},
 
