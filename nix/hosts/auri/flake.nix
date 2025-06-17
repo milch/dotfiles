@@ -5,6 +5,7 @@
   networking.computerName = "Auri";
   nixpkgs.hostPlatform = "aarch64-darwin";
 
+  system.primaryUser = "manu";
   users.knownUsers = [ "manu" ];
   users.users.manu = {
     name = "manu";
