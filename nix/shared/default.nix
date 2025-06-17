@@ -192,6 +192,7 @@
       "slack"
       "suspicious-package"
       "thingsmacsandboxhelper"
+      "zen"
     ];
   };
 
