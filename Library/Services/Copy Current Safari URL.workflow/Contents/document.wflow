@@ -51,7 +51,7 @@
 				<key>ActionParameters</key>
 				<dict>
 					<key>source</key>
-					<string>tell application "Safari"	try		set currentURL to URL of current tab of front window		set the clipboard to currentURL		-- Optional: Display a notification		display notification "URL copied to clipboard" with title "Safari"	on error		-- Optional: Display an error notification		display notification "Could not get URL" with title "Safari"	end tryend tell</string>
+					<string>tell application "Safari"	try		set currentURL to URL of current tab of front window		set the clipboard to currentURL	on error		-- Optional: Display an error notification		display notification "Could not get URL" with title "Safari"	end tryend tell</string>
 				</dict>
 				<key>BundleIdentifier</key>
 				<string>com.apple.Automator.RunScript</string>
