@@ -184,7 +184,7 @@
       "istat-menus"
       "jordanbaird-ice"
       "karabiner-elements"
-      "neovide"
+      "neovide-app"
       "obsidian"
       "provisionql"
       "rocket"

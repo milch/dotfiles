@@ -55,7 +55,7 @@
     "mactex"
     "moonlight"
     "nextcloud"
-    "ollama"
+    "ollama-app"
     "orbstack"
     "orion"
     "plex"
