@@ -72,6 +72,9 @@ in
         node = 'lts'
         python = '3'
         ruby = '3'
+
+        [settings]
+        idiomatic_version_file_enable_tools = ["*"]
       '';
     };
 
