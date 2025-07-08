@@ -13,8 +13,8 @@ after-login-command = []
 # 'after-startup-command' is run after 'after-login-command'
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
 after-startup-command = [
-  # Start a single daemon instance first that will receive config updates from all the others
-  "exec-and-forget zsh -c 'borders width=6.0 blacklist=iPhone\\ Mirroring' active_color=0xff4c85d8 inactive_color=0xff494d64 ",
+  '''exec-and-forget zsh -c "borders width=6.0 blacklist='iPhone Mirroring' active_color=0xff33ccff inactive_color=0xff494d64"
+  '''
 ]
 
 # Start AeroSpace at login
