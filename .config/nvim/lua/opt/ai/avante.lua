@@ -5,9 +5,11 @@ return {
 		version = false, -- set this if you want to always pull the latest change
 		opts = {
 			provider = "ollama",
-			ollama = {
-				endpoint = "http://localhost:11434",
-				model = "deepseek-r1:32b",
+			providers = {
+				ollama = {
+					endpoint = "http://localhost:11434",
+					model = "deepseek-r1:32b",
+				},
 			},
 		},
 		build = "make",
