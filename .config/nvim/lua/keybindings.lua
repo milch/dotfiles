@@ -78,14 +78,14 @@ function M.set()
 	end, { desc = "Toggle quickfix list" })
 
 	-- Removes the quickfix entry that the cursor is on with `dd`
-	vim.api.nvim_create_autocmd('FileType', {
-		pattern = 'qf',
+	vim.api.nvim_create_autocmd("FileType", {
+		pattern = "qf",
 		callback = function()
 			bind("n", "dd", function()
-				local currentId = vim.fn.line('.') - 1
+				local currentId = vim.fn.line(".") - 1
 				local quickfixList = vim.fn.getqflist()
 				table.remove(quickfixList, currentId + 1)
-				vim.fn.setqflist(quickfixList, 'r')
+				vim.fn.setqflist(quickfixList, "r")
 				local newIdx = math.min(currentId + 1, #quickfixList)
 				if #quickfixList > 0 then
 					vim.api.nvim_win_set_cursor(0, { newIdx, 0 })
@@ -93,7 +93,7 @@ function M.set()
 					vim.cmd.cclose()
 				end
 			end, { buffer = 0, noremap = true, silent = true })
-		end
+		end,
 	})
 
 	bind("n", "[q", vim.cmd.cprev, { desc = "Previous Quickfix" })
@@ -159,10 +159,14 @@ function M.set_lsp(_, bufnr)
 	bind("n", "gr", vim.lsp.buf.references, opts)
 
 	opts.desc = "Go to previous diagnostic"
-	bind("n", "[d", function() vim.diagnostic.jump({ count = -1 }) end, opts)
+	bind("n", "[d", function()
+		vim.diagnostic.jump({ count = -1 })
+	end, opts)
 
 	opts.desc = "Go to next diagnostic"
-	bind("n", "]d", function() vim.diagnostic.jump({ count = 1 }) end, opts)
+	bind("n", "]d", function()
+		vim.diagnostic.jump({ count = 1 })
+	end, opts)
 
 	opts.desc = "Show documentation for symbol under cursor"
 	bind("n", "K", vim.lsp.buf.hover, opts)
