@@ -43,6 +43,7 @@
     tree-sitter
     unison
     wget
+    yamllint
     zig
     zoxide
   ];
