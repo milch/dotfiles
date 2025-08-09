@@ -46,6 +46,8 @@ return {
 	},
 	{
 		"MeanderingProgrammer/render-markdown.nvim",
+		---@module 'render-markdown'
+		---@type render.md.UserConfig
 		opts = {},
 		dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.icons" },
 		ft = "markdown",
