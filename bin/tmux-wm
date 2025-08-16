@@ -65,27 +65,32 @@ while true; do
 
     # Handle escape sequences for arrow keys
     if [[ $key == $'\e' ]]; then
-        read -rsn2 key # Read the rest of the escape sequence
-        case "$key" in
-        '[A') # Up arrow
-            tmux-swap-panes up
-            ;;
-        '[B') # Down arrow
-            tmux-swap-panes down
-            ;;
-        '[D') # Left arrow
-            tmux-swap-panes left
-            ;;
-        '[C') # Right arrow
-            tmux-swap-panes right
-            ;;
-        '') # Just escape key pressed
+        # Try to read the next character with a timeout
+        if read -rsn1 -t 0.1 next1; then
+            if [[ $next1 == '[' ]]; then
+                read -rsn1 next2
+                case "$next2" in
+                'A') # Up arrow
+                    tmux-swap-panes up
+                    ;;
+                'B') # Down arrow
+                    tmux-swap-panes down
+                    ;;
+                'D') # Left arrow
+                    tmux-swap-panes left
+                    ;;
+                'C') # Right arrow
+                    tmux-swap-panes right
+                    ;;
+                esac
+                clear
+                show_hydra
+                continue
+            fi
+        else
+            # Just escape key pressed (timeout means no following characters)
             exit 0
-            ;;
-        esac
-        clear
-        show_hydra
-        continue
+        fi
     fi
 
     # Process regular keys
