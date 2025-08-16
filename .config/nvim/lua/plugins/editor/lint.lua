@@ -45,14 +45,18 @@ return {
 
 			-- LazyVim extension to easily override linter options
 			-- or add custom linters.
-			---@type table<string,table>
+			---@type table<string, table>
 			local linters = {
 				eslint_d = {
 					condition = function(ctx)
-						local found_files = vim.fs.find(
-							{ ".eslintrc.js", ".eslintrc.cjs", ".eslintrc.yaml", ".eslintrc.yml", ".eslintrc.json" },
-							{ path = ctx.filename, upward = true, stop = vim.loop.os_homedir() }
-						)
+						local found_files = vim.fs.find({
+							".eslintrc.js",
+							".eslintrc.cjs",
+							".eslintrc.yaml",
+							".eslintrc.yml",
+							".eslintrc.json",
+							"eslint.config.mjs",
+						}, { path = ctx.filename, upward = true, stop = vim.loop.os_homedir() })
 						return #found_files > 0
 					end,
 				},
