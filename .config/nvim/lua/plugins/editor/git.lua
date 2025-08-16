@@ -28,6 +28,9 @@ return {
 				map("<leader>gd", gs.diffthis, "Diff This")
 				map("<leader>gD", function() gs.diffthis("~") end, "Diff This ~")
 				-- stylua: ignore end
+
+				map("[h", gs.prev_hunk, "Previous Hunk")
+				map("]h", gs.next_hunk, "Next Hunk")
 			end,
 		},
 	},
