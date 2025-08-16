@@ -22,6 +22,7 @@ keybind = cmd+shift+t=text:\x01T
 keybind = cmd+comma=text:\x01,
 keybind = cmd+g=text:\x01g
 keybind = cmd+b=text:\x01b
+keybind = cmd+x=text:\x01\x17
 
 keybind = cmd+one=text:\x011
 keybind = cmd+two=text:\x012

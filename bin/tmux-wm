@@ -1,0 +1,127 @@
+#!/usr/bin/env bash
+
+# Get the source pane from the first argument
+# This should be passed as #{pane_id} from tmux
+SOURCE_PANE="${1:-}"
+
+# If no source pane provided, use the current active pane
+# This works fine in a popup since tmux uses the pane ID of the last active pane
+if [ -z "$SOURCE_PANE" ]; then
+    SOURCE_PANE=$(tmux display-message -p '#{pane_id}')
+fi
+
+SOURCE_WINDOW=$(tmux display-message -p '#{window_id}')
+
+BOLD='\033[1m'
+YELLOW='\033[0;33m'
+GREEN='\033[0;32m'
+RESET='\033[0m'
+
+# Displays a hydra-style UI for tmux window management
+show_hydra() {
+    echo -e ""
+    echo -e "${BOLD}${YELLOW}Window Resize${RESET}"
+    echo -e "${GREEN}h/l${RESET}: ← width →     ${GREEN}H/L${RESET}: ← 5x →"
+    echo -e "${GREEN}j/k${RESET}: ↓ height ↑    ${GREEN}J/K${RESET}: ↓ 5x ↑"
+    echo
+    echo -e "${BOLD}${YELLOW}Pane Swap${RESET}"
+    echo -e "${GREEN}Arrow keys${RESET}: swap with pane in direction"
+    echo
+    echo -e "${BOLD}${YELLOW}Pane Rotate${RESET}"
+    echo -e "${GREEN}o${RESET}: rotate panes    ${GREEN}O${RESET}: rotate reverse"
+    echo
+    echo -e "${BOLD}${YELLOW}Layout${RESET}"
+    echo -e "${GREEN}1${RESET}: even-horizontal ${GREEN}2${RESET}: even-vertical"
+    echo -e "${GREEN}3${RESET}: main-horizontal ${GREEN}4${RESET}: main-vertical"
+    echo -e "${GREEN}5${RESET}: tiled           ${GREEN}t${RESET}: next layout"
+    echo
+    echo "════════════════════════════════════════"
+    echo -e ""
+    echo -e "              ${GREEN}q/ESC${RESET}: exit"
+}
+
+# Hide cursor
+tput civis
+
+# Display the UI
+show_hydra
+
+# Restore cursor on exit
+trap 'tput cnorm' EXIT
+
+function tmux-swap-panes() {
+    direction=$1
+    current_pane=$(tmux display-message -p "#{pane_id}")
+    target_pane=$(tmux display-message -p -t "{${direction}-of}" "#{pane_id}" 2>/dev/null)
+    if [ "$target_pane" != "$current_pane" ] && [ -n "$target_pane" ]; then
+        tmux swap-pane -s "$current_pane" -t "$target_pane"
+    fi
+    tmux select-pane -t "$current_pane"
+}
+
+while true; do
+    # Read a single character without echoing it
+    read -rsn1 key
+
+    # Handle escape sequences for arrow keys
+    if [[ $key == $'\e' ]]; then
+        read -rsn2 key # Read the rest of the escape sequence
+        case "$key" in
+        '[A') # Up arrow
+            tmux-swap-panes up
+            ;;
+        '[B') # Down arrow
+            tmux-swap-panes down
+            ;;
+        '[D') # Left arrow
+            tmux-swap-panes left
+            ;;
+        '[C') # Right arrow
+            tmux-swap-panes right
+            ;;
+        '') # Just escape key pressed
+            exit 0
+            ;;
+        esac
+        clear
+        show_hydra
+        continue
+    fi
+
+    # Process regular keys
+    case "$key" in
+    # Window resize - single step
+    h) tmux resize-pane -t "$SOURCE_PANE" -L 1 ;;
+    l) tmux resize-pane -t "$SOURCE_PANE" -R 1 ;;
+    j) tmux resize-pane -t "$SOURCE_PANE" -D 1 ;;
+    k) tmux resize-pane -t "$SOURCE_PANE" -U 1 ;;
+
+    # Window resize - 5x
+    H) tmux resize-pane -t "$SOURCE_PANE" -L 5 ;;
+    L) tmux resize-pane -t "$SOURCE_PANE" -R 5 ;;
+    J) tmux resize-pane -t "$SOURCE_PANE" -D 5 ;;
+    K) tmux resize-pane -t "$SOURCE_PANE" -U 5 ;;
+
+    # Pane rotate operations
+    o) tmux rotate-window -t "$SOURCE_PANE" ;;
+    O) tmux rotate-window -t "$SOURCE_PANE" -D ;;
+
+    # Layout operations (these operate on the window containing the source pane)
+    1) tmux select-layout -t "$SOURCE_PANE" even-horizontal ;;
+    2) tmux select-layout -t "$SOURCE_PANE" even-vertical ;;
+    3) tmux select-layout -t "$SOURCE_PANE" main-horizontal ;;
+    4) tmux select-layout -t "$SOURCE_PANE" main-vertical ;;
+    5) tmux select-layout -t "$SOURCE_PANE" tiled ;;
+    't') tmux next-layout -t "$SOURCE_WINDOW" ;;
+
+    # Exit
+    q) exit 0 ;;
+
+    # Invalid key - continue
+    *) ;;
+    esac
+
+    # Clear and redraw the UI after each command
+    clear
+    show_hydra
+done
