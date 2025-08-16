@@ -20,7 +20,6 @@ return {
 				dashboard.button("e",  "  New file", "<cmd>ene <BAR> startinsert <CR>"),
 				dashboard.button("rs", "󰁯  Load session", [[:lua require("resession").load(vim.fn.getcwd(), { dir = "dirsession", silence_errors = true })<CR>]]),
 				dashboard.button("<Space>", "󰈞  Find file", "<cmd>Telescope find_files<CR>"),
-				dashboard.button(",", "  Live grep", "<cmd>Telescope live_grep<CR>"),
 				dashboard.button("u", "  Update plugins", "<cmd>Lazy sync<CR>"),
 				dashboard.button("l", "󰒲 " .. " Lazy", "<cmd> Lazy <cr>"),
 				dashboard.button("q", " " .. " Quit", "<cmd> qa <cr>"),
