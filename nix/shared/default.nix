@@ -35,6 +35,7 @@
     rename
     ripgrep
     rsync
+    rust-analyzer
     rustup
     shellcheck
     starship
