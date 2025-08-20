@@ -31,6 +31,11 @@ return {
 		},
 	},
 	{
+		"dmmulroy/ts-error-translator.nvim",
+		event = { "LazyFile" },
+		opts = {},
+	},
+	{
 		"stevearc/conform.nvim",
 		opts = {
 			formatters_by_ft = {
