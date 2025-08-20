@@ -28,13 +28,13 @@ local cmp_kinds = {
 }
 
 return {
-	"iguanacucumber/magazine.nvim",
+	"hrsh7th/nvim-cmp",
 	name = "nvim-cmp", -- Otherwise highlighting gets messed up
 	event = { "InsertEnter", "CmdlineEnter" },
 	dependencies = {
-		{ "iguanacucumber/mag-nvim-lsp", name = "cmp-nvim-lsp", opts = {} },
-		{ "iguanacucumber/mag-buffer", name = "cmp-buffer" },
-		{ "iguanacucumber/mag-cmdline", name = "cmp-cmdline" },
+		{ "hrsh7th/cmp-nvim-lsp", opts = {} },
+		{ "hrsh7th/cmp-buffer" },
+		{ "hrsh7th/cmp-cmdline" },
 		{ "https://codeberg.org/FelipeLema/cmp-async-path" },
 		{ "hrsh7th/cmp-nvim-lsp-signature-help" },
 	},
