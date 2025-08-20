@@ -103,6 +103,15 @@ return {
 			additional_vim_regex_highlighting = false,
 		},
 		textobjects = {
+			move = {
+				enable = true,
+				-- stylua: ignore start
+				goto_next_start =     { ["]f"] = "@function.outer", ["]c"] = "@class.outer", ["]a"] = "@parameter.inner" },
+				goto_next_end =       { ["]F"] = "@function.outer", ["]C"] = "@class.outer", ["]A"] = "@parameter.inner" },
+				goto_previous_start = { ["[f"] = "@function.outer", ["[c"] = "@class.outer", ["[a"] = "@parameter.inner" },
+				goto_previous_end =   { ["[F"] = "@function.outer", ["[C"] = "@class.outer", ["[A"] = "@parameter.inner" },
+				-- stylua: ignore end
+			},
 			select = {
 				enable = true,
 				keymaps = {
