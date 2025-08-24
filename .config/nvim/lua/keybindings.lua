@@ -28,8 +28,8 @@ function M.set()
 
 	local sar = require("search_and_replace")
 	bind("n", "<Esc>", "<cmd>nohlsearch<cr>", { desc = "Clear search highlight" })
-	bind({ "n", "x" }, "s", sar.searchAndReplaceOperator, { expr = true, desc = "Search and replace operator" })
-	bind("n", "s*", sar.searchAndReplaceCursorWord, { silent = true, desc = "Search and replace word under cursor" })
+	bind({ "n", "x" }, "gs", sar.searchAndReplaceOperator, { expr = true, desc = "Search and replace operator" })
+	bind("n", "gs*", sar.searchAndReplaceCursorWord, { silent = true, desc = "Search and replace word under cursor" })
 
 	bind("v", "<leader>p", [["_dP]], { desc = "Replace the selection with the paste buffer, preserve the buffer" })
 	bind({ "n", "v" }, "<leader>y", [["+y]], { desc = "Copy to system clipboard" })
@@ -175,7 +175,7 @@ function M.set_lsp(_, bufnr)
 	bind("n", "gi", vim.lsp.buf.implementation, opts)
 
 	opts.desc = "Show code signature help"
-	bind("n", "gs", vim.lsp.buf.signature_help, opts)
+	bind("n", "gS", vim.lsp.buf.signature_help, opts)
 
 	opts.desc = "Signature Help"
 	bind("i", "<c-k>", vim.lsp.buf.signature_help, opts)
