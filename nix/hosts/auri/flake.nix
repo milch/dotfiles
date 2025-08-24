@@ -63,6 +63,7 @@
     "topaz-photo-ai"
     "ultimaker-cura"
     "utm"
+    "vlc"
   ];
 
   system.defaults.dock = {
