@@ -2,7 +2,9 @@ return {
 	{
 		"nvimtools/hydra.nvim",
 		lazy = true,
-		keys = { { "<leader>xg", { desc = "Git operations" } } },
+		keys = {
+			{ "<leader>xg", "", desc = "Git operations" },
+		},
 		config = function()
 			local Hydra = require("hydra")
 			local gitsigns = require("gitsigns")
