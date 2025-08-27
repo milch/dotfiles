@@ -27,9 +27,9 @@ local specs = {
 	{ import = "plugins.lsp" },
 	{ import = "plugins.misc" },
 	{ import = "plugins.ui" },
-};
+}
 
-local opt_folder = vim.fn.stdpath('config') .. "/lua/opt"
+local opt_folder = vim.fn.stdpath("config") .. "/lua/opt"
 if vim.uv.fs_stat(opt_folder) then
 	for dir, type in vim.fs.dir(opt_folder, { depth = 1 }) do
 		table.insert(specs, { import = "opt." .. dir })
