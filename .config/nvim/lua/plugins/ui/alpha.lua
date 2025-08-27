@@ -21,8 +21,9 @@ return {
 				dashboard.button("rs", "󰁯  Load session", [[:lua require("resession").load(vim.fn.getcwd(), { dir = "dirsession", silence_errors = true })<CR>]]),
 				dashboard.button("<Space>", "󰈞  Find file", "<cmd>Telescope find_files<CR>"),
 				dashboard.button("u", "  Update plugins", "<cmd>Lazy sync<CR>"),
-				dashboard.button("l", "󰒲 " .. " Lazy", "<cmd> Lazy <cr>"),
-				dashboard.button("q", " " .. " Quit", "<cmd> qa <cr>"),
+				dashboard.button("m", "󱌢 " .. " Mason", "<cmd>Mason <cr>"),
+				dashboard.button("l", "󰒲 " .. " Lazy", "<cmd>Lazy <cr>"),
+				dashboard.button("q", " " .. " Quit", "<cmd>qa <cr>"),
 				-- stylua: ignore end
 			}
 
