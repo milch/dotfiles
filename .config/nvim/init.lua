@@ -45,6 +45,10 @@ require("lazy").setup({
 	install = {
 		colorscheme = { theme.GetColorScheme(startupTheme) },
 	},
+	git = {
+		-- nix builds can sometimes take a bit longer when re-caching a lot of dependencies
+		timeout = 300,
+	},
 	performance = {
 		rtp = {
 			disabled_plugins = {

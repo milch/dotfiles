@@ -19,7 +19,7 @@ return {
 				-- stylua: ignore start
 				dashboard.button("e",  "  New file", "<cmd>ene <BAR> startinsert <CR>"),
 				dashboard.button("rs", "󰁯  Load session", [[:lua require("resession").load(vim.fn.getcwd(), { dir = "dirsession", silence_errors = true })<CR>]]),
-				dashboard.button("<Space>", "󰈞  Find file", "<cmd>Telescope find_files<CR>"),
+				dashboard.button("<Space>", "󰈞  Find file", "<cmd>lua require('fff').find_files()<CR>"),
 				dashboard.button("u", "  Update plugins", "<cmd>Lazy sync<CR>"),
 				dashboard.button("m", "󱌢 " .. " Mason", "<cmd>Mason <cr>"),
 				dashboard.button("l", "󰒲 " .. " Lazy", "<cmd>Lazy <cr>"),
