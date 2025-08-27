@@ -7,6 +7,7 @@ return {
 		integrations = {
 			cmp = true,
 			lsp_trouble = true,
+			blink_cmp = true,
 			gitsigns = true,
 			markdown = true,
 			neotest = false,

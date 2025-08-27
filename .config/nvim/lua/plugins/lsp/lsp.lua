@@ -73,7 +73,7 @@ return {
 		"neovim/nvim-lspconfig",
 		event = { "LazyFile" },
 		dependencies = {
-			{ "williamboman/mason.nvim",           version = "^1.0.0" },
+			{ "williamboman/mason.nvim", version = "^1.0.0" },
 			{ "williamboman/mason-lspconfig.nvim", version = "^1.0.0" },
 		},
 		init = function()
@@ -126,9 +126,9 @@ return {
 			if opts.inlay_hints.enabled then
 				M.on_supports_method("textDocument/inlayHint", function(_, buffer)
 					if
-							vim.api.nvim_buf_is_valid(buffer)
-							and vim.bo[buffer].buftype == ""
-							and not vim.tbl_contains(opts.inlay_hints.exclude, vim.bo[buffer].filetype)
+						vim.api.nvim_buf_is_valid(buffer)
+						and vim.bo[buffer].buftype == ""
+						and not vim.tbl_contains(opts.inlay_hints.exclude, vim.bo[buffer].filetype)
 					then
 						vim.lsp.inlay_hint.enable(true, { bufnr = buffer })
 					end
@@ -138,12 +138,12 @@ return {
 			vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
 
 			local servers = opts.servers
-			local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+			local has_blink, blink_cmp = pcall(require, "blink.cmp")
 			local capabilities = vim.tbl_deep_extend(
 				"force",
 				{},
 				vim.lsp.protocol.make_client_capabilities(),
-				has_cmp and cmp_nvim_lsp.default_capabilities() or {},
+				has_blink and blink_cmp.get_lsp_capabilities() or {},
 				opts.capabilities or {}
 			)
 
@@ -188,7 +188,7 @@ return {
 			mlsp.setup({
 				ensure_installed = ensure_installed,
 				handlers = { setup },
-				automatic_enable = true
+				automatic_enable = true,
 			})
 
 			M.on_attach(require("keybindings").set_lsp)
@@ -205,16 +205,16 @@ return {
 			},
 			options = {
 				show_source = {
-					if_many = true
+					if_many = true,
 				},
 				use_icons_from_diagnostic = true,
 				multilines = {
 					enabled = true,
-					always_show = true
+					always_show = true,
 				},
 				show_all_diags_on_cursor_line = true,
-				enable_on_insert = true
-			}
-		}
-	}
+				enable_on_insert = true,
+			},
+		},
+	},
 }
