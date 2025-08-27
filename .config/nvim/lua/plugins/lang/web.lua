@@ -27,6 +27,7 @@ return {
 				"css-lsp",
 				"html-lsp",
 				"json-lsp",
+				"tailwindcss-language-server",
 			}, js_formatters),
 		},
 	},
