@@ -1,6 +1,6 @@
 return {
 	"saghen/blink.cmp",
-	build = "cargo build --release",
+	build = "nix run .#build-plugin",
 	event = "InsertEnter",
 	dependencies = {
 		"xzbdmw/colorful-menu.nvim", -- Nice treesitter-based completion item formatting
