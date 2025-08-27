@@ -61,8 +61,12 @@ return {
 						userDictPath = vim.fn.stdpath("config") .. "/spell/en.utf-8.add",
 						linters = {
 							SentenceCapitalization = false,
+							-- I use neovim built-in spell checker
 							SpellCheck = false,
+							-- TODO comments are fine
 							ToDoHyphen = false,
+							-- Don't warn about -- or --- (often CLI flags in comments)
+							Dashes = false,
 						},
 					},
 				},
