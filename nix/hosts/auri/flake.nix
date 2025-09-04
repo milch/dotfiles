@@ -52,6 +52,7 @@
     "expressvpn"
     "fastrawviewer"
     "google-chrome"
+    "lm-studio"
     "mactex"
     "moonlight"
     "nextcloud"
