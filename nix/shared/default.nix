@@ -29,6 +29,8 @@
     mise
     neofetch
     neovim
+    nil
+    nixfmt
     pam-reattach
     parallel
     pkgs.home-manager

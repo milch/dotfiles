@@ -217,4 +217,11 @@ return {
 			},
 		},
 	},
+	{
+		"neovim/nvim-lspconfig",
+		opts = {
+			-- Installed through nix
+			servers = { nil_ls = { mason = false } },
+		},
+	},
 }
