@@ -52,7 +52,7 @@ return {
 			keymap = {
 				preset = "inherit",
 				["<Tab>"] = { "accept" },
-				["<CR>"] = { "accept_and_enter", "fallback" },
+				["<CR>"] = {},
 			},
 			completion = { menu = { auto_show = true } },
 		},
