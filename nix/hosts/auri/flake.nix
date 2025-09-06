@@ -51,6 +51,7 @@
     "discord"
     "expressvpn"
     "fastrawviewer"
+    "garmin-express"
     "google-chrome"
     "lm-studio"
     "mactex"
@@ -65,6 +66,7 @@
     "ultimaker-cura"
     "utm"
     "vlc"
+    "wifiman"
   ];
 
   system.defaults.dock = {
