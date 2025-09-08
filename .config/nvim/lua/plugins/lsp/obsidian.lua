@@ -16,7 +16,6 @@ return {
 		},
 		dependencies = {
 			"nvim-lua/plenary.nvim",
-			"nvim-cmp",
 			"nvim-telescope/telescope.nvim",
 			"nvim-treesitter/nvim-treesitter",
 		},
