@@ -1,4 +1,4 @@
-{ pkgs,  ... }:
+{ pkgs, ... }:
 
 {
   environment.systemPackages = with pkgs; [
@@ -188,7 +188,6 @@
       "istat-menus"
       "jordanbaird-ice"
       "karabiner-elements"
-      "neovide-app"
       "obsidian"
       "provisionql"
       "rocket"
