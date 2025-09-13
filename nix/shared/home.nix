@@ -1,5 +1,10 @@
 # This file contains shared home-manager configuration that can be imported by both personal and work machines
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 let
   catppuccin-fish = pkgs.fetchFromGitHub {
@@ -15,8 +20,8 @@ let
     hash = "sha256-x1yqPCWuoBSx/cI94eA+AWwhiSA42cLNUOFJl7qjhmw=";
   };
   update-bundle = ''
-      export PATH="${lib.makeBinPath [ pkgs.ruby ]}:$PATH"
-      bundle install --frozen
+    export PATH="${lib.makeBinPath [ pkgs.ruby ]}:$PATH"
+    bundle install --frozen
   '';
   mkOutOfStoreSymlink = config.lib.file.mkOutOfStoreSymlink;
 in
@@ -47,11 +52,13 @@ in
 
     ".config/tmux/catppuccin-latte.conf".source = ../../.config/tmux/catppuccin-latte.conf;
     ".config/tmux/catppuccin-macchiato.conf".source = ../../.config/tmux/catppuccin-macchiato.conf;
-    ".config/tmux/tmux.conf".source = ../../.config/tmux/tmux.conf;
+    ".config/tmux/tmux.conf".source = mkOutOfStoreSymlink "/Users/manu/dotfiles/.config/tmux/tmux.conf";
 
     ".config/fish/dark_notify.sh".source = ../../.config/fish/dark_notify.sh;
-    ".config/fish/themes/Catppuccin Latte.theme".source = "${catppuccin-fish}/themes/Catppuccin Latte.theme";
-    ".config/fish/themes/Catppuccin Macchiato.theme".source = "${catppuccin-fish}/themes/Catppuccin Macchiato.theme";
+    ".config/fish/themes/Catppuccin Latte.theme".source =
+      "${catppuccin-fish}/themes/Catppuccin Latte.theme";
+    ".config/fish/themes/Catppuccin Macchiato.theme".source =
+      "${catppuccin-fish}/themes/Catppuccin Macchiato.theme";
 
     ".config/fish/functions/cdh.fish".source = ../../.config/fish/functions/cdh.fish;
     ".config/fish/functions/cssh.fish".source = ../../.config/fish/functions/cssh.fish;
@@ -78,8 +85,10 @@ in
       '';
     };
 
-    "Library/Services/Copy Current Safari URL.workflow".source = ../../Library/Services + "/Copy Current Safari URL.workflow";
-    "Library/Services/Summarize Current Page.workflow".source = ../../Library/Services + "/Summarize Current Page.workflow";
+    "Library/Services/Copy Current Safari URL.workflow".source = ../../Library/Services
+    + "/Copy Current Safari URL.workflow";
+    "Library/Services/Summarize Current Page.workflow".source = ../../Library/Services
+    + "/Summarize Current Page.workflow";
 
     "Gemfile" = {
       source = ../../Gemfile;
@@ -92,42 +101,42 @@ in
 
     ".unison/sync-user-prefs.prf" = {
       text = ''
-      # Roots of the synchronization
-      ## unison currently not support ~/$HOME in preference file
-      root = ${config.home.homeDirectory}
-      root = ${config.home.homeDirectory}/dotfiles/unison
-      prefer = newer
-      atomic = Name .git*
-      auto = true
-      batch = true
-      times = true
-      terse = true
+        # Roots of the synchronization
+        ## unison currently not support ~/$HOME in preference file
+        root = ${config.home.homeDirectory}
+        root = ${config.home.homeDirectory}/dotfiles/unison
+        prefer = newer
+        atomic = Name .git*
+        auto = true
+        batch = true
+        times = true
+        terse = true
 
-      # Keep a backup copy of every file in a central location
-      backuplocation = central
-      backupdir = ${config.home.homeDirectory}/.local/state/unison
-      backup = Name *
-      backupprefix = $VERSION.
-      backupsuffix =
+        # Keep a backup copy of every file in a central location
+        backuplocation = central
+        backupdir = ${config.home.homeDirectory}/.local/state/unison
+        backup = Name *
+        backupprefix = $VERSION.
+        backupsuffix =
 
-      ## macOS
-      path = Library/Preferences/com.apple.symbolichotkeys.plist
-      path = Library/Preferences/com.apple.print.custompresets.plist
-      path = Library/Preferences/com.apple.print.custompapers.plist
+        ## macOS
+        path = Library/Preferences/com.apple.symbolichotkeys.plist
+        path = Library/Preferences/com.apple.print.custompresets.plist
+        path = Library/Preferences/com.apple.print.custompapers.plist
 
-      # Alfred
-      path = Library/Preferences/com.runningwithcrayons.Alfred-Preferences.plist
+        # Alfred
+        path = Library/Preferences/com.runningwithcrayons.Alfred-Preferences.plist
 
-      # Ice
-      path = Library/Preferences/com.jordanbaird.Ice.plist
+        # Ice
+        path = Library/Preferences/com.jordanbaird.Ice.plist
 
-      # Rocket
-      path = Library/Preferences/net.matthewpalmer.Rocket.plist
+        # Rocket
+        path = Library/Preferences/net.matthewpalmer.Rocket.plist
 
-      # Karabiner (the UI writes to this - unison works better than HM for this)
-      path = .config/karabiner/karabiner.json
+        # Karabiner (the UI writes to this - unison works better than HM for this)
+        path = .config/karabiner/karabiner.json
 
-      ignore = Name {.DS_Store}
+        ignore = Name {.DS_Store}
       '';
     };
   };
@@ -177,11 +186,11 @@ in
 
   # Common activation scripts
   home.activation = {
-    installTerminfo = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    installTerminfo = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       mkdir -p $HOME/.terminfo/74
       cp -f /opt/homebrew/Cellar/ncurses/6.5/share/terminfo/74/tmux-256color $HOME/.terminfo/74
     '';
-    installTpm = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    installTpm = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       export PATH="${lib.makeBinPath [ pkgs.git ]}:$PATH"
       test -d $HOME/.config/tmux/plugins/tpm || git clone https://github.com/tmux-plugins/tpm $HOME/.config/tmux/plugins/tpm
     '';
