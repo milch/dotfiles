@@ -18,8 +18,10 @@ vim.opt.rtp:prepend(lazypath)
 local theme = require("ui.use_system_theme")
 theme.UpdateWhenSystemChanges()
 
-local startupTheme = theme.DetermineTheme("startup")
-vim.opt.background = startupTheme
+if not vim.g.neovide then
+	local startupTheme = theme.DetermineTheme("startup")
+	vim.opt.background = startupTheme
+end
 
 local specs = {
 	{ import = "plugins.editor" },

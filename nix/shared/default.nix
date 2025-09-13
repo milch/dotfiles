@@ -29,6 +29,7 @@
     mise
     neofetch
     neovim
+    neovide
     nil
     nixfmt
     pam-reattach
