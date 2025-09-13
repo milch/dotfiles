@@ -1,5 +1,8 @@
 { config, pkgs, lib, ... }:
 
+let 
+  mkOutOfStoreSymlink = config.lib.file.mkOutOfStoreSymlink;
+in
 {
   imports = [
     ../../shared/home.nix
