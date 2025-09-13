@@ -144,7 +144,7 @@ return {
 			},
 			{
 				"<leader><leader>",
-				picker("live_grep", { additional_args = { "--hidden" } }),
+				picker("live_grep", { additional_args = { "--hidden", "--glob=!.git" } }),
 				desc = "Live grep",
 			},
 			{
