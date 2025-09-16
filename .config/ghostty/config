@@ -6,7 +6,7 @@ macos-titlebar-style = hidden
 window-padding-balance = true
 window-padding-y = 9,0
 window-padding-x = 4
-theme = light:catppuccin-latte,dark:catppuccin-macchiato
+theme = light:Catppuccin Latte,dark:Catppuccin Macchiato
 window-colorspace = display-p3
 confirm-close-surface = false
 
