@@ -81,7 +81,7 @@ return {
 		cmd = "Trouble",
 		-- stylua: ignore
 		keys = {
-			{ "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics (Trouble)" },
+			{ "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>",                                         desc = "Diagnostics (Trouble)" },
 			{ "<leader>xs", "<cmd>Trouble lsp_document_symbols toggle focus=false win.position=right<cr>", desc = "LSP Document Symbols (Trouble)" },
 		},
 	},

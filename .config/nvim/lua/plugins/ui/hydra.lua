@@ -71,7 +71,7 @@ return {
 					{ "u", gitsigns.undo_stage_hunk },
 					{ "S", gitsigns.stage_buffer },
 					{ "p", gitsigns.preview_hunk },
-					{ "x", gitsigns.toggle_deleted, { nowait = true } },
+					{ "x", gitsigns.toggle_deleted,    { nowait = true } },
 					{ "d", gitsigns.diffthis },
 					{
 						"D",
@@ -86,7 +86,7 @@ return {
 							gitsigns.blame_line({ full = true })
 						end,
 					},
-					{ "/", gitsigns.show, { exit = true } }, -- show the base of the file
+					{ "/", gitsigns.show,      { exit = true } }, -- show the base of the file
 					{
 						"R",
 						function()

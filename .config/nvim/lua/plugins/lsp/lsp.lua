@@ -73,7 +73,7 @@ return {
 		"neovim/nvim-lspconfig",
 		event = { "LazyFile" },
 		dependencies = {
-			{ "williamboman/mason.nvim", version = "^1.0.0" },
+			{ "williamboman/mason.nvim",           version = "^1.0.0" },
 			{ "williamboman/mason-lspconfig.nvim", version = "^1.0.0" },
 		},
 		init = function()
@@ -126,9 +126,9 @@ return {
 			if opts.inlay_hints.enabled then
 				M.on_supports_method("textDocument/inlayHint", function(_, buffer)
 					if
-						vim.api.nvim_buf_is_valid(buffer)
-						and vim.bo[buffer].buftype == ""
-						and not vim.tbl_contains(opts.inlay_hints.exclude, vim.bo[buffer].filetype)
+							vim.api.nvim_buf_is_valid(buffer)
+							and vim.bo[buffer].buftype == ""
+							and not vim.tbl_contains(opts.inlay_hints.exclude, vim.bo[buffer].filetype)
 					then
 						vim.lsp.inlay_hint.enable(true, { bufnr = buffer })
 					end
