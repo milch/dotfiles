@@ -30,12 +30,11 @@
     "1Blocker" = 1365531024;
     "1Password for Safari" = 1569813296;
     "Blackmagic Disk Speed Test" = 425264550;
-    "CARROT Weather" = 993487541;
     "Consent-O-Matic" = 1606897889;
     "Flighty" = 1358823008;
     "Goodnotes" = 1444383602;
     "Noir" = 1592917505;
-    "Parcel" = 639968404;
+    "Parcel" = 375589283;
     "Refined GitHub" = 1519867270;
     "Save to Reader" = 1640236961;
     "SponsorBlock for Safari" = 1573461917;
@@ -76,7 +75,7 @@
       "/Applications/DaVinci Resolve/DaVinci Resolve.app"
       "/System/Applications/Music.app"
       "/Applications/Ghostty.app"
-      "/Applications/Xcode-16.2.0.app"
+      "/Applications/Xcode-26.0.0.app"
       "/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app"
       "/System/Applications/Messages.app"
       "/System/Applications/Mail.app"
@@ -85,7 +84,7 @@
       "/Applications/Obsidian.app"
       "/Applications/Fantastical.app"
       "/Applications/Things3.app"
-      "/Applications/CARROTweather.app"
+      "/Applications/CARROT.app"
       "/System/Applications/iPhone Mirroring.app"
     ];
   };
