@@ -24,12 +24,12 @@ keybind = cmd+g=text:\x01g
 keybind = cmd+b=text:\x01b
 keybind = cmd+x=text:\x01\x17
 
-keybind = cmd+one=text:\x011
-keybind = cmd+two=text:\x012
-keybind = cmd+three=text:\x013
-keybind = cmd+four=text:\x014
-keybind = cmd+five=text:\x015
-keybind = cmd+six=text:\x016
-keybind = cmd+seven=text:\x017
-keybind = cmd+eight=text:\x018
-keybind = cmd+nine=text:\x019
+keybind = cmd+digit_1=text:\x011
+keybind = cmd+digit_2=text:\x012
+keybind = cmd+digit_3=text:\x013
+keybind = cmd+digit_4=text:\x014
+keybind = cmd+digit_5=text:\x015
+keybind = cmd+digit_6=text:\x016
+keybind = cmd+digit_7=text:\x017
+keybind = cmd+digit_8=text:\x018
+keybind = cmd+digit_9=text:\x019
