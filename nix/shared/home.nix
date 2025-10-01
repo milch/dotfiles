@@ -318,6 +318,7 @@ in
       ".solargraph.yml"
     ];
     extraConfig = {
+      init.defaultBranch = "main";
       pull.rebase = true;
       rebase.autostash = true;
       diff = {
