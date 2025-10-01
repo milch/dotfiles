@@ -71,10 +71,10 @@ M.diagnosticsIcons = {
 return {
 	{
 		"neovim/nvim-lspconfig",
-		event = { "LazyFile" },
+		event = { "BufReadPre", "BufNewFile", "BufWritePre" },
 		dependencies = {
-			{ "williamboman/mason.nvim",           version = "^1.0.0" },
-			{ "williamboman/mason-lspconfig.nvim", version = "^1.0.0" },
+			{ "williamboman/mason.nvim" },
+			{ "williamboman/mason-lspconfig.nvim" },
 		},
 		init = function()
 			vim.opt.updatetime = 50
@@ -110,8 +110,6 @@ return {
 				--   require("typescript").setup({ server = opts })
 				--   return true
 				-- end,
-				-- Specify * to use this function as a fallback for any server
-				-- ["*"] = function(server, opts) end,
 			},
 		},
 		config = function(_, opts)
@@ -126,9 +124,9 @@ return {
 			if opts.inlay_hints.enabled then
 				M.on_supports_method("textDocument/inlayHint", function(_, buffer)
 					if
-							vim.api.nvim_buf_is_valid(buffer)
-							and vim.bo[buffer].buftype == ""
-							and not vim.tbl_contains(opts.inlay_hints.exclude, vim.bo[buffer].filetype)
+						vim.api.nvim_buf_is_valid(buffer)
+						and vim.bo[buffer].buftype == ""
+						and not vim.tbl_contains(opts.inlay_hints.exclude, vim.bo[buffer].filetype)
 					then
 						vim.lsp.inlay_hint.enable(true, { bufnr = buffer })
 					end
@@ -147,48 +145,37 @@ return {
 				opts.capabilities or {}
 			)
 
-			local function setup(server)
-				local server_opts = vim.tbl_deep_extend("force", {
-					capabilities = vim.deepcopy(capabilities),
-				}, servers[server] or {})
-				if server_opts.enabled == false then
+			vim.lsp.config("*", { capabilities = capabilities })
+
+			-- get all the servers that are available through mason-lspconfig
+			local mason_all = vim.tbl_keys(require("mason-lspconfig.mappings").get_mason_map().lspconfig_to_package)
+			local mason_exclude = {} ---@type string[]
+
+			local function configure(server)
+				local server_opts = servers[server] or { enabled = false }
+				if server_opts.enabled == false or server_opts.mason == false then
+					mason_exclude[#mason_exclude + 1] = server
 					return
 				end
 
-				if opts.setup[server] then
-					if opts.setup[server](server, server_opts) then
-						return
-					end
-				elseif opts.setup["*"] then
-					if opts.setup["*"](server, server_opts) then
-						return
-					end
-				end
-				require("lspconfig")[server].setup(server_opts)
-			end
-
-			-- get all the servers that are available through mason-lspconfig
-			local mlsp = require("mason-lspconfig")
-			local all_mslp_servers = vim.tbl_keys(require("mason-lspconfig.mappings.server").lspconfig_to_package)
-
-			local ensure_installed = {} ---@type string[]
-			for server, server_opts in pairs(servers) do
-				if server_opts then
-					server_opts = server_opts == true and {} or server_opts
-					if server_opts.enabled ~= false then
-						if server_opts.mason == false or not vim.tbl_contains(all_mslp_servers, server) then
-							setup(server)
-						else
-							ensure_installed[#ensure_installed + 1] = server
-						end
+				local use_mason = server_opts.mason ~= false and vim.tbl_contains(mason_all, server)
+				local setup = opts.setup[server] or opts.setup["*"]
+				if setup and setup(server, server_opts) then
+					mason_exclude[#mason_exclude + 1] = server
+				else
+					vim.lsp.config(server, server_opts) -- configure the server
+					if not use_mason then
+						vim.lsp.enable(server)
+						return false
 					end
 				end
+				return use_mason
 			end
 
-			mlsp.setup({
+			local ensure_installed = vim.tbl_filter(configure, vim.tbl_keys(servers))
+			require("mason-lspconfig").setup({
 				ensure_installed = ensure_installed,
-				handlers = { setup },
-				automatic_enable = true,
+				automatic_enable = { exclude = mason_exclude },
 			})
 
 			M.on_attach(require("keybindings").set_lsp)
