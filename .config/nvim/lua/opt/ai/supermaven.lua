@@ -5,6 +5,9 @@ return {
 		cmd = {
 			"SupermavenUseFree",
 			"SupermavenUsePro",
+			"SupermavenStart",
+			"SupermavenStatus",
+			"SupermavenStop",
 		},
 		opts = {
 			keymaps = {
@@ -13,6 +16,14 @@ return {
 			disable_inline_completion = true,
 			ignore_filetypes = { "bigfile", "snacks_input", "snacks_notif" },
 		},
+		config = function(_, opts)
+			-- HACK: Without nvim-cmp and inline completion disabled, supermaven logs
+			-- a warning on startup, so we pretend there is a cmp module.
+			package.loaded["cmp"] = {
+				register_source = function() end,
+			}
+			require("supermaven-nvim").setup(opts)
+		end,
 	},
 	{
 		"saghen/blink.cmp",
