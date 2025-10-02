@@ -22,12 +22,6 @@ return {
 		end,
 	},
 
-	{
-		"echasnovski/mini.ai",
-		event = "VeryLazy",
-		opts = {},
-	},
-
 	-- Utils
 	{
 		"pocco81/auto-save.nvim",
