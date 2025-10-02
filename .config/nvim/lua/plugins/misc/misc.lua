@@ -14,7 +14,7 @@ return {
 	},
 
 	{
-		"echasnovski/mini.icons",
+		"nvim-mini/mini.icons",
 		lazy = true,
 		config = function()
 			require("mini.icons").setup()
@@ -72,7 +72,7 @@ return {
 	{
 		"folke/trouble.nvim",
 		dependencies = {
-			"echasnovski/mini.icons",
+			"nvim-mini/mini.icons",
 		},
 		opts = {
 			auto_open = false, -- automatically open the list when you have diagnostics
