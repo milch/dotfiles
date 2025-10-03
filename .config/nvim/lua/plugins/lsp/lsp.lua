@@ -1,52 +1,5 @@
 local M = {}
 
----@type table<string, table<vim.lsp.Client, table<number, boolean>>>
-M._supports_method = {}
-
----@param client vim.lsp.Client
-function M._check_methods(client, buffer)
-	-- don't trigger on invalid buffers
-	if not vim.api.nvim_buf_is_valid(buffer) then
-		return
-	end
-	-- don't trigger on non-listed buffers
-	if not vim.bo[buffer].buflisted then
-		return
-	end
-	-- don't trigger on nofile buffers
-	if vim.bo[buffer].buftype == "nofile" then
-		return
-	end
-	for method, clients in pairs(M._supports_method) do
-		clients[client] = clients[client] or {}
-		if not clients[client][buffer] then
-			if client.supports_method and client.supports_method(method, { bufnr = buffer }) then
-				clients[client][buffer] = true
-				vim.api.nvim_exec_autocmds("User", {
-					pattern = "LspSupportsMethod",
-					data = { client_id = client.id, buffer = buffer, method = method },
-				})
-			end
-		end
-	end
-end
-
----@param method string
----@param fn fun(client:vim.lsp.Client, buffer)
-function M.on_supports_method(method, fn)
-	M._supports_method[method] = M._supports_method[method] or setmetatable({}, { __mode = "k" })
-	return vim.api.nvim_create_autocmd("User", {
-		pattern = "LspSupportsMethod",
-		callback = function(args)
-			local client = vim.lsp.get_client_by_id(args.data.client_id)
-			local buffer = args.data.buffer ---@type number
-			if client and method == args.data.method then
-				return fn(client, buffer)
-			end
-		end,
-	})
-end
-
 ---@param on_attach fun(client:vim.lsp.Client, buffer)
 ---@param name? string
 function M.on_attach(on_attach, name)
@@ -98,10 +51,6 @@ return {
 					},
 				},
 			},
-			inlay_hints = {
-				enabled = true,
-				exclude = { "vue" }, -- filetypes for which you don't want to enable inlay hints
-			},
 			servers = {},
 			---@type table<string, fun(server:string, opts:lspconfig.options):boolean?>
 			setup = {
@@ -119,18 +68,6 @@ return {
 					name = "DiagnosticSign" .. name
 					vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
 				end
-			end
-
-			if opts.inlay_hints.enabled then
-				M.on_supports_method("textDocument/inlayHint", function(_, buffer)
-					if
-						vim.api.nvim_buf_is_valid(buffer)
-						and vim.bo[buffer].buftype == ""
-						and not vim.tbl_contains(opts.inlay_hints.exclude, vim.bo[buffer].filetype)
-					then
-						vim.lsp.inlay_hint.enable(true, { bufnr = buffer })
-					end
-				end)
 			end
 
 			vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
@@ -179,7 +116,10 @@ return {
 			})
 
 			M.on_attach(require("keybindings").set_lsp)
-			M.on_attach(M._check_methods)
+			M.on_attach(function(_, buffer)
+				-- Enable inlay hints by default
+				vim.lsp.inlay_hint.enable(true, { bufnr = buffer })
+			end)
 		end,
 	},
 	{
