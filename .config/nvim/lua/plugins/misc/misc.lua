@@ -86,17 +86,48 @@ return {
 		},
 	},
 	{
-		"folke/zen-mode.nvim",
+		"folke/snacks.nvim",
+		priority = 1000,
+		lazy = false,
+		init = function()
+			vim.api.nvim_create_autocmd("User", {
+				pattern = "VeryLazy",
+				-- stylua: ignore
+				callback = function()
+					vim.g.snacks_animate = false
+
+					Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>as")
+					Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>aw")
+					Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>aL")
+					Snacks.toggle.diagnostics():map("<leader>ad")
+					Snacks.toggle.line_number():map("<leader>al")
+					Snacks.toggle.treesitter():map("<leader>aT")
+					Snacks.toggle.inlay_hints():map("<leader>ah")
+					Snacks.toggle.dim():map("<leader>aD")
+				end,
+			})
+		end,
+		---@module 'snacks'
+		---@type snacks.Config
 		opts = {
-			gitsigns = {
-				enable = true,
+			bigfile = { enabled = true },
+			image = {
+				doc = {
+					enabled = true,
+					inline = true,
+				},
+				math = {
+					enabled = true,
+				},
 			},
-			tmux = {
-				enable = true,
-			},
+			quickfile = {},
+			statuscolumn = { enabled = true },
 		},
+		-- stylua: ignore
 		keys = {
-			{ "<leader>xz", "<cmd>ZenMode<cr>", desc = "Toggle Zen Mode" },
+			{ "<leader>xz",  function() Snacks.zen() end, desc = "Toggle Zen Mode" },
+			{ "<leader>xZ",  function() Snacks.zen.zoom() end, desc = "Toggle Zoom" },
+			{ "<leader>cR", function() Snacks.rename.rename_file() end, desc = "Rename File" },
 		},
 	},
 	{
