@@ -10,7 +10,13 @@ return {
 	{
 		"kylechui/nvim-surround",
 		event = "VeryLazy",
-		opts = {},
+		opts = {
+			aliases = {
+				["b"] = { ")", "]", "}" },
+				["q"] = { '"', "'", "`" },
+				["s"] = { "}", "]", ")", ">", '"', "'", "`" },
+			},
+		},
 	},
 
 	{
