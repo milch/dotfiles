@@ -180,9 +180,6 @@ function M.set_lsp(_, bufnr)
 	opts.desc = "Signature Help"
 	bind("i", "<c-k>", vim.lsp.buf.signature_help, opts)
 
-	opts.desc = "Code Action"
-	bind({ "v", "n" }, "<leader>ca", vim.lsp.buf.code_action, opts)
-
 	opts.desc = "Run Codelens"
 	bind({ "v", "n" }, "<leader>cc", vim.lsp.codelens.run, opts)
 

@@ -145,6 +145,39 @@ return {
 		},
 	},
 	{
+		"rachartier/tiny-code-action.nvim",
+		dependencies = {
+			{ "nvim-lua/plenary.nvim" },
+		},
+		event = "LspAttach",
+		opts = {
+			backend = "delta",
+			picker = {
+				"buffer",
+				opts = {
+					hotkeys = true,
+					auto_preview = true,
+					auto_accept = true,
+					hotkeys_mode = function(titles)
+						local t = {}
+						for i = 1, #titles do
+							t[i] = tostring(i)
+						end
+						return t
+					end,
+				},
+			},
+		},
+		init = function()
+			M.on_attach(function(_, buffer)
+				local opts = { buffer = buffer, silent = true }
+				vim.keymap.set({ "n", "x" }, "<leader>ca", function()
+					require("tiny-code-action").code_action({})
+				end, opts)
+			end)
+		end,
+	},
+	{
 		"neovim/nvim-lspconfig",
 		opts = {
 			-- Installed through nix
