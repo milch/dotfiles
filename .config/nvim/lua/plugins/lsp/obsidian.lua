@@ -7,7 +7,7 @@ end
 
 return {
 	{
-		"epwalsh/obsidian.nvim",
+		"obsidian-nvim/obsidian.nvim",
 		version = "*", -- recommended, use latest release instead of latest commit
 		lazy = true,
 		event = {
@@ -20,39 +20,40 @@ return {
 			"nvim-treesitter/nvim-treesitter",
 		},
 		keys = {
-			{ "<leader>od", "<cmd>ObsidianToday<CR>" },
-			{ "<leader>oo", "<cmd>ObsidianOpen<CR>" },
-			{ "<leader>ob", "<cmd>ObsidianBacklinks<CR>" },
-			{ "<leader>ot", "<cmd>ObsidianTemplate<CR>" },
-			{ "<leader>os", "<cmd>ObsidianQuickSwitch<CR>" },
-			{ "<leader>of", "<cmd>ObsidianSearch<CR>" },
-			{ "<leader>op", "<cmd>ObsidianPasteImg<CR>" },
-			{ "<leader>ol", "<cmd>ObsidianLinkNew<CR>" },
+			{ "<leader>od", "<cmd>Obsidian today<CR>" },
+			{ "<leader>oo", "<cmd>Obsidian open<CR>" },
+			{ "<leader>ob", "<cmd>Obsidian backlinks<CR>" },
+			{ "<leader>ot", "<cmd>Obsidian template<CR>" },
+			{ "<leader>os", "<cmd>Obsidian quick_switch<CR>" },
+			{ "<leader>of", "<cmd>Obsidian search<CR>" },
+			{ "<leader>op", "<cmd>Obsidian paste_img<CR>" },
+			{ "<leader>ol", "<cmd>Obsidian link_new<CR>", mode = "v" },
 		},
+		---@module 'obsidian'
+		---@type obsidian.config
 		opts = {
-			ui = { enable = false },
 			workspaces = {
 				{
 					name = "notes",
 					path = "~/Notes/",
 				},
 			},
+			notes_subdir = "0 Inbox",
+
 			daily_notes = {
 				folder = "0 Inbox",
 				template = "daily-note.md",
 			},
-			notes_subdir = "0 Inbox",
-			follow_url_func = function(url)
-				vim.fn.jobstart({ "open", url })
-			end,
 			completion = {
 				min_chars = 1,
+				nvim_cmp = false,
+				blink = true,
 			},
 			new_notes_location = "notes_subdir",
 
-			--- @param title string
+			---@param title string|?
+			---@return string
 			note_id_func = function(title)
-				print("Getting id for title: " .. title)
 				local suffix = ""
 				if title ~= nil then
 					suffix = title:gsub(" ", "-"):gsub("[^A-Za-z0-9-]", "")
@@ -64,41 +65,25 @@ return {
 				return tostring(os.date("%Y%m%d%H%M")) .. "-" .. suffix
 			end,
 
-			---@param spec { id: string, dir: obsidian.Path, title: string|? }
-			note_path_func = function(spec)
-				if spec.title == nil then
-					return spec.dir / tostring(spec.id)
-				else
-					return spec.dir / tostring(spec.title)
-				end
+			-- Optional, customize how note file names are generated given the ID, target directory, and title.
+			-- note_path_func = function(spec)
+			-- 	if spec.title == nil then
+			-- 		return spec.dir / tostring(spec.id)
+			-- 	else
+			-- 		return spec.dir / tostring(spec.title)
+			-- 	end
+			-- end,
+
+			wiki_link_func = function(opts)
+				return require("obsidian.util").wiki_link_path_prefix(opts)
 			end,
 
-			---@param opts {path: string, label: string, id: string|?}
-			---@return string
-			wiki_link_func = function(opts)
-				local parent = vim.fs.basename(vim.fs.dirname(opts.path))
-				local parts = vim.split(parent, " - ", { plain = true })
-				if #parts > 1 then
-					parent = parts[#parts]
-				end
-				if parent == "0 Inbox" then
-					return string.format("[[%s|%s]]", opts.path, opts.label)
-				end
-				if opts.id == "Index" then
-					return string.format("[[%s|%s]]", opts.path, parent)
-				end
-				if opts.label ~= opts.path then
-					return string.format("[[%s|%s]]", opts.path, parent .. "/" .. opts.label)
-				else
-					return string.format("[[%s]]", opts.path)
-				end
-			end,
 			note_frontmatter_func = function(note)
 				local out = {
 					id = note.id,
 					aliases = note.aliases,
 					tags = note.tags,
-					created_date = os.date("%Y-%m-%d", os.time()),
+					created_date = os.date("%Y-%m-%d"),
 				}
 				-- `note.metadata` contains any manually added fields in the frontmatter.
 				-- So here we just make sure those fields are kept in the frontmatter.
@@ -110,30 +95,6 @@ return {
 				return out
 			end,
 
-			open_app_foreground = true,
-
-			use_advanced_uri = true,
-
-			mappings = {
-				-- Overrides the 'gf' mapping to work on markdown/wiki links within your vault.
-				["gf"] = {
-					action = function()
-						return require("obsidian").util.gf_passthrough()
-					end,
-					opts = { noremap = false, expr = true, buffer = true },
-				},
-				-- Toggle check-boxes.
-				["<CR>"] = {
-					action = function()
-						return require("obsidian").util.toggle_checkbox()
-					end,
-					opts = { buffer = true },
-				},
-			},
-
-			attachments = {
-				img_folder = "Attachments",
-			},
 			-- Optional, for templates (see below).
 			templates = {
 				subdir = "Templates",
@@ -152,15 +113,36 @@ return {
 					end,
 				},
 			},
-		},
-		init = function()
-			vim.api.nvim_create_autocmd({ "BufEnter", "BufReadPost" }, {
-				group = vim.api.nvim_create_augroup("obsidian", { clear = true }),
-				callback = function()
+
+			open = {
+				use_advanced_uri = true,
+				func = function(uri)
+					vim.ui.open(uri, { cmd = { "open", "-a", "/Applications/Obsidian.app" } })
+				end,
+			},
+
+			callbacks = {
+				enter_note = function(_, note)
+					vim.keymap.set("n", "<CR>", "<cmd>Obsidian toggle_checkbox<cr>", {
+						buffer = note.bufnr,
+						desc = "Toggle checkbox",
+					})
+					vim.keymap.set("n", "gf", "<cmd>Obsidian follow_link<cr>", {
+						buffer = note.bufnr,
+						desc = "Follow link",
+					})
 					vim.opt_local.conceallevel = 2
 				end,
-			})
-		end,
+			},
+
+			ui = { enable = false },
+
+			attachments = {
+				img_folder = "Attachments",
+			},
+
+			legacy_commands = false,
+		},
 	},
 	{
 		"stevearc/conform.nvim",
