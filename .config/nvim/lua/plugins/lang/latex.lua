@@ -1,5 +1,4 @@
 return {
-	{ "ryleelyman/latex.nvim", opts = {}, ft = { "markdown" } },
 	{
 		"MeanderingProgrammer/render-markdown.nvim",
 		opts = {

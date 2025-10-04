@@ -43,6 +43,7 @@
     shellcheck
     starship
     tmux
+    tectonic
     tree
     tree-sitter
     unison
