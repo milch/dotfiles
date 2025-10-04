@@ -12,10 +12,7 @@ after-login-command = []
 # You can use it to add commands that run after AeroSpace startup.
 # 'after-startup-command' is run after 'after-login-command'
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
-after-startup-command = [
-  '''exec-and-forget zsh -c "borders width=6.0 blacklist='iPhone Mirroring' active_color=0xff33ccff inactive_color=0xff494d64"
-  '''
-]
+after-startup-command = [ ]
 
 # Start AeroSpace at login
 start-at-login = true
@@ -47,7 +44,6 @@ key-mapping.preset = 'qwerty'
 # See https://nikitabobko.github.io/AeroSpace/commands#move-mouse
 on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 on-focus-changed = [
-  'exec-and-forget [ $(aerospace list-windows --workspace focused --count) -eq 1 ] && zsh -c "borders width=0.0" || zsh -c "borders width=6.0"',
   'move-mouse window-lazy-center'  # Mouse lazily follows any focus (window or workspace)
 ]
 
