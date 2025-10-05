@@ -18,6 +18,18 @@ return {
 			"nvim-lua/plenary.nvim",
 			"nvim-telescope/telescope.nvim",
 			"nvim-treesitter/nvim-treesitter",
+			{
+				"folke/snacks.nvim",
+				opts = {
+					image = {
+						resolve = function(path, src)
+							if require("obsidian.api").path_is_note(path) then
+								return require("obsidian.api").resolve_image_path(src)
+							end
+						end,
+					},
+				},
+			},
 		},
 		keys = {
 			{ "<leader>od", "<cmd>Obsidian today<CR>" },
