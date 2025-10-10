@@ -6,6 +6,7 @@
     atuin
     awscli2
     bat
+    bazelisk
     cmake
     delta
     dust
