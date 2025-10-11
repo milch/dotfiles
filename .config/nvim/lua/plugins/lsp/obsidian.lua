@@ -22,8 +22,12 @@ return {
 				"folke/snacks.nvim",
 				opts = {
 					image = {
+						--- @param path string
+						--- @param src string
 						resolve = function(path, src)
-							if require("obsidian.api").path_is_note(path) then
+							if src:find("^https?://") then
+								return src
+							elseif require("obsidian.api").path_is_note(path) then
 								return require("obsidian.api").resolve_image_path(src)
 							end
 						end,
