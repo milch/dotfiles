@@ -52,7 +52,7 @@ in
 
     ".config/tmux/catppuccin-latte.conf".source = ../../.config/tmux/catppuccin-latte.conf;
     ".config/tmux/catppuccin-macchiato.conf".source = ../../.config/tmux/catppuccin-macchiato.conf;
-    ".config/tmux/tmux.conf".source = mkOutOfStoreSymlink "/Users/manu/dotfiles/.config/tmux/tmux.conf";
+    ".config/tmux/tmux.conf".source = ../../.config/tmux/tmux.conf;
 
     ".config/fish/dark_notify.sh".source = ../../.config/fish/dark_notify.sh;
     ".config/fish/themes/Catppuccin Latte.theme".source =
