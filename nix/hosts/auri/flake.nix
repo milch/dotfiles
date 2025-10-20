@@ -44,6 +44,7 @@
   };
   homebrew.casks = [
     "astropad-studio"
+    "autodesk-fusion"
     "balenaetcher"
     "calibre"
     "calibrite-profiler"
@@ -58,8 +59,10 @@
     "nextcloud"
     "ollama-app"
     "orbstack"
+    "orcaslicer"
     "orion"
     "plex"
+    "prusaslicer"
     "steam"
     "topaz-photo-ai"
     "ultimaker-cura"
