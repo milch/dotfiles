@@ -90,6 +90,8 @@ in
     "Library/Services/Summarize Current Page.workflow".source = ../../Library/Services
     + "/Summarize Current Page.workflow";
 
+    ".local/bin/ocr".source = ../../bin/ocr;
+
     "Gemfile" = {
       source = ../../Gemfile;
       onChange = update-bundle;

@@ -9,5 +9,6 @@ in
   ];
   home.file = {
     ".config/nvim/lua/opt/ai/".source = ../../../.config/nvim/lua/opt/ai;
+    ".local/bin/bgcode".source = ../../../bin/bgcode;
   };
 }
