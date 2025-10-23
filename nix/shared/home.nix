@@ -91,6 +91,7 @@ in
     + "/Summarize Current Page.workflow";
 
     ".local/bin/ocr".source = ../../bin/ocr;
+    ".local/bin/aerospace-new-terminal".source = ../../bin/aerospace-new-terminal;
 
     "Gemfile" = {
       source = ../../Gemfile;

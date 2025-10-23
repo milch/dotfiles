@@ -1,0 +1,6 @@
+#!/bin/bash -eux
+
+WORKSPACE=$(aerospace list-workspaces --focused)
+shortcuts run "New Terminal"
+aerospace move-node-to-workspace --fail-if-noop "$WORKSPACE"
+aerospace workspace "$WORKSPACE"

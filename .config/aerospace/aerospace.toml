@@ -72,8 +72,7 @@ cmd-alt-h = [] # Disable "hide others"
 # TODO: Consider setting up a separate mode for resize/swap
 # https://github.com/nikitabobko/AeroSpace/issues/406 / https://github.com/nikitabobko/AeroSpace/issues/406
 
-alt-enter = '''exec-and-forget pgrep -x "Ghostty" > /dev/null || open -a Ghostty && osascript -e 'tell application "System Events" to tell application process "Ghostty" to click menu item "New Window" of menu "File" of menu bar 1'
-'''
+alt-enter = '''exec-and-forget ~/.local/bin/aerospace-new-terminal'''
 
 alt-shift-enter = '''exec-and-forget pgrep -x Arc && osascript -e '
 tell application "System Events"
