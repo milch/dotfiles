@@ -10,6 +10,14 @@ return {
 			transparent = true,
 			solid = false,
 		},
+		lsp_styles = {
+			underlines = {
+				errors = { "undercurl" },
+				hints = { "undercurl" },
+				warnings = { "undercurl" },
+				information = { "undercurl" },
+			},
+		},
 		integrations = {
 			cmp = true,
 			lsp_trouble = true,
@@ -24,15 +32,6 @@ return {
 			indent_blankline = {
 				enabled = true,
 				colored_indent_levels = true,
-			},
-			native_lsp = {
-				enabled = true,
-				underlines = {
-					errors = { "undercurl" },
-					hints = { "undercurl" },
-					warnings = { "undercurl" },
-					information = { "undercurl" },
-				},
 			},
 		},
 		custom_highlights = function(C)
