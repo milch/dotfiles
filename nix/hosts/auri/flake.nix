@@ -76,6 +76,7 @@
       "/System/Applications/Photos.app"
       "/Applications/Adobe Lightroom Classic/Adobe Lightroom Classic.app"
       "/Applications/DaVinci Resolve/DaVinci Resolve.app"
+      "/Applications/OrcaSlicer.app"
       "/System/Applications/Music.app"
       "/Applications/Ghostty.app"
       "/Applications/Xcode-26.0.0.app"
