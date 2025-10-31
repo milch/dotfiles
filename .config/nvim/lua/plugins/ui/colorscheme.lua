@@ -3,7 +3,13 @@ return {
 	name = "catppuccin",
 	priority = 1000,
 	lazy = false,
+	---@module 'catppuccin'
+	---@type CatppuccinOptions
 	opts = {
+		float = {
+			transparent = true,
+			solid = false,
+		},
 		integrations = {
 			cmp = true,
 			lsp_trouble = true,
