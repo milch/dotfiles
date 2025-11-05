@@ -272,13 +272,6 @@ in
   programs.git = {
     enable = true;
     lfs.enable = true;
-    delta = {
-      enable = true;
-      options = {
-        line-numbers = true;
-        tabs = 2;
-      };
-    };
     attributes = [
       "*.m     diff=objc"
       "*.mm    diff=objc"
@@ -320,7 +313,7 @@ in
 
       ".solargraph.yml"
     ];
-    extraConfig = {
+    settings = {
       init.defaultBranch = "main";
       pull.rebase = true;
       rebase.autostash = true;
@@ -336,6 +329,16 @@ in
         textconv = "plutil -p";
         binary = true;
       };
+    };
+  };
+
+  # Delta configuration
+  programs.delta = {
+    enable = true;
+    enableGitIntegration = true;
+    options = {
+      line-numbers = true;
+      tabs = 2;
     };
   };
 
