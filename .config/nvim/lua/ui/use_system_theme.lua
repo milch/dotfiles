@@ -42,8 +42,13 @@ M.DetermineTheme = function(arg)
 	if iTermProfile == "Dark" or iTermProfile == "Light" then
 		return string.lower(iTermProfile)
 	elseif arg == "startup" then
-		theme = os.getenv("APPLE_INTERFACE_STYLE")
-		return string.lower(theme or "")
+		theme = os.getenv("APPLE_INTERFACE_STYLE") or Exec("defaults read -g AppleInterfaceStyle 2>/dev/null")
+		theme = string.lower(theme)
+		if theme == "dark" or theme == "light" then
+			return theme
+		end
+
+		return "light"
 	end
 
 	return string.lower(Exec("defaults read -g AppleInterfaceStyle 2>/dev/null"))
