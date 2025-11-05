@@ -43,11 +43,13 @@
     rustup
     shellcheck
     starship
-    tmux
+    tealdeer
     tectonic
+    tmux
     tree
     tree-sitter
     unison
+    uv
     wget
     yamllint
     zig
