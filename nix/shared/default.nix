@@ -85,7 +85,7 @@
             <key>RunAtLoad</key>
             <true/>
             <key>StartInterval</key>
-            <integer>300</integer>
+            <integer>86400</integer>
             <key>StandardOutPath</key>
             <string>/tmp/user-pref-sync.log</string>
             <key>StandardErrorPath</key>
