@@ -160,6 +160,10 @@ return {
 			},
 
 			legacy_commands = false,
+
+			footer = {
+				enabled = false,
+			},
 		},
 	},
 	{
