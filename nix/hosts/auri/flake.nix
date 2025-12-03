@@ -27,7 +27,6 @@
   ];
 
   homebrew.masApps = {
-    "1Blocker" = 1365531024;
     "1Password for Safari" = 1569813296;
     "Blackmagic Disk Speed Test" = 425264550;
     "Consent-O-Matic" = 1606897889;
@@ -40,6 +39,7 @@
     "SponsorBlock for Safari" = 1573461917;
     "StopTheMadness Pro" = 6471380298;
     "Surfingkeys" = 1609752330;
+    "wBlock" = 6746388723;
     "WireGuard" = 1451685025;
   };
   homebrew.casks = [
