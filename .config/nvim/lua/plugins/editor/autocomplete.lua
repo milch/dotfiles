@@ -1,6 +1,18 @@
 return {
 	"saghen/blink.cmp",
-	build = "nix run .#build-plugin",
+	-- BUG: The original instructions don't work, see
+	-- https://github.com/saghen/blink.cmp/pull/1993#issuecomment-3430313826
+	build = [[
+		nix build .#blink-fuzzy-lib
+
+		# Prevent the library and its dependencies (e.g., libiconv) from being GC'd
+		nix profile remove blink-fuzzy-lib 2>/dev/null || true
+		nix profile install .#blink-fuzzy-lib
+
+		rm -rf target && mkdir -p target/release
+		cp result/lib/libblink_cmp_fuzzy.dylib target/release
+		rm result
+	]],
 	event = "InsertEnter",
 	dependencies = {
 		"xzbdmw/colorful-menu.nvim", -- Nice treesitter-based completion item formatting
