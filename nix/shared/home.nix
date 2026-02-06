@@ -191,7 +191,7 @@ in
   home.activation = {
     installTerminfo = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       mkdir -p $HOME/.terminfo/74
-      cp -f /opt/homebrew/Cellar/ncurses/6.5/share/terminfo/74/tmux-256color $HOME/.terminfo/74
+      cp -f /opt/homebrew/Cellar/ncurses/6.6/share/terminfo/74/tmux-256color $HOME/.terminfo/74
     '';
     installTpm = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       export PATH="${lib.makeBinPath [ pkgs.git ]}:$PATH"
