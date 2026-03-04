@@ -191,7 +191,6 @@
       "ghostty"
       "homerow"
       "istat-menus"
-      "jordanbaird-ice"
       "karabiner-elements"
       "obsidian"
       "provisionql"
