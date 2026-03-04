@@ -258,6 +258,10 @@ run = ['move-node-to-workspace 􀩼']
 if.app-id = 'com.amazon.Amazon-Chime'
 run = ['move-node-to-workspace 􀍉']
 
+[[on-window-detected]]
+if.app-id = 'us.zoom.xos'
+run = ['move-node-to-workspace 􀍉']
+
 [workspace-to-monitor-force-assignment]
 "􀩼"  = [".*LEN.*", ".*Acer.*"]
 "􀎬"  = [".*LEN.*", ".*Acer.*"]
