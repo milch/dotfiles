@@ -1,0 +1,2007 @@
+{
+  "animationsEnabled" : true,
+  "appRules" : [
+    {
+      "alwaysFloat" : true,
+      "bundleId" : "com.apple.systempreferences",
+      "id" : "D05F826C-807A-4B6A-9D8C-086A4257B333"
+    },
+    {
+      "assignToWorkspace" : "Safari",
+      "bundleId" : "com.apple.Safari",
+      "id" : "DE28F4B9-521D-408B-A0FE-4F1C437AFA28"
+    },
+    {
+      "assignToWorkspace" : "Safari",
+      "bundleId" : "app.zen-browser.zen",
+      "id" : "3C3E15CB-6694-4CED-8B3D-F9444DCCE588"
+    },
+    {
+      "assignToWorkspace" : "Safari",
+      "bundleId" : "company.thebrowser.Browser",
+      "id" : "4C13C145-BDBF-483E-99F6-5846743B79EB"
+    },
+    {
+      "assignToWorkspace" : "Chat",
+      "bundleId" : "com.apple.MobileSMS",
+      "id" : "5E01E338-EF2B-4BF9-ADD1-7F9DCDF00669"
+    },
+    {
+      "assignToWorkspace" : "Chat",
+      "bundleId" : "ru.keepcoder.Telegram",
+      "id" : "0BEE8551-EA1B-4B33-901B-639875831082"
+    },
+    {
+      "assignToWorkspace" : "D",
+      "bundleId" : "com.tinyspeck.slackmacgap",
+      "id" : "BB798C54-EBBE-4D82-B664-6D4C2C3D4BC6"
+    },
+    {
+      "assignToWorkspace" : "Productivity",
+      "bundleId" : "md.obsidian",
+      "id" : "2C891CF0-D177-4C83-B55D-AA0128A3EBD0"
+    },
+    {
+      "assignToWorkspace" : "Productivity",
+      "bundleId" : "com.culturedcode.ThingsMac",
+      "id" : "0CFA58C5-20DF-48B1-A89C-CD95784AD9EC"
+    },
+    {
+      "assignToWorkspace" : "Groupware",
+      "bundleId" : "com.apple.mail",
+      "id" : "E50809D7-1653-4EFE-9169-B2E6F4DFF9D3"
+    },
+    {
+      "assignToWorkspace" : "Groupware",
+      "bundleId" : "com.flexibits.fantastical2.mac",
+      "id" : "62A51F54-5F54-44E9-83BD-B7AA48AAEA2A"
+    },
+    {
+      "assignToWorkspace" : "Groupware",
+      "bundleId" : "com.busymac.busycal3",
+      "id" : "B15F6AB4-D8F7-414E-AF5F-834D6AB11AF9"
+    },
+    {
+      "assignToWorkspace" : "Terminal",
+      "bundleId" : "com.github.wez.wezterm",
+      "id" : "75F2AEB0-38C8-4BEA-9C19-B9C1C4B25598"
+    },
+    {
+      "assignToWorkspace" : "Video",
+      "bundleId" : "com.amazon.Amazon-Chime",
+      "id" : "D61B2525-BAF6-4C9E-8E30-A1E89C54F079"
+    }
+  ],
+  "appearanceMode" : "automatic",
+  "borderColorAlpha" : 1,
+  "borderColorBlue" : 1,
+  "borderColorGreen" : 0.5,
+  "borderColorRed" : 0,
+  "borderWidth" : 4,
+  "bordersEnabled" : true,
+  "defaultLayoutType" : "niri",
+  "dwindleDefaultSplitRatio" : 1,
+  "dwindleMoveToRootStable" : true,
+  "dwindleSingleWindowAspectRatio" : "4:3",
+  "dwindleSmartSplit" : false,
+  "dwindleSplitWidthMultiplier" : 1,
+  "dwindleUseGlobalGaps" : true,
+  "focusFollowsMouse" : false,
+  "gapSize" : 4,
+  "gestureFingerCount" : 3,
+  "gestureInvertDirection" : true,
+  "hiddenBarEnabled" : false,
+  "hiddenBarIsCollapsed" : false,
+  "hotkeyBindings" : [
+    {
+      "binding" : {
+        "keyCode" : 0,
+        "modifiers" : 2048
+      },
+      "command" : {
+        "switchWorkspace" : {
+          "_0" : 0
+        }
+      },
+      "id" : "switchWorkspace.0"
+    },
+    {
+      "binding" : {
+        "keyCode" : 11,
+        "modifiers" : 2048
+      },
+      "command" : {
+        "switchWorkspace" : {
+          "_0" : 1
+        }
+      },
+      "id" : "switchWorkspace.1"
+    },
+    {
+      "binding" : {
+        "keyCode" : 8,
+        "modifiers" : 2048
+      },
+      "command" : {
+        "switchWorkspace" : {
+          "_0" : 2
+        }
+      },
+      "id" : "switchWorkspace.2"
+    },
+    {
+      "binding" : {
+        "keyCode" : 2,
+        "modifiers" : 2048
+      },
+      "command" : {
+        "switchWorkspace" : {
+          "_0" : 3
+        }
+      },
+      "id" : "switchWorkspace.3"
+    },
+    {
+      "binding" : {
+        "keyCode" : 3,
+        "modifiers" : 2048
+      },
+      "command" : {
+        "switchWorkspace" : {
+          "_0" : 4
+        }
+      },
+      "id" : "switchWorkspace.4"
+    },
+    {
+      "binding" : {
+        "keyCode" : 5,
+        "modifiers" : 2048
+      },
+      "command" : {
+        "switchWorkspace" : {
+          "_0" : 5
+        }
+      },
+      "id" : "switchWorkspace.5"
+    },
+    {
+      "binding" : {
+        "keyCode" : 35,
+        "modifiers" : 2048
+      },
+      "command" : {
+        "switchWorkspace" : {
+          "_0" : 6
+        }
+      },
+      "id" : "switchWorkspace.6"
+    },
+    {
+      "binding" : {
+        "keyCode" : 12,
+        "modifiers" : 2048
+      },
+      "command" : {
+        "switchWorkspace" : {
+          "_0" : 7
+        }
+      },
+      "id" : "switchWorkspace.7"
+    },
+    {
+      "binding" : {
+        "keyCode" : 15,
+        "modifiers" : 2048
+      },
+      "command" : {
+        "switchWorkspace" : {
+          "_0" : 8
+        }
+      },
+      "id" : "switchWorkspace.8"
+    },
+    {
+      "binding" : {
+        "keyCode" : 1,
+        "modifiers" : 2048
+      },
+      "command" : {
+        "switchWorkspace" : {
+          "_0" : 9
+        }
+      },
+      "id" : "switchWorkspace.9"
+    },
+    {
+      "binding" : {
+        "keyCode" : 17,
+        "modifiers" : 2048
+      },
+      "command" : {
+        "switchWorkspace" : {
+          "_0" : 10
+        }
+      },
+      "id" : "switchWorkspace.10"
+    },
+    {
+      "binding" : {
+        "keyCode" : 9,
+        "modifiers" : 2048
+      },
+      "command" : {
+        "switchWorkspace" : {
+          "_0" : 11
+        }
+      },
+      "id" : "switchWorkspace.11"
+    },
+    {
+      "binding" : {
+        "keyCode" : 13,
+        "modifiers" : 2048
+      },
+      "command" : {
+        "switchWorkspace" : {
+          "_0" : 12
+        }
+      },
+      "id" : "switchWorkspace.12"
+    },
+    {
+      "binding" : {
+        "keyCode" : 7,
+        "modifiers" : 2048
+      },
+      "command" : {
+        "switchWorkspace" : {
+          "_0" : 13
+        }
+      },
+      "id" : "switchWorkspace.13"
+    },
+    {
+      "binding" : {
+        "keyCode" : 6,
+        "modifiers" : 2048
+      },
+      "command" : {
+        "switchWorkspace" : {
+          "_0" : 14
+        }
+      },
+      "id" : "switchWorkspace.14"
+    },
+    {
+      "binding" : {
+        "keyCode" : 4294967295,
+        "modifiers" : 0
+      },
+      "command" : {
+        "switchWorkspaceNext" : {
+
+        }
+      },
+      "id" : "switchWorkspace.next"
+    },
+    {
+      "binding" : {
+        "keyCode" : 4294967295,
+        "modifiers" : 0
+      },
+      "command" : {
+        "switchWorkspacePrevious" : {
+
+        }
+      },
+      "id" : "switchWorkspace.previous"
+    },
+    {
+      "binding" : {
+        "keyCode" : 0,
+        "modifiers" : 2560
+      },
+      "command" : {
+        "moveToWorkspace" : {
+          "_0" : 0
+        }
+      },
+      "id" : "moveToWorkspace.0"
+    },
+    {
+      "binding" : {
+        "keyCode" : 11,
+        "modifiers" : 2560
+      },
+      "command" : {
+        "moveToWorkspace" : {
+          "_0" : 1
+        }
+      },
+      "id" : "moveToWorkspace.1"
+    },
+    {
+      "binding" : {
+        "keyCode" : 8,
+        "modifiers" : 2560
+      },
+      "command" : {
+        "moveToWorkspace" : {
+          "_0" : 2
+        }
+      },
+      "id" : "moveToWorkspace.2"
+    },
+    {
+      "binding" : {
+        "keyCode" : 2,
+        "modifiers" : 2560
+      },
+      "command" : {
+        "moveToWorkspace" : {
+          "_0" : 3
+        }
+      },
+      "id" : "moveToWorkspace.3"
+    },
+    {
+      "binding" : {
+        "keyCode" : 3,
+        "modifiers" : 2560
+      },
+      "command" : {
+        "moveToWorkspace" : {
+          "_0" : 4
+        }
+      },
+      "id" : "moveToWorkspace.4"
+    },
+    {
+      "binding" : {
+        "keyCode" : 5,
+        "modifiers" : 2560
+      },
+      "command" : {
+        "moveToWorkspace" : {
+          "_0" : 5
+        }
+      },
+      "id" : "moveToWorkspace.5"
+    },
+    {
+      "binding" : {
+        "keyCode" : 35,
+        "modifiers" : 2560
+      },
+      "command" : {
+        "moveToWorkspace" : {
+          "_0" : 6
+        }
+      },
+      "id" : "moveToWorkspace.6"
+    },
+    {
+      "binding" : {
+        "keyCode" : 12,
+        "modifiers" : 2560
+      },
+      "command" : {
+        "moveToWorkspace" : {
+          "_0" : 7
+        }
+      },
+      "id" : "moveToWorkspace.7"
+    },
+    {
+      "binding" : {
+        "keyCode" : 15,
+        "modifiers" : 2560
+      },
+      "command" : {
+        "moveToWorkspace" : {
+          "_0" : 8
+        }
+      },
+      "id" : "moveToWorkspace.8"
+    },
+    {
+      "binding" : {
+        "keyCode" : 1,
+        "modifiers" : 2560
+      },
+      "command" : {
+        "moveToWorkspace" : {
+          "_0" : 9
+        }
+      },
+      "id" : "moveToWorkspace.9"
+    },
+    {
+      "binding" : {
+        "keyCode" : 17,
+        "modifiers" : 2560
+      },
+      "command" : {
+        "moveToWorkspace" : {
+          "_0" : 10
+        }
+      },
+      "id" : "moveToWorkspace.10"
+    },
+    {
+      "binding" : {
+        "keyCode" : 9,
+        "modifiers" : 2560
+      },
+      "command" : {
+        "moveToWorkspace" : {
+          "_0" : 11
+        }
+      },
+      "id" : "moveToWorkspace.11"
+    },
+    {
+      "binding" : {
+        "keyCode" : 13,
+        "modifiers" : 2560
+      },
+      "command" : {
+        "moveToWorkspace" : {
+          "_0" : 12
+        }
+      },
+      "id" : "moveToWorkspace.12"
+    },
+    {
+      "binding" : {
+        "keyCode" : 7,
+        "modifiers" : 2560
+      },
+      "command" : {
+        "moveToWorkspace" : {
+          "_0" : 13
+        }
+      },
+      "id" : "moveToWorkspace.13"
+    },
+    {
+      "binding" : {
+        "keyCode" : 6,
+        "modifiers" : 2560
+      },
+      "command" : {
+        "moveToWorkspace" : {
+          "_0" : 14
+        }
+      },
+      "id" : "moveToWorkspace.14"
+    },
+    {
+      "binding" : {
+        "keyCode" : 48,
+        "modifiers" : 6144
+      },
+      "command" : {
+        "workspaceBackAndForth" : {
+
+        }
+      },
+      "id" : "workspaceBackAndForth"
+    },
+    {
+      "binding" : {
+        "keyCode" : 4,
+        "modifiers" : 2048
+      },
+      "command" : {
+        "focus" : {
+          "_0" : "left"
+        }
+      },
+      "id" : "focus.left"
+    },
+    {
+      "binding" : {
+        "keyCode" : 38,
+        "modifiers" : 2048
+      },
+      "command" : {
+        "focus" : {
+          "_0" : "down"
+        }
+      },
+      "id" : "focus.down"
+    },
+    {
+      "binding" : {
+        "keyCode" : 40,
+        "modifiers" : 2048
+      },
+      "command" : {
+        "focus" : {
+          "_0" : "up"
+        }
+      },
+      "id" : "focus.up"
+    },
+    {
+      "binding" : {
+        "keyCode" : 37,
+        "modifiers" : 2048
+      },
+      "command" : {
+        "focus" : {
+          "_0" : "right"
+        }
+      },
+      "id" : "focus.right"
+    },
+    {
+      "binding" : {
+        "keyCode" : 4294967295,
+        "modifiers" : 0
+      },
+      "command" : {
+        "focusPrevious" : {
+
+        }
+      },
+      "id" : "focusPrevious"
+    },
+    {
+      "binding" : {
+        "keyCode" : 4294967295,
+        "modifiers" : 0
+      },
+      "command" : {
+        "focusDownOrLeft" : {
+
+        }
+      },
+      "id" : "focusDownOrLeft"
+    },
+    {
+      "binding" : {
+        "keyCode" : 4294967295,
+        "modifiers" : 0
+      },
+      "command" : {
+        "focusUpOrRight" : {
+
+        }
+      },
+      "id" : "focusUpOrRight"
+    },
+    {
+      "binding" : {
+        "keyCode" : 126,
+        "modifiers" : 6656
+      },
+      "command" : {
+        "moveWindowToWorkspaceUp" : {
+
+        }
+      },
+      "id" : "moveWindowToWorkspaceUp"
+    },
+    {
+      "binding" : {
+        "keyCode" : 125,
+        "modifiers" : 6656
+      },
+      "command" : {
+        "moveWindowToWorkspaceDown" : {
+
+        }
+      },
+      "id" : "moveWindowToWorkspaceDown"
+    },
+    {
+      "binding" : {
+        "keyCode" : 116,
+        "modifiers" : 6656
+      },
+      "command" : {
+        "moveColumnToWorkspaceUp" : {
+
+        }
+      },
+      "id" : "moveColumnToWorkspaceUp"
+    },
+    {
+      "binding" : {
+        "keyCode" : 121,
+        "modifiers" : 6656
+      },
+      "command" : {
+        "moveColumnToWorkspaceDown" : {
+
+        }
+      },
+      "id" : "moveColumnToWorkspaceDown"
+    },
+    {
+      "binding" : {
+        "keyCode" : 4294967295,
+        "modifiers" : 0
+      },
+      "command" : {
+        "moveColumnToWorkspace" : {
+          "_0" : 0
+        }
+      },
+      "id" : "moveColumnToWorkspace.0"
+    },
+    {
+      "binding" : {
+        "keyCode" : 4294967295,
+        "modifiers" : 0
+      },
+      "command" : {
+        "moveColumnToWorkspace" : {
+          "_0" : 1
+        }
+      },
+      "id" : "moveColumnToWorkspace.1"
+    },
+    {
+      "binding" : {
+        "keyCode" : 4294967295,
+        "modifiers" : 0
+      },
+      "command" : {
+        "moveColumnToWorkspace" : {
+          "_0" : 2
+        }
+      },
+      "id" : "moveColumnToWorkspace.2"
+    },
+    {
+      "binding" : {
+        "keyCode" : 4294967295,
+        "modifiers" : 0
+      },
+      "command" : {
+        "moveColumnToWorkspace" : {
+          "_0" : 3
+        }
+      },
+      "id" : "moveColumnToWorkspace.3"
+    },
+    {
+      "binding" : {
+        "keyCode" : 4294967295,
+        "modifiers" : 0
+      },
+      "command" : {
+        "moveColumnToWorkspace" : {
+          "_0" : 4
+        }
+      },
+      "id" : "moveColumnToWorkspace.4"
+    },
+    {
+      "binding" : {
+        "keyCode" : 4294967295,
+        "modifiers" : 0
+      },
+      "command" : {
+        "moveColumnToWorkspace" : {
+          "_0" : 5
+        }
+      },
+      "id" : "moveColumnToWorkspace.5"
+    },
+    {
+      "binding" : {
+        "keyCode" : 4294967295,
+        "modifiers" : 0
+      },
+      "command" : {
+        "moveColumnToWorkspace" : {
+          "_0" : 6
+        }
+      },
+      "id" : "moveColumnToWorkspace.6"
+    },
+    {
+      "binding" : {
+        "keyCode" : 4294967295,
+        "modifiers" : 0
+      },
+      "command" : {
+        "moveColumnToWorkspace" : {
+          "_0" : 7
+        }
+      },
+      "id" : "moveColumnToWorkspace.7"
+    },
+    {
+      "binding" : {
+        "keyCode" : 4294967295,
+        "modifiers" : 0
+      },
+      "command" : {
+        "moveColumnToWorkspace" : {
+          "_0" : 8
+        }
+      },
+      "id" : "moveColumnToWorkspace.8"
+    },
+    {
+      "binding" : {
+        "keyCode" : 4,
+        "modifiers" : 2560
+      },
+      "command" : {
+        "move" : {
+          "_0" : "left"
+        }
+      },
+      "id" : "move.left"
+    },
+    {
+      "binding" : {
+        "keyCode" : 38,
+        "modifiers" : 2560
+      },
+      "command" : {
+        "move" : {
+          "_0" : "down"
+        }
+      },
+      "id" : "move.down"
+    },
+    {
+      "binding" : {
+        "keyCode" : 40,
+        "modifiers" : 2560
+      },
+      "command" : {
+        "move" : {
+          "_0" : "up"
+        }
+      },
+      "id" : "move.up"
+    },
+    {
+      "binding" : {
+        "keyCode" : 37,
+        "modifiers" : 2560
+      },
+      "command" : {
+        "move" : {
+          "_0" : "right"
+        }
+      },
+      "id" : "move.right"
+    },
+    {
+      "binding" : {
+        "keyCode" : 4,
+        "modifiers" : 6144
+      },
+      "command" : {
+        "swap" : {
+          "_0" : "left"
+        }
+      },
+      "id" : "swap.left"
+    },
+    {
+      "binding" : {
+        "keyCode" : 37,
+        "modifiers" : 6144
+      },
+      "command" : {
+        "swap" : {
+          "_0" : "right"
+        }
+      },
+      "id" : "swap.right"
+    },
+    {
+      "binding" : {
+        "keyCode" : 4294967295,
+        "modifiers" : 0
+      },
+      "command" : {
+        "swap" : {
+          "_0" : "up"
+        }
+      },
+      "id" : "swap.up"
+    },
+    {
+      "binding" : {
+        "keyCode" : 4294967295,
+        "modifiers" : 0
+      },
+      "command" : {
+        "swap" : {
+          "_0" : "down"
+        }
+      },
+      "id" : "swap.down"
+    },
+    {
+      "binding" : {
+        "keyCode" : 123,
+        "modifiers" : 6144
+      },
+      "command" : {
+        "moveToMonitor" : {
+          "_0" : "left"
+        }
+      },
+      "id" : "moveToMonitor.left"
+    },
+    {
+      "binding" : {
+        "keyCode" : 125,
+        "modifiers" : 6144
+      },
+      "command" : {
+        "moveToMonitor" : {
+          "_0" : "down"
+        }
+      },
+      "id" : "moveToMonitor.down"
+    },
+    {
+      "binding" : {
+        "keyCode" : 126,
+        "modifiers" : 6144
+      },
+      "command" : {
+        "moveToMonitor" : {
+          "_0" : "up"
+        }
+      },
+      "id" : "moveToMonitor.up"
+    },
+    {
+      "binding" : {
+        "keyCode" : 124,
+        "modifiers" : 6144
+      },
+      "command" : {
+        "moveToMonitor" : {
+          "_0" : "right"
+        }
+      },
+      "id" : "moveToMonitor.right"
+    },
+    {
+      "binding" : {
+        "keyCode" : 123,
+        "modifiers" : 4352
+      },
+      "command" : {
+        "focusMonitor" : {
+          "_0" : "left"
+        }
+      },
+      "id" : "focusMonitor.left"
+    },
+    {
+      "binding" : {
+        "keyCode" : 124,
+        "modifiers" : 4352
+      },
+      "command" : {
+        "focusMonitor" : {
+          "_0" : "right"
+        }
+      },
+      "id" : "focusMonitor.right"
+    },
+    {
+      "binding" : {
+        "keyCode" : 126,
+        "modifiers" : 4352
+      },
+      "command" : {
+        "focusMonitor" : {
+          "_0" : "up"
+        }
+      },
+      "id" : "focusMonitor.up"
+    },
+    {
+      "binding" : {
+        "keyCode" : 125,
+        "modifiers" : 4352
+      },
+      "command" : {
+        "focusMonitor" : {
+          "_0" : "down"
+        }
+      },
+      "id" : "focusMonitor.down"
+    },
+    {
+      "binding" : {
+        "keyCode" : 48,
+        "modifiers" : 4352
+      },
+      "command" : {
+        "focusMonitorNext" : {
+
+        }
+      },
+      "id" : "focusMonitorNext"
+    },
+    {
+      "binding" : {
+        "keyCode" : 4294967295,
+        "modifiers" : 0
+      },
+      "command" : {
+        "focusMonitorPrevious" : {
+
+        }
+      },
+      "id" : "focusMonitorPrevious"
+    },
+    {
+      "binding" : {
+        "keyCode" : 50,
+        "modifiers" : 4352
+      },
+      "command" : {
+        "focusMonitorLast" : {
+
+        }
+      },
+      "id" : "focusMonitorLast"
+    },
+    {
+      "binding" : {
+        "keyCode" : 123,
+        "modifiers" : 4864
+      },
+      "command" : {
+        "moveColumnToMonitor" : {
+          "_0" : "left"
+        }
+      },
+      "id" : "moveColumnToMonitor.left"
+    },
+    {
+      "binding" : {
+        "keyCode" : 124,
+        "modifiers" : 4864
+      },
+      "command" : {
+        "moveColumnToMonitor" : {
+          "_0" : "right"
+        }
+      },
+      "id" : "moveColumnToMonitor.right"
+    },
+    {
+      "binding" : {
+        "keyCode" : 126,
+        "modifiers" : 4864
+      },
+      "command" : {
+        "moveColumnToMonitor" : {
+          "_0" : "up"
+        }
+      },
+      "id" : "moveColumnToMonitor.up"
+    },
+    {
+      "binding" : {
+        "keyCode" : 125,
+        "modifiers" : 4864
+      },
+      "command" : {
+        "moveColumnToMonitor" : {
+          "_0" : "down"
+        }
+      },
+      "id" : "moveColumnToMonitor.down"
+    },
+    {
+      "binding" : {
+        "keyCode" : 4294967295,
+        "modifiers" : 0
+      },
+      "command" : {
+        "moveWorkspaceToMonitor" : {
+          "_0" : "left"
+        }
+      },
+      "id" : "moveWorkspaceToMonitor.left"
+    },
+    {
+      "binding" : {
+        "keyCode" : 4294967295,
+        "modifiers" : 0
+      },
+      "command" : {
+        "moveWorkspaceToMonitor" : {
+          "_0" : "right"
+        }
+      },
+      "id" : "moveWorkspaceToMonitor.right"
+    },
+    {
+      "binding" : {
+        "keyCode" : 4294967295,
+        "modifiers" : 0
+      },
+      "command" : {
+        "moveWorkspaceToMonitor" : {
+          "_0" : "up"
+        }
+      },
+      "id" : "moveWorkspaceToMonitor.up"
+    },
+    {
+      "binding" : {
+        "keyCode" : 4294967295,
+        "modifiers" : 0
+      },
+      "command" : {
+        "moveWorkspaceToMonitor" : {
+          "_0" : "down"
+        }
+      },
+      "id" : "moveWorkspaceToMonitor.down"
+    },
+    {
+      "binding" : {
+        "keyCode" : 48,
+        "modifiers" : 2048
+      },
+      "command" : {
+        "moveWorkspaceToMonitorNext" : {
+
+        }
+      },
+      "id" : "moveWorkspaceToMonitor.next"
+    },
+    {
+      "binding" : {
+        "keyCode" : 4294967295,
+        "modifiers" : 0
+      },
+      "command" : {
+        "moveWorkspaceToMonitorPrevious" : {
+
+        }
+      },
+      "id" : "moveWorkspaceToMonitor.previous"
+    },
+    {
+      "binding" : {
+        "keyCode" : 3,
+        "modifiers" : 6400
+      },
+      "command" : {
+        "toggleFullscreen" : {
+
+        }
+      },
+      "id" : "toggleFullscreen"
+    },
+    {
+      "binding" : {
+        "keyCode" : 3,
+        "modifiers" : 6912
+      },
+      "command" : {
+        "toggleNativeFullscreen" : {
+
+        }
+      },
+      "id" : "toggleNativeFullscreen"
+    },
+    {
+      "binding" : {
+        "keyCode" : 4,
+        "modifiers" : 4608
+      },
+      "command" : {
+        "moveColumn" : {
+          "_0" : "left"
+        }
+      },
+      "id" : "moveColumn.left"
+    },
+    {
+      "binding" : {
+        "keyCode" : 37,
+        "modifiers" : 4608
+      },
+      "command" : {
+        "moveColumn" : {
+          "_0" : "right"
+        }
+      },
+      "id" : "moveColumn.right"
+    },
+    {
+      "binding" : {
+        "keyCode" : 4,
+        "modifiers" : 6400
+      },
+      "command" : {
+        "consumeWindow" : {
+          "_0" : "left"
+        }
+      },
+      "id" : "consumeWindow.left"
+    },
+    {
+      "binding" : {
+        "keyCode" : 37,
+        "modifiers" : 6400
+      },
+      "command" : {
+        "consumeWindow" : {
+          "_0" : "right"
+        }
+      },
+      "id" : "consumeWindow.right"
+    },
+    {
+      "binding" : {
+        "keyCode" : 33,
+        "modifiers" : 6656
+      },
+      "command" : {
+        "expelWindow" : {
+          "_0" : "left"
+        }
+      },
+      "id" : "expelWindow.left"
+    },
+    {
+      "binding" : {
+        "keyCode" : 30,
+        "modifiers" : 6656
+      },
+      "command" : {
+        "expelWindow" : {
+          "_0" : "right"
+        }
+      },
+      "id" : "expelWindow.right"
+    },
+    {
+      "binding" : {
+        "keyCode" : 17,
+        "modifiers" : 6144
+      },
+      "command" : {
+        "toggleColumnTabbed" : {
+
+        }
+      },
+      "id" : "toggleColumnTabbed"
+    },
+    {
+      "binding" : {
+        "keyCode" : 115,
+        "modifiers" : 2048
+      },
+      "command" : {
+        "focusColumnFirst" : {
+
+        }
+      },
+      "id" : "focusColumnFirst"
+    },
+    {
+      "binding" : {
+        "keyCode" : 119,
+        "modifiers" : 2048
+      },
+      "command" : {
+        "focusColumnLast" : {
+
+        }
+      },
+      "id" : "focusColumnLast"
+    },
+    {
+      "binding" : {
+        "keyCode" : 115,
+        "modifiers" : 2560
+      },
+      "command" : {
+        "focusWindowTop" : {
+
+        }
+      },
+      "id" : "focusWindowTop"
+    },
+    {
+      "binding" : {
+        "keyCode" : 119,
+        "modifiers" : 2560
+      },
+      "command" : {
+        "focusWindowBottom" : {
+
+        }
+      },
+      "id" : "focusWindowBottom"
+    },
+    {
+      "binding" : {
+        "keyCode" : 18,
+        "modifiers" : 6144
+      },
+      "command" : {
+        "focusColumn" : {
+          "_0" : 0
+        }
+      },
+      "id" : "focusColumn.0"
+    },
+    {
+      "binding" : {
+        "keyCode" : 19,
+        "modifiers" : 6144
+      },
+      "command" : {
+        "focusColumn" : {
+          "_0" : 1
+        }
+      },
+      "id" : "focusColumn.1"
+    },
+    {
+      "binding" : {
+        "keyCode" : 20,
+        "modifiers" : 6144
+      },
+      "command" : {
+        "focusColumn" : {
+          "_0" : 2
+        }
+      },
+      "id" : "focusColumn.2"
+    },
+    {
+      "binding" : {
+        "keyCode" : 21,
+        "modifiers" : 6144
+      },
+      "command" : {
+        "focusColumn" : {
+          "_0" : 3
+        }
+      },
+      "id" : "focusColumn.3"
+    },
+    {
+      "binding" : {
+        "keyCode" : 23,
+        "modifiers" : 6144
+      },
+      "command" : {
+        "focusColumn" : {
+          "_0" : 4
+        }
+      },
+      "id" : "focusColumn.4"
+    },
+    {
+      "binding" : {
+        "keyCode" : 22,
+        "modifiers" : 6144
+      },
+      "command" : {
+        "focusColumn" : {
+          "_0" : 5
+        }
+      },
+      "id" : "focusColumn.5"
+    },
+    {
+      "binding" : {
+        "keyCode" : 26,
+        "modifiers" : 6144
+      },
+      "command" : {
+        "focusColumn" : {
+          "_0" : 6
+        }
+      },
+      "id" : "focusColumn.6"
+    },
+    {
+      "binding" : {
+        "keyCode" : 28,
+        "modifiers" : 6144
+      },
+      "command" : {
+        "focusColumn" : {
+          "_0" : 7
+        }
+      },
+      "id" : "focusColumn.7"
+    },
+    {
+      "binding" : {
+        "keyCode" : 25,
+        "modifiers" : 6144
+      },
+      "command" : {
+        "focusColumn" : {
+          "_0" : 8
+        }
+      },
+      "id" : "focusColumn.8"
+    },
+    {
+      "binding" : {
+        "keyCode" : 24,
+        "modifiers" : 2560
+      },
+      "command" : {
+        "cycleColumnWidthForward" : {
+
+        }
+      },
+      "id" : "cycleColumnWidthForward"
+    },
+    {
+      "binding" : {
+        "keyCode" : 27,
+        "modifiers" : 2560
+      },
+      "command" : {
+        "cycleColumnWidthBackward" : {
+
+        }
+      },
+      "id" : "cycleColumnWidthBackward"
+    },
+    {
+      "binding" : {
+        "keyCode" : 3,
+        "modifiers" : 4608
+      },
+      "command" : {
+        "toggleColumnFullWidth" : {
+
+        }
+      },
+      "id" : "toggleColumnFullWidth"
+    },
+    {
+      "binding" : {
+        "keyCode" : 11,
+        "modifiers" : 4608
+      },
+      "command" : {
+        "balanceSizes" : {
+
+        }
+      },
+      "id" : "balanceSizes"
+    },
+    {
+      "binding" : {
+        "keyCode" : 4294967295,
+        "modifiers" : 0
+      },
+      "command" : {
+        "moveToRoot" : {
+
+        }
+      },
+      "id" : "moveToRoot"
+    },
+    {
+      "binding" : {
+        "keyCode" : 4294967295,
+        "modifiers" : 0
+      },
+      "command" : {
+        "toggleSplit" : {
+
+        }
+      },
+      "id" : "toggleSplit"
+    },
+    {
+      "binding" : {
+        "keyCode" : 4294967295,
+        "modifiers" : 0
+      },
+      "command" : {
+        "swapSplit" : {
+
+        }
+      },
+      "id" : "swapSplit"
+    },
+    {
+      "binding" : {
+        "keyCode" : 4294967295,
+        "modifiers" : 0
+      },
+      "command" : {
+        "resizeInDirection" : {
+          "_0" : "left",
+          "_1" : true
+        }
+      },
+      "id" : "resizeGrow.left"
+    },
+    {
+      "binding" : {
+        "keyCode" : 4294967295,
+        "modifiers" : 0
+      },
+      "command" : {
+        "resizeInDirection" : {
+          "_0" : "right",
+          "_1" : true
+        }
+      },
+      "id" : "resizeGrow.right"
+    },
+    {
+      "binding" : {
+        "keyCode" : 4294967295,
+        "modifiers" : 0
+      },
+      "command" : {
+        "resizeInDirection" : {
+          "_0" : "up",
+          "_1" : true
+        }
+      },
+      "id" : "resizeGrow.up"
+    },
+    {
+      "binding" : {
+        "keyCode" : 4294967295,
+        "modifiers" : 0
+      },
+      "command" : {
+        "resizeInDirection" : {
+          "_0" : "down",
+          "_1" : true
+        }
+      },
+      "id" : "resizeGrow.down"
+    },
+    {
+      "binding" : {
+        "keyCode" : 4294967295,
+        "modifiers" : 0
+      },
+      "command" : {
+        "resizeInDirection" : {
+          "_0" : "left",
+          "_1" : false
+        }
+      },
+      "id" : "resizeShrink.left"
+    },
+    {
+      "binding" : {
+        "keyCode" : 4294967295,
+        "modifiers" : 0
+      },
+      "command" : {
+        "resizeInDirection" : {
+          "_0" : "right",
+          "_1" : false
+        }
+      },
+      "id" : "resizeShrink.right"
+    },
+    {
+      "binding" : {
+        "keyCode" : 4294967295,
+        "modifiers" : 0
+      },
+      "command" : {
+        "resizeInDirection" : {
+          "_0" : "up",
+          "_1" : false
+        }
+      },
+      "id" : "resizeShrink.up"
+    },
+    {
+      "binding" : {
+        "keyCode" : 4294967295,
+        "modifiers" : 0
+      },
+      "command" : {
+        "resizeInDirection" : {
+          "_0" : "down",
+          "_1" : false
+        }
+      },
+      "id" : "resizeShrink.down"
+    },
+    {
+      "binding" : {
+        "keyCode" : 4294967295,
+        "modifiers" : 0
+      },
+      "command" : {
+        "preselect" : {
+          "_0" : "left"
+        }
+      },
+      "id" : "preselect.left"
+    },
+    {
+      "binding" : {
+        "keyCode" : 4294967295,
+        "modifiers" : 0
+      },
+      "command" : {
+        "preselect" : {
+          "_0" : "right"
+        }
+      },
+      "id" : "preselect.right"
+    },
+    {
+      "binding" : {
+        "keyCode" : 4294967295,
+        "modifiers" : 0
+      },
+      "command" : {
+        "preselect" : {
+          "_0" : "up"
+        }
+      },
+      "id" : "preselect.up"
+    },
+    {
+      "binding" : {
+        "keyCode" : 4294967295,
+        "modifiers" : 0
+      },
+      "command" : {
+        "preselect" : {
+          "_0" : "down"
+        }
+      },
+      "id" : "preselect.down"
+    },
+    {
+      "binding" : {
+        "keyCode" : 4294967295,
+        "modifiers" : 0
+      },
+      "command" : {
+        "preselectClear" : {
+
+        }
+      },
+      "id" : "preselectClear"
+    },
+    {
+      "binding" : {
+        "keyCode" : 18,
+        "modifiers" : 4608
+      },
+      "command" : {
+        "summonWorkspace" : {
+          "_0" : 0
+        }
+      },
+      "id" : "summonWorkspace.0"
+    },
+    {
+      "binding" : {
+        "keyCode" : 19,
+        "modifiers" : 4608
+      },
+      "command" : {
+        "summonWorkspace" : {
+          "_0" : 1
+        }
+      },
+      "id" : "summonWorkspace.1"
+    },
+    {
+      "binding" : {
+        "keyCode" : 20,
+        "modifiers" : 4608
+      },
+      "command" : {
+        "summonWorkspace" : {
+          "_0" : 2
+        }
+      },
+      "id" : "summonWorkspace.2"
+    },
+    {
+      "binding" : {
+        "keyCode" : 21,
+        "modifiers" : 4608
+      },
+      "command" : {
+        "summonWorkspace" : {
+          "_0" : 3
+        }
+      },
+      "id" : "summonWorkspace.3"
+    },
+    {
+      "binding" : {
+        "keyCode" : 23,
+        "modifiers" : 4608
+      },
+      "command" : {
+        "summonWorkspace" : {
+          "_0" : 4
+        }
+      },
+      "id" : "summonWorkspace.4"
+    },
+    {
+      "binding" : {
+        "keyCode" : 22,
+        "modifiers" : 4608
+      },
+      "command" : {
+        "summonWorkspace" : {
+          "_0" : 5
+        }
+      },
+      "id" : "summonWorkspace.5"
+    },
+    {
+      "binding" : {
+        "keyCode" : 26,
+        "modifiers" : 4608
+      },
+      "command" : {
+        "summonWorkspace" : {
+          "_0" : 6
+        }
+      },
+      "id" : "summonWorkspace.6"
+    },
+    {
+      "binding" : {
+        "keyCode" : 28,
+        "modifiers" : 4608
+      },
+      "command" : {
+        "summonWorkspace" : {
+          "_0" : 7
+        }
+      },
+      "id" : "summonWorkspace.7"
+    },
+    {
+      "binding" : {
+        "keyCode" : 25,
+        "modifiers" : 4608
+      },
+      "command" : {
+        "summonWorkspace" : {
+          "_0" : 8
+        }
+      },
+      "id" : "summonWorkspace.8"
+    },
+    {
+      "binding" : {
+        "keyCode" : 49,
+        "modifiers" : 6144
+      },
+      "command" : {
+        "openWindowFinder" : {
+
+        }
+      },
+      "id" : "openWindowFinder"
+    },
+    {
+      "binding" : {
+        "keyCode" : 4294967295,
+        "modifiers" : 0
+      },
+      "command" : {
+        "raiseAllFloatingWindows" : {
+
+        }
+      },
+      "id" : "raiseAllFloatingWindows"
+    },
+    {
+      "binding" : {
+        "keyCode" : 46,
+        "modifiers" : 6144
+      },
+      "command" : {
+        "openMenuAnywhere" : {
+
+        }
+      },
+      "id" : "openMenuAnywhere"
+    },
+    {
+      "binding" : {
+        "keyCode" : 46,
+        "modifiers" : 6656
+      },
+      "command" : {
+        "openMenuPalette" : {
+
+        }
+      },
+      "id" : "openMenuPalette"
+    },
+    {
+      "binding" : {
+        "keyCode" : 4294967295,
+        "modifiers" : 0
+      },
+      "command" : {
+        "toggleHiddenBar" : {
+
+        }
+      },
+      "id" : "toggleHiddenBar"
+    },
+    {
+      "binding" : {
+        "keyCode" : 36,
+        "modifiers" : 2048
+      },
+      "command" : {
+        "toggleQuakeTerminal" : {
+
+        }
+      },
+      "id" : "toggleQuakeTerminal"
+    },
+    {
+      "binding" : {
+        "keyCode" : 44,
+        "modifiers" : 2048
+      },
+      "command" : {
+        "toggleWorkspaceLayout" : {
+
+        }
+      },
+      "id" : "toggleWorkspaceLayout"
+    },
+    {
+      "binding" : {
+        "keyCode" : 31,
+        "modifiers" : 2560
+      },
+      "command" : {
+        "toggleOverview" : {
+
+        }
+      },
+      "id" : "toggleOverview"
+    }
+  ],
+  "hotkeysEnabled" : true,
+  "menuAnywhereNativeEnabled" : true,
+  "menuAnywherePaletteEnabled" : true,
+  "menuAnywherePosition" : "cursor",
+  "menuAnywhereShowShortcuts" : true,
+  "monitorBarSettings" : [
+
+  ],
+  "monitorDwindleSettings" : [
+
+  ],
+  "monitorNiriSettings" : [
+
+  ],
+  "monitorOrientationSettings" : [
+
+  ],
+  "mouseWarpEnabled" : false,
+  "mouseWarpMargin" : 2,
+  "mouseWarpMonitorOrder" : [
+
+  ],
+  "moveMouseToFocusedWindow" : true,
+  "niriAlwaysCenterSingleColumn" : true,
+  "niriCenterFocusedColumn" : "never",
+  "niriColumnWidthPresets" : [
+    0.3333333333333333,
+    0.5,
+    0.6666666666666666
+  ],
+  "niriInfiniteLoop" : false,
+  "niriMaxVisibleColumns" : 2,
+  "niriMaxWindowsPerColumn" : 3,
+  "niriSingleWindowAspectRatio" : "4:3",
+  "outerGapBottom" : 0,
+  "outerGapLeft" : 0,
+  "outerGapRight" : 0,
+  "outerGapTop" : 0,
+  "persistentWorkspacesRaw" : "",
+  "preventSleepEnabled" : false,
+  "quakeTerminalMonitorMode" : "mouseCursor",
+  "quakeTerminalOpacity" : 1,
+  "scrollGestureEnabled" : true,
+  "scrollModifierKey" : "optionShift",
+  "scrollSensitivity" : 1,
+  "version" : 1,
+  "workspaceAssignmentsRaw" : "",
+  "workspaceBarBackgroundOpacity" : 0.1,
+  "workspaceBarDeduplicateAppIcons" : false,
+  "workspaceBarEnabled" : true,
+  "workspaceBarHeight" : 24,
+  "workspaceBarHideEmptyWorkspaces" : false,
+  "workspaceBarNotchAware" : true,
+  "workspaceBarPosition" : "overlappingMenuBar",
+  "workspaceBarShowLabels" : true,
+  "workspaceBarWindowLevel" : "popup",
+  "workspaceBarXOffset" : 0,
+  "workspaceBarYOffset" : 0,
+  "workspaceConfigurations" : [
+    {
+      "displayName" : "A",
+      "id" : "D7C4350C-15CF-4491-B2EA-EA612F75516B",
+      "isPersistent" : false,
+      "layoutType" : "niri",
+      "monitorAssignment" : {
+        "type" : "main"
+      },
+      "name" : "A"
+    },
+    {
+      "displayName" : "B",
+      "id" : "8B2845C7-5913-4FA1-8D4C-27F11B208206",
+      "isPersistent" : false,
+      "layoutType" : "niri",
+      "monitorAssignment" : {
+        "type" : "main"
+      },
+      "name" : "B"
+    },
+    {
+      "displayName" : "\u{101498}",
+      "id" : "5B49E2E1-8D4B-4106-92D5-24F781B2D1CF",
+      "isPersistent" : false,
+      "layoutType" : "niri",
+      "monitorAssignment" : {
+        "type" : "main"
+      },
+      "name" : "Chat"
+    },
+    {
+      "displayName" : "\u{10074b}",
+      "id" : "7A2C0419-8C08-405D-9A83-2977BE1F6274",
+      "isPersistent" : false,
+      "layoutType" : "niri",
+      "monitorAssignment" : {
+        "type" : "main"
+      },
+      "name" : "D"
+    },
+    {
+      "displayName" : "\u{1003c6}",
+      "id" : "38244CDE-6D70-433B-AE94-F5399ACC71D3",
+      "isPersistent" : false,
+      "layoutType" : "niri",
+      "monitorAssignment" : {
+        "type" : "main"
+      },
+      "name" : "F"
+    },
+    {
+      "displayName" : "\u{100249}",
+      "id" : "A194C3E6-225A-4DD6-8530-72B461221E93",
+      "isPersistent" : false,
+      "layoutType" : "niri",
+      "monitorAssignment" : {
+        "type" : "main"
+      },
+      "name" : "Groupware"
+    },
+    {
+      "displayName" : "\u{100441}",
+      "id" : "7F1F920C-9E8D-4059-9D01-CC21C33E699A",
+      "isPersistent" : false,
+      "layoutType" : "niri",
+      "monitorAssignment" : {
+        "type" : "main"
+      },
+      "name" : "Productivity"
+    },
+    {
+      "displayName" : "Q",
+      "id" : "05DC796B-3104-4CB6-924C-F28763F3AE52",
+      "isPersistent" : false,
+      "layoutType" : "niri",
+      "monitorAssignment" : {
+        "type" : "main"
+      },
+      "name" : "Q"
+    },
+    {
+      "displayName" : "R",
+      "id" : "808479E8-D41B-405B-AD27-FEBD4AE5BF6B",
+      "isPersistent" : false,
+      "layoutType" : "niri",
+      "monitorAssignment" : {
+        "type" : "main"
+      },
+      "name" : "R"
+    },
+    {
+      "displayName" : "\u{1003ac}",
+      "id" : "1F574D1B-4EEF-46D0-BF42-F2E5736BF799",
+      "isPersistent" : false,
+      "layoutType" : "dwindle",
+      "monitorAssignment" : {
+        "type" : "secondary"
+      },
+      "name" : "Safari"
+    },
+    {
+      "displayName" : "\u{100a7c}",
+      "id" : "A7CDE466-818A-4314-A141-1C58598DE657",
+      "isPersistent" : false,
+      "layoutType" : "niri",
+      "monitorAssignment" : {
+        "type" : "main"
+      },
+      "name" : "Terminal"
+    },
+    {
+      "displayName" : "\u{100349}",
+      "id" : "9955332C-F48D-40F4-98AC-E0D5D0F79ABE",
+      "isPersistent" : false,
+      "layoutType" : "niri",
+      "monitorAssignment" : {
+        "type" : "main"
+      },
+      "name" : "Video"
+    },
+    {
+      "displayName" : "W",
+      "id" : "A3507F6F-9CF3-4A9B-B403-6AE1DF256005",
+      "isPersistent" : false,
+      "layoutType" : "niri",
+      "monitorAssignment" : {
+        "type" : "main"
+      },
+      "name" : "W"
+    },
+    {
+      "displayName" : "\u{100644}",
+      "id" : "FF40D9BC-8739-4E0B-9A89-F4760B0A4904",
+      "isPersistent" : false,
+      "layoutType" : "niri",
+      "monitorAssignment" : {
+        "type" : "main"
+      },
+      "name" : "X"
+    },
+    {
+      "displayName" : "Z",
+      "id" : "8954410C-90A9-4F47-BF37-C2E667CA7E54",
+      "isPersistent" : false,
+      "layoutType" : "niri",
+      "monitorAssignment" : {
+        "type" : "main"
+      },
+      "name" : "Z"
+    }
+  ]
+}

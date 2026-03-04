@@ -161,12 +161,12 @@
       "xcodesorg/made"
     ];
     brews = [
-      "cormacrelf/tap/dark-notify"
-      "xcodesorg/made/xcodes"
       "coreutils"
+      "cormacrelf/tap/dark-notify"
       "libyaml" # Dependency for ruby-build (mise)
       "ncurses"
       "xcode-build-server"
+      "xcodesorg/made/xcodes"
     ];
     masApps = {
       "Amphetamine" = 937984704;
