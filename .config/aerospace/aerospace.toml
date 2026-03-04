@@ -263,5 +263,5 @@ if.app-id = 'us.zoom.xos'
 run = ['move-node-to-workspace 􀍉']
 
 [workspace-to-monitor-force-assignment]
-"􀩼"  = [".*LEN.*", ".*Acer.*"]
-"􀎬"  = [".*LEN.*", ".*Acer.*"]
+"􀩼"  = [".*LEN.*", "DELL P32*"]
+"􀎬"  = [".*LEN.*", "DELL P32*"]
