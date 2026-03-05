@@ -1,0 +1,12 @@
+#!/bin/bash -e
+# Open a new terminal window in the currently focused workspace.
+# Mirrors the behaviour of the aerospace-new-terminal script.
+#
+# The wezterm app_rule in rift normally sends new wezterm windows to workspace
+# "Terminal" (index 10). This script overrides that by recording the active
+# workspace, opening the terminal, then moving the new window back here.
+
+WORKSPACE=$(rift-cli query workspaces | jq -r '.[] | select(.is_active == true) | .index')
+shortcuts run "New Terminal"
+sleep 0.4
+rift-cli execute workspace move-window "$WORKSPACE"

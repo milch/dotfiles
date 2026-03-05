@@ -1,0 +1,12 @@
+#!/bin/bash -e
+# Move the focused window to workspace INDEX then follow it there.
+# Emulates aerospace: ['move-node-to-workspace X', 'workspace X']
+# Usage: rift-move-follow <workspace_index>
+
+INDEX="$1"
+rift-cli execute workspace move-window "$INDEX"
+
+# BUG: Rift doesn't seem to want to switch workspaces immediately after moving a window
+sleep 0.025
+
+rift-cli execute workspace switch "$INDEX"

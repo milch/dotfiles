@@ -113,7 +113,7 @@
     ShowDayOfWeek = false;
   };
 
-  system.defaults.spaces.spans-displays = true;
+  system.defaults.spaces.spans-displays = false;
 
   system.defaults.CustomUserPreferences = {
     "NSGlobalDomain" = {
@@ -156,11 +156,13 @@
     onActivation.upgrade = false;
     onActivation.cleanup = "zap";
     taps = [
+      "acsandmann/tap"
       "cormacrelf/tap"
       "nikitabobko/tap"
       "xcodesorg/made"
     ];
     brews = [
+      "acsandmann/tap/rift"
       "coreutils"
       "cormacrelf/tap/dark-notify"
       "libyaml" # Dependency for ruby-build (mise)

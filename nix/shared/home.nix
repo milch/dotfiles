@@ -44,6 +44,10 @@ in
 
     ".config/aerospace/aerospace.toml".source = ../../.config/aerospace/aerospace.toml;
 
+    # ".config/rift/config.toml".source = ../../.config/rift/config.toml;
+    ".config/rift/config.toml".source = mkOutOfStoreSymlink "/Users/manu/dotfiles/.config/rift/config.toml";
+
+
     ".config/lazygit".source = ../../.config/lazygit;
 
     ".config/rubocop/config.yml".source = ../../.config/rubocop/config.yml;
@@ -92,6 +96,8 @@ in
 
     ".local/bin/ocr".source = ../../bin/ocr;
     ".local/bin/aerospace-new-terminal".source = ../../bin/aerospace-new-terminal;
+    ".local/bin/rift-new-terminal".source = ../../bin/rift-new-terminal;
+    ".local/bin/rift-move-follow".source = ../../bin/rift-move-follow;
 
     "Gemfile" = {
       source = ../../Gemfile;
@@ -189,6 +195,13 @@ in
 
   # Common activation scripts
   home.activation = {
+    installRift = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      export PATH="/opt/homebrew/bin:$PATH"
+      if ! ls "$HOME/Library/LaunchAgents/"*rift* >/dev/null 2>&1; then
+        rift service install
+        rift service start
+      fi
+    '';
     installTerminfo = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       mkdir -p $HOME/.terminfo/74
       cp -f /opt/homebrew/Cellar/ncurses/6.6/share/terminfo/74/tmux-256color $HOME/.terminfo/74
