@@ -176,8 +176,8 @@
       "Telegram" = 747648890;
     };
     casks = [
-      "1password"
       "1password-cli"
+      "1password"
       "aerospace"
       "alfred"
       "apparency"
@@ -198,6 +198,7 @@
       "sf-symbols"
       "slack"
       "suspicious-package"
+      "thaw@beta"
       "thingsmacsandboxhelper"
       "zen"
     ];
