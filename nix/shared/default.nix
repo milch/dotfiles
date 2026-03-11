@@ -17,6 +17,7 @@
     fswatch
     fzf
     git
+    git-absorb
     go
     harper
     htop
