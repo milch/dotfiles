@@ -1,15 +1,17 @@
 { pkgs, ... }:
 
+let username = "manu";
+  in
 {
   imports = [ ../../shared/default.nix ];
   networking.computerName = "Auri";
   nixpkgs.hostPlatform = "aarch64-darwin";
 
-  system.primaryUser = "manu";
-  users.knownUsers = [ "manu" ];
+  system.primaryUser = username;
+  users.knownUsers = [ username ];
   users.users.manu = {
-    name = "manu";
-    home = "/Users/manu";
+    name = username;
+    home = "/Users/${username}";
     uid = 501;
     shell = pkgs.fish;
   };
@@ -81,7 +83,7 @@
       "/Applications/OrcaSlicer.app"
       "/System/Applications/Music.app"
       "/Applications/Ghostty.app"
-      "/Applications/Xcode-26.0.0.app"
+      "/Applications/Xcode-26.3.0.app"
       "/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app"
       "/System/Applications/Messages.app"
       "/System/Applications/Mail.app"
@@ -92,6 +94,9 @@
       "/Applications/Things3.app"
       "/Applications/CARROT.app"
       "/System/Applications/iPhone Mirroring.app"
+    ];
+    persistent-others = [
+      { folder = { path = "/Users/${username}/Downloads"; showas = "fan"; arrangement = "date-added"; }; }
     ];
   };
 }
