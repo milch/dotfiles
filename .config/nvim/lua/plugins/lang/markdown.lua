@@ -67,6 +67,12 @@ return {
 							ToDoHyphen = false,
 							-- Don't warn about -- or --- (often CLI flags in comments)
 							Dashes = false,
+							-- Don't warn about 5s, 10min, etc.
+							ExpandTimeShorthands = false,
+							-- Don't warn about 5min
+							ExpandMinimum = false,
+							-- Don't warn about 5 GiB
+							ExpandMemoryShorthands = false,
 						},
 					},
 				},
