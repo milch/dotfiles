@@ -62,14 +62,6 @@ return {
 			},
 		},
 		config = function(_, opts)
-			if type(opts.diagnostics.signs) ~= "boolean" then
-				for severity, icon in pairs(opts.diagnostics.signs.text) do
-					local name = vim.diagnostic.severity[severity]:lower():gsub("^%l", string.upper)
-					name = "DiagnosticSign" .. name
-					vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
-				end
-			end
-
 			vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
 
 			local servers = opts.servers
