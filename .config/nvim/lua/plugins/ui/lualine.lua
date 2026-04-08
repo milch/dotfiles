@@ -63,7 +63,6 @@ return {
 
 		require("lualine").setup({
 			options = {
-				theme = "catppuccin",
 				ignore_focus = { "NvimTree", "TelescopePrompt" },
 				icons_enabled = true,
 				component_separators = "",
