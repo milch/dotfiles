@@ -167,7 +167,7 @@ function M.set_lsp(_, bufnr)
 	bind({ "v", "n" }, "<leader>cc", vim.lsp.codelens.run, opts)
 
 	opts.desc = "Lsp Info"
-	bind("n", "<leader>cl", "<cmd>LspInfo<cr>", opts)
+	bind("n", "<leader>cl", "<cmd>checkhealth vim.lsp<cr>", opts)
 
 	opts.desc = "Goto Implementation"
 	bind("n", "gI", vim.lsp.buf.implementation, opts)
@@ -179,7 +179,10 @@ function M.set_lsp(_, bufnr)
 	bind("n", "gD", vim.lsp.buf.declaration, opts)
 
 	opts.desc = "Refresh & Display Codelens"
-	bind("n", "<leader>cC", vim.lsp.codelens.refresh, opts)
+
+	bind("n", "<leader>cC", function()
+		vim.lsp.codelens.enable(true)
+	end, opts)
 
 	opts.desc = "Line diagnostic"
 	bind("n", "<leader>cd", vim.diagnostic.open_float, opts)
