@@ -10,7 +10,7 @@ return {
 					if mode == nil then
 						mode = "n"
 					end
-					vim.keymap.set(mode, l, r, { buffer = buffer, desc = desc })
+					vim.keymap.set(mode, l, r, { buf = buffer, desc = desc })
 				end
 				map("<leader>gs", gs.stage_hunk, "Stage hunk")
 				map("<leader>gS", gs.stage_buffer, "Stage buffer")

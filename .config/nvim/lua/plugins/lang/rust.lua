@@ -47,7 +47,7 @@ return {
 					end
 					vim.keymap.set("n", "<leader>dr", function()
 						vim.cmd.RustLsp("debuggables")
-					end, { desc = "Rust Debuggables", buffer = bufnr })
+					end, { desc = "Rust Debuggables", buf = bufnr })
 				end,
 				default_settings = {
 					-- rust-analyzer language server configuration

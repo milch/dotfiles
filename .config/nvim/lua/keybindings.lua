@@ -92,7 +92,7 @@ function M.set()
 				else
 					vim.cmd.cclose()
 				end
-			end, { buffer = 0, noremap = true, silent = true })
+			end, { buf = 0, noremap = true, silent = true })
 		end,
 	})
 
@@ -144,7 +144,7 @@ function M.set()
 end
 
 function M.set_lsp(_, bufnr)
-	local opts = { buffer = bufnr, silent = true }
+	local opts = { buf = bufnr, silent = true }
 
 	opts.desc = "Format code"
 	bind({ "n", "v", "x" }, "<leader>cf", require("conform").format, opts)

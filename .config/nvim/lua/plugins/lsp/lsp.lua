@@ -170,7 +170,7 @@ return {
 		},
 		init = function()
 			M.on_attach(function(_, buffer)
-				local opts = { buffer = buffer, silent = true }
+				local opts = { buf = buffer, silent = true }
 				vim.keymap.set({ "n", "x" }, "<leader>ca", function()
 					require("tiny-code-action").code_action({})
 				end, opts)
