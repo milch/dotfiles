@@ -85,3 +85,10 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 		})
 	end,
 })
+
+local function load_undotree()
+	vim.cmd("packadd nvim.undotree")
+	vim.cmd("Undotree")
+end
+vim.keymap.set("n", "<leader>u", load_undotree, { desc = "Toggle Undotree" })
+vim.api.nvim_create_user_command("Undotree", load_undotree, {})
