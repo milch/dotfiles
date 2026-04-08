@@ -96,13 +96,6 @@ function M.set()
 		end,
 	})
 
-	bind("n", "[q", vim.cmd.cprev, { desc = "Previous Quickfix" })
-	bind("n", "]q", vim.cmd.cnext, { desc = "Next Quickfix" })
-
-	-- buffers
-	bind("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
-	bind("n", "]b", "<cmd>bnext<cr>", { desc = "Next Buffer" })
-
 	bind("n", "<S-h>", function()
 		require("plugins.ui.lualine.harpoon-component").bprev()
 	end, { desc = "Prev Buffer" })
@@ -157,16 +150,6 @@ function M.set_lsp(_, bufnr)
 
 	opts.desc = "Go to references"
 	bind("n", "gr", vim.lsp.buf.references, opts)
-
-	opts.desc = "Go to previous diagnostic"
-	bind("n", "[d", function()
-		vim.diagnostic.jump({ count = -1 })
-	end, opts)
-
-	opts.desc = "Go to next diagnostic"
-	bind("n", "]d", function()
-		vim.diagnostic.jump({ count = 1 })
-	end, opts)
 
 	opts.desc = "Show documentation for symbol under cursor"
 	bind("n", "K", vim.lsp.buf.hover, opts)
