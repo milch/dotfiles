@@ -13,6 +13,7 @@
     eslint_d
     eternal-terminal
     eza
+    fastfetch
     fd
     fswatch
     fzf
@@ -29,9 +30,8 @@
     lazygit
     markdownlint-cli
     mise
-    neofetch
-    neovim
     neovide
+    neovim
     nil
     nixfmt
     pam-reattach
