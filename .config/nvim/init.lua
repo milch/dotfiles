@@ -18,8 +18,9 @@ vim.opt.rtp:prepend(lazypath)
 local theme = require("ui.use_system_theme")
 theme.UpdateWhenSystemChanges()
 
+local startupTheme
 if not vim.g.neovide then
-	local startupTheme = theme.DetermineTheme("startup")
+	startupTheme = theme.DetermineTheme("startup")
 	vim.opt.background = startupTheme
 end
 
