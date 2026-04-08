@@ -7,6 +7,7 @@
     awscli2
     bat
     bazelisk
+    clang-tools
     cmake
     delta
     dust
@@ -28,6 +29,7 @@
     jankyborders
     jq
     lazygit
+    lua-language-server
     markdownlint-cli
     mise
     neovide
@@ -37,13 +39,19 @@
     pam-reattach
     parallel
     pkgs.home-manager
+    prettierd
     rename
     ripgrep
     rsync
+    rubocop
     rust-analyzer
     rustup
     shellcheck
+    shfmt
+    solargraph
     starship
+    stylua
+    tailwindcss-language-server
     tealdeer
     tectonic
     tmux
@@ -51,9 +59,12 @@
     tree-sitter
     unison
     uv
+    vscode-langservers-extracted
+    vtsls
     wget
     yamllint
     zig
+    zls
     zoxide
   ];
 

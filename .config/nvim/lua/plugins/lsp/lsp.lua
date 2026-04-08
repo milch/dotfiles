@@ -21,20 +21,22 @@ M.diagnosticsIcons = {
 	info = "",
 }
 
+vim.lsp.enable("nil_ls")
+
 return {
 	{
+		-- lspconfig provides base configs (cmd, filetypes, root_markers) for servers
 		"neovim/nvim-lspconfig",
+	},
+	{
+		-- Global LSP settings: diagnostics, capabilities, keybindings
+		name = "lsp",
+		dir = vim.fn.stdpath("config"),
 		event = { "BufReadPre", "BufNewFile", "BufWritePre" },
-		dependencies = {
-			{ "williamboman/mason.nvim" },
-			{ "williamboman/mason-lspconfig.nvim" },
-		},
-		init = function()
+		config = function()
 			vim.opt.updatetime = 50
-		end,
-		opts = {
-			---@type vim.diagnostic.Opts
-			diagnostics = {
+
+			vim.diagnostic.config({
 				underline = true,
 				virtual_text = false,
 				severity_sort = true,
@@ -50,66 +52,20 @@ return {
 						[vim.diagnostic.severity.INFO] = M.diagnosticsIcons.info,
 					},
 				},
-			},
-			servers = {},
-			---@type table<string, fun(server:string, opts:lspconfig.options):boolean?>
-			setup = {
-				-- example to setup with typescript.nvim
-				-- tsserver = function(_, opts)
-				--   require("typescript").setup({ server = opts })
-				--   return true
-				-- end,
-			},
-		},
-		config = function(_, opts)
-			vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
+			})
 
-			local servers = opts.servers
 			local has_blink, blink_cmp = pcall(require, "blink.cmp")
-			local capabilities = vim.tbl_deep_extend(
-				"force",
-				{},
-				vim.lsp.protocol.make_client_capabilities(),
-				has_blink and blink_cmp.get_lsp_capabilities() or {},
-				opts.capabilities or {}
-			)
-
-			vim.lsp.config("*", { capabilities = capabilities })
-
-			-- get all the servers that are available through mason-lspconfig
-			local mason_all = vim.tbl_keys(require("mason-lspconfig.mappings").get_mason_map().lspconfig_to_package)
-			local mason_exclude = {} ---@type string[]
-
-			local function configure(server)
-				local server_opts = servers[server] or { enabled = false }
-				if server_opts.enabled == false or server_opts.mason == false then
-					mason_exclude[#mason_exclude + 1] = server
-					return
-				end
-
-				local use_mason = server_opts.mason ~= false and vim.tbl_contains(mason_all, server)
-				local setup = opts.setup[server] or opts.setup["*"]
-				if setup and setup(server, server_opts) then
-					mason_exclude[#mason_exclude + 1] = server
-				else
-					vim.lsp.config(server, server_opts) -- configure the server
-					if not use_mason then
-						vim.lsp.enable(server)
-						return false
-					end
-				end
-				return use_mason
-			end
-
-			local ensure_installed = vim.tbl_filter(configure, vim.tbl_keys(servers))
-			require("mason-lspconfig").setup({
-				ensure_installed = ensure_installed,
-				automatic_enable = { exclude = mason_exclude },
+			vim.lsp.config("*", {
+				capabilities = vim.tbl_deep_extend(
+					"force",
+					{},
+					vim.lsp.protocol.make_client_capabilities(),
+					has_blink and blink_cmp.get_lsp_capabilities() or {}
+				),
 			})
 
 			M.on_attach(require("keybindings").set_lsp)
 			M.on_attach(function(_, buffer)
-				-- Enable inlay hints by default
 				vim.lsp.inlay_hint.enable(true, { bufnr = buffer })
 			end)
 		end,
@@ -117,7 +73,7 @@ return {
 	{
 		"rachartier/tiny-inline-diagnostic.nvim",
 		event = "LspAttach",
-		priority = 1000, -- needs to be loaded in first
+		priority = 1000,
 		opts = {
 			hi = {
 				background = "None",
@@ -168,12 +124,5 @@ return {
 				end, opts)
 			end)
 		end,
-	},
-	{
-		"neovim/nvim-lspconfig",
-		opts = {
-			-- Installed through nix
-			servers = { nil_ls = { mason = false } },
-		},
 	},
 }

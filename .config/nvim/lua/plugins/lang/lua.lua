@@ -1,11 +1,9 @@
+vim.lsp.enable("lua_ls")
+
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
 		opts = { ensure_installed = { "lua", "luadoc" } },
-	},
-	{
-		"williamboman/mason.nvim",
-		opts = { ensure_installed = { "stylua", "lua_ls" } },
 	},
 	{
 		"stevearc/conform.nvim",
@@ -13,11 +11,9 @@ return {
 	},
 	{
 		"folke/lazydev.nvim",
-		ft = "lua", -- only load on lua files
+		ft = "lua",
 		opts = {
 			library = {
-				-- See the configuration section for more details
-				-- Load luvit types when the `vim.uv` word is found
 				{ path = "luvit-meta/library", words = { "vim%.uv" } },
 			},
 		},

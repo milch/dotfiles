@@ -1,3 +1,22 @@
+vim.lsp.config("harper_ls", {
+	settings = {
+		["harper-ls"] = {
+			userDictPath = vim.fn.stdpath("config") .. "/spell/en.utf-8.add",
+			linters = {
+				SentenceCapitalization = false,
+				SpellCheck = false,
+				ToDoHyphen = false,
+				Dashes = false,
+				ExpandTimeShorthands = false,
+				ExpandMinimum = false,
+				ExpandMemoryShorthands = false,
+			},
+		},
+	},
+})
+
+vim.lsp.enable("harper_ls")
+
 -- See https://github.com/stevearc/conform.nvim/blob/master/doc/recipes.md#run-the-first-available-formatter-followed-by-more-formatters
 ---@param bufnr integer
 ---@param ... string
@@ -14,10 +33,6 @@ local function first(bufnr, ...)
 end
 
 return {
-	{
-		"williamboman/mason.nvim",
-		opts = { ensure_installed = { "prettier", "prettierd", "markdownlint" } },
-	},
 	{
 		"nvim-treesitter/nvim-treesitter",
 		opts = {
@@ -51,32 +66,5 @@ return {
 		opts = {},
 		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-mini/mini.icons" },
 		ft = "markdown",
-	},
-	{
-		"neovim/nvim-lspconfig",
-		opts = function(_, opts)
-			opts.servers["harper_ls"] = {
-				settings = {
-					["harper-ls"] = {
-						userDictPath = vim.fn.stdpath("config") .. "/spell/en.utf-8.add",
-						linters = {
-							SentenceCapitalization = false,
-							-- I use neovim built-in spell checker
-							SpellCheck = false,
-							-- TODO comments are fine
-							ToDoHyphen = false,
-							-- Don't warn about -- or --- (often CLI flags in comments)
-							Dashes = false,
-							-- Don't warn about 5s, 10min, etc.
-							ExpandTimeShorthands = false,
-							-- Don't warn about 5min
-							ExpandMinimum = false,
-							-- Don't warn about 5 GiB
-							ExpandMemoryShorthands = false,
-						},
-					},
-				},
-			}
-		end,
 	},
 }

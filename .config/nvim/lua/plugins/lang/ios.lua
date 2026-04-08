@@ -1,12 +1,6 @@
+vim.lsp.enable("sourcekit")
+
 return {
-	{
-		"neovim/nvim-lspconfig",
-		opts = function(_, opts)
-			opts.servers.sourcekit = {
-				cmd = { vim.trim(vim.fn.system("xcrun -f sourcekit-lsp")) },
-			}
-		end,
-	},
 	{
 		"wojciech-kulik/xcodebuild.nvim",
 		ft = { "objc", "swift" },

@@ -1,10 +1,6 @@
+vim.lsp.enable("zls")
+
 return {
-	{
-		"neovim/nvim-lspconfig",
-		opts = {
-			servers = { zls = {} },
-		},
-	},
 	{
 		"nvim-treesitter/nvim-treesitter",
 		opts = { ensure_installed = { "zig" } },
