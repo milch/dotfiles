@@ -120,6 +120,24 @@ return {
 					enabled = true,
 				},
 			},
+			picker = {
+				enabled = true,
+				win = {
+					input = {
+						keys = {
+							["<C-j>"] = { "list_down", mode = { "i", "n" } },
+							["<C-k>"] = { "list_up", mode = { "i", "n" } },
+						},
+					},
+				},
+				sources = {
+					grep = { layout = { preset = "dropdown" } },
+					grep_buffers = { layout = { preset = "dropdown" } },
+					grep_word = { layout = { preset = "dropdown" } },
+					lsp_workspace_symbols = { layout = { preset = "dropdown" } },
+					todo = { layout = { preset = "dropdown" } },
+				},
+			},
 			quickfile = {},
 			statuscolumn = { enabled = true },
 		},

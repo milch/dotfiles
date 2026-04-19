@@ -63,7 +63,7 @@ return {
 
 		require("lualine").setup({
 			options = {
-				ignore_focus = { "NvimTree", "TelescopePrompt" },
+				ignore_focus = { "NvimTree", "snacks_picker_input" },
 				icons_enabled = true,
 				component_separators = "",
 				section_separators = { left = "", right = "" },

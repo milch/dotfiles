@@ -1,7 +1,7 @@
 return {
 	{
 		"folke/todo-comments.nvim",
-		cmd = { "TodoTrouble", "TodoTelescope", "TodoQuickfix" },
+		cmd = { "TodoTrouble", "TodoQuickfix" },
 		event = "LazyFile",
 		opts = {
 			search = {
@@ -16,6 +16,10 @@ return {
 				},
 			},
 		},
+		config = function(_, opts)
+			require("todo-comments").setup(opts)
+			Snacks.picker.sources.todo = require("todo-comments.snacks").source
+		end,
 		keys = {
 			{
 				"]t",
@@ -37,8 +41,16 @@ return {
 				"<cmd>Trouble todo toggle filter = {tag = {TODO,FIX,FIXME}}<cr>",
 				desc = "Todo/Fix/Fixme (Trouble)",
 			},
-			{ "<leader>st", "<cmd>TodoTelescope<cr>", desc = "Todo" },
-			{ "<leader>sT", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>", desc = "Todo/Fix/Fixme" },
+			{
+				"<leader>st",
+				function() require("todo-comments.snacks").pick() end,
+				desc = "Todo",
+			},
+			{
+				"<leader>sT",
+				function() require("todo-comments.snacks").pick({ keywords = { "TODO", "FIX", "FIXME" } }) end,
+				desc = "Todo/Fix/Fixme",
+			},
 		},
 	},
 }

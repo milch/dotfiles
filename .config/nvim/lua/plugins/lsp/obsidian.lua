@@ -16,7 +16,6 @@ return {
 		},
 		dependencies = {
 			"nvim-lua/plenary.nvim",
-			"nvim-telescope/telescope.nvim",
 			"nvim-treesitter/nvim-treesitter",
 			{
 				"folke/snacks.nvim",
@@ -55,6 +54,10 @@ return {
 				},
 			},
 			notes_subdir = "0 Inbox",
+
+			picker = {
+				name = "snacks.pick",
+			},
 
 			daily_notes = {
 				folder = "0 Inbox",

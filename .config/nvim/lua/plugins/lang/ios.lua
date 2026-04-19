@@ -5,7 +5,7 @@ return {
 		"wojciech-kulik/xcodebuild.nvim",
 		ft = { "objc", "swift" },
 		dependencies = {
-			"nvim-telescope/telescope.nvim",
+			"folke/snacks.nvim",
 			"MunifTanjim/nui.nvim",
 		},
 		opts = {},

@@ -26,7 +26,7 @@ return {
 			markdown = true,
 			neotest = false,
 			nvimtree = true,
-			telescope = true,
+			snacks = true,
 			treesitter = true,
 			treesitter_context = true,
 			indent_blankline = {
