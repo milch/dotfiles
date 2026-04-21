@@ -35,7 +35,8 @@ return {
 		},
 	},
 	{
-		"sindrets/diffview.nvim",
+		"axkirillov/unified.nvim",
 		opts = {},
+		cmd = { "Unified" },
 	},
 }
