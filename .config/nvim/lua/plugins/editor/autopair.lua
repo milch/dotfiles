@@ -1,6 +1,6 @@
 return {
 	"altermo/ultimate-autopair.nvim",
-	event = { "InsertEnter", "CmdlineEnter", "TermEnter", "CursorMoved" },
+	event = { "InsertEnter", "CmdlineEnter", "TermEnter" },
 	opts = {
 		bs = { space = "balance", indent_ignore = true, single_delete = true },
 		cr = { autoclose = true },
