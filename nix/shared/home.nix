@@ -73,6 +73,7 @@ in
     ".config/fish/functions/up.fish".source = ../../.config/fish/functions/up.fish;
 
     ".config/ghostty/config".source = ../../.config/ghostty/config;
+    ".config/mistty/config".source = ../../.config/mistty/config.toml;
 
     ".markdownlintrc".source = ../../.markdownlintrc;
     ".yamllint.yaml".source = ../../.yamllint.yaml;

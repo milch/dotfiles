@@ -1,0 +1,84 @@
+font_size = 13
+font_family = "SF Mono"
+cursor_style = "block"
+scrollback_lines = 10000
+sidebar_visible = true
+
+[[popup]]
+name = "lazygit"
+command = "lazygit"
+shortcut = "Cmd-Shift-G"
+width = 0.75
+height = 0.8
+close_on_exit = true
+
+[[popup]]
+name = "fast-sh"
+command = "lazygit"
+shortcut = "cmd+shift+t"
+close_on_exit = true
+shell = "/bin/sh"
+env = { PATH = "/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin", MY_POPUP = "hi" }
+
+[ssh]
+default_command = "ssh"
+
+[[ssh.host]]
+hostname = "sailor"
+command = "et"
+
+# ─── Copy mode hints ─────────────────────────────────────────────────────────
+[copy_mode.hints]
+# Letters used to label hints. Order matters — earlier letters are assigned first.
+# Pick keys that are easy to reach on your layout.
+alphabet = "tnseriaodh"
+
+# ─── Window chrome ───────────────────────────────────────────────────────────
+[ui]
+# When to show the tab bar.
+# Options:
+#   "always"                                — tab bar always visible
+#   "never"                                 — tab bar never visible
+#   "when_sidebar_hidden"                   — only when the sidebar is collapsed
+#   "when_sidebar_hidden_and_multiple_tabs" — sidebar collapsed AND more than one tab
+#   "when_multiple_tabs"                    — whenever there is more than one tab (default)
+tab_bar_mode = "when_sidebar_hidden_and_multiple_tabs"
+
+# Title bar appearance.
+# Options:
+#   "always"             — standard macOS title bar above content
+#   "hidden_with_lights" — title bar hidden, traffic lights float over content (default)
+#   "hidden_no_lights"   — title bar hidden, no traffic lights (use cmd+w / cmd+q to close)
+title_bar_style = "hidden_no_lights"
+
+# Padding, in points, inside the terminal surface. The area fills with the
+# terminal background, so this adds breathing room without cutting into the
+# text. Accepts an integer (symmetric) or a 2-element array (start, end).
+#   content_padding_x = 4        # 4pt left + 4pt right
+#   content_padding_x = [4, 8]   # 4pt left, 8pt right
+#   content_padding_y = [9, 0]   # 9pt top, 0pt bottom
+# Maps directly to ghostty's window-padding-x / window-padding-y.
+content_padding_x = 6
+content_padding_y = [12, 0]
+
+# When true, ghostty distributes leftover pixels as extra padding so the grid
+# stays centered within the surface. Maps to ghostty window-padding-balance.
+content_padding_balance = true
+
+# ─── Ghostty passthrough ─────────────────────────────────────────────────────
+# Any ghostty config key placed under [ghostty] is forwarded verbatim to
+# libghostty. Keys use ghostty's kebab-case names exactly as they appear in
+# `ghostty +show-config` / the ghostty docs.
+#
+# This is the same as dropping options into ~/.config/mistty/ghostty.conf —
+# use whichever you prefer. Mistty-managed keys (see below) are always
+# ignored here, and Mistty's own [ui] keys (content_padding_*,
+# pane_border_*) take precedence.
+[ghostty]
+theme = "light:Catppuccin Latte,dark:Catppuccin Macchiato"
+font-family = "SF Mono"
+font-style = "Medium"
+font-size = 14
+window-colorspace = "display-p3"
+window-theme = "system"
+macos-option-as-alt = "true"
