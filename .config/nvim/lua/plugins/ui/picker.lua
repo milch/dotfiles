@@ -28,7 +28,6 @@ return {
 				preview_scroll_down = "<C-f>",
 			},
 		},
-		lazy = false,
 		keys = {
 			{
 				"<leader><space>",
