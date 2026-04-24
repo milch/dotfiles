@@ -9,6 +9,7 @@ return {
 				desc = "Load workspace session",
 			},
 		},
+		lazy = false,
 		init = function()
 			local should_load = function()
 				if vim.fn.argc(-1) ~= 0 then
@@ -28,12 +29,30 @@ return {
 					return true
 				end
 			end
+			vim.api.nvim_create_autocmd("VimEnter", {
+				callback = function()
+					local restore_pid = vim.env.NVIM_RESTORE_FROM_PID
+					if restore_pid ~= nil and restore_pid ~= "" then
+						require("resession").load(restore_pid, { dir = "dirsession" })
+					end
+					require("resession").save(tostring(vim.fn.getpid()), { dir = "dirsession" })
+					if restore_pid ~= nil and restore_pid ~= "" then
+						-- delete old restore file after we've restored from it
+						pcall(os.remove, vim.fn.stdpath("data") .. "/dirsession/" .. restore_pid .. ".json")
+					end
+				end,
+				nested = true,
+			})
 			vim.api.nvim_create_autocmd("VimLeavePre", {
 				callback = function()
 					-- We called it with truly empty args or a file/dir
 					if should_load() or vim.fn.argc(-1) ~= 0 then
 						require("resession").save(vim.fn.getcwd(), { dir = "dirsession", notify = false })
 					end
+
+					-- Clearly we're not crashing / restarting the term -> delete the session
+					local pid = tostring(vim.fn.getpid())
+					pcall(os.remove, vim.fn.stdpath("data") .. "/dirsession/" .. pid .. ".json")
 				end,
 			})
 		end,
