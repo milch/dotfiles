@@ -174,7 +174,6 @@
       "xcodesorg/made"
     ];
     brews = [
-      "acsandmann/tap/rift"
       "coreutils"
       "cormacrelf/tap/dark-notify"
       "libyaml" # Dependency for ruby-build (mise)
