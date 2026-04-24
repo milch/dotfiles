@@ -3,22 +3,33 @@ font_family = "SF Mono"
 cursor_style = "block"
 scrollback_lines = 10000
 sidebar_visible = true
+debug_logging = true
 
 [[popup]]
 name = "lazygit"
-command = "lazygit"
-shortcut = "Cmd-Shift-G"
+command = "zsh -c lazygit"
+shortcut = "Cmd-G"
+shell_wrap = false
 width = 0.75
 height = 0.8
 close_on_exit = true
 
 [[popup]]
-name = "fast-sh"
-command = "lazygit"
-shortcut = "cmd+shift+t"
-close_on_exit = true
-shell = "/bin/sh"
-env = { PATH = "/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin", MY_POPUP = "hi" }
+name = "darwin_rebuild"
+command = "zsh -c 'sudo darwin-rebuild switch --flake $HOME/dotfiles'"
+shortcut = "cmd-b"
+shell_wrap = false
+width = 0.33
+height = 0.95
+close_on_exit = false
+
+[[restore.command]]
+match = "nvim"
+strategy = "nvim"
+env = { NVIM_RESTORE_FROM_PID = "{{pid}}" }
+
+[[restore.command]]
+match = "et"
 
 [ssh]
 default_command = "ssh"
