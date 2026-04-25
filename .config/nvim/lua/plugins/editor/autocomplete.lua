@@ -13,6 +13,7 @@ return {
 		cp result/lib/libblink_cmp_fuzzy.dylib target/release
 		rm result
 	]],
+	version = "1.*", -- Pin to 1.x while v2 is under development
 	event = "InsertEnter",
 	dependencies = {
 		"xzbdmw/colorful-menu.nvim", -- Nice treesitter-based completion item formatting
