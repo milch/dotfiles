@@ -35,7 +35,7 @@ return {
 					if restore_pid ~= nil and restore_pid ~= "" then
 						require("resession").load(restore_pid, { dir = "dirsession" })
 					end
-					require("resession").save(tostring(vim.fn.getpid()), { dir = "dirsession" })
+					require("resession").save(tostring(vim.fn.getpid()), { dir = "dirsession", notify = false })
 					if restore_pid ~= nil and restore_pid ~= "" then
 						-- delete old restore file after we've restored from it
 						pcall(os.remove, vim.fn.stdpath("data") .. "/dirsession/" .. restore_pid .. ".json")
