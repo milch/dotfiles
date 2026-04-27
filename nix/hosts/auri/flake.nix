@@ -1,7 +1,8 @@
 { pkgs, ... }:
 
-let username = "manu";
-  in
+let
+  username = "manu";
+in
 {
   imports = [ ../../shared/default.nix ];
   networking.computerName = "Auri";
@@ -81,7 +82,7 @@ let username = "manu";
       "/Applications/DaVinci Resolve/DaVinci Resolve.app"
       "/Applications/OrcaSlicer.app"
       "/System/Applications/Music.app"
-      "/Applications/Ghostty.app"
+      "/Applications/Mistty.app"
       "/Applications/Xcode-26.3.0.app"
       "/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app"
       "/System/Applications/Messages.app"
@@ -95,7 +96,13 @@ let username = "manu";
       "/System/Applications/iPhone Mirroring.app"
     ];
     persistent-others = [
-      { folder = { path = "/Users/${username}/Downloads"; showas = "fan"; arrangement = "date-added"; }; }
+      {
+        folder = {
+          path = "/Users/${username}/Downloads";
+          showas = "fan";
+          arrangement = "date-added";
+        };
+      }
     ];
   };
 }
