@@ -31,11 +31,12 @@ return {
 			end
 			vim.api.nvim_create_autocmd("VimEnter", {
 				callback = function()
+					local resession = require("resession")
 					local restore_pid = vim.env.NVIM_RESTORE_FROM_PID
 					if restore_pid ~= nil and restore_pid ~= "" then
-						require("resession").load(restore_pid, { dir = "dirsession" })
+						pcall(resession.load, restore_pid, { dir = "dirsession" })
 					end
-					require("resession").save(tostring(vim.fn.getpid()), { dir = "dirsession", notify = false })
+					resession.save(tostring(vim.fn.getpid()), { dir = "dirsession", notify = false })
 					if restore_pid ~= nil and restore_pid ~= "" then
 						-- delete old restore file after we've restored from it
 						pcall(os.remove, vim.fn.stdpath("data") .. "/dirsession/" .. restore_pid .. ".json")
