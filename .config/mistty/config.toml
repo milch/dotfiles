@@ -1,4 +1,4 @@
-font_size = 13
+font_size = 14
 font_family = "SF Mono"
 cursor_style = "block"
 scrollback_lines = 10000
@@ -87,9 +87,7 @@ content_padding_balance = true
 # pane_border_*) take precedence.
 [ghostty]
 theme = "light:Catppuccin Latte,dark:Catppuccin Macchiato"
-font-family = "SF Mono"
 font-style = "Medium"
-font-size = 14
 window-colorspace = "display-p3"
 window-theme = "system"
 macos-option-as-alt = "true"
