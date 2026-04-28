@@ -44,7 +44,6 @@ return {
 				"json",
 				"css",
 				"html",
-				"jsonc",
 				"typescript",
 			},
 		},
