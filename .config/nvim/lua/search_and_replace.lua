@@ -39,8 +39,9 @@ _G.searchAndReplaceOperatorFunc = function(type)
 
 	vim.cmd("normal! " .. operatorYankCommand[type] .. "y")
 
-	-- Get yanked text and escape it for search
-	local text = vim.fn.escape(vim.fn.getreg('"'), "\\()[]{}.+*^$")
+	-- Get yanked text and escape it for search. Use \V (very nomagic) so only
+	-- backslashes are special; everything else (parens, braces, dots, ...) is literal.
+	local text = "\\V" .. vim.fn.escape(vim.fn.getreg('"'), "\\"):gsub("\n", "\\n")
 
 	M.searchAndReplace(text)
 
