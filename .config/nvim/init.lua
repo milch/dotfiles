@@ -39,6 +39,8 @@ if vim.uv.fs_stat(opt_folder) then
 	end
 end
 
+require("vim._core.ui2").enable({})
+
 require("lazy_file").setup()
 require("lazy").setup({
 	spec = specs,

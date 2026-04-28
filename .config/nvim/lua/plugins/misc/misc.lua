@@ -138,6 +138,7 @@ return {
 					todo = { layout = { preset = "dropdown" } },
 				},
 			},
+			notifier = {},
 			quickfile = {},
 			statuscolumn = { enabled = true },
 		},

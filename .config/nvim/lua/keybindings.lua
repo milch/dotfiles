@@ -26,6 +26,27 @@ function M.set()
 	bind("n", "<C-u>", "<C-u>zz", { desc = "Move one page up (keep cursor centered)" })
 	bind("n", "<C-o>", "<C-o>zz", { desc = "Move to previous location (keep cursor centered)" })
 
+	-- Scroll LSP hover / signature_help / diagnostic floats with <C-f>/<C-b>
+	-- without entering the float. Falls back to normal page scrolling when no
+	-- focusable floating window is open.
+	local function scroll_float(key)
+		local termcode = vim.api.nvim_replace_termcodes(key, true, false, true)
+		return function()
+			for _, win in ipairs(vim.api.nvim_list_wins()) do
+				local cfg = vim.api.nvim_win_get_config(win)
+				if cfg.relative ~= "" and cfg.focusable then
+					vim.api.nvim_win_call(win, function()
+						vim.cmd("normal! " .. termcode)
+					end)
+					return
+				end
+			end
+			vim.api.nvim_feedkeys(termcode, "n", false)
+		end
+	end
+	bind("n", "<C-f>", scroll_float("<C-d>"), { silent = true, desc = "Scroll float / page down" })
+	bind("n", "<C-b>", scroll_float("<C-u>"), { silent = true, desc = "Scroll float / page up" })
+
 	local sar = require("search_and_replace")
 	bind("n", "<Esc>", "<cmd>nohlsearch<cr>", { desc = "Clear search highlight" })
 	bind({ "n", "x" }, "gs", sar.searchAndReplaceOperator, { expr = true, desc = "Search and replace operator" })
@@ -110,30 +131,6 @@ function M.set()
 	bind("n", "gcO", "O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Above" })
 
 	bind("i", "<M-BS>", "<C-w>", { desc = "Delete a whole word in insert mode with Alt+Backspace" })
-
-	-- Groups from Lazy
-	-- { "<leader><tab>", group = "tabs" },
-	-- { "<leader>c", group = "code" },
-	-- { "<leader>f", group = "file/find" },
-	-- { "<leader>g", group = "git" },
-	-- { "<leader>gh", group = "hunks" },
-	-- { "<leader>q", group = "quit/session" },
-	-- { "<leader>s", group = "search" },
-	-- { "<leader>u", group = "ui", icon = { icon = "󰙵 ", color = "cyan" } },
-	-- { "<leader>x", group = "diagnostics/quickfix", icon = { icon = "󱖫 ", color = "green" } },
-	-- { "[", group = "prev" },
-	-- { "]", group = "next" },
-	-- { "g", group = "goto" },
-	-- { "gs", group = "surround" },
-	-- { "z", group = "fold" },
-	-- {
-	--   "<leader>b",
-	--   group = "buffer",
-	--   expand = function()
-	--     return require("which-key.extras").expand.buf()
-	--   end,
-	-- },
-	--
 end
 
 function M.set_lsp(_, bufnr)
@@ -179,7 +176,6 @@ function M.set_lsp(_, bufnr)
 	bind("n", "gD", vim.lsp.buf.declaration, opts)
 
 	opts.desc = "Refresh & Display Codelens"
-
 	bind("n", "<leader>cC", function()
 		vim.lsp.codelens.enable(true)
 	end, opts)

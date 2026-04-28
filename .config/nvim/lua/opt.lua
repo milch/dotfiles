@@ -32,6 +32,8 @@ vim.opt.mouse = "a"
 vim.opt.listchars = "tab:>·,trail:~,extends:>,precedes:<"
 vim.opt.list = true
 
+vim.o.winborder = "rounded"
+
 vim.opt.shada = "'1,/10,<50,s10,h"
 
 local spelling_group = vim.api.nvim_create_augroup("Spelling", {})
