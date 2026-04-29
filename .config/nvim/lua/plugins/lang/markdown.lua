@@ -9,6 +9,7 @@ vim.lsp.config("harper_ls", {
 				Dashes = false,
 				ExpandTimeShorthands = false,
 				ExpandMinimum = false,
+				ExpandDependencies = false,
 				ExpandMemoryShorthands = false,
 			},
 		},
