@@ -151,7 +151,7 @@ in
     cp = "rsync --info=progress2";
     ls = "eza --icons=always -w 120 --group-directories-first --across";
     pcd = "fzf-cdhist-widget";
-    lg = "TERM=screen-256color lazygit";
+    lg = "TERM=xterm-256color lazygit";
     cat = "bat";
     be = "bundler exec";
     bi = "bundler install";
