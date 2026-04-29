@@ -144,6 +144,7 @@ return {
 		},
 		-- stylua: ignore
 		keys = {
+			{ "<leader>xn",  function() Snacks.notifier.show_history() end, desc = "Show notification history" },
 			{ "<leader>xz",  function() Snacks.zen() end, desc = "Toggle Zen Mode" },
 			{ "<leader>xZ",  function() Snacks.zen.zoom() end, desc = "Toggle Zoom" },
 			{ "<leader>cR", function() Snacks.rename.rename_file() end, desc = "Rename File" },
