@@ -67,6 +67,7 @@ in
     ".config/fish/functions/git_dirty.fish".source = ../../.config/fish/functions/git_dirty.fish;
     ".config/fish/functions/gpm.fish".source = ../../.config/fish/functions/gpm.fish;
     ".config/fish/functions/up.fish".source = ../../.config/fish/functions/up.fish;
+    ".config/fish/functions/pz.fish".source = ../../.config/fish/functions/pz.fish;
 
     ".config/ghostty/config".source = ../../.config/ghostty/config;
     ".config/mistty/config".source = ../../.config/mistty/config.toml;
