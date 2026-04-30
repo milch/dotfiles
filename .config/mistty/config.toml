@@ -31,6 +31,10 @@ env = { NVIM_RESTORE_FROM_PID = "{{pid}}" }
 [[restore.command]]
 match = "et"
 
+[[restore.command]]
+match = "claude"
+strategy = "claude --resume"
+
 [ssh]
 default_command = "ssh"
 
