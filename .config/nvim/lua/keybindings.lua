@@ -57,8 +57,7 @@ function M.set()
 
 	local sar = require("search_and_replace")
 	bind("n", "<Esc>", "<cmd>nohlsearch<cr>", "Clear search highlight")
-	bind({ "n", "x" }, "gs", sar.searchAndReplaceOperator, { expr = true, desc = "Search and replace operator" })
-	bind("n", "gs*", sar.searchAndReplaceCursorWord, { silent = true, desc = "Search and replace word under cursor" })
+	bind({ "n", "x" }, "gs", sar.searchAndReplaceOperator, { silent = true, desc = "Search and replace operator (gs* for word under cursor)" })
 
 	bind("v", "<leader>p", [["_dP]], "Replace the selection with the paste buffer, preserve the buffer")
 	bind({ "n", "v" }, "<leader>y", [["+y]], "Copy to system clipboard")
