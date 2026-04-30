@@ -4,6 +4,20 @@ bind("n", "<leader>xl", function()
 	require("lazy").home()
 end, { desc = "Show lazy plugin manager", silent = true, noremap = true })
 
+local rainbow_highlight = {
+	RainbowRed = "#E06C75",
+	RainbowYellow = "#E5C07B",
+	RainbowBlue = "#61AFEF",
+	RainbowOrange = "#D19A66",
+	RainbowGreen = "#98C379",
+	RainbowViolet = "#C678DD",
+	RainbowCyan = "#56B6C2",
+}
+
+for group, color in pairs(rainbow_highlight) do
+	vim.api.nvim_set_hl(0, group, { fg = color })
+end
+
 return {
 	{ "nvim-lua/plenary.nvim", lazy = true }, -- Everything uses plenary
 	-- Editor
@@ -141,6 +155,21 @@ return {
 			notifier = {},
 			quickfile = {},
 			statuscolumn = { enabled = true },
+			indent = {
+				enabled = true,
+				indent = {
+					priority = 1,
+					char = "│",
+					only_scope = false, -- only show indent guides of the scope
+					only_current = false, -- only show indent guides in the current window
+					hl = vim.tbl_keys(rainbow_highlight),
+				},
+				scope = {
+					char = "┆",
+					only_current = true,
+					hl = "IblScope", -- For whatever reason the default in catppuccin is different between IBL & Snacks scope, and the IBL scope has better contrast
+				},
+			},
 		},
 		-- stylua: ignore
 		keys = {
