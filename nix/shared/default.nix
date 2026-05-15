@@ -176,6 +176,7 @@
     brews = [
       "coreutils"
       "cormacrelf/tap/dark-notify"
+      "libomp" # Dependency for codediff
       "libyaml" # Dependency for ruby-build (mise)
       "ncurses"
       "xcode-build-server"
