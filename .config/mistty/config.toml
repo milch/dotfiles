@@ -42,6 +42,9 @@ default_command = "ssh"
 hostname = "sailor"
 command = "et"
 
+[copy_mode]
+scrolloff = 5
+
 # ─── Copy mode hints ─────────────────────────────────────────────────────────
 [copy_mode.hints]
 # Letters used to label hints. Order matters — earlier letters are assigned first.
