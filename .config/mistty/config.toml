@@ -40,7 +40,13 @@ default_command = "ssh"
 
 [[ssh.host]]
 hostname = "sailor"
-command = "et"
+command = "env TERM=xterm-256color /run/current-system/sw/bin/et"
+
+[[ssh.host]]
+hostname = "homeassistant"
+command = "env TERM=xterm-256color /run/current-system/sw/bin/et"
+
+[shortcuts]
 
 [copy_mode]
 scrolloff = 5
