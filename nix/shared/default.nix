@@ -43,6 +43,7 @@
     rename
     ripgrep
     rsync
+    rtk
     rubocop
     rust-analyzer
     rustup
