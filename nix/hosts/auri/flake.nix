@@ -56,7 +56,6 @@ in
     "expressvpn"
     "fastrawviewer"
     "garmin-express"
-    "google-chrome"
     "lm-studio"
     "mactex"
     "moonlight"
