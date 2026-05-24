@@ -87,10 +87,10 @@ in
       '';
     };
 
-    "Library/Services/Copy Current Safari URL.workflow".source = ../../Library/Services
-    + "/Copy Current Safari URL.workflow";
-    "Library/Services/Summarize Current Page.workflow".source = ../../Library/Services
-    + "/Summarize Current Page.workflow";
+    "Library/Services/Copy Current Safari URL.workflow".source =
+      ../../Library/Services + "/Copy Current Safari URL.workflow";
+    "Library/Services/Summarize Current Page.workflow".source =
+      ../../Library/Services + "/Summarize Current Page.workflow";
 
     ".local/bin/ocr".source = ../../bin/ocr;
     ".local/bin/aerospace-new-terminal".source = ../../bin/aerospace-new-terminal;
