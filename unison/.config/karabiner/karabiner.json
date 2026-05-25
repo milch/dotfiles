@@ -1,9 +1,214 @@
 {
-    "global": { "show_in_menu_bar": false },
+    "global": {
+        "show_in_menu_bar": false
+    },
     "profiles": [
         {
             "complex_modifications": {
                 "rules": [
+                    {
+                        "description": "OmniWM workspace forwarding (alt+letter for unbound workspaces)",
+                        "manipulators": [
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "key_code": "a",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "option"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "/Applications/OmniWM.app/Contents/MacOS/omniwmctl command switch-workspace 10"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "key_code": "a",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "option",
+                                            "shift"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "/Applications/OmniWM.app/Contents/MacOS/omniwmctl command move-to-workspace 10 && /Applications/OmniWM.app/Contents/MacOS/omniwmctl command switch-workspace 10"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "key_code": "b",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "option"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "/Applications/OmniWM.app/Contents/MacOS/omniwmctl command switch-workspace 11"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "key_code": "b",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "option",
+                                            "shift"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "/Applications/OmniWM.app/Contents/MacOS/omniwmctl command move-to-workspace 11 && /Applications/OmniWM.app/Contents/MacOS/omniwmctl command switch-workspace 11"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "key_code": "q",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "option"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "/Applications/OmniWM.app/Contents/MacOS/omniwmctl command switch-workspace 12"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "key_code": "q",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "option",
+                                            "shift"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "/Applications/OmniWM.app/Contents/MacOS/omniwmctl command move-to-workspace 12 && /Applications/OmniWM.app/Contents/MacOS/omniwmctl command switch-workspace 12"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "key_code": "r",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "option"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "/Applications/OmniWM.app/Contents/MacOS/omniwmctl command switch-workspace 13"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "key_code": "r",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "option",
+                                            "shift"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "/Applications/OmniWM.app/Contents/MacOS/omniwmctl command move-to-workspace 13 && /Applications/OmniWM.app/Contents/MacOS/omniwmctl command switch-workspace 13"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "key_code": "x",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "option"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "/Applications/OmniWM.app/Contents/MacOS/omniwmctl command switch-workspace 14"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "key_code": "x",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "option",
+                                            "shift"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "/Applications/OmniWM.app/Contents/MacOS/omniwmctl command move-to-workspace 14 && /Applications/OmniWM.app/Contents/MacOS/omniwmctl command switch-workspace 14"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "key_code": "z",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "option"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "/Applications/OmniWM.app/Contents/MacOS/omniwmctl command switch-workspace 15"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "key_code": "z",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "option",
+                                            "shift"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "/Applications/OmniWM.app/Contents/MacOS/omniwmctl command move-to-workspace 15 && /Applications/OmniWM.app/Contents/MacOS/omniwmctl command switch-workspace 15"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
                     {
                         "description": "QWERTY to Colemak (Internal Keyboard Only)",
                         "manipulators": [
@@ -21,9 +226,17 @@
                                 ],
                                 "from": {
                                     "key_code": "q",
-                                    "modifiers": { "optional": ["any"] }
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
                                 },
-                                "to": [{ "key_code": "q" }],
+                                "to": [
+                                    {
+                                        "key_code": "q"
+                                    }
+                                ],
                                 "type": "basic"
                             },
                             {
@@ -40,9 +253,17 @@
                                 ],
                                 "from": {
                                     "key_code": "w",
-                                    "modifiers": { "optional": ["any"] }
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
                                 },
-                                "to": [{ "key_code": "w" }],
+                                "to": [
+                                    {
+                                        "key_code": "w"
+                                    }
+                                ],
                                 "type": "basic"
                             },
                             {
@@ -59,9 +280,17 @@
                                 ],
                                 "from": {
                                     "key_code": "e",
-                                    "modifiers": { "optional": ["any"] }
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
                                 },
-                                "to": [{ "key_code": "f" }],
+                                "to": [
+                                    {
+                                        "key_code": "f"
+                                    }
+                                ],
                                 "type": "basic"
                             },
                             {
@@ -78,9 +307,17 @@
                                 ],
                                 "from": {
                                     "key_code": "r",
-                                    "modifiers": { "optional": ["any"] }
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
                                 },
-                                "to": [{ "key_code": "p" }],
+                                "to": [
+                                    {
+                                        "key_code": "p"
+                                    }
+                                ],
                                 "type": "basic"
                             },
                             {
@@ -97,9 +334,17 @@
                                 ],
                                 "from": {
                                     "key_code": "t",
-                                    "modifiers": { "optional": ["any"] }
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
                                 },
-                                "to": [{ "key_code": "g" }],
+                                "to": [
+                                    {
+                                        "key_code": "g"
+                                    }
+                                ],
                                 "type": "basic"
                             },
                             {
@@ -116,9 +361,17 @@
                                 ],
                                 "from": {
                                     "key_code": "y",
-                                    "modifiers": { "optional": ["any"] }
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
                                 },
-                                "to": [{ "key_code": "j" }],
+                                "to": [
+                                    {
+                                        "key_code": "j"
+                                    }
+                                ],
                                 "type": "basic"
                             },
                             {
@@ -135,9 +388,17 @@
                                 ],
                                 "from": {
                                     "key_code": "u",
-                                    "modifiers": { "optional": ["any"] }
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
                                 },
-                                "to": [{ "key_code": "l" }],
+                                "to": [
+                                    {
+                                        "key_code": "l"
+                                    }
+                                ],
                                 "type": "basic"
                             },
                             {
@@ -154,9 +415,17 @@
                                 ],
                                 "from": {
                                     "key_code": "i",
-                                    "modifiers": { "optional": ["any"] }
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
                                 },
-                                "to": [{ "key_code": "u" }],
+                                "to": [
+                                    {
+                                        "key_code": "u"
+                                    }
+                                ],
                                 "type": "basic"
                             },
                             {
@@ -173,9 +442,17 @@
                                 ],
                                 "from": {
                                     "key_code": "o",
-                                    "modifiers": { "optional": ["any"] }
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
                                 },
-                                "to": [{ "key_code": "y" }],
+                                "to": [
+                                    {
+                                        "key_code": "y"
+                                    }
+                                ],
                                 "type": "basic"
                             },
                             {
@@ -192,9 +469,17 @@
                                 ],
                                 "from": {
                                     "key_code": "p",
-                                    "modifiers": { "optional": ["any"] }
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
                                 },
-                                "to": [{ "key_code": "semicolon" }],
+                                "to": [
+                                    {
+                                        "key_code": "semicolon"
+                                    }
+                                ],
                                 "type": "basic"
                             },
                             {
@@ -211,9 +496,17 @@
                                 ],
                                 "from": {
                                     "key_code": "a",
-                                    "modifiers": { "optional": ["any"] }
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
                                 },
-                                "to": [{ "key_code": "a" }],
+                                "to": [
+                                    {
+                                        "key_code": "a"
+                                    }
+                                ],
                                 "type": "basic"
                             },
                             {
@@ -230,9 +523,17 @@
                                 ],
                                 "from": {
                                     "key_code": "s",
-                                    "modifiers": { "optional": ["any"] }
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
                                 },
-                                "to": [{ "key_code": "r" }],
+                                "to": [
+                                    {
+                                        "key_code": "r"
+                                    }
+                                ],
                                 "type": "basic"
                             },
                             {
@@ -249,9 +550,17 @@
                                 ],
                                 "from": {
                                     "key_code": "d",
-                                    "modifiers": { "optional": ["any"] }
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
                                 },
-                                "to": [{ "key_code": "s" }],
+                                "to": [
+                                    {
+                                        "key_code": "s"
+                                    }
+                                ],
                                 "type": "basic"
                             },
                             {
@@ -268,9 +577,17 @@
                                 ],
                                 "from": {
                                     "key_code": "f",
-                                    "modifiers": { "optional": ["any"] }
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
                                 },
-                                "to": [{ "key_code": "t" }],
+                                "to": [
+                                    {
+                                        "key_code": "t"
+                                    }
+                                ],
                                 "type": "basic"
                             },
                             {
@@ -287,9 +604,17 @@
                                 ],
                                 "from": {
                                     "key_code": "g",
-                                    "modifiers": { "optional": ["any"] }
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
                                 },
-                                "to": [{ "key_code": "d" }],
+                                "to": [
+                                    {
+                                        "key_code": "d"
+                                    }
+                                ],
                                 "type": "basic"
                             },
                             {
@@ -306,9 +631,17 @@
                                 ],
                                 "from": {
                                     "key_code": "h",
-                                    "modifiers": { "optional": ["any"] }
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
                                 },
-                                "to": [{ "key_code": "h" }],
+                                "to": [
+                                    {
+                                        "key_code": "h"
+                                    }
+                                ],
                                 "type": "basic"
                             },
                             {
@@ -325,9 +658,17 @@
                                 ],
                                 "from": {
                                     "key_code": "j",
-                                    "modifiers": { "optional": ["any"] }
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
                                 },
-                                "to": [{ "key_code": "n" }],
+                                "to": [
+                                    {
+                                        "key_code": "n"
+                                    }
+                                ],
                                 "type": "basic"
                             },
                             {
@@ -344,9 +685,17 @@
                                 ],
                                 "from": {
                                     "key_code": "k",
-                                    "modifiers": { "optional": ["any"] }
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
                                 },
-                                "to": [{ "key_code": "e" }],
+                                "to": [
+                                    {
+                                        "key_code": "e"
+                                    }
+                                ],
                                 "type": "basic"
                             },
                             {
@@ -363,9 +712,17 @@
                                 ],
                                 "from": {
                                     "key_code": "l",
-                                    "modifiers": { "optional": ["any"] }
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
                                 },
-                                "to": [{ "key_code": "i" }],
+                                "to": [
+                                    {
+                                        "key_code": "i"
+                                    }
+                                ],
                                 "type": "basic"
                             },
                             {
@@ -382,9 +739,17 @@
                                 ],
                                 "from": {
                                     "key_code": "semicolon",
-                                    "modifiers": { "optional": ["any"] }
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
                                 },
-                                "to": [{ "key_code": "o" }],
+                                "to": [
+                                    {
+                                        "key_code": "o"
+                                    }
+                                ],
                                 "type": "basic"
                             },
                             {
@@ -401,9 +766,17 @@
                                 ],
                                 "from": {
                                     "key_code": "z",
-                                    "modifiers": { "optional": ["any"] }
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
                                 },
-                                "to": [{ "key_code": "z" }],
+                                "to": [
+                                    {
+                                        "key_code": "z"
+                                    }
+                                ],
                                 "type": "basic"
                             },
                             {
@@ -420,9 +793,17 @@
                                 ],
                                 "from": {
                                     "key_code": "x",
-                                    "modifiers": { "optional": ["any"] }
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
                                 },
-                                "to": [{ "key_code": "x" }],
+                                "to": [
+                                    {
+                                        "key_code": "x"
+                                    }
+                                ],
                                 "type": "basic"
                             },
                             {
@@ -439,9 +820,17 @@
                                 ],
                                 "from": {
                                     "key_code": "c",
-                                    "modifiers": { "optional": ["any"] }
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
                                 },
-                                "to": [{ "key_code": "c" }],
+                                "to": [
+                                    {
+                                        "key_code": "c"
+                                    }
+                                ],
                                 "type": "basic"
                             },
                             {
@@ -458,9 +847,17 @@
                                 ],
                                 "from": {
                                     "key_code": "v",
-                                    "modifiers": { "optional": ["any"] }
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
                                 },
-                                "to": [{ "key_code": "v" }],
+                                "to": [
+                                    {
+                                        "key_code": "v"
+                                    }
+                                ],
                                 "type": "basic"
                             },
                             {
@@ -477,9 +874,17 @@
                                 ],
                                 "from": {
                                     "key_code": "b",
-                                    "modifiers": { "optional": ["any"] }
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
                                 },
-                                "to": [{ "key_code": "b" }],
+                                "to": [
+                                    {
+                                        "key_code": "b"
+                                    }
+                                ],
                                 "type": "basic"
                             },
                             {
@@ -496,9 +901,17 @@
                                 ],
                                 "from": {
                                     "key_code": "n",
-                                    "modifiers": { "optional": ["any"] }
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
                                 },
-                                "to": [{ "key_code": "k" }],
+                                "to": [
+                                    {
+                                        "key_code": "k"
+                                    }
+                                ],
                                 "type": "basic"
                             },
                             {
@@ -515,9 +928,17 @@
                                 ],
                                 "from": {
                                     "key_code": "m",
-                                    "modifiers": { "optional": ["any"] }
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
                                 },
-                                "to": [{ "key_code": "m" }],
+                                "to": [
+                                    {
+                                        "key_code": "m"
+                                    }
+                                ],
                                 "type": "basic"
                             }
                         ]
@@ -528,63 +949,139 @@
                 {
                     "fn_function_keys": [
                         {
-                            "from": { "key_code": "f1" },
-                            "to": [{ "consumer_key_code": "display_brightness_decrement" }]
+                            "from": {
+                                "key_code": "f1"
+                            },
+                            "to": [
+                                {
+                                    "consumer_key_code": "display_brightness_decrement"
+                                }
+                            ]
                         },
                         {
-                            "from": { "key_code": "f2" },
-                            "to": [{ "consumer_key_code": "display_brightness_increment" }]
+                            "from": {
+                                "key_code": "f2"
+                            },
+                            "to": [
+                                {
+                                    "consumer_key_code": "display_brightness_increment"
+                                }
+                            ]
                         },
                         {
-                            "from": { "key_code": "f3" },
-                            "to": [{ "apple_vendor_keyboard_key_code": "mission_control" }]
+                            "from": {
+                                "key_code": "f3"
+                            },
+                            "to": [
+                                {
+                                    "apple_vendor_keyboard_key_code": "mission_control"
+                                }
+                            ]
                         },
                         {
-                            "from": { "key_code": "f4" },
-                            "to": [{ "apple_vendor_keyboard_key_code": "spotlight" }]
+                            "from": {
+                                "key_code": "f4"
+                            },
+                            "to": [
+                                {
+                                    "apple_vendor_keyboard_key_code": "spotlight"
+                                }
+                            ]
                         },
                         {
-                            "from": { "key_code": "f5" },
-                            "to": [{ "consumer_key_code": "dictation" }]
+                            "from": {
+                                "key_code": "f5"
+                            },
+                            "to": [
+                                {
+                                    "consumer_key_code": "dictation"
+                                }
+                            ]
                         },
                         {
-                            "from": { "key_code": "f6" },
-                            "to": [{ "apple_vendor_keyboard_key_code": "launchpad" }]
+                            "from": {
+                                "key_code": "f6"
+                            },
+                            "to": [
+                                {
+                                    "apple_vendor_keyboard_key_code": "launchpad"
+                                }
+                            ]
                         },
                         {
-                            "from": { "key_code": "f7" },
-                            "to": [{ "consumer_key_code": "rewind" }]
+                            "from": {
+                                "key_code": "f7"
+                            },
+                            "to": [
+                                {
+                                    "consumer_key_code": "rewind"
+                                }
+                            ]
                         },
                         {
-                            "from": { "key_code": "f8" },
-                            "to": [{ "consumer_key_code": "play_or_pause" }]
+                            "from": {
+                                "key_code": "f8"
+                            },
+                            "to": [
+                                {
+                                    "consumer_key_code": "play_or_pause"
+                                }
+                            ]
                         },
                         {
-                            "from": { "key_code": "f9" },
-                            "to": [{ "consumer_key_code": "fast_forward" }]
+                            "from": {
+                                "key_code": "f9"
+                            },
+                            "to": [
+                                {
+                                    "consumer_key_code": "fast_forward"
+                                }
+                            ]
                         },
                         {
-                            "from": { "key_code": "f10" },
-                            "to": [{ "consumer_key_code": "mute" }]
+                            "from": {
+                                "key_code": "f10"
+                            },
+                            "to": [
+                                {
+                                    "consumer_key_code": "mute"
+                                }
+                            ]
                         },
                         {
-                            "from": { "key_code": "f11" },
-                            "to": [{ "consumer_key_code": "volume_decrement" }]
+                            "from": {
+                                "key_code": "f11"
+                            },
+                            "to": [
+                                {
+                                    "consumer_key_code": "volume_decrement"
+                                }
+                            ]
                         },
                         {
-                            "from": { "key_code": "f12" },
-                            "to": [{ "consumer_key_code": "volume_increment" }]
+                            "from": {
+                                "key_code": "f12"
+                            },
+                            "to": [
+                                {
+                                    "consumer_key_code": "volume_increment"
+                                }
+                            ]
                         }
                     ],
-                    "identifiers": { "is_keyboard": true },
+                    "identifiers": {
+                        "is_keyboard": true
+                    },
                     "simple_modifications": [
                         {
-                            "from": { "key_code": "caps_lock" },
-                            "to": [{ "key_code": "escape" }]
-                        },
-                        {
-                            "from": { "key_code": "right_command" },
-                            "to": [{ "key_code": "delete_or_backspace" }]
+                            "from": {
+                                "key_code": "caps_lock"
+                            },
+                            "to": [
+                                {
+                                    "key_code": "escape"
+                                }
+                            ]
                         }
                     ]
                 },
@@ -607,52 +1104,124 @@
                 {
                     "fn_function_keys": [
                         {
-                            "from": { "key_code": "f1" },
-                            "to": [{ "consumer_key_code": "display_brightness_decrement" }]
+                            "from": {
+                                "key_code": "f1"
+                            },
+                            "to": [
+                                {
+                                    "consumer_key_code": "display_brightness_decrement"
+                                }
+                            ]
                         },
                         {
-                            "from": { "key_code": "f2" },
-                            "to": [{ "consumer_key_code": "display_brightness_increment" }]
+                            "from": {
+                                "key_code": "f2"
+                            },
+                            "to": [
+                                {
+                                    "consumer_key_code": "display_brightness_increment"
+                                }
+                            ]
                         },
                         {
-                            "from": { "key_code": "f3" },
-                            "to": [{ "apple_vendor_keyboard_key_code": "launchpad" }]
+                            "from": {
+                                "key_code": "f3"
+                            },
+                            "to": [
+                                {
+                                    "apple_vendor_keyboard_key_code": "launchpad"
+                                }
+                            ]
                         },
                         {
-                            "from": { "key_code": "f4" },
-                            "to": [{ "apple_vendor_keyboard_key_code": "spotlight" }]
+                            "from": {
+                                "key_code": "f4"
+                            },
+                            "to": [
+                                {
+                                    "apple_vendor_keyboard_key_code": "spotlight"
+                                }
+                            ]
                         },
                         {
-                            "from": { "key_code": "f5" },
-                            "to": [{ "consumer_key_code": "dictation" }]
+                            "from": {
+                                "key_code": "f5"
+                            },
+                            "to": [
+                                {
+                                    "consumer_key_code": "dictation"
+                                }
+                            ]
                         },
                         {
-                            "from": { "key_code": "f6" },
-                            "to": [{ "apple_vendor_keyboard_key_code": "mission_control" }]
+                            "from": {
+                                "key_code": "f6"
+                            },
+                            "to": [
+                                {
+                                    "apple_vendor_keyboard_key_code": "mission_control"
+                                }
+                            ]
                         },
                         {
-                            "from": { "key_code": "f7" },
-                            "to": [{ "consumer_key_code": "rewind" }]
+                            "from": {
+                                "key_code": "f7"
+                            },
+                            "to": [
+                                {
+                                    "consumer_key_code": "rewind"
+                                }
+                            ]
                         },
                         {
-                            "from": { "key_code": "f8" },
-                            "to": [{ "consumer_key_code": "play_or_pause" }]
+                            "from": {
+                                "key_code": "f8"
+                            },
+                            "to": [
+                                {
+                                    "consumer_key_code": "play_or_pause"
+                                }
+                            ]
                         },
                         {
-                            "from": { "key_code": "f9" },
-                            "to": [{ "consumer_key_code": "fast_forward" }]
+                            "from": {
+                                "key_code": "f9"
+                            },
+                            "to": [
+                                {
+                                    "consumer_key_code": "fast_forward"
+                                }
+                            ]
                         },
                         {
-                            "from": { "key_code": "f10" },
-                            "to": [{ "consumer_key_code": "mute" }]
+                            "from": {
+                                "key_code": "f10"
+                            },
+                            "to": [
+                                {
+                                    "consumer_key_code": "mute"
+                                }
+                            ]
                         },
                         {
-                            "from": { "key_code": "f11" },
-                            "to": [{ "consumer_key_code": "volume_decrement" }]
+                            "from": {
+                                "key_code": "f11"
+                            },
+                            "to": [
+                                {
+                                    "consumer_key_code": "volume_decrement"
+                                }
+                            ]
                         },
                         {
-                            "from": { "key_code": "f12" },
-                            "to": [{ "consumer_key_code": "volume_increment" }]
+                            "from": {
+                                "key_code": "f12"
+                            },
+                            "to": [
+                                {
+                                    "consumer_key_code": "volume_increment"
+                                }
+                            ]
                         }
                     ],
                     "identifiers": {
@@ -664,53 +1233,121 @@
             ],
             "fn_function_keys": [
                 {
-                    "from": { "key_code": "f1" },
-                    "to": [{ "key_code": "f1" }]
+                    "from": {
+                        "key_code": "f1"
+                    },
+                    "to": [
+                        {
+                            "key_code": "f1"
+                        }
+                    ]
                 },
                 {
-                    "from": { "key_code": "f2" },
-                    "to": [{ "key_code": "f2" }]
+                    "from": {
+                        "key_code": "f2"
+                    },
+                    "to": [
+                        {
+                            "key_code": "f2"
+                        }
+                    ]
                 },
                 {
-                    "from": { "key_code": "f3" },
-                    "to": [{ "key_code": "f3" }]
+                    "from": {
+                        "key_code": "f3"
+                    },
+                    "to": [
+                        {
+                            "key_code": "f3"
+                        }
+                    ]
                 },
                 {
-                    "from": { "key_code": "f4" },
-                    "to": [{ "key_code": "f4" }]
+                    "from": {
+                        "key_code": "f4"
+                    },
+                    "to": [
+                        {
+                            "key_code": "f4"
+                        }
+                    ]
                 },
                 {
-                    "from": { "key_code": "f5" },
-                    "to": [{ "key_code": "f5" }]
+                    "from": {
+                        "key_code": "f5"
+                    },
+                    "to": [
+                        {
+                            "key_code": "f5"
+                        }
+                    ]
                 },
                 {
-                    "from": { "key_code": "f7" },
-                    "to": [{ "key_code": "f7" }]
+                    "from": {
+                        "key_code": "f7"
+                    },
+                    "to": [
+                        {
+                            "key_code": "f7"
+                        }
+                    ]
                 },
                 {
-                    "from": { "key_code": "f8" },
-                    "to": [{ "key_code": "f8" }]
+                    "from": {
+                        "key_code": "f8"
+                    },
+                    "to": [
+                        {
+                            "key_code": "f8"
+                        }
+                    ]
                 },
                 {
-                    "from": { "key_code": "f9" },
-                    "to": [{ "key_code": "f9" }]
+                    "from": {
+                        "key_code": "f9"
+                    },
+                    "to": [
+                        {
+                            "key_code": "f9"
+                        }
+                    ]
                 },
                 {
-                    "from": { "key_code": "f10" },
-                    "to": [{ "key_code": "f10" }]
+                    "from": {
+                        "key_code": "f10"
+                    },
+                    "to": [
+                        {
+                            "key_code": "f10"
+                        }
+                    ]
                 },
                 {
-                    "from": { "key_code": "f11" },
-                    "to": [{ "key_code": "f11" }]
+                    "from": {
+                        "key_code": "f11"
+                    },
+                    "to": [
+                        {
+                            "key_code": "f11"
+                        }
+                    ]
                 },
                 {
-                    "from": { "key_code": "f12" },
-                    "to": [{ "key_code": "f12" }]
+                    "from": {
+                        "key_code": "f12"
+                    },
+                    "to": [
+                        {
+                            "key_code": "f12"
+                        }
+                    ]
                 }
             ],
             "name": "Default profile",
             "selected": true,
-            "virtual_hid_keyboard": { "keyboard_type_v2": "ansi" }
+            "virtual_hid_keyboard": {
+                "keyboard_type_v2": "ansi"
+            }
         }
     ]
 }
