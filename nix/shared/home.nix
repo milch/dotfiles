@@ -33,7 +33,9 @@ in
   # Common dotfiles
   home.file = {
     ".config/nvim/init.lua".source = ../../.config/nvim/init.lua;
-    ".config/nvim/lua/plugins".source = ../../.config/nvim/lua/plugins;
+    ".config/nvim/lua/plugins".source =
+      mkOutOfStoreSymlink "/Users/manu/dotfiles/.config/nvim/lua/plugins";
+    # ".config/nvim/lua/plugins".source = ../../.config/nvim/lua/plugins;
     ".config/nvim/lua/ui".source = ../../.config/nvim/lua/ui;
     ".config/nvim/lua/disable_defaults.lua".source = ../../.config/nvim/lua/disable_defaults.lua;
     ".config/nvim/lua/opt.lua".source = ../../.config/nvim/lua/opt.lua;
@@ -67,10 +69,11 @@ in
     ".config/fish/functions/git_dirty.fish".source = ../../.config/fish/functions/git_dirty.fish;
     ".config/fish/functions/gpm.fish".source = ../../.config/fish/functions/gpm.fish;
     ".config/fish/functions/up.fish".source = ../../.config/fish/functions/up.fish;
-    ".config/fish/functions/pz.fish".source = ../../.config/fish/functions/pz.fish;
+    # ".config/fish/functions/pz.fish".source = ../../.config/fish/functions/pz.fish;
 
     ".config/ghostty/config".source = ../../.config/ghostty/config;
-    ".config/mistty/config".source = ../../.config/mistty/config.toml;
+    ".config/mistty/config.toml".source =
+      mkOutOfStoreSymlink "/Users/manu/dotfiles/.config/mistty/config.toml";
 
     ".markdownlintrc".source = ../../.markdownlintrc;
     ".yamllint.yaml".source = ../../.yamllint.yaml;
@@ -80,7 +83,7 @@ in
         [tools]
         node = 'lts'
         python = '3'
-        ruby = '3'
+        ruby = '4'
 
         [settings]
         idiomatic_version_file_enable_tools = ["*"]
@@ -132,14 +135,14 @@ in
         # Alfred
         path = Library/Preferences/com.runningwithcrayons.Alfred-Preferences.plist
 
-        # Ice
-        path = Library/Preferences/com.jordanbaird.Ice.plist
-
         # Rocket
         path = Library/Preferences/net.matthewpalmer.Rocket.plist
 
         # Karabiner (the UI writes to this - unison works better than HM for this)
         path = .config/karabiner/karabiner.json
+
+        # OmniWM (the UI writes to this - unison works better than HM for this)
+        path = .config/omniwm/settings.toml
 
         ignore = Name {.DS_Store}
       '';

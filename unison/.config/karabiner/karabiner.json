@@ -111,39 +111,6 @@
                             {
                                 "type": "basic",
                                 "from": {
-                                    "key_code": "r",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "option"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/Applications/OmniWM.app/Contents/MacOS/omniwmctl command switch-workspace 13"
-                                    }
-                                ]
-                            },
-                            {
-                                "type": "basic",
-                                "from": {
-                                    "key_code": "r",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "option",
-                                            "shift"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/Applications/OmniWM.app/Contents/MacOS/omniwmctl command move-to-workspace 13 && /Applications/OmniWM.app/Contents/MacOS/omniwmctl command switch-workspace 13"
-                                    }
-                                ]
-                            },
-                            {
-                                "type": "basic",
-                                "from": {
                                     "key_code": "x",
                                     "modifiers": {
                                         "mandatory": [
@@ -204,6 +171,116 @@
                                 "to": [
                                     {
                                         "shell_command": "/Applications/OmniWM.app/Contents/MacOS/omniwmctl command move-to-workspace 15 && /Applications/OmniWM.app/Contents/MacOS/omniwmctl command switch-workspace 15"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "key_code": "s",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "option"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "/Applications/OmniWM.app/Contents/MacOS/omniwmctl command switch-workspace 13"
+                                    }
+                                ],
+                                "conditions": [
+                                    {
+                                        "identifiers": [
+                                            {
+                                                "is_built_in_keyboard": true,
+                                                "is_keyboard": true
+                                            }
+                                        ],
+                                        "type": "device_if"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "key_code": "s",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "option",
+                                            "shift"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "/Applications/OmniWM.app/Contents/MacOS/omniwmctl command move-to-workspace 13 && /Applications/OmniWM.app/Contents/MacOS/omniwmctl command switch-workspace 13"
+                                    }
+                                ],
+                                "conditions": [
+                                    {
+                                        "identifiers": [
+                                            {
+                                                "is_built_in_keyboard": true,
+                                                "is_keyboard": true
+                                            }
+                                        ],
+                                        "type": "device_if"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "key_code": "r",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "option"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "/Applications/OmniWM.app/Contents/MacOS/omniwmctl command switch-workspace 13"
+                                    }
+                                ],
+                                "conditions": [
+                                    {
+                                        "identifiers": [
+                                            {
+                                                "is_built_in_keyboard": true,
+                                                "is_keyboard": true
+                                            }
+                                        ],
+                                        "type": "device_unless"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "key_code": "r",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "option",
+                                            "shift"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "/Applications/OmniWM.app/Contents/MacOS/omniwmctl command move-to-workspace 13 && /Applications/OmniWM.app/Contents/MacOS/omniwmctl command switch-workspace 13"
+                                    }
+                                ],
+                                "conditions": [
+                                    {
+                                        "identifiers": [
+                                            {
+                                                "is_built_in_keyboard": true,
+                                                "is_keyboard": true
+                                            }
+                                        ],
+                                        "type": "device_unless"
                                     }
                                 ]
                             }

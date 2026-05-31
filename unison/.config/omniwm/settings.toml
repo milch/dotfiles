@@ -33,7 +33,7 @@ useGlobalGaps = true
 [focus]
 followsMouse = false
 followsWindowToMonitor = true
-moveMouseToFocusedWindow = false
+moveMouseToFocusedWindow = true
 
 [gaps]
 size = 3.0
@@ -48,8 +48,11 @@ top = 0.0
 animationsEnabled = true
 defaultLayoutType = "niri"
 hotkeysEnabled = true
+hyperTrigger = "Option"
 ipcEnabled = true
+leaderKey = "Hyper+Space"
 preventSleepEnabled = false
+sequenceTimeoutMilliseconds = 800
 updateChecksEnabled = true
 
 [gestures]
@@ -71,7 +74,6 @@ centerFocusedColumn = "never"
 columnWidthPresets = [0.3333333333333333, 0.5, 0.6666666666666666, 1.0]
 infiniteLoop = false
 maxVisibleColumns = 2
-maxWindowsPerColumn = 10
 singleWindowAspectRatio = "none"
 
 [quakeTerminal]
@@ -82,11 +84,7 @@ heightPercent = 50.0
 monitorMode = "focusedWindow"
 opacity = 1.0
 position = "center"
-useCustomFrame = false
 widthPercent = 50.0
-
-[state]
-commandPaletteLastMode = "windows"
 
 [statusBar]
 showAppNames = false
@@ -361,11 +359,11 @@ binding = "Option+Shift+L"
 id = "move.right"
 
 [[hotkeys]]
-binding = "Option+Shift+-"
+binding = "Option+Shift+Minus"
 id = "setColumnWidth.decrease10Percent"
 
 [[hotkeys]]
-binding = "Option+Shift+="
+binding = "Option+Shift+Equal"
 id = "setColumnWidth.increase10Percent"
 
 [[hotkeys]]
@@ -381,7 +379,7 @@ binding = "Control+Option+Command+T"
 id = "toggleFocusedWindowFloating"
 
 [[hotkeys]]
-binding = "Option+/"
+binding = "Option+Slash"
 id = "toggleWorkspaceLayout"
 
 [[hotkeys]]
@@ -393,7 +391,7 @@ binding = "Unassigned"
 id = "toggleColumnTabbed"
 
 [[hotkeys]]
-binding = "Option+Shift+,"
+binding = "Option+Shift+Comma"
 id = "toggleColumnFullWidth"
 
 [[hotkeys]]
@@ -445,7 +443,7 @@ binding = "Unassigned"
 id = "focusWindowOrWorkspaceUp"
 
 [[hotkeys]]
-binding = "Option+Shift+."
+binding = "Option+Shift+Period"
 id = "centerColumn"
 
 [[hotkeys]]
@@ -541,7 +539,7 @@ binding = "Unassigned"
 id = "focusMonitorPrevious"
 
 [[hotkeys]]
-binding = "Control+Command+`"
+binding = "Control+Command+Grave"
 id = "focusMonitorLast"
 
 [[hotkeys]]
@@ -677,11 +675,11 @@ binding = "Unassigned"
 id = "moveColumnToIndex.9"
 
 [[hotkeys]]
-binding = "Option+."
+binding = "Option+Period"
 id = "cycleColumnWidthForward"
 
 [[hotkeys]]
-binding = "Option+,"
+binding = "Option+Comma"
 id = "cycleColumnWidthBackward"
 
 [[hotkeys]]
@@ -797,11 +795,11 @@ binding = "Control+Option+Space"
 id = "openCommandPalette"
 
 [[hotkeys]]
-binding = "Option+`"
+binding = "Option+Grave"
 id = "raiseAllFloatingWindows"
 
 [[hotkeys]]
-binding = "Option+Shift+`"
+binding = "Option+Shift+Grave"
 id = "rescueOffscreenWindows"
 
 [[hotkeys]]
@@ -898,7 +896,7 @@ type = "main"
 [[workspaces]]
 displayName = "􀍉"
 id = "AB6B1BDA-D19E-46CE-92D3-A5F7FF6F766E"
-layoutType = "dwindle"
+layoutType = "niri"
 name = "8"
 
 [workspaces.monitorAssignment]
