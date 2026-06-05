@@ -51,6 +51,9 @@ command = "env TERM=xterm-256color /run/current-system/sw/bin/et"
 [copy_mode]
 scrolloff = 5
 
+[notifications]
+enabled = true
+
 # ─── Copy mode hints ─────────────────────────────────────────────────────────
 [copy_mode.hints]
 # Letters used to label hints. Order matters — earlier letters are assigned first.
