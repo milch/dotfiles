@@ -35,26 +35,15 @@ return {
 		},
 	},
 	{
-		"axkirillov/unified.nvim",
-		opts = {},
-		cmd = { "Unified" },
-	},
-	{
 		"esmuellert/codediff.nvim",
 		cmd = "CodeDiff",
 		build = "./build.sh",
-	},
-	-- Lazy
-	{
-		"dlyongemallo/diffview.nvim",
-		version = "*",
-		-- optional: lazy-load on command
-		cmd = {
-			"DiffviewOpen",
-			"DiffviewToggle",
-			"DiffviewFileHistory",
-			"DiffviewDiffFiles",
-			"DiffviewLog",
+		-- stylua: ignore
+		keys = {
+			{ "<leader>dd", "<cmd>CodeDiff<cr>",          desc = "Diff: All uncommitted changes" },
+			{ "<leader>du", "<cmd>CodeDiff @{u}<cr>",     desc = "Diff: All changes compared to upstream" },
+			{ "<leader>dc", "<cmd>CodeDiff @{u}...@<cr>", desc = "Diff: Committed changes compared to upstream" },
+			{ "<leader>dl", "<cmd>CodeDiff HEAD<cr>",     desc = "Diff: Last commit" },
 		},
 	},
 }
