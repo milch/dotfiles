@@ -193,7 +193,6 @@
     casks = [
       "1password-cli"
       "1password"
-      "aerospace"
       "alfred"
       "apparency"
       "arq"

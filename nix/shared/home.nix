@@ -44,8 +44,6 @@ in
     ".config/nvim/lua/keybindings.lua".source = ../../.config/nvim/lua/keybindings.lua;
     ".config/nvim/lua/search_and_replace.lua".source = ../../.config/nvim/lua/search_and_replace.lua;
 
-    ".config/aerospace/aerospace.toml".source = ../../.config/aerospace/aerospace.toml;
-
     ".config/lazygit".source = ../../.config/lazygit;
 
     ".config/rubocop/config.yml".source = ../../.config/rubocop/config.yml;
@@ -96,7 +94,6 @@ in
       ../../Library/Services + "/Summarize Current Page.workflow";
 
     ".local/bin/ocr".source = ../../bin/ocr;
-    ".local/bin/aerospace-new-terminal".source = ../../bin/aerospace-new-terminal;
 
     "Gemfile" = {
       source = ../../Gemfile;
