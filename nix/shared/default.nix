@@ -181,6 +181,7 @@
     onActivation.cleanup = "zap";
     taps = [
       "acsandmann/tap"
+      "BarutSRB/tap"
       "cormacrelf/tap"
       "nikitabobko/tap"
       "xcodesorg/made"
@@ -219,6 +220,7 @@
       "istat-menus"
       "karabiner-elements"
       "obsidian"
+      "omniwm"
       "provisionql"
       "rocket"
       "sf-symbols"
