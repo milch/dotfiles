@@ -132,6 +132,9 @@ in
         # Rocket
         path = Library/Preferences/net.matthewpalmer.Rocket.plist
 
+        # Thaw
+        path = Library/Preferences/com.stonerl.Thaw.plist
+
         # Karabiner (the UI writes to this - unison works better than HM for this)
         path = .config/karabiner/karabiner.json
 
