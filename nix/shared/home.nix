@@ -33,9 +33,7 @@ in
   # Common dotfiles
   home.file = {
     ".config/nvim/init.lua".source = ../../.config/nvim/init.lua;
-    ".config/nvim/lua/plugins".source =
-      mkOutOfStoreSymlink "/Users/manu/dotfiles/.config/nvim/lua/plugins";
-    # ".config/nvim/lua/plugins".source = ../../.config/nvim/lua/plugins;
+    ".config/nvim/lua/plugins".source = ../../.config/nvim/lua/plugins;
     ".config/nvim/lua/ui".source = ../../.config/nvim/lua/ui;
     ".config/nvim/lua/disable_defaults.lua".source = ../../.config/nvim/lua/disable_defaults.lua;
     ".config/nvim/lua/opt.lua".source = ../../.config/nvim/lua/opt.lua;
