@@ -48,11 +48,10 @@ top = 0.0
 animationsEnabled = true
 defaultLayoutType = "niri"
 hotkeysEnabled = true
+hyperKeyHoldThresholdMilliseconds = 150
 hyperTrigger = "Left Option"
 ipcEnabled = true
-leaderKey = "Hyper+Space"
 preventSleepEnabled = false
-sequenceTimeoutMilliseconds = 800
 updateChecksEnabled = true
 
 [gestures]
