@@ -180,20 +180,20 @@
     onActivation.upgrade = false;
     onActivation.cleanup = "zap";
     taps = [
-      "acsandmann/tap"
       "BarutSRB/tap"
       "cormacrelf/tap"
-      "nikitabobko/tap"
-      "xcodesorg/made"
     ];
     brews = [
       "coreutils"
-      "cormacrelf/tap/dark-notify"
+      {
+        name = "cormacrelf/tap/dark-notify";
+        trusted = true;
+      }
       "libomp" # Dependency for codediff
       "libyaml" # Dependency for ruby-build (mise)
       "ncurses"
       "xcode-build-server"
-      "xcodesorg/made/xcodes"
+      "xcodes"
     ];
     masApps = {
       "Amphetamine" = 937984704;
@@ -220,7 +220,10 @@
       "istat-menus"
       "karabiner-elements"
       "obsidian"
-      "omniwm"
+      {
+	name = "BarutSRB/tap/omniwm";
+	trusted = true;
+      }
       "provisionql"
       "rocket"
       "sf-symbols"
