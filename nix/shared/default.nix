@@ -213,6 +213,7 @@
       "font-fira-code-nerd-font"
       "font-sf-mono"
       "font-sf-pro"
+      "ghostpepper"
       "ghostty"
       "homerow"
       "istat-menus"
