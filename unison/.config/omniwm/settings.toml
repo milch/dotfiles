@@ -8,7 +8,7 @@ mode = "automatic"
 
 [borders]
 enabled = false
-width = 5.0
+width = 2.0
 
 [borders.color]
 alpha = 1.0
@@ -33,7 +33,7 @@ useGlobalGaps = true
 [focus]
 followsMouse = false
 followsWindowToMonitor = true
-moveMouseToFocusedWindow = true
+moveMouseToFocusedWindow = false
 
 [gaps]
 size = 3.0
@@ -48,7 +48,7 @@ top = 0.0
 animationsEnabled = true
 defaultLayoutType = "niri"
 hotkeysEnabled = true
-hyperTrigger = "Option"
+hyperTrigger = "Left Option"
 ipcEnabled = true
 leaderKey = "Hyper+Space"
 preventSleepEnabled = false
