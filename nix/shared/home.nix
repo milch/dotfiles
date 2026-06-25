@@ -68,8 +68,7 @@ in
     # ".config/fish/functions/pz.fish".source = ../../.config/fish/functions/pz.fish;
 
     ".config/ghostty/config".source = ../../.config/ghostty/config;
-    ".config/mistty/config.toml".source =
-      mkOutOfStoreSymlink "/Users/manu/dotfiles/.config/mistty/config.toml";
+    ".config/mistty/config.toml".source = ../../.config/mistty/config.toml;
 
     ".markdownlintrc".source = ../../.markdownlintrc;
     ".yamllint.yaml".source = ../../.yamllint.yaml;
