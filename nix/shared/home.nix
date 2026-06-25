@@ -196,6 +196,14 @@ in
       export PATH="${lib.makeBinPath [ pkgs.git ]}:$PATH"
       test -d $HOME/.config/tmux/plugins/tpm || git clone https://github.com/tmux-plugins/tpm $HOME/.config/tmux/plugins/tpm
     '';
+    # Reconcile user prefs (karabiner, omniwm, etc.) immediately on activation
+    # rather than waiting for the once-a-day launchd timer. Runs after
+    # writeBoundary so the sync-user-prefs.prf profile is already linked.
+    # Tolerant of failure so a sync conflict can't abort the rebuild.
+    syncUserPrefs = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      "${pkgs.unison}/bin/unison" -ui text sync-user-prefs || \
+        echo "warning: unison sync-user-prefs did not complete cleanly"
+    '';
   };
 
   # Enable home-manager
