@@ -135,6 +135,11 @@ in
         # Thaw
         path = Library/Preferences/com.stonerl.Thaw.plist
 
+        # iStat Menus (menubar layout/config + item visibility; the base
+        # com.bjango.istatmenus plist is just window geometry, so it's skipped)
+        path = Library/Preferences/com.bjango.istatmenus.menubar.7.plist
+        path = Library/Preferences/com.bjango.istatmenus.status.plist
+
         # Karabiner (the UI writes to this - unison works better than HM for this)
         path = .config/karabiner/karabiner.json
 
