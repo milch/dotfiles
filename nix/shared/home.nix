@@ -21,7 +21,7 @@ let
   };
   update-bundle = ''
     export PATH="${lib.makeBinPath [ pkgs.ruby ]}:$PATH"
-    bundle install --frozen
+    BUNDLE_FROZEN=true bundle install
   '';
   mkOutOfStoreSymlink = config.lib.file.mkOutOfStoreSymlink;
 in
