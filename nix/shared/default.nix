@@ -130,6 +130,7 @@
     NSWindowShouldDragOnGesture = true;
     InitialKeyRepeat = 15;
     KeyRepeat = 1;
+    "com.apple.trackpad.scaling" = 3.0;
   };
 
   system.defaults.menuExtraClock = {
