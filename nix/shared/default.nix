@@ -221,8 +221,8 @@
       "karabiner-elements"
       "obsidian"
       {
-	name = "BarutSRB/tap/omniwm";
-	trusted = true;
+        name = "BarutSRB/tap/omniwm";
+        trusted = true;
       }
       "provisionql"
       "rocket"
