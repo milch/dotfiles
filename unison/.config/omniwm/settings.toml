@@ -27,17 +27,17 @@ maxTotalBytes = 67108864
 [dwindle]
 defaultSplitRatio = 1.0
 moveToRootStable = true
-singleWindowAspectRatio = "1440x1080"
+singleWindowAspectRatio = "fill"
 smartSplit = true
 splitWidthMultiplier = 1.0
 useGlobalGaps = true
 
 [focus]
-crossesMonitorAtEdge = false
+crossesMonitorAtEdge = true
 followsMouse = false
 followsWindowToMonitor = true
-moveCrossesMonitorAtEdge = false
-moveMouseToFocusedWindow = false
+moveCrossesMonitorAtEdge = true
+moveMouseToFocusedWindow = true
 
 [gaps]
 size = 3.0
