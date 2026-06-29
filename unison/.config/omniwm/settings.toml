@@ -1,7 +1,9 @@
 monitorBarOverrides = []
 monitorDwindleOverrides = []
+monitorGapOverrides = []
 monitorNiriOverrides = []
 monitorOrientationOverrides = []
+monitorRoutingOverrides = []
 
 [appearance]
 mode = "automatic"
@@ -25,14 +27,16 @@ maxTotalBytes = 67108864
 [dwindle]
 defaultSplitRatio = 1.0
 moveToRootStable = true
-singleWindowAspectRatio = "4:3"
+singleWindowAspectRatio = "1440x1080"
 smartSplit = true
 splitWidthMultiplier = 1.0
 useGlobalGaps = true
 
 [focus]
+crossesMonitorAtEdge = false
 followsMouse = false
 followsWindowToMonitor = true
+moveCrossesMonitorAtEdge = false
 moveMouseToFocusedWindow = false
 
 [gaps]
@@ -50,6 +54,8 @@ defaultLayoutType = "niri"
 hotkeysEnabled = true
 ipcEnabled = true
 preventSleepEnabled = false
+spacesTrackingEnabled = true
+systemHyperTrigger = "None"
 updateChecksEnabled = true
 
 [gestures]
@@ -59,11 +65,11 @@ mouseResizeModifierKey = "option"
 scrollEnabled = true
 scrollModifierKey = "optionShift"
 scrollSensitivity = 5.0
+trackpadScrollStyle = "snap"
 
 [mouseWarp]
-axis = "horizontal"
+enabled = true
 margin = 1
-monitorOrder = []
 
 [niri]
 alwaysCenterSingleColumn = true
@@ -71,17 +77,20 @@ centerFocusedColumn = "never"
 columnWidthPresets = [0.3333333333333333, 0.5, 0.6666666666666666, 1.0]
 infiniteLoop = false
 maxVisibleColumns = 2
-singleWindowAspectRatio = "none"
+singleWindowAspectRatio = "fill"
 
 [quakeTerminal]
 animationDuration = 0.2
 autoHide = false
-enabled = true
+enabled = false
 heightPercent = 50.0
 monitorMode = "focusedWindow"
 opacity = 1.0
 position = "center"
 widthPercent = 50.0
+
+[routing]
+mode = "macOS"
 
 [statusBar]
 showAppNames = false
@@ -374,7 +383,7 @@ binding = "Control+Option+Command+F"
 id = "toggleFullscreen"
 
 [[hotkeys]]
-binding = "Control+Option+Shift+Command+F"
+binding = "Hyper+F"
 id = "toggleNativeFullscreen"
 
 [[hotkeys]]
