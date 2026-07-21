@@ -113,6 +113,24 @@ return {
 					Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>as")
 					Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>aw")
 					Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>aL")
+					Snacks.toggle.new({
+						name = "Buffer Format on Save",
+						get = function()
+							return not vim.b.disable_autoformat
+						end,
+						set = function(enabled)
+							vim.b.disable_autoformat = not enabled
+						end,
+					}):map("<leader>af")
+					Snacks.toggle.new({
+						name = "Global Format on Save",
+						get = function()
+							return not vim.g.disable_autoformat
+						end,
+						set = function(enabled)
+							vim.g.disable_autoformat = not enabled
+						end,
+					}):map("<leader>aF")
 					Snacks.toggle.diagnostics():map("<leader>ad")
 					Snacks.toggle.line_number():map("<leader>al")
 					Snacks.toggle.treesitter():map("<leader>aT")
