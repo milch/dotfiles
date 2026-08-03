@@ -26,9 +26,6 @@ return {
 				hover = true,
 			},
 			completion = {
-				cmp = {
-					enabled = true,
-				},
 				crates = {
 					enabled = true,
 					min_chars = 2,
