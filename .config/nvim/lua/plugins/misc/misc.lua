@@ -131,6 +131,15 @@ return {
 							vim.g.disable_autoformat = not enabled
 						end,
 					}):map("<leader>aF")
+					Snacks.toggle.new({
+						name = "Harper",
+						get = function()
+							return vim.lsp.is_enabled("harper_ls")
+						end,
+						set = function(enabled)
+							vim.lsp.enable("harper_ls", enabled)
+						end,
+					}):map("<leader>aH")
 					Snacks.toggle.diagnostics():map("<leader>ad")
 					Snacks.toggle.line_number():map("<leader>al")
 					Snacks.toggle.treesitter():map("<leader>aT")
