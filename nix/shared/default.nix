@@ -222,7 +222,7 @@
       "karabiner-elements"
       "obsidian"
       {
-        name = "BarutSRB/tap/omniwm";
+        name = "barutsrb/tap/omniwm";
         trusted = true;
       }
       "provisionql"
