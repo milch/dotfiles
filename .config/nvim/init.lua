@@ -52,7 +52,7 @@ require("lazy").setup({
 	},
 	git = {
 		-- nix builds can sometimes take a bit longer when re-caching a lot of dependencies
-		timeout = 300,
+		timeout = 1200,
 	},
 	performance = {
 		rtp = {
