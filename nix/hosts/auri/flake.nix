@@ -63,7 +63,6 @@ in
     "mactex"
     "moonlight"
     "nextcloud"
-    "ollama-app"
     "openscad@snapshot"
     "orbstack"
     "orcaslicer"
