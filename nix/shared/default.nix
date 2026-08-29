@@ -183,6 +183,7 @@
     taps = [
       "BarutSRB/tap"
       "cormacrelf/tap"
+      "xcodesorg/made"
     ];
     brews = [
       "coreutils"
@@ -194,7 +195,10 @@
       "libyaml" # Dependency for ruby-build (mise)
       "ncurses"
       "xcode-build-server"
-      "xcodes"
+      {
+        name = "xcodesorg/made/xcodes";
+        trusted = true;
+      }
     ];
     masApps = {
       "Amphetamine" = 937984704;
@@ -210,6 +214,7 @@
       "apparency"
       "arq"
       "bettertouchtool"
+      "codex"
       "dash"
       "fantastical"
       "font-fira-code-nerd-font"

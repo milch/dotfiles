@@ -32,9 +32,12 @@ in
   homebrew.masApps = {
     "1Password for Safari" = 1569813296;
     "Blackmagic Disk Speed Test" = 425264550;
+    "CARROTweather" = 993487541;
     "Consent-O-Matic" = 1606897889;
     "Flighty" = 1358823008;
     "Goodnotes" = 1444383602;
+    "Infuse" = 1136220934;
+    "Kagi for Safari" = 1622835804;
     "Noir" = 1592917505;
     "Parcel" = 375589283;
     "Refined GitHub" = 1519867270;
@@ -69,6 +72,7 @@ in
     "readest"
     "steam"
     "topaz-photo-ai"
+    "ungoogled-chromium"
     "utm"
     "vlc"
     "wifiman"
