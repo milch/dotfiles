@@ -36,15 +36,19 @@ return {
 	},
 	{
 		"mrcjkb/rustaceanvim",
+		lazy = false,
+		-- Load DAP before rust-analyzer starts so debug actions and the UI are ready.
+		dependencies = { "mfussenegger/nvim-dap" },
+		-- rustaceanvim discovers the Nix-installed codelldb on PATH and builds Cargo targets.
 		opts = {
 			server = {
 				on_attach = function(_, bufnr)
 					vim.lsp.buf.code_action = function()
 						vim.cmd.RustLsp("codeAction")
 					end
-					vim.keymap.set("n", "<leader>dr", function()
+					vim.keymap.set("n", "<leader>Dr", function()
 						vim.cmd.RustLsp("debuggables")
-					end, { desc = "Rust Debuggables", buf = bufnr })
+					end, { desc = "Debug Rust target", buffer = bufnr })
 				end,
 				default_settings = {
 					-- rust-analyzer language server configuration

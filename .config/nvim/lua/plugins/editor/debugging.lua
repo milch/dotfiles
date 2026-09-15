@@ -1,25 +1,27 @@
 return {
-
 	{
-		"jay-babu/mason-nvim-dap.nvim",
-		keys = { "<leader>xd" },
+		"folke/which-key.nvim",
+		opts = {
+			spec = { { "<leader>D", group = "Debug" } },
+		},
+	},
+	{
+		"mfussenegger/nvim-dap",
+		keys = { { "<leader>Dd", desc = "Debug controls" } },
 		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"mfussenegger/nvim-dap",
-			"rcarriga/nvim-dap-ui",
+			"nvimtools/hydra.nvim",
+			{
+				"rcarriga/nvim-dap-ui",
+				dependencies = { "nvim-neotest/nvim-nio" },
+			},
 		},
 		config = function()
-			require("mason").setup()
-			require("mason-nvim-dap").setup({
-				ensure_installed = { "codelldb" },
-			})
-
 			local dap = require("dap")
 			local hint = [[
 				^ ^Step^ ^ ^      ^ ^     Action
 				----^-^-^-^--^-^----  ^-^-------------------
-				^ ^back^ ^ ^     ^_t_: toggle breakpoint
-				^ ^ _K_^ ^        _T_: clear breakpoints
+				^ ^ ^ ^ ^        ^_t_: toggle breakpoint
+				^ ^ ^ ^ ^         _T_: clear breakpoints
 				out _H_ ^ ^ _L_ into  _c_: continue
 				^ ^ _J_ ^ ^       _x_: terminate
 				^ ^over ^ ^     ^^_r_: open repl
@@ -30,6 +32,7 @@ return {
 				name = "Debug",
 				hint = hint,
 				config = {
+					desc = "Debug controls",
 					color = "pink",
 					invoke_on_body = true,
 					hint = {
@@ -37,11 +40,10 @@ return {
 					},
 				},
 				mode = { "n" },
-				body = "<leader>xd",
+				body = "<leader>Dd",
 				heads = {
 					{ "H", dap.step_out, { desc = "step out" } },
 					{ "J", dap.step_over, { desc = "step over" } },
-					{ "K", dap.step_back, { desc = "step back" } },
 					{ "L", dap.step_into, { desc = "step into" } },
 					{ "t", dap.toggle_breakpoint, { desc = "toggle breakpoint" } },
 					{ "T", dap.clear_breakpoints, { desc = "clear breakpoints" } },

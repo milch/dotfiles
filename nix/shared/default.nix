@@ -60,6 +60,7 @@
     tree-sitter
     unison
     uv
+    vscode-extensions.vadimcn.vscode-lldb.adapter
     vscode-langservers-extracted
     vtsls
     wget
