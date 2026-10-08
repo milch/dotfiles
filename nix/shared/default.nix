@@ -26,7 +26,6 @@
     httpie
     hyperfine
     ijq
-    jankyborders
     jq
     lazygit
     lua-language-server
@@ -182,7 +181,6 @@
     onActivation.upgrade = false;
     onActivation.cleanup = "zap";
     taps = [
-      "BarutSRB/tap"
       "cormacrelf/tap"
       "xcodesorg/made"
     ];
@@ -227,10 +225,7 @@
       "istat-menus"
       "karabiner-elements"
       "obsidian"
-      {
-        name = "barutsrb/tap/omniwm";
-        trusted = true;
-      }
+      "omniwm"
       "provisionql"
       "rocket"
       "sf-symbols"
