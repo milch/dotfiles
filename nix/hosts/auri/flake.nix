@@ -85,7 +85,7 @@ in
       "/Applications/OrcaSlicer.app"
       "/System/Applications/Music.app"
       "/Applications/Mistty.app"
-      "/Applications/Xcode-26.4.1.app"
+      "/Applications/Xcode-27.0.0.app"
       "/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app"
       "/System/Applications/Messages.app"
       "/System/Applications/Mail.app"
