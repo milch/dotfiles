@@ -3,10 +3,11 @@ monitorDwindleOverrides = []
 monitorGapOverrides = []
 monitorNiriOverrides = []
 monitorOrientationOverrides = []
-schemaVersion = 3
+schemaVersion = 4
 
 [appearance]
 mode = "automatic"
+tabRailAppIcons = false
 
 [borders]
 enabled = false
@@ -20,6 +21,7 @@ red = 0.013463222421705723
 
 [clipboard]
 historyEnabled = false
+ignoredTypes = []
 maxItemBytes = 8388608
 maxItems = 200
 maxTotalBytes = 67108864
@@ -52,6 +54,7 @@ right = 0.0
 top = 0.0
 
 [general]
+animationSpeed = 1.0
 animationsEnabled = true
 defaultLayoutType = "niri"
 hotkeysEnabled = true
@@ -66,10 +69,17 @@ fingerCount = 4
 invertDirection = true
 mouseMoveModifierKey = "option"
 mouseResizeModifierKey = "option"
+overviewGestureEnabled = false
+overviewGestureFingerCount = 4
 scrollEnabled = true
 scrollModifierKey = "optionShift"
 scrollSensitivity = 5.0
 trackpadScrollStyle = "snap"
+windowGestureSensitivity = 1.0
+windowMoveEnabled = false
+windowMoveFingerCount = 4
+windowResizeEnabled = false
+windowResizeFingerCount = 3
 workspaceSwipeAxis = "vertical"
 workspaceSwipeEnabled = false
 workspaceSwipeFingerCount = 3
@@ -89,11 +99,17 @@ alwaysCenterSingleColumn = true
 centerFocusedColumn = "never"
 containerPrimarySpanPresets = [0.3333333333333333, 0.5, 0.6666666666666666]
 defaultContainerPrimarySpan = 0.5
+edgeGaps = true
 infiniteLoop = false
+resizeStepPercent = 5
 singleWindowFit = "fill"
 visibleContainerCount = 2
 
 [overview]
+enabled = true
+invertScrollDirection = false
+matchFocusBorder = true
+mouseScrollSpeed = 1.0
 zoom = 1.0
 
 [overview.backdrop]
@@ -127,7 +143,7 @@ animationDuration = 0.2
 autoHide = false
 backgroundBlurRadius = 0
 backgroundEffect = "standardBlur"
-enabled = true
+enabled = false
 heightPercent = 50.0
 monitorMode = "focusedWindow"
 opacity = 1.0
@@ -144,10 +160,14 @@ mode = "macOS"
 
 [statusBar]
 showAppNames = false
+showIcon = true
 showWorkspaceName = false
 useWorkspaceId = false
 
 [workspaceBar]
+autoHide = false
+autoHideHideDelayMilliseconds = 0.0
+autoHideRevealDelayMilliseconds = 0.0
 backgroundOpacity = 0.1
 deduplicateAppIcons = true
 enabled = true
@@ -155,15 +175,22 @@ excludedBundleIDs = []
 height = 24.0
 hideEmptyWorkspaces = true
 hideInNativeFullscreen = false
+hoverPreviewsEnabled = true
 notchActiveZoneWidth = 180.0
 notchMode = "moveBelowMenuBar"
+notificationBadgeRefreshIntervalSeconds = 5.0
+notificationBadges = "off"
 position = "overlappingMenuBar"
 reserveLayoutSpace = false
 revealHoldMilliseconds = 200.0
 revealModifier = "off"
+showAccentHighlights = true
 showFloatingWindows = false
+showItemBackgrounds = true
 showLabels = true
+solidBlackBackground = false
 systemStatsButton = false
+transparentBackground = false
 windowLevel = "popup"
 xOffset = 0.0
 yOffset = 0.0
@@ -477,6 +504,54 @@ id = "moveToWorkspace.8"
 
 [[hotkeys]]
 binding = "Unassigned"
+id = "switchWorkspace.9"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "moveToWorkspace.9"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "switchWorkspace.10"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "moveToWorkspace.10"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "switchWorkspace.11"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "moveToWorkspace.11"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "switchWorkspace.12"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "moveToWorkspace.12"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "switchWorkspace.13"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "moveToWorkspace.13"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "switchWorkspace.14"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "moveToWorkspace.14"
+
+[[hotkeys]]
+binding = "Unassigned"
 id = "switchWorkspaceSlot.1"
 
 [[hotkeys]]
@@ -670,6 +745,30 @@ id = "moveColumnToWorkspace.7"
 [[hotkeys]]
 binding = "Unassigned"
 id = "moveColumnToWorkspace.8"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "moveColumnToWorkspace.9"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "moveColumnToWorkspace.10"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "moveColumnToWorkspace.11"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "moveColumnToWorkspace.12"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "moveColumnToWorkspace.13"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "moveColumnToWorkspace.14"
 
 [[hotkeys]]
 binding = "Option+Shift+H"
@@ -1036,6 +1135,10 @@ binding = "Option+Grave"
 id = "raiseAllFloatingWindows"
 
 [[hotkeys]]
+binding = "Unassigned"
+id = "toggleFloatingFocus"
+
+[[hotkeys]]
 binding = "Option+Shift+Grave"
 id = "rescueOffscreenWindows"
 
@@ -1050,6 +1153,14 @@ id = "closeFocusedWindow"
 [[hotkeys]]
 binding = "Control+Option+M"
 id = "openMenuAnywhere"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "setWindowMark"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "removeWindowMark"
 
 [[hotkeys]]
 binding = "Control+Option+Shift+W"
