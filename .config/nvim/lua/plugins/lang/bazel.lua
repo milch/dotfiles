@@ -1,5 +1,5 @@
 vim.lsp.config("starpls", {
-	cmd = { "starpls", "server", "--experimental_infer_ctx_attributes" },
+	cmd = { "starpls", "server", "--bazel_path", "bazelisk", "--experimental_infer_ctx_attributes" },
 })
 
 vim.lsp.enable("starpls")

@@ -49,6 +49,7 @@
     shellcheck
     shfmt
     solargraph
+    starpls
     starship
     stylua
     tailwindcss-language-server
