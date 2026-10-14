@@ -33,7 +33,8 @@ return {
 					end
 				end
 
-				return { timeout_ms = 200, lsp_fallback = true }, on_format
+				-- Allow for formatter startup before switching to asynchronous formatting.
+				return { timeout_ms = 1000, lsp_fallback = true }, on_format
 			end,
 
 			format_after_save = function(bufnr)
