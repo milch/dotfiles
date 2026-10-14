@@ -56,7 +56,7 @@ return {
 			notes_subdir = "0 Inbox",
 
 			picker = {
-				name = "snacks.pick",
+				name = "snacks.picker",
 			},
 
 			daily_notes = {
@@ -65,8 +65,6 @@ return {
 			},
 			completion = {
 				min_chars = 1,
-				nvim_cmp = false,
-				blink = true,
 			},
 			new_notes_location = "notes_subdir",
 
@@ -93,9 +91,10 @@ return {
 			-- 	end
 			-- end,
 
-			wiki_link_func = function(opts)
-				return require("obsidian.util").wiki_link_path_prefix(opts)
-			end,
+			link = {
+				style = "wiki",
+				format = "absolute", -- Keep paths relative to the vault root.
+			},
 
 			frontmatter = {
 				func = function(note)
@@ -159,7 +158,7 @@ return {
 			ui = { enable = false },
 
 			attachments = {
-				img_folder = "Attachments",
+				folder = "Attachments",
 			},
 
 			legacy_commands = false,
